@@ -30,7 +30,7 @@ public class IndivrankController {
 	//개인랭크 페이지
 	@GetMapping("/indivrank")
 	public ModelAndView indivrank(ScorecardVO sv, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView im = new ModelAndView("/tier/ranking");
+		ModelAndView im = new ModelAndView("/tier/indivrank");
 		response.setContentType("text/html;charset=utf-8");
 		
 		PrintWriter out = response.getWriter();
@@ -56,7 +56,12 @@ public class IndivrankController {
 		String rankno = request.getParameter("rankno");
 		
 		int getCount = rankingService.playCount(id);
-		String s_handicap = indivService.getHandicap(id);
+		//String s_handicap = 
+		List<String> s_handicapList = indivService.getHandicap(id);
+		String s_handicap = "";
+		if(s_handicapList.size() > 0) {
+			s_handicap = s_handicapList.get(0);
+		}		
 		if(rankno == null) {
 			int num = 1;
 			
@@ -132,13 +137,43 @@ public class IndivrankController {
 			viewBestScore = indivService.getBestScore(id);
 			viewRange = indivService.getRange(id);
 			
-			im.addObject("viewDate"+i, viewDate.get(i));
-			im.addObject("viewLocation"+i, viewLocation.get(i));
-			im.addObject("viewBestScore"+i, viewBestScore.get(i));
-			im.addObject("viewRange"+i, viewRange.get(i));
+			if(viewDate.size() > 0) {
+				im.addObject("viewDate"+i, viewDate.get(i));
+			}else {
+				im.addObject("viewDate"+i, "");
+			}
+			
+			if(viewLocation.size() > 0) {
+				im.addObject("viewLocation"+i, viewLocation.get(i));
+			}else {
+				im.addObject("viewLocation"+i, "");
+			}
+			
+			if(viewBestScore.size() > 0) {
+				im.addObject("viewBestScore"+i, viewBestScore.get(i));
+			}else {
+				im.addObject("viewBestScore"+i, 0);
+			}
+			
+			if(viewRange.size() > 0) {
+				im.addObject("viewRange"+i, viewRange.get(i));
+			}else {
+				im.addObject("viewRange"+i, 0);
+			}
+			//im.addObject("viewDate"+i, viewDate.get(i));
+			//im.addObject("viewLocation"+i, viewLocation.get(i));
+			//im.addObject("viewBestScore"+i, viewBestScore.get(i));
+			//im.addObject("viewRange"+i, viewRange.get(i));
 		}
 		
-		int point = indivService.getSumPoint(id);
+		//int point = indivService.getSumPoint(id);
+		List<Integer> pointList = indivService.getSumPoint(id);
+		int point = 0;
+		for(int i=0 ; i<pointList.size() ; ++i) {
+			if(pointList.get(i) != null) {
+				point += pointList.get(i);
+			}
+		}
 		String tierURL = null;
 		String tierStr = null;
 		

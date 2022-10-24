@@ -1,3 +1,29 @@
+create table golforboard( --테이블 생성
+  b_no number(38) primary key --게시물 번호
+ ,username varchar2(100) not null --글쓴이
+ ,b_title varchar2(200) not null --글제목
+ ,password varchar2(50) not null --비번
+ ,b_cont varchar2(4000) not null --글내용
+ ,b_file varchar2(200) --첨부파일명
+ ,b_hit number(38) default 0 --조회수
+ ,b_ref number(38) --원본글과 관리자 답변글을 묶어주는 글 그룹번호값
+ ,b_step number(38) --원본글이면 0,첫번째 답변글이면 1,두번째 답변글이면 2,원본글과 답변글을 구분하는 번호값이면서 몇번째 답변글인가를 알려준다.
+ ,b_level number(38) --답변글 정렬순서
+ ,b_date date --글 등록날짜
+ ,b_like number(38) default 0
+);
+
+alter table golforboard add constraint golforboard_username_fk
+foreign key(username) references golforyou_memberNew(username);
+
+drop table golforboard;
+
+
+create sequence board_no_seq
+start with 1 --1부터 시작
+increment by 1 --1씩 증가
+nocache;
+
 
 --golforboard mvc 계층형 게시판 
 
@@ -5,7 +31,7 @@ create table golforboard( --테이블 생성
   b_no number(38) primary key --게시물 번호
  ,username varchar2(100) not null --글쓴이
  ,b_title varchar2(200) not null --글제목
- ,b_pwd varchar2(50) not null --비번
+ ,password varchar2(50) not null --비번
  ,b_cont varchar2(4000) not null --글내용
  ,b_file varchar2(200) --첨부파일명
  ,b_hit number(38) default 0 --조회수

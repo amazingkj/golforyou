@@ -2,37 +2,6 @@
 <%@ page import="java.sql.*, java.util.*, javax.sql.*, javax.naming.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%		
-	String prov = (String)request.getAttribute("prov");
-	int mem = (Integer)request.getAttribute("mem");
-	
-	String[] fileaddr = new String[mem];
-	
-	String[] rankid = new String[mem];
-	for(int i=0 ; i<mem ; ++i){
-		rankid[i] = (String)request.getAttribute("rankid"+i);
-	}
-	
-	int[] count = new int[mem];
-	for(int i=0 ; i<mem ; ++i){
-		count[i] = (Integer)request.getAttribute("count"+i);
-	}
-	
-	int[] rankpoint = new int[mem];
-	for(int i=0 ; i<mem ; ++i){
-		rankpoint[i] = (Integer)request.getAttribute("rankpoint"+i);
-	}
-	
-	int[] bestrange = new int[mem];
-	for(int i=0 ; i<mem ; ++i){
-		bestrange[i] = (Integer)request.getAttribute("bestrange"+i);
-	}
-	
-	String[] province = new String[mem];
-	for(int i=0 ; i<mem ; ++i){
-		province[i] = (String)request.getAttribute("province"+i);
-	}
-%>
 
 <jsp:include page="/WEB-INF/views/includes/header.jsp" /> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -180,38 +149,25 @@
 	
 	
 	<!-- div 내 정보 자동입력 -->
-	<% 		
-	for(int i=1 ; i<=mem ; ++i){
-		
-		%>
-		<script>
-		$('#rId'+<%=i%>).append("<%=rankid[i-1]%>");
-		$('#rPoint_'+<%=i%>).append("<%=rankpoint[i-1]%>");
-		$('#rProv_'+<%=i%>).append("<%=province[i-1]%>");
-		$('#rCard_'+<%=i%>).append("<%=count[i-1]%>");
-		$('#rDriver_'+<%=i%>).append("<%=bestrange[i-1]%>");
-		</script>
-		<%		
-		//fileaddr[i-1] = mdao.fileinfo(rankid);
-	}
-		
-	%>
 	
-	<%
-	for(int i=0 ; i<mem ; ++i){
-		//if(fileaddr[i] != null){
-		%>
-		<script>
-		$("#rProfile_"+<%=i+1%>).css({
-			"background-image": "url('/upload/member"+"<%=fileaddr[i] %>"+"')",
-			"background-repeat" : "no-repeat",
-			"background-size" : "50px 50px"
-		});
-		</script>
-		<%
-		//}
-	}
-	%>
+	<c:forEach var="i" begin="1" end="${mem }">
+	<script>
+	
+	$('#rId'+${i}).append("<c:out value='${rankid.get(i-1)}'/>");
+	$('#rPoint_'+${i}).append("<c:out value='${rankpoint.get(i-1)}'/>");
+	$('#rProv_'+${i}).append("<c:out value='${province.get(i-1)}'/>");
+	$('#rCard_'+${i}).append("<c:out value='${count.get(i-1)}'/>");
+	$('#rDriver_'+${i}).append("<c:out value='${bestrange.get(i-1)}'/>");	
+	
+	$("#rProfile_"+${i}).css({
+		"background-image": "url('/upload/member"+"<c:out value='${fileaddr.get(i-1)}'/>"+"')",
+		"background-repeat" : "no-repeat",
+		"background-size" : "50px 50px"
+	});
+	</script>
+	</c:forEach>
+
+	
 	<script>
 	//indivrank 링크, 티어 만드는 스크립트
 
