@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/css/board.css" />
 <br/>
 <%
-String id = request.getParameter("rId");
+String id = request.getParameter("id");
 if(id == null) {	 
 	id = (String)session.getAttribute("id");;
 }

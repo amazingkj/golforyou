@@ -9,21 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.golforyou.service.FileService;
 import com.golforyou.service.IndivService;
 import com.golforyou.service.ScBoardService;
 import com.golforyou.vo.ScboardVO;
@@ -35,13 +28,9 @@ public class ScBoardController {
 	private ScBoardService scBoardService;
 	@Autowired
 	private IndivService indivService;
-	@Autowired
-	private FileService fileService;
-	
-	
 	
 	//스코어카드게시판 목록
-	@RequestMapping(value="/scorecard_list")
+	@RequestMapping(value="/tier/scorecard_list")
 	public String scorecard_list(Model listM, HttpServletRequest request, HttpServletResponse response, @ModelAttribute ScboardVO sb, HttpSession session) {
 		response.setContentType("text/html;charest=utf-8");
 		
@@ -90,8 +79,8 @@ public class ScBoardController {
 	}
 	
 	//스코어카드 게시판 내용보기(+수정,답변,삭제)
-	@RequestMapping(value="/scorecard_cont")
-	public ModelAndView scorecard_cont(ScboardVO sb, @RequestParam("sc_no") int sc_no, String state, int page, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/tier/scorecard_cont")
+	public ModelAndView scorecard_cont(@RequestParam("sc_no") int sc_no, String state, int page, ScboardVO sb, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView scm = new ModelAndView();
 		
 		response.setContentType("text/html;charset=utf-8");
@@ -131,7 +120,7 @@ public class ScBoardController {
 	}
 	
 	//스코어카드 글쓰기
-	@RequestMapping(value="/scorecard_write")
+	@RequestMapping(value="/tier/scorecard_write")
 	public ModelAndView scorecard_write(HttpServletRequest request, HttpServletResponse response, int page, HttpSession session) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		ModelAndView swm = new ModelAndView("tier/scorecard_write");
@@ -148,13 +137,12 @@ public class ScBoardController {
 		if(sc_id == null) {
 			out.println("<script>");
 			out.println("alert('로그인부터 하세요')");
-			out.println("location='login2';");
+			out.println("history.back();");
 			out.println("</script>");
 		}else {
 			page = 1;
 			if(request.getParameter("page") != null) {
 				page = Integer.parseInt(request.getParameter("page"));
-				request.setAttribute("page", page);
 			}
 			return swm;
 		}
@@ -163,66 +151,52 @@ public class ScBoardController {
 	}
 	
 	//스코어카드 글쓰기 저장
-	@RequestMapping("/scorecard_write_ok")
-	public String scorecard_write_ok(@ModelAttribute ScboardVO sb, MultipartFile file, RedirectAttributes redirectAttributes,  HttpServletResponse response, MultipartHttpServletRequest request, HttpSession session) throws Exception{
+	@RequestMapping(value="/tier/scorecard_write_ok")
+	public String scorecard_write_ok(ScboardVO sb, HttpServletResponse response, HttpServletRequest request, HttpSession session, int page) throws Exception{
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		String saveFolder = request.getServletContext().getRealPath("/upload");
+		String saveFolder = request.getRealPath("/resources/upload");
 		
-		String debugroute = request.getRealPath("/");
-		
-		int page = 1;
+		page = 1;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		int fileSize = 10*1024*1024; //이진파일 업로드 최대크기를 10mb로 제한
+		MultipartRequest multi = null; //이진파일 업로드
+		
+		multi = new MultipartRequest(request, saveFolder, fileSize, "utf-8");
+		
 		String sc_id = (String)session.getAttribute("id");
-		String sc_title = request.getParameter("sc_title");
-		String sc_playdate = request.getParameter("sc_playdate");
+		String sc_title = multi.getParameter("sc_title");
+		String sc_playdate = multi.getParameter("sc_playdate");
 		sc_playdate = sc_playdate.replace("-", "_");
-		String sc_cont = request.getParameter("sc_cont");
+		String sc_cont = multi.getParameter("sc_cont");
 		
-		file = request.getFile("file");
+		String fileoutput = null;
 		
-		if(file != null) { //첨부파일 있는경우
-			//String fileName = request.getParameter("file"); //첨부한 파일명
+		File upfile = multi.getFile("sc_file");
+		if(upfile != null) { //첨부파일 있는경우
+			String fileName = upfile.getName(); //첨부한 파일명
 			Calendar c = Calendar.getInstance();
 			int year = c.get(Calendar.YEAR); //년도
 			int month = c.get(Calendar.MONTH)+1; //1월이 0이라 +1
 			int date = c.get(Calendar.DATE);
 			
-			String homedir = "";
-			if(month >= 1 && month <= 9) {
-				homedir = saveFolder+"/"+year+"-"+"0"+month+"-"+date; //폴더경로 저장
-			}else if(month >= 10 && month <= 12) {
-				homedir = saveFolder+"/"+year+"-"+month+"-"+date; //폴더경로 저장
-			}
+			String homedir = saveFolder+"/"+year+"-"+"0"+month+"-"+date; //폴더경로 저장
 			File path01 = new File(homedir);
-			if(!(path01.exists())) { //여기서 폴더생성이 안되고있음?
-				path01.mkdirs(); //풀더 생성
-				System.out.println("폴더생성 완료.");
+			if(!(path01.exists())) {
+				path01.mkdir(); //풀더 생성
 			}
 			
-			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
-			String refileName = sc_playdate+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
-			String fileDBName = "";
-			if(month >= 1 && month <= 9) {
-				fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
-			}else if(month >= 10 && month <= 12) {
-				fileDBName = "/"+year+"-"+month+"-"+date+"/"+refileName;
-			}
-			File saveFile = new File("/"+homedir+"/"+refileName);
-			try {
-				file.transferTo(saveFile); //새롭게 생성된 폴더 경로에 변경된 파일로 실제 업로드
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			
+			int index = fileName.lastIndexOf("."); //첨부파일에서 마침표 위치번호
+			String fileExtendsion = fileName.substring(index+1); //마침표 이후부터 마지막 문자까지 구함(파일 확장자)
+			String refileName = sc_playdate+"_"+sc_id+"."+fileExtendsion; //새로운 파일첨부명
+			String fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
+			upfile.renameTo(new File(homedir+"/"+refileName)); //새롭게 생성된 폴더 경로에 변경된 파일로 실제 업로드
 			sb.setSc_file(fileDBName);
-			
+			fileoutput = fileName;
 		}
-		
-		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
 		
 		sb.setSc_id(sc_id);
 		sb.setSc_title(sc_title);
@@ -233,7 +207,6 @@ public class ScBoardController {
 		indivService.autoInsert(sb);
 		
 		String strdate = indivService.makeDate(sb);
-		strdate = strdate.replace("_", "");
 		int numdate = Integer.parseInt(strdate);
 		sb.setNumdate(numdate);
 		indivService.sortDate(sb);
@@ -242,7 +215,7 @@ public class ScBoardController {
 	}
 	
 	//답글 저장
-	@RequestMapping(value="/scorecard_reply_ok")
+	@RequestMapping(value="/tier/scorecard_reply_ok")
 	public String scorecard_reply_ok(HttpServletRequest request, HttpServletResponse response, ScboardVO sb, int page) {
 		page = 1;
 		if(request.getParameter("page") != null) {
@@ -271,11 +244,11 @@ public class ScBoardController {
 	}
 	
 	//수정
-	@RequestMapping(value="/scorecard_edit_ok")
+	@RequestMapping(value="/tier/scorecard_edit_ok")
 	public String scorecard_edit_ok(HttpServletRequest request, HttpServletResponse response, ScboardVO sb) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
 		
-		String saveFolder = request.getRealPath("/upload"); //이진파일 업로드 실제경로
+		String saveFolder = request.getRealPath("/resources/upload"); //이진파일 업로드 실제경로
 		int fileSize = 10*1024*1024; //이진파일 업로드 최대크기
 		
 		MultipartRequest multi = null;
@@ -332,13 +305,13 @@ public class ScBoardController {
 	}
 	
 	//삭제
-	@RequestMapping(value="/scorecard_del_ok")
-	public String scorecard_del_ok(String del_pwd,HttpServletResponse response,HttpServletRequest request, ScboardVO sb) throws Exception{
+	@RequestMapping(value="/tier/scorecard_del_ok")
+	public String scorecard_del_ok(int page,String del_pwd,HttpServletResponse response,HttpServletRequest request, ScboardVO sb) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		
 		int sc_no = Integer.parseInt(request.getParameter("sc_no"));
 		String sc_playdate = request.getParameter("sc_playdate");
-		int page = 1;
+		page = 1;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -350,9 +323,8 @@ public class ScBoardController {
 		sb.setSc_playdate(sc_playdate);
 		
 		scBoardService.delBoard(sb);
-		scBoardService.delCard(sb);
 		
-		return "redirect:/scorecard_list?page="+page;
+		return "redirect:/tier/scorecard_list?page="+page;
 	}		
 	
 }

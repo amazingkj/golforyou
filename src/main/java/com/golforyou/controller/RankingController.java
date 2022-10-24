@@ -36,30 +36,32 @@ public class RankingController {
 		List<Integer> province = new ArrayList<Integer>();
 		rankid = rankingService.getId();
 		for(int i=0 ; i<mem ; ++i) {
-			rm.addObject("rankid"+i,rankid.get(i));
+			rm.addObject("rankid",rankid);
 		}
-		
+		List<Integer> count = new ArrayList<>();
 		for(int i=0 ; i<mem ; ++i) {
-			int count = rankingService.playCount(rankid.get(i)); //플레이횟수
-			rm.addObject("count"+i, count);				
+			count.add(rankingService.playCount(rankid.get(i))); //플레이횟수
+			rm.addObject("count", count);				
 		}
 		
 		rankpoint = rankingService.getRankPoint(); //점수합계
 		bestrange = rankingService.getBestRange(); //최대비거리
 		province = rankingService.getProvince(); //주소지
-		for(int i=0 ; i<mem ; ++i) {				
-			rm.addObject("rankpoint"+i, rankpoint.get(i));
-			rm.addObject("bestrange"+i, bestrange.get(i));
-			rm.addObject("province"+i, province.get(i));
-		}
+
+		rm.addObject("rankpoint", rankpoint);
+		rm.addObject("bestrange", bestrange);
+		rm.addObject("province", province);
 		
-		String[] fileaddr = new String[mem];
+		List<String> fileaddr = new ArrayList<>();
+		for(int i=0 ; i<mem ; ++i) {
+			fileaddr.add("");
+		}
 								
 		rm.addObject("prov", prov);
 		rm.addObject("mem",mem);
-		for(int i=0 ; i<mem ; ++i) {
-			rm.addObject("fileaddr"+i, fileaddr[i]);
-		}
+		
+		rm.addObject("fileaddr", fileaddr);
+		
 		
 		return rm;
 		
