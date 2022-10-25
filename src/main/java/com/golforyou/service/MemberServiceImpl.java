@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.golforyou.dao.MemberDAO;
-import com.golforyou.util.SHA256Util;
 import com.golforyou.vo.MemberVO;
 
 

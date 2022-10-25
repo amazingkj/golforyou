@@ -24,16 +24,21 @@
 			<tr height="9%">
 				<th><input class="sccont_text" id="sccont_title" readonly value="[제목] ${sb.sc_title }"></th>
 			</tr>
-			
+			<c:if test="${sb.sc_playdate != null }">
 			<tr height="9%">
 				<th><input class="sccont_text" readonly value="[방문 날짜] ${sb.sc_playdate }"></th>
 			</tr>	
+			</c:if>
+			<c:if test="${sb.sc_file != null }">
 			<tr height="15%">
 				<th>
 				<div class="sccont_image">
+					
 					<img src="/upload${sb.sc_file }" width="800px" height="200px" alt="스코어카드">
+					
 				</div>
 			</tr>
+			</c:if>
 			<tr height="58%">
 				<th><input class="sccont_text" readonly value="${sb.sc_cont }"></th>
 			</tr>

@@ -40,9 +40,6 @@
 			<c:if test="${!empty sclist }">
 				<c:forEach var="s" items="${sclist }">
 				<tr>
-					<!-- <c:if test="${id == 'admin' }">
-					<td width="5%"><input type="checkbox"></td>
-					</c:if> -->
 					<td width="7%"><c:if test="${s.sc_step == 0 }">${s.sc_ref }</c:if></td>
 					<td width="52%">
 						<c:if test="${s.sc_step != 0 }"> <%-- 답변글일때만 실행, 들여쓰기와 답변글 이미지가 나옴 --%>

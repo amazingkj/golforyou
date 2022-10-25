@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 내용보기 -->
 	<select id="scb_cont" parameterType="scb" resultType="Scb">
-		select sc_no,sc_id,sc_title,sc_cont,sc_file,sc_hit from scboard where sc_no=#{sc_no}
+		select sc_no,sc_id,sc_title,sc_cont,sc_file,sc_hit,sc_playdate,sc_ref from scboard where sc_no=#{sc_no}
 	</select>
 	
 	<!-- 글쓰기 -->

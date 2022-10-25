@@ -2,6 +2,7 @@ package com.golforyou.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -11,14 +12,18 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.golforyou.service.IndivService;
 import com.golforyou.service.ScBoardService;
@@ -31,6 +36,14 @@ public class ScBoardController {
 	private ScBoardService scBoardService;
 	@Autowired
 	private IndivService indivService;
+	
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	    multipartResolver.setDefaultEncoding("UTF-8"); // 파일 인코딩 설정
+	    multipartResolver.setMaxUploadSizePerFile(10 * 1024 * 1024); // 파일당 업로드 크기 제한 (5MB)
+	    return multipartResolver;
+	}
 	
 	//스코어카드게시판 목록
 	@RequestMapping(value="/scorecard_list")
@@ -147,6 +160,7 @@ public class ScBoardController {
 			if(request.getParameter("page") != null) {
 				page = Integer.parseInt(request.getParameter("page"));
 			}
+			System.out.println(sc_id);
 			return swm;
 		}
 		
@@ -154,64 +168,66 @@ public class ScBoardController {
 	}
 	
 	//스코어카드 글쓰기 저장
-	@RequestMapping(value="/scorecard_write_ok")
-	public String scorecard_write_ok(ScboardVO sb, MultipartFile file,HttpServletResponse response, MultipartHttpServletRequest request, HttpSession session, int page) throws Exception{
+	@RequestMapping("/scorecard_write_ok")
+	public String scorecard_write_ok(@ModelAttribute ScboardVO sb, MultipartFile file, RedirectAttributes redirectAttributes,  HttpServletResponse response, MultipartHttpServletRequest request, HttpSession session) throws Exception{
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String saveFolder = request.getServletContext().getRealPath("/upload");
 		
-		page = 1;
+		String debugroute = request.getRealPath("/");
+		
+		int page = 1;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		int fileSize = 10*1024*1024; //이진파일 업로드 최대크기를 10mb로 제한
-		MultipartRequest multi = null; //이진파일 업로드
-		
-		multi = new MultipartRequest(request, saveFolder, fileSize, "utf-8");
-		
 		String sc_id = (String)session.getAttribute("id");
-		String sc_title = multi.getParameter("sc_title");
-		String sc_playdate = multi.getParameter("sc_playdate");
+		String sc_title = request.getParameter("sc_title");
+		String sc_playdate = request.getParameter("sc_playdate");
 		sc_playdate = sc_playdate.replace("-", "_");
-		String sc_cont = multi.getParameter("sc_cont");
+		String sc_cont = request.getParameter("sc_cont");
 		
 		file = request.getFile("file");
 		
 		if(file != null) { //첨부파일 있는경우
-			String fileName = file.getName(); //첨부한 파일명
+			//String fileName = request.getParameter("file"); //첨부한 파일명
 			Calendar c = Calendar.getInstance();
 			int year = c.get(Calendar.YEAR); //년도
 			int month = c.get(Calendar.MONTH)+1; //1월이 0이라 +1
 			int date = c.get(Calendar.DATE);
 			
-            String homedir = "";
-            if(month >= 1 && month <= 9) {
-                homedir = saveFolder+"/"+year+"-"+"0"+month+"-"+date; //폴더경로 저장
-            }else if(month >= 10 && month <= 12) {
-                homedir = saveFolder+"/"+year+"-"+month+"-"+date; //폴더경로 저장
-            }
+			String homedir = "";
+			if(month >= 1 && month <= 9) {
+				homedir = saveFolder+"/"+year+"-"+"0"+month+"-"+date; //폴더경로 저장
+			}else if(month >= 10 && month <= 12) {
+				homedir = saveFolder+"/"+year+"-"+month+"-"+date; //폴더경로 저장
+			}
 			File path01 = new File(homedir);
-			if(!(path01.exists())) {
-                path01.mkdirs(); //풀더 생성
+			if(!(path01.exists())) { //여기서 폴더생성이 안되고있음?
+				path01.mkdirs(); //풀더 생성
+				System.out.println("폴더생성 완료.");
 			}
 			
-            String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
-            String refileName = sc_playdate+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
-            String fileDBName = "";
-            if(month >= 1 && month <= 9) {
-                fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
-            }else if(month >= 10 && month <= 12) {
-                fileDBName = "/"+year+"-"+month+"-"+date+"/"+refileName;
-            }
-            File saveFile = new File("/"+homedir+"/"+refileName);
-            try {
-                file.transferTo(saveFile); //새롭게 생성된 폴더 경로에 변경된 파일로 실제 업로드
-            }catch(Exception e) {
-                e.printStackTrace();
-            }						
+			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
+			String refileName = sc_playdate+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
+			String fileDBName = "";
+			if(month >= 1 && month <= 9) {
+				fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
+			}else if(month >= 10 && month <= 12) {
+				fileDBName = "/"+year+"-"+month+"-"+date+"/"+refileName;
+			}
+			File saveFile = new File("/"+homedir+"/"+refileName);
+			try {
+				file.transferTo(saveFile); //새롭게 생성된 폴더 경로에 변경된 파일로 실제 업로드
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			sb.setSc_file(fileDBName);
+			
 		}
+		
+		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
 		
 		sb.setSc_id(sc_id);
 		sb.setSc_title(sc_title);
@@ -222,6 +238,7 @@ public class ScBoardController {
 		indivService.autoInsert(sb);
 		
 		String strdate = indivService.makeDate(sb);
+		strdate = strdate.replace("_", "");
 		int numdate = Integer.parseInt(strdate);
 		sb.setNumdate(numdate);
 		indivService.sortDate(sb);
@@ -231,11 +248,14 @@ public class ScBoardController {
 	
 	//답글 저장
 	@RequestMapping(value="/scorecard_reply_ok")
-	public String scorecard_reply_ok(HttpServletRequest request, HttpServletResponse response, ScboardVO sb, int page) {
+	public String scorecard_reply_ok(HttpServletRequest request, HttpServletResponse response, ScboardVO sb, int page) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		page = 1;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
+		
+		String saveFolder = request.getServletContext().getRealPath("/upload");
 		
 		//답변글 히든값 3개
 		int sc_ref = Integer.parseInt(request.getParameter("sc_ref"));
@@ -316,17 +336,17 @@ public class ScBoardController {
 		
 		scBoardService.updateBoard(sb);
 		
-		return "redirect:/tier/scorecard_cont?sc_no="+sc_no+"&page="+page+"&state=cont";
+		return "redirect:/scorecard_cont?sc_no="+sc_no+"&page="+page+"&state=cont";
 	}
 	
 	//삭제
 	@RequestMapping(value="/scorecard_del_ok")
-	public String scorecard_del_ok(int page,String del_pwd,HttpServletResponse response,HttpServletRequest request, ScboardVO sb) throws Exception{
+	public String scorecard_del_ok(String del_pwd,HttpServletResponse response,HttpServletRequest request, ScboardVO sb) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		
 		int sc_no = Integer.parseInt(request.getParameter("sc_no"));
 		String sc_playdate = request.getParameter("sc_playdate");
-		page = 1;
+		int page = 1;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -339,7 +359,7 @@ public class ScBoardController {
 		
 		scBoardService.delBoard(sb);
 		
-		return "redirect:/tier/scorecard_list?page="+page;
+		return "redirect:/scorecard_list?page="+page;
 	}		
 	
 }

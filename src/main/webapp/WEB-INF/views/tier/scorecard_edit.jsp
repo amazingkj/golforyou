@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.sql.*, java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/includes/header.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/header.css" />
@@ -37,7 +38,7 @@
 	<hr style="padding:0.5px; background-color:grey; width:1300px; margin-left:	4%; border:0; margin-top:20px;">
 	<div class="scwrite_wrap">
 	<form method="post" action="scorecard_edit_ok" onsubmit="return check();" enctype="multipart/form-data">
-		 <%-- 히든값 전달 --%>
+		<%-- 히든값 전달 --%>
 	    <input type="hidden" name="sc_no" value="${sb.sc_no }"> <%-- 번호가 전달 --%>
 	    <input type="hidden" name="page" value="${page }"> <%-- 페이지 쪽나누기에서 책갈피 기능을 구현하기 위해 히든으로 쪽번호 전달 --%>
 		<table class="sc_t">
