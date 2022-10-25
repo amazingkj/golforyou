@@ -35,14 +35,14 @@ public class RankingController {
 		List<Integer> bestrange = new ArrayList<Integer>();
 		List<Integer> province = new ArrayList<Integer>();
 		rankid = rankingService.getId();
-		for(int i=0 ; i<mem ; ++i) {
-			rm.addObject("rankid",rankid);
-		}
+		
+		rm.addObject("rankid",rankid);
+		
 		List<Integer> count = new ArrayList<>();
 		for(int i=0 ; i<mem ; ++i) {
-			count.add(rankingService.playCount(rankid.get(i))); //플레이횟수
-			rm.addObject("count", count);				
+			count.add(rankingService.playCount(rankid.get(i))); //플레이횟수							
 		}
+		rm.addObject("count", count);
 		
 		rankpoint = rankingService.getRankPoint(); //점수합계
 		bestrange = rankingService.getBestRange(); //최대비거리

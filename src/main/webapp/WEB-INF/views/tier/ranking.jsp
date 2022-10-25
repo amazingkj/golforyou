@@ -14,9 +14,6 @@
 
 <script src="/js/jquery.js"></script>
 
-
-
-
 <article id="ranking_main">
 	<br>
 	<span class="rank_title_1" id="rank_tag_1">
@@ -160,7 +157,7 @@
 	$('#rDriver_'+${i}).append("<c:out value='${bestrange.get(i-1)}'/>");	
 	
 	$("#rProfile_"+${i}).css({
-		"background-image": "url('/upload/member"+"<c:out value='${fileaddr.get(i-1)}'/>"+"')",
+		"background-image": "url('/upload/member<c:out value="${fileaddr.get(i-1)}"/>')",
 		"background-repeat" : "no-repeat",
 		"background-size" : "50px 50px"
 	});

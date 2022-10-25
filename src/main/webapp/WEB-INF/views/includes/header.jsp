@@ -33,16 +33,16 @@
      <%--상단 메뉴 --%>
      
      <ul>
-      <li><a href="/tier/ranking"class=btn1>랭킹</a>
+      <li><a href="/ranking"class=btn1>랭킹</a>
        <ul>
-       <li><a href="/tier/ranking">전체기록</a></li>
-       <li><a href="/tier/indivrank">개인기록</a></li>
+       <li><a href="/ranking">전체기록</a></li>
+       <li><a href="/indivrank">개인기록</a></li>
        </ul>
        </li>
       <li><a href="/board_list" class=btn1>게시판</a>
        <ul>      
        <li><a href="/board_list">자유게시판</a></li>
-       <li><a href="/tier/scorecard_list">스코어카드<br>게시판</a></li>
+       <li><a href="/scorecard_list">스코어카드<br>게시판</a></li>
        </ul>
        </li>
       <li><a href="/yeyag/yeyag_list" class=btn1>골프장</a>

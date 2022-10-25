@@ -44,4 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="sc_editAvg">
 		update ranking set r_sum=#{s_sumscore} where r_id=#{s_id}
 	</update>
+	
+	<!-- 회원가입과 동시에 랭킹레코드 발생 -->
+	<insert id="rank_insert">
+		insert into ranking(r_no,r_id,r_province) values(rno_seq.nextval,#{r_id},#{r_province})
+	</insert>
 </mapper>

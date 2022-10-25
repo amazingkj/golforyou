@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
+import com.golforyou.service.RankingService;
 import com.golforyou.vo.GolforyouMemberNEW;
+import com.golforyou.vo.RankingVO;
 
 @Controller
 public class LoginController {
@@ -29,6 +31,9 @@ public class LoginController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private RankingService rankingService;
 	
 	//@Autowired
 	//private PrincipalDetailsService principalDetail;
@@ -158,6 +163,21 @@ public class LoginController {
 	public String joinOk(GolforyouMemberNEW member,RedirectAttributes Redirect) {
 		System.out.println(member);
 		member.setMRole("ROLE_USER");
+		
+		
+		/* 회원가입과 동시에 ranking에 추가 */
+		String r_id = member.getUsername();
+		System.out.println("r_id : "+r_id);
+
+		String r_province = "서울";
+		
+		RankingVO r = new RankingVO();
+		
+		r.setR_id(r_id);
+		r.setR_province(r_province);
+		
+		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
+		/* 회원가입과 동시에 ranking에 추가 끝 */
 		
 		String rawPassword = member.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);

@@ -23,4 +23,6 @@ public interface RankingDAO {
 
 	void updateAvgScore(ScorecardVO sc);
 
+	void createRank(RankingVO r);
+
 }

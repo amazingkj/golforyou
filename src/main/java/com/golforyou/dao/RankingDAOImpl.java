@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.ScorecardVO;
 
 @Repository
@@ -60,6 +61,12 @@ public class RankingDAOImpl implements RankingDAO {
 	public void updateAvgScore(ScorecardVO sc) {
 		// TODO Auto-generated method stub
 		sqlSession.update("rank_editAvg", sc);
+	}
+
+	@Override
+	public void createRank(RankingVO r) {
+		// TODO Auto-generated method stub
+		sqlSession.insert("rank_insert",r);
 	}
 	
 	

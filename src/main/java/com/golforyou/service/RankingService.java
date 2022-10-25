@@ -2,6 +2,7 @@ package com.golforyou.service;
 
 import java.util.List;
 
+import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.ScorecardVO;
 
 public interface RankingService {
@@ -21,5 +22,7 @@ public interface RankingService {
 	List<Integer> getProvince();
 
 	void updateAvgScore(ScorecardVO sc);
+
+	void createRank(RankingVO r);
 	
 }

@@ -8,27 +8,9 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 <link rel="stylesheet" type="text/css" href="/css/board.css" />
 <br/>
-<%
-String id = request.getParameter("id");
-if(id == null) {	 
-	id = (String)session.getAttribute("id");;
-}
 
-int getCount = (Integer)request.getAttribute("getCount");
-
-String[] viewDate = new String[getCount];
-String[] viewLocation = new String[getCount];
-int[] viewBestScore = new int[getCount];
-int[] viewRange = new int[getCount];
-for(int i=0 ; i<getCount ; ++i) {
-	viewDate[i] = (String)request.getAttribute("viewDate"+i);
-	viewLocation[i] = (String)request.getAttribute("viewLocation"+i);
-	viewBestScore[i] = (Integer)request.getAttribute("viewBestScore"+i);
-	viewRange[i] = (Integer)request.getAttribute("viewRange"+i);
-}
-%>
 <%-- 개인 본문 --%>
-<script src="/resources/js/jquery.js"></script>
+<script src="/js/jquery.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> <!-- chart.js -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -159,8 +141,10 @@ for(int i=0 ; i<getCount ; ++i) {
 						<th width="15%" id="ListRange">최대 비거리</th>
 						<th width="15%" id="ListMax">최고득점</th>
 						<th width="15%" id="ListImg">카드</th>
-					</tr>
+					</tr>				
 				</table>	
+				<c:if test="${getCount == 0 }">
+				</c:if>
 			</div>
 			
 		</div>
@@ -182,7 +166,11 @@ for(int i=0 ; i<getCount ; ++i) {
 				+"<th width='12%' id='ListImg'>카드</th>"
 				+"</tr>"
 				+"</table>"
-				+"<div class='ind_history' id='ind_history_1'>");
+				+"<div class='ind_history' id='ind_history_1'>"
+				+"<c:if test='${getCount == 0 }'>"
+				+"<br>골프장 방문 기록이 없습니다."
+				+"</c:if>"
+				+"</div>");
 		
 		while(historyCount > divCount){
 			
@@ -207,13 +195,9 @@ for(int i=0 ; i<getCount ; ++i) {
 			var divScoreCard = $("<div></div>").addClass("iScoreCard").attr('id',"iScoreCard_"+(divCount+1));
 			$("#iHighScore_"+(divCount+1)).after(divScoreCard); //iHighScore클래스 div 생성
 			
-			//document.getElementById('iDate_'+(divCount+1)).innerHTML = "생성된날짜";
-			//document.getElementById('iLocation_'+(divCount+1)).innerHTML = "생성된골프장소";
-			//document.getElementById('iRange_'+(divCount+1)).innerHTML = "생성된최대비거리";
-			//document.getElementById('iHighScore_'+(divCount+1)).innerHTML = "생성된그날최고득점";
-			document.getElementById('iScoreCard_'+(divCount+1)).innerHTML = "<i class='far fa-clipboard'></i>";
+			document.getElementById('iScoreCard_'+(divCount+1)).innerHTML = "<i class='far fa-clipboard'></i>"; //스코어카드 확인용 아이콘 생성
 			
-			divCount = $('.ind_history').length;
+			divCount = $('.ind_history').length; //divCount 증가
 		}
 		
 		$(".ind_profile").css({
@@ -234,43 +218,40 @@ for(int i=0 ; i<getCount ; ++i) {
 		
 
 	</script>
-	<%
-	for(int i=0 ; i<getCount ; ++i){
-	%>
+	
+	<c:forEach var="i" begin="1" end="${getCount }">
 		<script>
-		$("#iDate_"+(<%=i+1%>)).append("<%=viewDate[i]%>");
-		$("#iDate2_"+(<%=i+1%>)).append("<%=viewDate[i].substring(0,4)+"년"+viewDate[i].substring(5,7)+"월"+viewDate[i].substring(8,10)+"일"%>");
-		$("#iLocation_"+(<%=i+1%>)).append("<%=viewLocation[i]%>");
-		$("#iHighScore_"+(<%=i+1%>)).append("<%=viewBestScore[i]%>");
-		$("#iRange_"+(<%=i+1%>)).append("<%=viewRange[i]%>m");
+		$("#iDate_"+${i}).append("<c:out value='${viewDate.get(i-1)}'/>");
+		$("#iDate2_"+${i}).append("<c:out value='${viewDate.get(i-1).substring(0,4)}'/>년 <c:out value='${viewDate.get(i-1).substring(5,7)}'/>월 <c:out value='${viewDate.get(i-1).substring(8,10)}'/>일");
+		$("#iLocation_"+${i}).append("<c:out value='${viewLocation.get(i-1)}'/>");
+		$("#iHighScore_"+${i}).append("<c:out value='${viewBestScroe.get(i-1)}'/>");
+		$("#iRange_"+${i}).append("<c:out value='${viewRange.get(i-1)}'/>m");
 		
-		var loc = $('#iLocation_'+<%=i+1%>).text();
+		var loc = $('#iLocation_'+${i}).text();
 		
 		if(loc == '잭 니클라우스 GC 코리아'){
-			$('#iLocation_'+<%=i+1%>).css({
+			$('#iLocation_'+${i}).css({
 				"background-image": "linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url('/images/tier/JACK_NICKLAUS_GOLF_CLUB_KOREA.jpg')",
 				"background-size" : "330px 80px"	
 				});
 		}else if(loc == '소노 펠리체 CC'){
-			$('#iLocation_'+<%=i+1%>).css({
+			$('#iLocation_'+${i}).css({
 				"background-image": "linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url('/images/tier/SONO_FELICE_COUNTRY_CLUB.jpg')",
 				"background-size" : "330px 80px"
 				});
 		}else if(loc == '해슬리 나인브릿지'){
-			$('#iLocation_'+<%=i+1%>).css({
+			$('#iLocation_'+${i}).css({
 				"background-image": "linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url('/images/tier/HAESLEY_NINE_BRIDGE.jpg')",
 				"background-size" : "330px 80px"
 				});
 		}else if(loc == '골드레이크 CC'){
-			$('#iLocation_'+<%=i+1%>).css({
+			$('#iLocation_'+${i}).css({
 				"background-image": "linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url('/images/GOLD_LAKE_CC.jpg')",
 				"background-size" : "330px 80px"
 				});
 		}
 		</script>
-	<%	
-	}
-	%>
+	</c:forEach>
 	
 
 </article>

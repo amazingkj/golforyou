@@ -62,6 +62,12 @@ public class RankingServiceImpl implements RankingService {
 		// TODO Auto-generated method stub
 		rankingDAO.updateAvgScore(sc);
 	}
+
+	@Override
+	public void createRank(RankingVO r) {
+		// TODO Auto-generated method stub
+		rankingDAO.createRank(r);
+	}
 	
 	
 }
