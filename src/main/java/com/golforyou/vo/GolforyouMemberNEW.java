@@ -3,13 +3,16 @@ package com.golforyou.vo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import lombok.Builder;
 import lombok.Data;
@@ -22,19 +25,24 @@ import lombok.NoArgsConstructor;
 		sequenceName = "MEMBER_SEQ",	//매핑할 DB 시퀀스 이름
 		initialValue = 1, allocationSize = 1)
 @Data
-@NoArgsConstructor 
+@NoArgsConstructor
+@DynamicInsert
 public class GolforyouMemberNEW implements Serializable{
-	
+	@Id 
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MEMBER_SEQ_GENERATOR")
 	private int  mNo;
-	@Id
+	
+	@Column(name="username" , unique=true)
 	private String username;
+	
 	private String password;
 	private String mPhone;
 	private String mAddr;
 	private String mEmail;
 	private String mGender;
 	private String mFile;
+	
+	@ColumnDefault("'1'")
 	private int mState;
 	private String mRole; //ROLE_USER,ROLE_ADMIN,ROLE_MANAGER
 	
