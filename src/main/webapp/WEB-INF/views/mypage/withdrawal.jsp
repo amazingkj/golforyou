@@ -30,7 +30,7 @@ function withdrawal_check(){
 		<p class="deleteIdTxt02"><strong>계정 삭제 사유</strong> </p> 
 		<textarea id="del_cont" name="del_cont" 
 		cols="30" rows="2" placeholder="계정 삭제 사유를 남겨주시면 보다 나은 서비스를 제공할 수 있도록 노력하는 golForYou가 되겠습니다."></textarea>
-		<p class="deleteIdTxt02"><strong>계정 비밀번호</strong> </p> <input type="password" id="m_pw" name="m_pw">
+		<p class="deleteIdTxt02"><strong>계정 비밀번호</strong> </p> <input type="password" id="password" name="password">
 		<hr/>
 		<p class="deleteIdTxt02"><strong>정말로 계정을 삭제하시겠습니다? </strong></p> 
 		<button type="button" id="btn_change_password" class="checkBtn" onClick='window.close()'>계속 사용하기</button>
