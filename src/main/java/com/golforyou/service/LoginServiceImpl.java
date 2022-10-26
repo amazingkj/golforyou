@@ -15,7 +15,7 @@ public class LoginServiceImpl implements LoginService {
 
 
 		@Override
-		public GolforyouMemberNEW idCheck(String username) {
+		public int idCheck(String username) {
 			return this.loginDAO.idCheck(username);
 			
 		}

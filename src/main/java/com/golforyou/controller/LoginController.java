@@ -1,5 +1,8 @@
 package com.golforyou.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,12 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
+import com.golforyou.service.LoginService;
 import com.golforyou.vo.GolforyouMemberNEW;
 
 @Controller
@@ -29,6 +34,9 @@ public class LoginController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private LoginService loginService;
 	
 	//@Autowired
 	//private PrincipalDetailsService principalDetail;
@@ -122,7 +130,34 @@ public class LoginController {
 		return "redirect:/test/login";
 	}
 	
-	
+//	public MemberVO idCheck(String id) {
+//		MemberVO m=null;
+//		
+//		try {
+//			con=ds.getConnection();//커넥션 풀 관리 ds로 db연결 con생성
+//			sql="select * from golformemberNew where m_id=?";
+//			pt = con.prepareStatement(sql);//쿼리문을 미리 컴파일하여 수행할 pt생성
+//			pt.setString(1,id);//쿼리문의 첫번째 물음표에 문자열로 아이디저장
+//			rs=pt.executeQuery();//검색 쿼리문 수행후 결과레코드를 rs에 저장
+//			
+//			if(rs.next()) {//다음 레코드 행이 존재하면 참
+//				m=new MemberVO();
+//				m.setM_id(rs.getString("m_id"));//m_id컬럼으로 부터 문자열로 아이디값을
+//				//가져와서 setter()메서드에 저장
+//			}
+//		}catch(Exception e) {e.printStackTrace();}
+//		finally {
+//			try {
+//			    if(rs != null) rs.close();
+//			    if(pt != null) pt.close();
+//			    if(con != null) con.close();
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return m;
+//	}//idCheck()
+//	
 	@RequestMapping("/index")
 	public String loginandSession(HttpServletRequest request, HttpSession session,
 			Authentication authentication,
@@ -153,9 +188,45 @@ public class LoginController {
 //		}
 		return "member/join";
 	}
+	 @ResponseBody
+	@RequestMapping("/idcheck")
+    public int idcheck(String username) {
+        System.out.println("테스트");
+        int count = 0;
+        //Map<Object, Object> map = new HashMap<Object, Object>();
+ 
+        count = this.loginService.idCheck(username);
+        System.out.println(count);
+        //map.put("cnt", count);
+        //System.out.println(map);
 
+        return count;
+    }
+	
+	
+	
+	
+//	@RequestMapping("/idcheck")
+//    @ResponseBody
+//    public Map<Object, Object> idcheck(@RequestBody String username) {
+//        System.out.println("테스트");
+//        int count = 0;
+//        Map<Object, Object> map = new HashMap<Object, Object>();
+// 
+//        count = loginService.idCheck(username);
+//        System.out.println(count);
+//        map.put("cnt", count);
+//        System.out.println(map);
+//    	
+//        return map;
+//    }
+//	
+//	
+	
 	@PostMapping("/join_ok")
 	public String joinOk(GolforyouMemberNEW member,RedirectAttributes Redirect) {
+		
+
 		System.out.println(member);
 		member.setMRole("ROLE_USER");
 		

@@ -4,7 +4,7 @@ import com.golforyou.vo.GolforyouMemberNEW;
 
 public interface LoginDAO {
 
-	GolforyouMemberNEW idCheck(String username);
+	int idCheck(String username);
 	GolforyouMemberNEW getMember(String id);
 
 }
