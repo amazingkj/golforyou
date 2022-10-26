@@ -68,6 +68,18 @@ public class RankingDAOImpl implements RankingDAO {
 		// TODO Auto-generated method stub
 		sqlSession.insert("rank_insert",r);
 	}
-	
+
+	@Override
+	public int getUpdatedScorecardCount(ScorecardVO sc) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("sc_upcount", sc);
+	}
+
+	@Override
+	public void resetScore(ScorecardVO sc) {
+		// TODO Auto-generated method stub
+		sqlSession.update("rank_reset", sc);
+	}
+
 	
 }

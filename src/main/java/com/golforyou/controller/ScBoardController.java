@@ -41,7 +41,7 @@ public class ScBoardController {
 	public CommonsMultipartResolver multipartResolver() {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 	    multipartResolver.setDefaultEncoding("UTF-8"); // 파일 인코딩 설정
-	    multipartResolver.setMaxUploadSizePerFile(10 * 1024 * 1024); // 파일당 업로드 크기 제한 (5MB)
+	    multipartResolver.setMaxUploadSizePerFile(10 * 1024 * 1024); // 파일당 업로드 크기 제한 (10MB)
 	    return multipartResolver;
 	}
 	
@@ -50,7 +50,7 @@ public class ScBoardController {
 	public String scorecard_list(Model listM, HttpServletRequest request, HttpServletResponse response, @ModelAttribute ScboardVO sb, HttpSession session) {
 		response.setContentType("text/html;charest=utf-8");
 		
-		int page = 1;
+		int page = 1; //page없으면 1페이지고정
 		int limit = 10;
 		String find_field = null;
 		String find_name = null;
@@ -64,12 +64,12 @@ public class ScBoardController {
 		sb.setFind_field(find_field);
 		sb.setFind_name("%"+find_name+"%");
 		
-		int listcount = scBoardService.getListCount(sb);
+		int listcount = scBoardService.getListCount(sb); //게시판 목록 갯수
 		
 		sb.setStartrow((page-1)*10+1);
 		sb.setEndrow(sb.getStartrow()+limit-1);
 		
-		List<ScboardVO> sclist = scBoardService.getBoardList(sb);
+		List<ScboardVO> sclist = scBoardService.getBoardList(sb); //게시판 목록 리스트
 		
 		String id = (String)session.getAttribute("id");
 		
@@ -182,10 +182,10 @@ public class ScBoardController {
 		}
 		
 		String sc_id = (String)session.getAttribute("id");
-		String sc_title = request.getParameter("sc_title");
-		String sc_playdate = request.getParameter("sc_playdate");
-		sc_playdate = sc_playdate.replace("-", "_");
-		String sc_cont = request.getParameter("sc_cont");
+		String sc_title = request.getParameter("sc_title"); //제목
+		String sc_playdate = request.getParameter("sc_playdate"); //골프 친 날짜
+		sc_playdate = sc_playdate.replace("-", "_"); //2022-01-01을 2022_01_01로
+		String sc_cont = request.getParameter("sc_cont"); //내용
 		
 		file = request.getFile("file");
 		
@@ -210,7 +210,7 @@ public class ScBoardController {
 			
 			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
 			String refileName = sc_playdate+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
-			String fileDBName = "";
+			String fileDBName = ""; //DB에 저장되는 경로명
 			if(month >= 1 && month <= 9) {
 				fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
 			}else if(month >= 10 && month <= 12) {
@@ -234,14 +234,14 @@ public class ScBoardController {
 		sb.setSc_playdate(sc_playdate);
 		sb.setSc_cont(sc_cont);
 		
-		scBoardService.insertBoard(sb);
-		indivService.autoInsert(sb);
+		scBoardService.insertBoard(sb); //scboard테이블에 레코드 생성
+		indivService.autoInsert(sb); //스코어카드에 id와 playdate만 입력된 레코드 생성, 나머지는 관리자페이지에서 채우게 됨
 		
-		String strdate = indivService.makeDate(sb);
+		String strdate = indivService.makeDate(sb); //playdate를 s_sort인 int로 만들기 위해 발골하는 작업
 		strdate = strdate.replace("_", "");
 		int numdate = Integer.parseInt(strdate);
 		sb.setNumdate(numdate);
-		indivService.sortDate(sb);
+		indivService.sortDate(sb); //발골된 날짜를 s_sort에 저장
 		
 		return "redirect:/scorecard_list?page="+page;
 	}

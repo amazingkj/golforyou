@@ -229,7 +229,7 @@
 .indList{
 	position:relative;
 	border:0.5px solid #d4d4d4;
-	width:850px;
+	width:860px;
 	height:35px;
 	margin:15px auto 0px auto;
 	float:center;
@@ -243,7 +243,7 @@
 	background-color:#fff;
 	border:1px solid #d4d4d4;
 	box-shadow:0 0 5px  rgba(0,0,0,0.2);
-	width:850px;
+	width:860px;
 	height:100px;
 	margin:10px auto;
 	float:center;
@@ -258,7 +258,7 @@
 	position:relative;
 	background-color: #fff;
 	border:none;
-	width:110px;
+	width:120px;
 	height:80px;
 	margin:10px 5px;
 	float:left;

@@ -25,47 +25,40 @@ public class RankingController {
 		ModelAndView rm = new ModelAndView("/tier/ranking");
 		String prov = request.getParameter("prov");
 		
-		int mem=0;
+		int mem=0;		
+		mem = rankingService.memberCount(); //ranking테이블에 있는 레코드 개수(회원수)
 		
-		mem = rankingService.memberCount();
-		
-		List<String> rankid = new ArrayList<>();
-		//List<Integer> count = new ArrayList<Integer>();
+		List<String> rankid = new ArrayList<>(); 
 		List<Integer> rankpoint = new ArrayList<Integer>();
 		List<Integer> bestrange = new ArrayList<Integer>();
 		List<Integer> province = new ArrayList<Integer>();
-		rankid = rankingService.getId();
 		
-		rm.addObject("rankid",rankid);
+		rankid = rankingService.getId(); //점수순으로 정렬된 아이디
 		
 		List<Integer> count = new ArrayList<>();
 		for(int i=0 ; i<mem ; ++i) {
 			count.add(rankingService.playCount(rankid.get(i))); //플레이횟수							
 		}
-		rm.addObject("count", count);
-		
+	
 		rankpoint = rankingService.getRankPoint(); //점수합계
 		bestrange = rankingService.getBestRange(); //최대비거리
 		province = rankingService.getProvince(); //주소지
-
+	
+		List<String> fileaddr = new ArrayList<>();
+		for(int i=0 ; i<mem ; ++i) {
+			fileaddr.add(""); //프로필 사진 경로
+		}
+		
+		rm.addObject("rankid",rankid);		
+		rm.addObject("count", count);
 		rm.addObject("rankpoint", rankpoint);
 		rm.addObject("bestrange", bestrange);
 		rm.addObject("province", province);
-		
-		List<String> fileaddr = new ArrayList<>();
-		for(int i=0 ; i<mem ; ++i) {
-			fileaddr.add("");
-		}
-								
 		rm.addObject("prov", prov);
-		rm.addObject("mem",mem);
-		
+		rm.addObject("mem",mem);		
 		rm.addObject("fileaddr", fileaddr);
-		
-		
+				
 		return rm;
-		
-		
 		
 	}
 }

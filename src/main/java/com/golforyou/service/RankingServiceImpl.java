@@ -68,6 +68,17 @@ public class RankingServiceImpl implements RankingService {
 		// TODO Auto-generated method stub
 		rankingDAO.createRank(r);
 	}
-	
+
+	@Override
+	public int getUpdatedScorecardCount(ScorecardVO sc) {
+		// TODO Auto-generated method stub
+		return rankingDAO.getUpdatedScorecardCount(sc);
+	}
+
+	@Override
+	public void resetScore(ScorecardVO sc) {
+		// TODO Auto-generated method stub
+		rankingDAO.resetScore(sc);
+	}
 	
 }

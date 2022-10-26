@@ -36,59 +36,61 @@ public class IndivrankController {
 		PrintWriter out = response.getWriter();
 		
 		String id = request.getParameter("rId");
-		if(id == null) {
+		if(id == null) { //ranking페이지에서 타고 온 경우가 아닌 경우
 			HttpSession session = request.getSession();
-			if((String)session.getAttribute("id") == null) {
+			if((String)session.getAttribute("id") == null) { //로그인이 안되어있는 경우
 				out.println("<script>");
 				out.println("alert('로그인부터 하세요')");
 				out.println("location='login'");
 				out.println("</script>");
-			}else {
+			}else { //로그인되어있으면
 				id = (String)session.getAttribute("id");
 			}			
-		}
-		if(id != null) {
+		} 
+		if(id != null) { //ranking페이지에서 타고오거나 로그인한 경우에만 들어갈수있음
 			sv.setS_id(id);
 			
-			String rPoint = request.getParameter("rPoint_");
-			if(rPoint == null) {
-				rPoint = indivService.getPoint(id);
+			String rPoint = request.getParameter("rPoint_"); //ranking페이지에서 받아온 포인트값
+			if(rPoint == null) { //ranking페이지에서 타고온 경우가 아니라면
+				rPoint = indivService.getPoint(id); //로그인한 회원의 정보에서 포인트값 가져옴
 			}
-			String rankno = request.getParameter("rankno");
+			String rankno = request.getParameter("rankno"); //순위
 			
-			int getCount = rankingService.playCount(id);
+			int getCount = rankingService.playCount(id); //골프 플레이 횟수
 
-			List<Integer> s_obandhazard = indivService.getOBandHazard(id);
-			List<Integer> s_strike = indivService.getStrike(id);
+			List<Integer> s_obandhazard = indivService.getOBandHazard(id); //OB+Hazard값
+			List<Integer> s_strike = indivService.getStrike(id); //타수
 			int obandhazard = 0;
 			int strike = 0;
 			
 			for(int i=0 ; i<s_obandhazard.size() ; ++i) {
-				obandhazard = s_obandhazard.get(i);
-				strike = s_strike.get(i);
+				if(s_obandhazard.get(i) != null) {
+					obandhazard = s_obandhazard.get(i); //지금까지 OB+Hazard 한 횟수 합
+					strike = s_strike.get(i); //지금까지 골프공을 친 횟수 합
+				}				
 			}
 			
-			if(rankno == null) {
-				int num = 1;
+			if(rankno == null) { //ranking페이지에서 타고온 경우가 아닌 경우 순위를 구해야함
+				int num = 1; //순위 초기값
 				
-				List<String> row_id = indivService.getRowNum(id);
+				List<String> row_id = indivService.getRowNum(id); //점수 기준으로 테이블에서 아이디가 몇번째인가
 				
 				while(num == getCount) {
-					if(row_id.get(num).equals(id)) {
-						break;
+					if(row_id.get(num).equals(id)) { //num번째 아이디와 로그인한 아이디가 일치하는지 여부
+						break; //일치하면 while문 중단
 					}
-					++num;
+					++num; //돌때마다 순위 하나씩 증가
 				}			
-				rankno = num+"";
+				rankno = num+""; //num값이 순위
 			}
-			List<Integer> put = new ArrayList<>();
+			List<Integer> put = new ArrayList<>(); //퍼팅
 			put = indivService.getPutting(id);
 			int sumPutting = 0;
 			for(int i=0 ; i<getCount ; ++i) {						
 				sumPutting += put.get(i);
 			}
 			double avgPutting = (double)sumPutting/getCount;
-			String strPutting = String.format("%.2f", avgPutting);
+			String strPutting = String.format("%.2f", avgPutting); //평균 퍼팅횟수
 			
 			Calendar cal = Calendar.getInstance();
 			int intyear = cal.get(Calendar.YEAR);
@@ -150,7 +152,6 @@ public class IndivrankController {
 				
 			}
 			
-			//int point = indivService.getSumPoint(id);
 			List<Integer> pointList = indivService.getSumPoint(id);
 			int point = 0;
 			for(int i=0 ; i<pointList.size() ; ++i) {
@@ -161,22 +162,28 @@ public class IndivrankController {
 			String tierURL = null;
 			String tierStr = null;
 			
-			if(point < -15){
-				tierURL = "/images/t_d.png";
-				tierStr = "다이아몬드";
-			}else if(point >= -15 && point < -10){
-				tierURL = "/images/t_p.png";
-				tierStr = "플레티넘";
-			}else if(point >= -10 && point < -5){
-				tierURL = "/images/t_g.png";
-				tierStr = "골드";
-			}else if(point >= -5 && point < 5){
-				tierURL = "/images/t_s.png";
-				tierStr = "실버";
-			}else{
-				tierURL = "/images/t_b.png";
-				tierStr = "브론즈";
-			}
+			
+			if(getCount < 5) { //플레이를 5판 미만으로 했다면 언랭
+				tierURL = "/images/un_rank.png";
+				tierStr = "UNRANK";
+			}else { //5판이상 플레이한 회원만 티어 부여
+				if(point < -15){
+					tierURL = "/images/t_d.png";
+					tierStr = "다이아몬드";
+				}else if(point >= -15 && point < -10){
+					tierURL = "/images/t_p.png";
+					tierStr = "플레티넘";
+				}else if(point >= -10 && point < -5){
+					tierURL = "/images/t_g.png";
+					tierStr = "골드";
+				}else if(point >= -5 && point < 5){
+					tierURL = "/images/t_s.png";
+					tierStr = "실버";
+				}else{
+					tierURL = "/images/t_b.png";
+					tierStr = "브론즈";
+				}
+			}			
 			
 			im.addObject("id", id);
 			im.addObject("rPoint", rPoint);

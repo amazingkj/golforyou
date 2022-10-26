@@ -25,4 +25,8 @@ public interface RankingDAO {
 
 	void createRank(RankingVO r);
 
+	int getUpdatedScorecardCount(ScorecardVO sc);
+
+	void resetScore(ScorecardVO sc);
+
 }

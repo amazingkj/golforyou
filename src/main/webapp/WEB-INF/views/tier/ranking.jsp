@@ -85,6 +85,7 @@
 						<option value="select_gold">골드</option>
 						<option value="select_platinum">플레티넘</option>
 						<option value="select_diamond">다이아몬드</option>
+						<option value="select_unrank">티어없음</option>
 					</select>
 				</th>
 				<th width="25%" id="Listid">아이디</th>
@@ -114,7 +115,7 @@
 			$("#rankno"+(divCount+1)).after(divrankprofile); //rankprofile클래스 div 생성
 			
 			var divranktier = $("<div></div>").addClass("ranktier").attr('id',"rTier_"+(divCount+1));
-			$("#rProfile_"+(divCount+1)).after(divranktier); //rankdriver클래스 div 생성
+			$("#rProfile_"+(divCount+1)).after(divranktier); //ranktier클래스 div 생성
 						
 			var divrankid = $("<div></div>").addClass("rankid").attr('id',"rId"+(divCount+1));
 			$("#rTier_"+(divCount+1)).after(divrankid); //rankid클래스 div 생성
@@ -129,7 +130,7 @@
 			$("#rDriver_"+(divCount+1)).after(divrankcard); //rankcard클래스 div 생성
 			
 			var divrankprov = $("<div></div>").addClass("rankprov").attr('id',"rProv_"+(divCount+1));
-			$("#rCard_"+(divCount+1)).after(divrankprov); //rankcard클래스 div 생성
+			$("#rCard_"+(divCount+1)).after(divrankprov); //rankprov클래스 div 생성
 			
 			
 			$("#rankpoint"+(divCount+1)).html("<span id='rPoint_"+(divCount+1)+"'></span>");
@@ -137,7 +138,7 @@
 			document.getElementById('rankno'+(divCount+1)).innerHTML = (divCount+1)+"위";
 			
 						
-			divCount = $('.rank').length; //div는 하나만 생기고있음. 
+			divCount = $('.rank').length; //div 값 갱신. 
 			
 			
 		}//while
@@ -151,10 +152,19 @@
 	<script>
 	
 	$('#rId'+${i}).append("<c:out value='${rankid.get(i-1)}'/>");
-	$('#rPoint_'+${i}).append("<c:out value='${rankpoint.get(i-1)}'/>");
-	$('#rProv_'+${i}).append("<c:out value='${province.get(i-1)}'/>");
 	$('#rCard_'+${i}).append("<c:out value='${count.get(i-1)}'/>");
-	$('#rDriver_'+${i}).append("<c:out value='${bestrange.get(i-1)}'/>");	
+	if($('#rCard_'+${i}).text() == "0"){
+		$('#rPoint_'+${i}).text("X");
+	}else{
+		$('#rPoint_'+${i}).append("<c:out value='${rankpoint.get(i-1)}'/>");
+	}	
+	$('#rProv_'+${i}).append("<c:out value='${province.get(i-1)}'/>");	
+	if($('#rCard_'+${i}).text() == "0"){
+		$('#rDriver_'+${i}).text("X");
+	}else{
+		$('#rDriver_'+${i}).append("<c:out value='${bestrange.get(i-1)}'/>m");	
+	}
+	
 	
 	$("#rProfile_"+${i}).css({
 		"background-image": "url('/upload/member<c:out value="${fileaddr.get(i-1)}"/>')",
@@ -170,32 +180,39 @@
 
 		var tier = '';
 		for(var i=1 ; i<=memberCount ; ++i){
-			$("#rank"+i).attr('onclick',"location.href='indivrank?rId="+document.getElementById("rId"+i).innerHTML+"&rPoint_="+$("#rPoint_"+i).text()+"&rankno="+$("#rankno"+i).text()+"'");
+			$("#rank"+i).attr('onclick',"location.href='indivrank?rId="+document.getElementById("rId"+i).innerHTML+"&rPoint_="+$("#rPoint_"+i).text()+"&rankno="+$("#rankno"+i).text()+"'");	
 			
-			var tierNum = $("#rPoint_"+i).text();
-			if(tierNum < -15){
-				tier = 'd.png';
-				document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='다이아' src='/images/t_"+tier+"'>";
-				$("#rTier_"+i).append("다이아몬드");
-			}else if(tierNum >= -15 && tierNum < -10){
-				tier = 'p.png';
-				document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='플레' src='/images/t_"+tier+"'>";
-				$("#rTier_"+i).append("플레티넘");
-			}else if(tierNum >= -10 && tierNum < -5){
-				tier = 'g.png';
-				document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='골드' src='/images/t_"+tier+"'>";
-				$("#rTier_"+i).append("골드");
-			}else if(tierNum >= -5 && tierNum < 5){
-				tier = 's.png';
-				document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='실버' src='/images/t_"+tier+"'>";
-				$("#rTier_"+i).append("실버");
+			if(parseInt($('#rCard_'+i).text()) < 5){ //5판 미만으로 플레이시 언랭 티어로 지정
+				tier = 'un_rank.png';
+				document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='언' src='/images/"+tier+"'>";
+				$("#rTier_"+i).append("티어없음");
 			}else{
-				tier = 'b.png';
-				document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='브' src='/images/t_"+tier+"'>";
-				$("#rTier_"+i).append("브론즈");
+				var tierNum = $("#rPoint_"+i).text();
+				if(tierNum < -15){
+					tier = 'd.png';
+					document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='다이아' src='/images/t_"+tier+"'>";
+					$("#rTier_"+i).append("다이아몬드");
+				}else if(tierNum >= -15 && tierNum < -10){
+					tier = 'p.png';
+					document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='플레' src='/images/t_"+tier+"'>";
+					$("#rTier_"+i).append("플레티넘");
+				}else if(tierNum >= -10 && tierNum < -5){
+					tier = 'g.png';
+					document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='골드' src='/images/t_"+tier+"'>";
+					$("#rTier_"+i).append("골드");
+				}else if(tierNum >= -5 && tierNum < 5){
+					tier = 's.png';
+					document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='실버' src='/images/t_"+tier+"'>";
+					$("#rTier_"+i).append("실버");
+				}else{
+					tier = 'b.png';
+					document.getElementById("rTier_"+i).innerHTML = "<img class='tierPic' alt='브' src='/images/t_"+tier+"'>";
+					$("#rTier_"+i).append("브론즈");
+				}
 			}
+			
 			var profile = $('#rProfile_+i').text();
-
+			
 			
 		}
 		

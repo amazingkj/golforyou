@@ -40,13 +40,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select r_sum from ranking where r_id=#{r_id}
 	</select>
 
-	<!-- 평균(사실은 총합)점수 업데이트 -->
-	<update id="sc_editAvg">
-		update ranking set r_sum=#{s_sumscore} where r_id=#{s_id}
+	<!-- 총합 점수 업데이트 -->
+	<update id="rank_editAvg">
+		update ranking set r_sum=r_sum+#{s_sumscore},r_maxrange=#{s_range} where r_id=#{s_id}
 	</update>
 	
 	<!-- 회원가입과 동시에 랭킹레코드 발생 -->
 	<insert id="rank_insert">
-		insert into ranking(r_no,r_id,r_province) values(rno_seq.nextval,#{r_id},#{r_province})
+		insert into ranking(r_no,r_id,r_sum) values(rno_seq.nextval,#{r_id},9999)
 	</insert>
+	
+	<!-- r_sum의 초기값 9999를 0으로 리셋 -->
+	<update id="rank_reset">
+		update ranking set r_sum=0 where r_id=#{s_id}
+	</update>
 </mapper>

@@ -31,8 +31,16 @@
 						<strong id="ind_id">${id }</strong> 님은
 					</div>
 					<div class="ind_prof">
-						<img id="tier_img" src="${tierURL }" alt="티어이미지">
-						<strong style="font-color:red;">${tierStr }</strong> 등급입니다
+						<c:if test="${getCount < 5 }">
+							<img id="tier_img" src="${tierURL }" alt="티어이미지">
+							<strong style="font-color:red;">UNRANK</strong> 등급입니다<br>
+							<span id="minisize">경기를 ${5-getCount }회 더 해야 합니다!</span>
+						</c:if>
+						<c:if test="${getCount >= 5 }">
+							<img id="tier_img" src="${tierURL }" alt="티어이미지">
+							<strong style="font-color:red;">${tierStr }</strong> 등급입니다
+						</c:if>
+						
 					</div>
 					
 					
@@ -115,15 +123,30 @@
 						<strong>${rankno}</strong>
 					</div>
 					<div class="info2" id="iPoint">
-						POINT : <b>&nbsp;${rPoint}</b>점
+						<c:if test="${getCount == 0 }">
+							POINT : X
+						</c:if>
+						<c:if test="${getCount != 0 }">
+							POINT : <b>&nbsp;${rPoint}</b>점
+						</c:if>
 					</div>
 					
 					<div class="info2" id="iPutting">
-						평균 퍼팅 : ${strPutting}
+						<c:if test="${getCount != 0 }">
+							평균 퍼팅 : ${strPutting}
+						</c:if>
+						<c:if test="${getCount == 0 }">
+							평균 퍼팅 : X
+						</c:if>
 					</div>
 					
 					<div class="info2" id="iObhazardperstrike">
-						OB+Hazard : ${obandhazard }회 / <span id="minisize">${strike }타</span>
+						<c:if test="${getCount != 0 }">
+							OB+Hazard : ${obandhazard }회 / <span id="minisize">${strike }타</span>
+						</c:if>
+						<c:if test="${getCount == 0 }">
+							OB+Hazard : X
+						</c:if>
 					</div>
 					
 					<div class="info2" id="iLog">
@@ -224,7 +247,7 @@
 		$("#iDate_"+${i}).append("<c:out value='${viewDate.get(i-1)}'/>");
 		$("#iDate2_"+${i}).append("<c:out value='${viewDate.get(i-1).substring(0,4)}'/>년 <c:out value='${viewDate.get(i-1).substring(5,7)}'/>월 <c:out value='${viewDate.get(i-1).substring(8,10)}'/>일");
 		$("#iLocation_"+${i}).append("<c:out value='${viewLocation.get(i-1)}'/>");
-		$("#iHighScore_"+${i}).append("<c:out value='${viewBestScroe.get(i-1)}'/>");
+		$("#iHighScore_"+${i}).append("<c:out value='${viewBestScore.get(i-1)}'/>");
 		$("#iRange_"+${i}).append("<c:out value='${viewRange.get(i-1)}'/>m");
 		
 		var loc = $('#iLocation_'+${i}).text();

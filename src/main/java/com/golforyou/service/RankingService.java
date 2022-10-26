@@ -24,5 +24,10 @@ public interface RankingService {
 	void updateAvgScore(ScorecardVO sc);
 
 	void createRank(RankingVO r);
+
+	int getUpdatedScorecardCount(ScorecardVO sc);
+
+	void resetScore(ScorecardVO sc);
+
 	
 }

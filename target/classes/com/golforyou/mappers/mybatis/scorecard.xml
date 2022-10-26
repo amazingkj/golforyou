@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 스코어카드 업데이트 -->
 	<update id="sc_editCard">
 		update score_card set 
-		s_location=#{s_location},s_putting=#{s_putting},s_range=#{s_range},s_handicap=#{s_handicap},s_bestscore=#{s_bestscore},s_sumscore=#{s_sumscore},s_updated=1 
+		s_location=#{s_location},s_putting=#{s_putting},s_range=#{s_range},s_bestscore=#{s_bestscore},s_sumscore=#{s_sumscore},s_updated=1,s_strike=#{s_strike},s_obandhazard=#{s_obandhazard} 
 		where s_id=#{s_id} and s_date=#{s_date}
 	</update>
 	
@@ -106,4 +106,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="sc_needList" resultType="sc">
 		select * from (select rowNum rNum,s_id,s_date,s_sort from (select * from score_card order by s_sort asc) where s_updated=0) where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
 	</select>
+	
+	<!-- 업데이트된 스코어카드 갯수 반환 -->
+	<select id="sc_upcount" resultType="int">
+		select count(*) from score_card where s_id=#{s_id} and s_updated=1
+	</select>
+	
+	
 </mapper>

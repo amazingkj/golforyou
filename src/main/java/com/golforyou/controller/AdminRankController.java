@@ -115,7 +115,7 @@ public class AdminRankController {
 		
 		String s_id = request.getParameter("s_id");
 		String s_date = request.getParameter("s_date");
-		double point_avg = Double.parseDouble(request.getParameter("point_avg"));
+		double point_sum = Double.parseDouble(request.getParameter("point_sum"));
 		int s_strike = Integer.parseInt(request.getParameter("strike"));
 		int bestPoint = Integer.parseInt(request.getParameter("bestPoint"));
 		double put_avg = Double.parseDouble(request.getParameter("put_avg"));
@@ -129,13 +129,20 @@ public class AdminRankController {
 		sc.setS_range(range);
 		sc.setS_location(location);
 		sc.setS_putting(put_avg);
-		sc.setS_sumscore(point_avg);
+		sc.setS_sumscore(point_sum);
 		sc.setS_strike(s_strike);
 		sc.setS_obandhazard(s_obandhazard);
 		
+		int updatedCount = rankingService.getUpdatedScorecardCount(sc); //score_card테이블 레코드개수
+		
 		scBoardService.updateCard(sc);
 		
-		rankingService.updateAvgScore(sc); //point_avg,s_id
+		if(updatedCount == 0) {
+			rankingService.resetScore(sc); //첫 가입시 r_sum 초기값 9999로 설정된걸 0으로 바꿔줌. 첫 입력에만 발동하게 조건을 걸어야함
+			//s_updated가 1인게 하나도 없다면? 첫 업데이트때만 9999가 0이된다. 이게 맞네.
+		}		
+		
+		rankingService.updateAvgScore(sc); //point_sum,s_id
 		
 		return "redirect:/admin/admin_insertCard";
 	}
