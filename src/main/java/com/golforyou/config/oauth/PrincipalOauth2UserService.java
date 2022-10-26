@@ -43,8 +43,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		System.out.println("mProviderid: "+mProviderid);
 		
 		if(userEntity == null) {
-			System.out.println("구글로그인이 최초입니다.");
+		
 			System.out.println("userEntity: "+userEntity);
+			System.out.println("구글 - 로그인이 최초입니다.");
 			userEntity = GolforyouMemberNEW.builder()
 					.username(username)
 					.password(password)
@@ -53,6 +54,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 					.mProvider(mProvider)
 					.mProviderid(mProviderid)
 					.build();
+			userRepository.save(userEntity);//회원가입!
+			
 			System.out.println("가입이 완료되었습니다");
 		}else {
 			System.out.println("구글가입이 이미 되어있습니다.");

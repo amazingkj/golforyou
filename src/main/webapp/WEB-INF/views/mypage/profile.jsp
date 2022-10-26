@@ -149,7 +149,7 @@ $('.edit-wrapper .tab').click(function(){
 		
 		
 		<div style="align:center">
-			<span>프로필 사진 변경</span><br><input id="imgFile" type="file" name="m_file" accept=".jpg,.png, .jpeg, .gif" value=""/><br>
+			<span>프로필 사진 변경</span><br><input id="imgFile" type="file" name="mFile" accept=".jpg,.png, .jpeg, .gif" value=""/><br>
 	 		<%--<button class="del-button" onclick="delImg()">기본 프로필 사진으로 돌아가기</button> --%>
 	 	
 	 	</div>
@@ -159,21 +159,21 @@ $('.edit-wrapper .tab').click(function(){
 				placeholder="${id }" readonly><br>
 	 	</div>
 			<div class="inputBoxVertical">
-			<label>이메일</label><input type="email" name="m_email" class="textField"
-					value="${m_email}" placeholder="${m_email}"><br><%--<input
+			<label>이메일</label><input type="email" name="mEmail" class="textField"
+					value="${mEmail}" placeholder="${mEmail}"><br><%--<input
 					type="button" name=button class="checkBtn" value="인증전송">--%>
 			</div>
 		
 			<div class="inputBoxVertical">
-			<label>휴대폰 번호</label><input type="tel" name="m_phone" class="textField"
+			<label>휴대폰 번호</label><input type="tel" name="mPhone" class="textField"
 					pattern="^[0][1][0]-\d{4}-\d{4}$"
-					value="${m_phone}" placeholder="${m_phone}"><br> 
+					value="${mPhone}" placeholder="${mPhone}"><br> 
 			</div>
 			
 			<div class="inputBoxVertical">
 			<label>주요 이용지역</label>
 			
-			<select id="m_addr" name="m_addr" class="textField" selected="${m_addr}">
+			<select id="mAddr" name="mAddr" class="textField" selected="${mAddr}">
 					<option value="서울" <c:if test="${select_zone =='Seoul'}">${'selected'}
         			 </c:if>>서울</option>
 					<option value="경기" <c:if test="${select_zone =='gg'}">${'selected'}

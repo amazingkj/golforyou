@@ -72,9 +72,10 @@
 		<div class="inputBoxVertical" style="width:500px"  >
 			<c:if test="${!empty id}"> 
 			<strong>${id}</strong>님 로그인을 환영합니다.<br/>
-			<strong>${id}</strong>님의 주요 이용지역은 <strong>${m_addr}</strong> 입니다. <br/>
+			<c:if test="${!empty m_addr}"><strong>${id}</strong>님의 주요 이용지역은 <strong>${m_addr}</strong> 입니다.<br/></c:if>
+			<c:if test="${empty m_addr}"><a href="profile">주요 이용 지역 설정하기</a><br/></c:if>
 			 <br/>
-			<a href="profile.do">회원정보 변경하기</a>
+			<a href="profile">회원정보 변경하기</a>
 			
 			</c:if>
 			</div>
