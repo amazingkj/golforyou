@@ -36,20 +36,37 @@
 	margin-left:4%;
 	top:10px;
 }
+.sccont_doublewrap{
+	position:relative;
+	border:0.5px solid #d4d4d4;
+	left:150px;
+	width:1000px;
+	height:700px;
+}
 .sccont_t{
 	position:relative;
 	float:left;
 	width:1000px;
 	height:700px;
 	top:10px;
-	left:150px;
+	
 	border:none;
 }
 .sccont_text{
 	font-size:1.2em;
-	width:88%;
+	width:92%;
 	height:88%;
 	text-indent:15px;
+	border:none;
+}
+.sccont_div{
+	position:relative;
+	float:center;
+	text-align:left;
+}
+#sccont_date{
+	font-size:0.8em;
+	text-align:center;
 }
 #sccont_title{
 	font-weight: bold;

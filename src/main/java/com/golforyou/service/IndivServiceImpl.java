@@ -22,12 +22,6 @@ public class IndivServiceImpl implements IndivService {
 	}
 
 	@Override
-	public List<String> getHandicap(String id) {
-		// TODO Auto-generated method stub
-		return indivDAO.getHandicap(id);
-	}
-
-	@Override
 	public List<Integer> getPutting(String id) {
 		// TODO Auto-generated method stub
 		return indivDAO.getPutting(id);
@@ -91,6 +85,18 @@ public class IndivServiceImpl implements IndivService {
 	public void sortDate(ScboardVO sb) {
 		// TODO Auto-generated method stub
 		indivDAO.sortDate(sb);
+	}
+
+	@Override
+	public List<Integer> getOBandHazard(String id) {
+		// TODO Auto-generated method stub
+		return indivDAO.getOBandHazard(id);
+	}
+
+	@Override
+	public List<Integer> getStrike(String id) {
+		// TODO Auto-generated method stub
+		return indivDAO.getStrike(id);
 	}
 	
 }

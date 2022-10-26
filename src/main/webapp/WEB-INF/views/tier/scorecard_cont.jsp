@@ -20,27 +20,29 @@
 	</span>
 	<hr style="padding:0.5px; background-color:grey; width:1300px; margin-left:	4%; border:0; margin-top:20px;">
 	<div class="sccont_wrap">
+	<div class="sccont_doublewrap">
 		<table class="sccont_t">
 			<tr height="9%">
 				<th><input class="sccont_text" id="sccont_title" readonly value="[제목] ${sb.sc_title }"></th>
 			</tr>
 			<c:if test="${sb.sc_playdate != null }">
 			<tr height="9%">
-				<th><input class="sccont_text" readonly value="[방문 날짜] ${sb.sc_playdate }"></th>
+				
+				<th>
+				<c:if test="${sb.sc_file != null }">
+					<img src="/upload${sb.sc_file }" width="800px" height="200px" alt="스코어카드">
+					<br>
+				</c:if>
+				<input class="sccont_text" id="sccont_date" readonly value="[방문 날짜] ${sb.sc_playdate }">
+				</th>
 			</tr>	
 			</c:if>
-			<c:if test="${sb.sc_file != null }">
-			<tr height="15%">
-				<th>
-				<div class="sccont_image">
-					
-					<img src="/upload${sb.sc_file }" width="800px" height="200px" alt="스코어카드">
-					
-				</div>
-			</tr>
-			</c:if>
+			
 			<tr height="58%">
-				<th><input class="sccont_text" readonly value="${sb.sc_cont }"></th>
+				<th>
+					<hr style="border:0; padding:0.5px; background-color:grey; width:80%;">
+					<input class="sccont_text" readonly value="${sb.sc_cont }">
+				</th>
 			</tr>
 			
 			<tr height="9%">
@@ -56,7 +58,7 @@
 				</td>
 			</tr>
 		</table>
-		
+	</div>
 	</div>
 	
 </article>

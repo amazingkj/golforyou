@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="find_field == 'sc_cont'"> <!-- 내용기준 -->
 				sc_cont like #{find_name}
 			</if>
-			<if test="find_field == 'sc_id'"> <!-- 내용기준 -->
+			<if test="find_field == 'sc_id'"> <!-- 아이디기준 -->
 				sc_id like #{find_name}
 			</if>
 		</where>

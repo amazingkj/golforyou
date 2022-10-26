@@ -58,11 +58,16 @@ public class IndivrankController {
 			
 			int getCount = rankingService.playCount(id);
 
-			List<String> s_handicapList = indivService.getHandicap(id);
-			String s_handicap = "";
-			if(s_handicapList.size() > 0) {
-				s_handicap = s_handicapList.get(0);
-			}		
+			List<Integer> s_obandhazard = indivService.getOBandHazard(id);
+			List<Integer> s_strike = indivService.getStrike(id);
+			int obandhazard = 0;
+			int strike = 0;
+			
+			for(int i=0 ; i<s_obandhazard.size() ; ++i) {
+				obandhazard = s_obandhazard.get(i);
+				strike = s_strike.get(i);
+			}
+			
 			if(rankno == null) {
 				int num = 1;
 				
@@ -177,7 +182,8 @@ public class IndivrankController {
 			im.addObject("rPoint", rPoint);
 			im.addObject("rankno", rankno);
 			im.addObject("getCount", getCount);
-			im.addObject("s_handicap", s_handicap);
+			im.addObject("obandhazard", obandhazard);
+			im.addObject("strike", strike);
 			im.addObject("strPutting", strPutting);
 			im.addObject("jan", jan);
 			im.addObject("feb", feb);

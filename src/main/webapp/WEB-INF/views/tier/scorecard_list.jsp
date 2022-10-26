@@ -26,9 +26,6 @@
 		<table class="boardlist" id="board_sclist">
 			<thead>
 				<tr>
-					<!-- <c:if test="${id == 'admin' }">
-					<th width="5%"><input type="checkbox"></th>
-					</c:if> -->
 					<th width="7%">번호</th>				
 					<th width="52%">글제목</th>
 					<th width="14%">글쓴이</th>

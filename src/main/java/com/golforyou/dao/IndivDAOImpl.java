@@ -22,12 +22,6 @@ public class IndivDAOImpl implements IndivDAO {
 	}
 
 	@Override
-	public List<String> getHandicap(String id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_handicap", id);
-	}
-
-	@Override
 	public List<Integer> getPutting(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("sc_putting", id);
@@ -91,6 +85,18 @@ public class IndivDAOImpl implements IndivDAO {
 	public void sortDate(ScboardVO sb) {
 		// TODO Auto-generated method stub
 		sqlSession.update("sc_sort", sb);
+	}
+
+	@Override
+	public List<Integer> getOBandHazard(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("sc_obandhazard", id);
+	}
+
+	@Override
+	public List<Integer> getStrike(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("sc_strike", id);
 	}
 	
 }

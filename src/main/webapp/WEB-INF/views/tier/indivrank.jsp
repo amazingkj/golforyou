@@ -122,8 +122,8 @@
 						평균 퍼팅 : ${strPutting}
 					</div>
 					
-					<div class="info2" id="iHandicap">
-						최근 핸디캡 : ${s_handicap }
+					<div class="info2" id="iObhazardperstrike">
+						OB+Hazard : ${obandhazard }회 / <span id="minisize">${strike }타</span>
 					</div>
 					
 					<div class="info2" id="iLog">

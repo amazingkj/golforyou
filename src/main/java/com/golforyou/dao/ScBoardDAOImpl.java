@@ -106,9 +106,9 @@ public class ScBoardDAOImpl implements ScBoardDAO {
 	}
 
 	@Override
-	public List<ScorecardVO> getNeedUpdateScorecardList() {
+	public List<ScorecardVO> getNeedUpdateScorecardList(ScorecardVO sv) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_needList");
+		return sqlSession.selectList("sc_needList",sv);
 	}
 	
 }

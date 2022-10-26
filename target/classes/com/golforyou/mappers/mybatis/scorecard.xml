@@ -10,9 +10,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from score_card where s_id=#{r_id} and s_updated=1
 	</select>
 	
-	<!-- 핸디캡 카운트 -->
-	<select id="sc_handicap" resultType="String">
-		select s_handicap from score_card where s_id=#{id} order by s_sort desc
+	<!-- OB+Hazard 카운트 -->
+	<select id="sc_obandhazard" resultType="int">
+		select s_obandhazard from score_card where s_id=#{id} order by s_sort desc
+	</select>
+	
+	<!-- 타수 카운트 -->
+	<select id="sc_strike" resultType="int">
+		select s_strike from score_card where s_id=#{id} order by s_sort desc
 	</select>
 	
 	<!-- 퍼팅 카운트 -->
@@ -99,6 +104,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 업데이트 해야할 스코어카드 목록 -->
 	<select id="sc_needList" resultType="sc">
-		select s_id,s_date from score_card where s_updated=0
+		select * from (select rowNum rNum,s_id,s_date,s_sort from (select * from score_card order by s_sort asc) where s_updated=0) where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
 	</select>
 </mapper>

@@ -105,9 +105,9 @@ public class ScBoardServiceImpl implements ScBoardService {
 	}
 
 	@Override
-	public List<ScorecardVO> getNeedUpdateScorecardList() {
+	public List<ScorecardVO> getNeedUpdateScorecardList(ScorecardVO sv) {
 		// TODO Auto-generated method stub
-		return scBoardDAO.getNeedUpdateScorecardList();
+		return scBoardDAO.getNeedUpdateScorecardList(sv);
 	}
 	
 }

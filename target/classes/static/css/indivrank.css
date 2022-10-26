@@ -146,6 +146,11 @@
 	left:25px;
 	float:left;
 }
+#minisize{
+	font-size:0.65em;
+	color:#d4d4d4;
+	font-style: italic;
+}
 .ind_infowrap{
 	position:relative;
 	border:none;
@@ -176,13 +181,16 @@
 	margin-top:5px;
 	padding:0;
 	float:left;
-	width:240px;
+	width:230px;
 	height:50px;
 	line-height:50px;
 	text-align:left;
 	text-indent:3px;
 	font-size:20px;
 	left:5px;
+}
+#iObhazardperstrike{
+	width:280px;
 }
 .three_jum_o{
 	position:relative;

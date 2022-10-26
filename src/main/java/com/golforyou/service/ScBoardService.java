@@ -35,6 +35,8 @@ public interface ScBoardService {
 
 	int getNeedUpdateScorecardCount();
 
-	List<ScorecardVO> getNeedUpdateScorecardList();
+	//List<ScorecardVO> getNeedUpdateScorecardList();
+
+	List<ScorecardVO> getNeedUpdateScorecardList(ScorecardVO sv);
 
 }

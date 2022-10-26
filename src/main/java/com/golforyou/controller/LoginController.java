@@ -169,12 +169,12 @@ public class LoginController {
 		String r_id = member.getUsername();
 		System.out.println("r_id : "+r_id);
 
-		String r_province = "서울";
+		//String r_province = "서울";
 		
 		RankingVO r = new RankingVO();
 		
 		r.setR_id(r_id);
-		r.setR_province(r_province);
+		//r.setR_province(r_province);
 		
 		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
 		/* 회원가입과 동시에 ranking에 추가 끝 */

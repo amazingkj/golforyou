@@ -43,6 +43,31 @@
 		</table>
 	</div>
 </form>
+<%-- 페이징 --%>
+<div>
+	<c:if test="${page <= 1 }">
+		[이전]
+	</c:if>	
+	<c:if test="${page > 1 }">
+		<a href="admin_insertCard?page=${page-1 }">[이전]</a>
+	</c:if>
+	
+	<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+		<c:if test="${a == page }">
+			${a }
+		</c:if>
+		<c:if test="${a != page }">
+			<a href="admin_insertCard?page=${a }">${a }</a>
+		</c:if>
+	</c:forEach>
+	
+	<c:if test="${page >= maxpage }">
+		[다음]
+	</c:if>
+	<c:if test="${page < maxpage }">
+		<a href="admin_insertCard?page=${page+1 }">[다음]</a>
+	</c:if>
+</div>
 <form method="post" action="/admin_insertCard_Check">
 	<div>
 		<div id="imginfo_wrap">

@@ -9,8 +9,6 @@ public interface IndivService {
 
 	String getPoint(String id);
 
-	List<String> getHandicap(String id);
-
 	List<Integer> getPutting(String id);
 
 	int monthCount(ScorecardVO sv);
@@ -32,6 +30,10 @@ public interface IndivService {
 	String makeDate(ScboardVO sb);
 
 	void sortDate(ScboardVO sb);
+
+	List<Integer> getOBandHazard(String id);
+
+	List<Integer> getStrike(String id);
 
 	
 }

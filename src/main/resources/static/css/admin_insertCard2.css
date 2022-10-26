@@ -37,21 +37,28 @@
   cursor: pointer;
 } 
 #cal_point,
-#cal_put{
+#cal_put,
+#cal_OBandHazard{
 	border:none;
 	margin-left: 5px;
 	margin-right: 5px;
 	background-color: #c0c0c0;
 	cursor: pointer;
 }
-#point_avg,
+#point_sum,
 #bestPoint,
 #put_avg,
 #range,
-#handicap{
+#handicap,
+#OBandHazard,
+#strike{
 	border:none;
 	background-color:#fff;
 	opacity:0.5;
+}
+#tip{
+	color:#d4d4d4;
+	font-style: italic;
 }
 .CheckBtn_admin{
   font-size: 14px;

@@ -11,16 +11,31 @@
 <script>
 	
 	function calc_point(){
-		var avgpoint = 0;
+		var sumpoint = 0;
+		var par = 0;
+		var bestpoint = 9999;
 		for(var i=1 ; i<=18 ; i++){
 			var a = $('#point'+i).val();
 			a = parseInt(a);
-			avgpoint += a;
+			sumpoint += a;
+		}
+		for(var i=1 ; i<=18 ; i++){
+			var b = $('#par'+i).val();
+			b = parseInt(b);
+			par += b;
+		}
+		for(var i=1 ; i<=18 ; i++){
+			var c = $('#point'+i).val();
+			c = parseInt(c);
+			if(bestpoint > c){
+				bestpoint = c;
+			}
 		}
 		
-		//avgpoint = avgpoint/18;
+		document.getElementById('point_sum').value = sumpoint;
+		document.getElementById('strike').value = par+sumpoint;
+		document.getElementById('bestPoint').value = bestpoint;
 		
-		document.getElementById('point_avg').value = avgpoint;
 	}
 	
 	function calc_putt(){
@@ -34,6 +49,26 @@
 		puttpoint = puttpoint/18;
 		
 		document.getElementById('put_avg').value = puttpoint;
+	}
+	
+	function calc_OBandHazard(){
+		var OBpoint = 0;
+		var hazardpoint = 0;
+		var sumpoint = 0;
+		for(var i=1 ; i<=18 ; i++){
+			var a = $('#ob'+i).val();
+			a = parseInt(a);
+			OBpoint += a;
+		}
+		for(var i=1 ; i<=18 ; i++){
+			var a = $('#hazard'+i).val();
+			a = parseInt(a);
+			hazardpoint += a;
+		}
+		
+		sumpoint = OBpoint+hazardpoint;
+		
+		document.getElementById('OBandHazard').value = sumpoint;
 	}
 
 
@@ -56,145 +91,57 @@
 			<table id="insertT" border="1">
 				<tr>
 					<td>hole</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-					<td>10</td>
-					<td>11</td>
-					<td>12</td>
-					<td>13</td>
-					<td>14</td>
-					<td>15</td>
-					<td>16</td>
-					<td>17</td>
-					<td>18</td>
+					<c:forEach var="i" begin="1" end="18">
+						<td>${i }</td>					
+					</c:forEach>
 				</tr>
 				<tr>
 					<td>par</td>
-					<td ><input type="text" name="par" class="insert_info"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
-					<td><input type="text" name="par" class="insert_info" size="1"></td>
+					<c:forEach var="i" begin="1" end="18">
+						<td><input type="text" name="par" class="insert_info" id="par${i }" size="1"></td>					
+					</c:forEach>
 				</tr>
 				<tr>
 					<td>점수</td>
-					<td><input type="text" name="point" class="insert_info" id="point1" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point2" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point3" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point4" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point5" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point6" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point7" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point8" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point9" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point10" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point11" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point12" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point13" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point14" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point15" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point16" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point17" size="1"></td>
-					<td><input type="text" name="point" class="insert_info" id="point18" size="1"></td>
+					<c:forEach var="i" begin="1" end="18">
+						<td><input type="text" name="point" class="insert_info" id="point${i }" size="1"></td>					
+					</c:forEach>
 				</tr>
 				<tr>
 					<td>OB횟수</td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
-					<td><input type="text" name="ob" class="insert_info" size="1"></td>
+					<c:forEach var="i" begin="1" end="18">
+						<td><input type="text" name="ob" class="insert_info" id="ob${i }" size="1"></td>					
+					</c:forEach>
 				</tr>
 				<tr>
 					<td>Hazard횟수</td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
-					<td><input type="text" name="hazard" class="insert_info" size="1"></td>
+					<c:forEach var="i" begin="1" end="18">
+						<td><input type="text" name="hazard" class="insert_info" id="hazard${i }" size="1"></td>					
+					</c:forEach>
 				</tr>
 				<tr>
 					<td>퍼팅횟수</td>
-					<td><input type="text" name="putting" class="insert_info" id="putt1" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt2" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt3" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt4" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt5" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt6" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt7" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt8" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt9" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt10" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt11" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt12" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt13" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt14" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt15" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt16" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt17" size="1"></td>
-					<td><input type="text" name="putting" class="insert_info" id="putt18" size="1"></td>
+					<c:forEach var="i" begin="1" end="18">
+						<td><input type="text" name="putting" class="insert_info" id="putt${i }" size="1"></td>					
+					</c:forEach>
 				</tr>
 			</table>
 			<br>
 			<hr>
 			<div id="insert_Card">
 			점수합 계산하기 : <input type="button" name="cal_point" id="cal_point" value="계산하기" onclick="calc_point();"><br>
-			점수합 : <input type="text" name="point_avg" id="point_avg" readonly size="14">
+			점수합 : <input type="text" name="point_sum" id="point_sum" readonly size="14"><br>
+			타수 : <input type="text" name="strike" id="strike" readonly size="14">
 			<hr class="mini_hr">
-			최고점수 : <input type="text" name="bestPoint" id="bestPoint" size="2">
+			최고점수 : <input type="text" name="bestPoint" id="bestPoint" readonly size="14"> <span id="tip">*골프 점수는 낮을수록 좋습니다.</span>
 			<hr class="mini_hr">
 			평균 퍼팅 계산하기 : <input type="button" name="cal_put" id="cal_put" value="계산하기" onclick="calc_putt();"><br>
 			평균 퍼팅 : <input type="text" name="put_avg" id="put_avg" readonly size="14">
 			<hr class="mini_hr">
 			최대비거리 : <input type="text" name="range" id="range">
 			<hr class="mini_hr">
-			핸디캡 : <input type="text" name="handicap" id="handicap">
+			OB+Hazard 계산하기 : <input type="button" name="cal_OBandHazard" id="cal_OBandHazard" value="계산하기" onclick="calc_OBandHazard();"><br>
+			OB+Hazard : <input type="text" name="OBandHazard" id="OBandHazard" readonly size="14">
 			<hr class="mini_hr">
 			골프장 이름 : 
 			<select name="location" id="location">

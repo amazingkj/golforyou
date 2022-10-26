@@ -27,21 +27,38 @@ public class AdminRankController {
 	
 	//관리자 스코어카드 첫페이지
 	@RequestMapping("admin/admin_insertCard")
-	public void admin_insertCard(HttpServletRequest request) throws Exception {
+	public void admin_insertCard(HttpServletRequest request,ScorecardVO sv) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		
 		int page = 1; //페이지 쪽수
+		int limit = 10;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
 		int needCount = scBoardService.getNeedUpdateScorecardCount(); //업데이트해야할 스코어카드 갯수
-		List<ScorecardVO> needList = scBoardService.getNeedUpdateScorecardList(); //업데이트해야할 스코어카드 목록
+		
+		sv.setStartrow((page-1)*10+1);
+		sv.setEndrow(sv.getStartrow()+limit-1);
+		
+		List<ScorecardVO> needList = scBoardService.getNeedUpdateScorecardList(sv); //업데이트해야할 스코어카드 목록
+		
+		
+		
+		int maxpage = (int)((double)needCount/limit + 0.95); //총 페이지 수;
+		int startpage = (((int)((double)page/10 + 0.9))-1)*10 + 1; //시작 페이지;
+		int endpage = maxpage;
+		if(endpage > startpage + 9) {
+			endpage = startpage + 9;
+		}
 		
 		request.setAttribute("page", page);
 		request.setAttribute("needCount", needCount);
 		request.setAttribute("needList", needList);
-		
+		request.setAttribute("page", page);
+		request.setAttribute("startpage", startpage);
+		request.setAttribute("endpage", endpage);
+		request.setAttribute("maxpage", maxpage);
 	}
 	
 	//입력해야 할 스코어카드 존재 확인여부
@@ -99,20 +116,22 @@ public class AdminRankController {
 		String s_id = request.getParameter("s_id");
 		String s_date = request.getParameter("s_date");
 		double point_avg = Double.parseDouble(request.getParameter("point_avg"));
+		int s_strike = Integer.parseInt(request.getParameter("strike"));
 		int bestPoint = Integer.parseInt(request.getParameter("bestPoint"));
 		double put_avg = Double.parseDouble(request.getParameter("put_avg"));
 		int range = Integer.parseInt(request.getParameter("range"));
 		String location = request.getParameter("location");
-		int handicap = Integer.parseInt(request.getParameter("handicap"));
+		int s_obandhazard = Integer.parseInt(request.getParameter("OBandHazard"));
 		
 		sc.setS_id(s_id);
 		sc.setS_date(s_date);
 		sc.setS_bestscore(bestPoint);
 		sc.setS_range(range);
 		sc.setS_location(location);
-		sc.setS_handicap(handicap);
 		sc.setS_putting(put_avg);
 		sc.setS_sumscore(point_avg);
+		sc.setS_strike(s_strike);
+		sc.setS_obandhazard(s_obandhazard);
 		
 		scBoardService.updateCard(sc);
 		
