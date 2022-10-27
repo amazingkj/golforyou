@@ -13,7 +13,7 @@ public class LoginDAOImpl implements LoginDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public GolforyouMemberNEW idCheck(String username) { 
+	public int idCheck(String username) { 
 		return this.sqlSession.selectOne("id_check",username);
 		
 	}//아이디 중복 검사

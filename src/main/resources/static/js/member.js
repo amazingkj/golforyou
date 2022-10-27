@@ -1,123 +1,98 @@
 /**
  * member.js
  */
-  function join_check() {
-      if ($.trim($('#username').val()) == '') {//trim()함수는 양쪽 공백을 제거
-         alert('아이디를 입력하세요!');
-         $('#username').val('').focus();
-         return false;
-      }
-
-      if ($.trim($('#password').val()) == '') {
-         alert('비밀번호를 입력하세요!');
-         $('#password').val('').focus();
-         return false;
-      }
-
-      
-      if ($.trim($('#pwCheck').val()) == '') {
-         alert('비밀번호를 다시 한 번 입력하세요!');
-         $('#pwCheck').val('').focus();
-         return false;
-      }
-      
-      if ($.trim($('#mPhone').val()) == '') {
-         alert('휴대폰 번호를 입력하세요!');
-         $('#mPhone').val('').focus();
-         return false;
-      }
-      
-      if ($.trim($('#mEmail').val()) == '') {
-         alert('이메일을 입력하세요!');
-         $('#mEmail').val('').focus();
-         return false;
-      }
-      
-      if ($.trim($('input[name=mGender]:radio:checked').val()) == '') {
-          alert('성별을 선택하세요');
-          $('#mEmail').val('').focus();
-          return false;
-       }
-       
-   }
-   
- //중복아이디 검색
-   function id_Check(){
-    /* copy begin */
-   	$("#idcheck").hide();
-   	//아이디 영역을 숨김
-   	$m_id=$.trim($("#m_id").val());
-   	//1.입력글자 길이 체크
-   	if($username.length < 4){
-   		$newtext='<font color="red" size="2"><b>아이디는 4자 이상이어야 합니다.</b></font>';
-   		$("#idcheck").text('');
-   		//idcheck 아이디 영역 문자열을 초기화
-   		$("#idcheck").show();
-   		//idcheck 아이디 영역을 보이게 함.
-   		$("#idcheck").append($newtext);
-   		//idcheck영역에 문자열을 추가
-   		$("#username").val('').focus();
-   		return false;
-   	};
-   	if($username.length > 12){
-   		$newtext='<font color="red" size="2"><b>아이디는12자 이하이어야 합니다.</b></font>';
-   		$("#idcheck").text('');
-   		//idcheck 아이디 영역 문자열을 초기화
-   		$("#idcheck").show();
-   		//idcheck 아이디 영역을 보이게 함.
-   		$("#idcheck").append($newtext);
-   		//idcheck영역에 문자열을 추가
-   		$("#username").val('').focus();
-   		return false;
-   	};
-   	//2.입력글자 확인
-   	if(!(validate_userid($m_id))){
-   		$newtext='<font color="red" size="2"><b>아이디는 영문소문자,숫자,_조합만 가능합니다.</b></font>';
-   		$("#idcheck").text('');
-   		$("#idcheck").show();
-   		$("#idcheck").append($newtext);
-   		$("#username").val('').focus();
-   		return false;
-   	};
-   	
-    
-
-   	//아이디 중복확인
-       $.ajax({//$는 jQuery란 뜻. $.ajax 뜻은 jQuery 내의 비동기식 아작스 실행
-           type:"POST",//데이터를 서버로 보내는 방법
-          //url:"./member/member_idcheck.jsp",    
-           url:"/idcheck", //아작스 서버 주소 파일명
-           data: {"id":$mId},  //좌측 id 피라미터 이름에 우측 $m_id변수값을 저장
-           datatype:"int",//서버의 실행된 결과값을 사용자로 받아오는 방법
-           success: function (data) {//success는 아작스로 받아오는것이 성공했을경우
-           	//서버 데이터를 data변수에 저장
-         	  if(data==1){//중복 아이디가 있다면
-         		$newtext='<font color="red" size="2"><b>중복 아이디입니다.</b></font>';
-         		$("#idcheck").text('');
-           	$("#idcheck").show();
-           	$("#idcheck").append($newtext);          		
-             	$("#username").val('').focus();
-             	return false;
-   	     
-         	  }else{//중복 아이디가 아니면
-         		$newtext='<font color="blue" size="2"><b>사용가능한 아이디입니다.</b></font>';
-         		$("#idcheck").text('');
-         		$("#idcheck").show();
-         		$("#idcheck").append($newtext);
-         		$("#password").focus();
-         	  }  	    	  
-           },
-       	  error:function(){//비동기식 아작스로 서버디비 데이터를
-       		  //못가져와서 에러가 발생했을 때 호출되는 함수이다.
-       		  alert("data error");
-       	  }
-         });//$.ajax
+//아이디 중복확인
+//username을 param
+ //   	var idck = 0;
+ //   $(function() {
+	 
+//	 $("#idck").click(function() {
+ //)};
+ //)};
     /* end */	
-   
+    var idck = 0;
+   function idcheck(){
+	  $username =  $("#username").val(); 		
+      $.ajax({//$는 jQuery란 뜻. $.ajax 뜻은 jQuery 내의 비동기식 아작스 실행
+          type:"POST",//데이터를 서버로 보내는 방법
+         	//url:"./member/member_idcheck.jsp",    
+          url:"/idcheck", //아작스 서버 주소 파일명
+          data: {"username":$username},  //좌측 id 피라미터 이름에 우측 $username변수값을 저장
+          datatype:"int",//서버의 실행된 결과값을 사용자로 받아오는 방법
+          success: function (data) {//success는 아작스로 받아오는것이 성공했을경우
+          	//서버 데이터를 data변수에 저장
+        	  if(data> 0){//중복 아이디가 있다면
+        	  
+        	  alert("중복 아이디 입니다");        		
+            	$("#username").val('').focus();
+            	return false;
+  	     
+        	  }else{//중복 아이디가 아니면
+        	  
+        	  alert("사용 가능한 아이디 입니다");
+        		$("#password").val('').focus();
+        		//아이디가 중복하지 않으면  idck = 1 
+        		
+                   idck = 1;
+        	  }  	
+        	      	  
+          },
+      	  error:function(){//비동기식 아작스로 서버디비 데이터를
+      		  //못가져와서 에러가 발생했을 때 호출되는 함수이다.
+      		  alert("data error 서버가 연결되어 있지 않습니다");
+      	  }
+        });//$.ajax
+	}
 
+function join_check(){	
+	  if ($.trim($('#username').val()) == '') {//trim()함수는 양쪽 공백을 제거
+       alert('아이디를 입력하세요!');
+       $('#username').val('').focus();
+       return false;
+    }
+
+    if ($.trim($('#password').val()) == '') {
+       alert('비밀번호를 입력하세요!');
+       $('#password').val('').focus();
+       return false;
+    }
+
+    
+    if ($.trim($('#pwCheck').val()) == '') {
+       alert('비밀번호를 다시 한 번 입력하세요!');
+       $('#pwCheck').val('').focus();
+       return false;
+    }
+    
+    if ($.trim($('#mPhone').val()) == '') {
+       alert('휴대폰 번호를 입력하세요!');
+       $('#mPhone').val('').focus();
+       return false;
+    }
+    
+    if ($.trim($('#mEmail').val()) == '') {
+       alert('이메일을 입력하세요!');
+       $('#mEmail').val('').focus();
+       return false;
+    }
+    
+    if ($.trim($('input[name=mGender]:radio:checked').val()) == '') {
+        alert('성별을 선택하세요');
+        $('#mEmail').val('').focus();
+        return false;
+     }
+     
+    if(confirm("회원가입을 하시겠습니까?")){
+    if(idck==0){
+          alert('아이디 중복체크를 해주세요');
+          return false;
+      }else{
+      alert("회원가입을 축하합니다");
+      $("#frm").submit();
+      }
+     
 }
-
-
+}
    function email_Check(){  //작업중 더블체크할 것 
 
 	//이메일 중복확인
@@ -155,15 +130,12 @@
 }
 
 
-
-
-
 //정규표현식
-function validate_userid($m_id)
+function validate_userid($username)
 {
   var pattern= new RegExp(/^[a-z0-9_]+$/);//아이디를 영문소문
   //자와 숫자 와 _조합으로 처리
-  return pattern.test($m_id);
+  return pattern.test($username);
 };
 
 

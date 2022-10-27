@@ -9,8 +9,8 @@
  	 		select * from GolforyouMemberNEW where username=#{username,jdbcType=VARCHAR} and mState=1
  	 	</select>
   	
- 	 	<select id="id_check" parameterType="member" resultType="member">
- 	 		select * from GolforyouMemberNEW where username=#{username,jdbcType=VARCHAR}
+ 	 	<select id="id_check" parameterType="member" resultType="int">
+ 	 		select count(*) from Golforyou_MemberNEW where username=#{username}
  	 	</select>
  	 	
  	 	<!-- 회원 정보 수정 -->
