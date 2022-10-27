@@ -43,7 +43,7 @@
 <div class="loginForm">
 <H3>이메일 발송 완료</H3><br><br>
 이메일이 발송되었습니다.
-<a href="login.do"><br>로그인 하기</a>
+<a href="login"><br>로그인 하기</a>
 </div>
 </body>
 
