@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 스코어카드 내용 가져오기 -->
 	<select id="scb_cont2" resultType="Scb">
-		select * from scboard where sc_id=#{sc_id} and sc_playdate=#{sc_playdate}
+		select * from scboard where sc_id=#{sc_id} and sc_no=#{sc_no}
 	</select>
 	
 	<!-- 관리자 스코어카드 조건갯수 확인 -->
@@ -92,5 +92,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from scboard where sc_no=#{sc_no} and sc_playdate=#{sc_playdate}
 	</select>
 	
+	<!-- 글번호 가져오기 -->
+	<select id="scb_getno" resultType="int">
+		select sc_no from scboard where sc_id=#{sc_id} and sc_playdate=#{sc_playdate} order by sc_no desc
+	</select>
 	
 </mapper>

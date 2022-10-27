@@ -41,4 +41,6 @@ public interface ScBoardDAO {
 
 	List<ScorecardVO> getNeedUpdateScorecardList(ScorecardVO sv);
 
+	List<Integer> getScno(ScboardVO sb);
+
 }

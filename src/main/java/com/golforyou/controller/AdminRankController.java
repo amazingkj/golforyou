@@ -42,9 +42,7 @@ public class AdminRankController {
 		sv.setEndrow(sv.getStartrow()+limit-1);
 		
 		List<ScorecardVO> needList = scBoardService.getNeedUpdateScorecardList(sv); //업데이트해야할 스코어카드 목록
-		
-		
-		
+						
 		int maxpage = (int)((double)needCount/limit + 0.95); //총 페이지 수;
 		int startpage = (((int)((double)page/10 + 0.9))-1)*10 + 1; //시작 페이지;
 		int endpage = maxpage;
@@ -55,14 +53,13 @@ public class AdminRankController {
 		request.setAttribute("page", page);
 		request.setAttribute("needCount", needCount);
 		request.setAttribute("needList", needList);
-		request.setAttribute("page", page);
 		request.setAttribute("startpage", startpage);
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("maxpage", maxpage);
 	}
 	
 	//입력해야 할 스코어카드 존재 확인여부
-	@RequestMapping("/admin_insertCard_Check")
+	@RequestMapping("admin/admin_insertCard_Check")
 	public ModelAndView admin_InsertCard_Check(HttpServletRequest request, HttpServletResponse response, ScboardVO sb) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		
@@ -70,23 +67,23 @@ public class AdminRankController {
 		
 		request.setCharacterEncoding("utf-8");
 
+		int sc_no = Integer.parseInt(request.getParameter("admin_no"));
 		String sc_id = request.getParameter("admin_id");
-		String sc_playdate = request.getParameter("admin_playdate");
+		//String sc_playdate = request.getParameter("admin_playdate");
 		
 				
-		sc_playdate = sc_playdate.replace("-", "_"); //2022-01-01을 2022_01_01로
+		//sc_playdate = sc_playdate.replace("-", "_"); //2022-01-01을 2022_01_01로
 	
 		ScboardVO info = new ScboardVO();
 		info.setSc_id(sc_id);
-		info.setSc_playdate(sc_playdate);
+		info.setSc_no(sc_no);
 		
 		sb = scBoardService.getScBoardCont(info);
 		
 		if(sb != null) {
-			if(scBoardService.getUpdated(info) == 0) {
-				
-				request.setAttribute("date", sc_playdate);
-				
+			if(scBoardService.getUpdated(info) == 0) {				
+				//request.setAttribute("date", sc_playdate);	
+				request.setAttribute("no", sc_no);
 				request.setAttribute("id", sc_id);
 				request.setAttribute("sb", sb);
 				
@@ -109,12 +106,12 @@ public class AdminRankController {
 	}
 	
 	//스코어카드 정보 입력 확인
-	@RequestMapping("admin_insertCard_ok")
+	@RequestMapping("/admin_insertCard_ok")
 	public String admin_InsertCard_Ok(HttpServletRequest request, HttpServletResponse response, ScorecardVO sc) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		
 		String s_id = request.getParameter("s_id");
-		String s_date = request.getParameter("s_date");
+		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		double point_sum = Double.parseDouble(request.getParameter("point_sum"));
 		int s_strike = Integer.parseInt(request.getParameter("strike"));
 		int bestPoint = Integer.parseInt(request.getParameter("bestPoint"));
@@ -124,7 +121,7 @@ public class AdminRankController {
 		int s_obandhazard = Integer.parseInt(request.getParameter("OBandHazard"));
 		
 		sc.setS_id(s_id);
-		sc.setS_date(s_date);
+		sc.setS_no(s_no);
 		sc.setS_bestscore(bestPoint);
 		sc.setS_range(range);
 		sc.setS_location(location);
@@ -144,7 +141,7 @@ public class AdminRankController {
 		
 		rankingService.updateAvgScore(sc); //point_sum,s_id
 		
-		return "redirect:/admin/admin_insertCard";
+		return "redirect:admin/admin_insertCard";
 	}
 	
 	//스코어카드 삭제
@@ -160,7 +157,7 @@ public class AdminRankController {
 	}
 	
 	//스코어카드 삭제 확인
-	@RequestMapping("/admin_insertCard_del_ok")
+	@RequestMapping("admin/admin_insertCard_del_ok")
 	public String admin_InsertCard_del_ok(HttpServletRequest request, HttpServletResponse response, ScorecardVO sv) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");

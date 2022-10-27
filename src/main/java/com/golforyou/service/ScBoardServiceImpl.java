@@ -109,5 +109,11 @@ public class ScBoardServiceImpl implements ScBoardService {
 		// TODO Auto-generated method stub
 		return scBoardDAO.getNeedUpdateScorecardList(sv);
 	}
+
+	@Override
+	public List<Integer> getScno(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getScno(sb);
+	}
 	
 }

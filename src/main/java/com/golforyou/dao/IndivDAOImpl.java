@@ -98,5 +98,17 @@ public class IndivDAOImpl implements IndivDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("sc_strike", id);
 	}
+
+	@Override
+	public void sortUpdate(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		sqlSession.update("sc_sortupdate",sb);
+	}
+
+	@Override
+	public void autoUpdate(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		sqlSession.update("sc_contupdate", sb);
+	}
 	
 }

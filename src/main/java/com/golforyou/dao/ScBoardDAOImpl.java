@@ -110,5 +110,11 @@ public class ScBoardDAOImpl implements ScBoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("sc_needList",sv);
 	}
+
+	@Override
+	public List<Integer> getScno(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("scb_getno", sb);
+	}
 	
 }

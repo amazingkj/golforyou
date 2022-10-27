@@ -98,5 +98,17 @@ public class IndivServiceImpl implements IndivService {
 		// TODO Auto-generated method stub
 		return indivDAO.getStrike(id);
 	}
+
+	@Override
+	public void sortUpdate(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		indivDAO.sortUpdate(sb);
+	}
+
+	@Override
+	public void autoUpdate(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		indivDAO.autoUpdate(sb);
+	}
 	
 }

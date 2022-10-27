@@ -76,9 +76,9 @@
 
 <article class="adminInsertCard2_main">
 <br>
-	<form method="post" action="admin_insertCard_ok">
+	<form method="post" action="/admin_insertCard_ok">
 		<input type="hidden" name="s_id" value="${id }">
-		<input type="hidden" name="s_date" value="${date }">
+		<input type="hidden" name="s_no" value="${no }">
 		<div id="imginfo_wrap">
 			<div>
 			<h2>스코어카드 이미지</h2> <br>
@@ -161,7 +161,7 @@
 
 	</form>
 	<hr>
-	<form method="post" action="admin_insertCard_del">
+	<form method="post" action="admin/admin_insertCard_del">
 		<input type="hidden" name="s_id" value="${id }">
 		<input type="hidden" name="s_date" value="${date }">
 		잘못올린 게시글이나 사진양식이 잘못된 경우 : <input type="submit" class="checkBtn_admin" value="반려">

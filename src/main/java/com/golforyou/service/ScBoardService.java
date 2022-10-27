@@ -39,4 +39,6 @@ public interface ScBoardService {
 
 	List<ScorecardVO> getNeedUpdateScorecardList(ScorecardVO sv);
 
+	List<Integer> getScno(ScboardVO sb);
+
 }

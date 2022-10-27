@@ -24,6 +24,7 @@
     
 		<table class="needList">
 			<tr>
+				<th>번호</th>
 				<th>아이디</th>
 				<th>플레이날짜</th>
 			</tr>
@@ -31,7 +32,8 @@
 			<c:if test="${!empty needList }">
 				<c:forEach var="n" items="${needList }">
 					<tr>
-						<td id="href"><a href="/admin_insertCard_Check?&admin_id=${n.s_id}&admin_playdate=${n.s_date}">${n.s_id }</a></td>
+						<td>${n.s_no }
+						<td id="href"><a href="admin_insertCard_Check?admin_no=${n.s_no }&admin_id=${n.s_id}">${n.s_id }</a></td>
 						<td>${n.s_date }</td>
 					</tr>
 				</c:forEach>
@@ -72,12 +74,12 @@
 	<div>
 		<div id="imginfo_wrap">
 			<div class="admin_info">
-			아이디 : <input type="text" name="admin_id" id="admin_id" size="14" value="아이디를 입력하세요">
+			글번호 : <input type="text" name="admin_no" id="admin_no" size="14" placeholder="글번호">
 			</div>
 			<div class="admin_info">
-			방문날짜 : <input type="text" id="admin_playdate" name="admin_playdate" readonly value="방문 날짜를 선택하세요" size="14">	
-					<input type="date" name="playdate" class="sc_date" id="sc_playdate" onchange="document.getElementById('admin_playdate').value = this.value">
+			아이디 : <input type="text" name="admin_id" id="admin_id" size="14" placeholder="아이디를 입력하세요">
 			</div>
+			
 			<div class="admin_btn">
 				<input type="submit" class="CheckBtn_admin" value="확인하기">
 			</div>

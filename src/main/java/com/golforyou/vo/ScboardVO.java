@@ -16,6 +16,7 @@ public class ScboardVO {
 	private int sc_step;
 	private int sc_level;
 	private String sc_date;
+	private int s_sort;
 	
 	//쪽나누기용 변수
 	private int startrow; //시작행 번호

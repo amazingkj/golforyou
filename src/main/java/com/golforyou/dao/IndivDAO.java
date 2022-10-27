@@ -35,4 +35,8 @@ public interface IndivDAO {
 
 	List<Integer> getStrike(String id);
 
+	void sortUpdate(ScboardVO sb);
+
+	void autoUpdate(ScboardVO sb);
+
 }

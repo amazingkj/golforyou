@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ScorecardVO {
+	private int s_no;
 	private String s_id;
 	private String s_location;
 	private double s_putting;

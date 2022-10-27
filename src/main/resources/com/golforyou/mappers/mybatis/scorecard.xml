@@ -62,39 +62,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 스코어카드 레코드 생성 -->
 	<insert id="sc_auto">
-		insert into score_card(s_id,s_date,s_updated) values (#{sc_id},#{sc_playdate},0)
+		insert into score_card(s_no,s_id,s_date,s_updated) values (#{sc_no},#{sc_id},#{sc_playdate},0)
 	</insert>
 	
 	<!-- 날짜 구하기 -->
 	<select id="sc_makedate" resultType="String">
-		select s_date from score_card where s_id=#{sc_id} and s_date=#{sc_playdate}
+		select s_date from score_card where s_id=#{sc_id} and s_no=#{sc_no}
 	</select>
 	
 	<!-- sortdate값 만들기 -->
 	<update id="sc_sort">
-		update score_card set s_sort=#{numdate} where s_id=#{sc_id} and s_date=#{sc_playdate}
+		update score_card set s_sort=#{numdate} where s_id=#{sc_id} and s_no=#{sc_no}
 	</update>
 	
 	<!-- scorecard 삭제 -->
 	<delete id="sc_del">
-		delete from score_card where s_id=#{sc_id} and s_date=#{sc_playdate}
+		delete from score_card where s_id=#{sc_id} and s_no=#{sc_no}
 	</delete>
 	
 	<!-- 스코어카드 업데이트 확인여부 -->
 	<select id="sc_update" resultType="int">
-		select s_updated from score_card where s_id=#{sc_id} and s_date=#{sc_playdate}
+		select s_updated from score_card where s_id=#{sc_id} and s_no=#{sc_no}
 	</select>
 	
 	<!-- 스코어카드 업데이트 -->
 	<update id="sc_editCard">
 		update score_card set 
 		s_location=#{s_location},s_putting=#{s_putting},s_range=#{s_range},s_bestscore=#{s_bestscore},s_sumscore=#{s_sumscore},s_updated=1,s_strike=#{s_strike},s_obandhazard=#{s_obandhazard} 
-		where s_id=#{s_id} and s_date=#{s_date}
+		where s_id=#{s_id} and s_no=#{s_no}
 	</update>
 	
 	<!-- 스코어카드 삭제 -->
 	<delete id="sc_delCard">
-		delete from score_card where s_id=#{s_id} and s_date=#{s_date}
+		delete from score_card where s_id=#{s_id} and s_no=#{s_no}
 	</delete>
 	
 	<!-- 업데이트 해야할 스코어카드 갯수 찾기 -->
@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 업데이트 해야할 스코어카드 목록 -->
 	<select id="sc_needList" resultType="sc">
-		select * from (select rowNum rNum,s_id,s_date,s_sort from (select * from score_card order by s_sort asc) where s_updated=0) where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
+		select * from (select rowNum rNum,s_no,s_id,s_date,s_sort from (select * from score_card order by s_sort asc) where s_updated=0) where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
 	</select>
 	
 	<!-- 업데이트된 스코어카드 갯수 반환 -->
@@ -112,5 +112,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from score_card where s_id=#{s_id} and s_updated=1
 	</select>
 	
+	<!-- s_sort 업데이트 -->
+	<update id="sc_sortupdate">
+		update score_card set s_sort=#{s_sort} where s_id=#{sc_id} and s_no=#{sc_no}
+	</update>
+	
+	<!-- 스코어카드의 날짜 수정 -->
+	<update id="sc_contupdate">
+		update score_card set s_date=#{sc_playdate} where s_no=#{sc_no} and s_id=#{sc_id}
+	</update>
 	
 </mapper>
