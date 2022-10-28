@@ -114,7 +114,7 @@ public class AdminRankController {
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		double point_sum = Double.parseDouble(request.getParameter("point_sum"));
 		int s_strike = Integer.parseInt(request.getParameter("strike"));
-		int bestPoint = Integer.parseInt(request.getParameter("bestPoint"));
+		//int bestPoint = Integer.parseInt(request.getParameter("bestPoint"));
 		double put_avg = Double.parseDouble(request.getParameter("put_avg"));
 		int range = Integer.parseInt(request.getParameter("range"));
 		String location = request.getParameter("location");
@@ -122,7 +122,7 @@ public class AdminRankController {
 		
 		sc.setS_id(s_id);
 		sc.setS_no(s_no);
-		sc.setS_bestscore(bestPoint);
+		//sc.setS_bestscore(bestPoint);
 		sc.setS_range(range);
 		sc.setS_location(location);
 		sc.setS_putting(put_avg);

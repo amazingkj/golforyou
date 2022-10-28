@@ -11,7 +11,6 @@ public class ScorecardVO {
 	private int s_range;
 	private String s_date;
 	private int s_sort;
-	private int s_bestscore;
 	private double s_sumscore;
 	private int s_updated;
 	private int s_strike;

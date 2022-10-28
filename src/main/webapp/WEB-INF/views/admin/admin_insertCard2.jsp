@@ -110,13 +110,13 @@
 				<tr>
 					<td>OB횟수</td>
 					<c:forEach var="i" begin="1" end="18">
-						<td><input type="text" name="ob" class="insert_info" id="ob${i }" size="1"></td>					
+						<td><input type="text" name="ob" class="insert_info" id="ob${i }" size="1" value="0"></td>					
 					</c:forEach>
 				</tr>
 				<tr>
 					<td>Hazard횟수</td>
 					<c:forEach var="i" begin="1" end="18">
-						<td><input type="text" name="hazard" class="insert_info" id="hazard${i }" size="1"></td>					
+						<td><input type="text" name="hazard" class="insert_info" id="hazard${i }" size="1" value="0"></td>					
 					</c:forEach>
 				</tr>
 				<tr>
@@ -130,10 +130,8 @@
 			<hr>
 			<div id="insert_Card">
 			점수합 계산하기 : <input type="button" name="cal_point" id="cal_point" value="계산하기" onclick="calc_point();"><br>
-			점수합 : <input type="text" name="point_sum" id="point_sum" readonly size="14"><br>
+			점수합 : <input type="text" name="point_sum" id="point_sum" readonly size="14"><span id="tip">*골프 점수는 낮을수록 좋습니다.</span><br>
 			타수 : <input type="text" name="strike" id="strike" readonly size="14">
-			<hr class="mini_hr">
-			최고점수 : <input type="text" name="bestPoint" id="bestPoint" readonly size="14"> <span id="tip">*골프 점수는 낮을수록 좋습니다.</span>
 			<hr class="mini_hr">
 			평균 퍼팅 계산하기 : <input type="button" name="cal_put" id="cal_put" value="계산하기" onclick="calc_putt();"><br>
 			평균 퍼팅 : <input type="text" name="put_avg" id="put_avg" readonly size="14">

@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 글쓰기 -->
 	<insert id="scb_write">
 		insert into scboard(sc_no,sc_id,sc_title,sc_playdate,sc_cont,sc_file,sc_ref,sc_step,sc_level,sc_date) 
-		values(test_scboard_seq.nextval,#{sc_id},#{sc_title},#{sc_playdate},#{sc_cont},#{sc_file},test_scboard_seq.nextval,0,0,sysdate)
+		values(test_scboard_seq.currval,#{sc_id},#{sc_title},#{sc_playdate},#{sc_cont},#{sc_file},test_scboard_seq.nextval,0,0,sysdate)
 	</insert>
 	
 	<!-- 답변레벨 증가 -->
@@ -97,4 +97,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select sc_no from scboard where sc_id=#{sc_id} and sc_playdate=#{sc_playdate} order by sc_no desc
 	</select>
 	
+	<!-- 게시판 다음시퀀스 가져오기 -->
+	<select id="scb_nextdual" resultType="int">
+		select last_number from user_sequences where sequence_name='TEST_SCBOARD_SEQ'
+	</select>
+	
+	<!-- 게시판 글쓴 날짜 추출 -->
+	<select id="scb_date" resultType="String">
+		select sc_date from scboard where sc_no=#{no}
+	</select>
+	
+	<!-- 이미지경로 가져오기 -->
+	<select id="scb_justfile" resultType="String">
+		select sc_file from scboard where sc_no=#{no}
+	</select>
 </mapper>

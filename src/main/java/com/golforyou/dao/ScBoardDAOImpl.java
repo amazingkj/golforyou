@@ -116,5 +116,23 @@ public class ScBoardDAOImpl implements ScBoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("scb_getno", sb);
 	}
+
+	@Override
+	public int getscnodual() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("scb_nextdual");
+	}
+
+	@Override
+	public String getDate(int no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("scb_date",no);
+	}
+
+	@Override
+	public String getImg(int no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("scb_justfile", no);
+	}
 	
 }

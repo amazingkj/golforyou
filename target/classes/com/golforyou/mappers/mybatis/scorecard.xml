@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 그래프 카운트 -->
 	<select id="sc_graph" resultType="int">
-		select count(s_date) from score_card where s_id=#{s_id} and s_date like #{graph_date}
+		select count(s_date) from score_card where s_id=#{s_id} and s_updated=1 and s_date like #{graph_date}
 	</select>
 	
 	<!-- 로그인한 경우 순위 -->
@@ -41,8 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 베스트스코어 가져오기 -->
-	<select id="sc_bestscore" resultType="int">
-		select s_bestscore from score_card where s_id=#{id} order by s_sort desc
+	<select id="sc_sumscore" resultType="int">
+		select s_sumscore from score_card where s_id=#{id} order by s_sort desc
 	</select>
 	
 	<!-- 장소 가져오기 -->
@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 스코어카드 업데이트 -->
 	<update id="sc_editCard">
 		update score_card set 
-		s_location=#{s_location},s_putting=#{s_putting},s_range=#{s_range},s_bestscore=#{s_bestscore},s_sumscore=#{s_sumscore},s_updated=1,s_strike=#{s_strike},s_obandhazard=#{s_obandhazard} 
+		s_location=#{s_location},s_putting=#{s_putting},s_range=#{s_range},s_sumscore=#{s_sumscore},s_updated=1,s_strike=#{s_strike},s_obandhazard=#{s_obandhazard} 
 		where s_id=#{s_id} and s_no=#{s_no}
 	</update>
 	
@@ -121,5 +121,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="sc_contupdate">
 		update score_card set s_date=#{sc_playdate} where s_no=#{sc_no} and s_id=#{sc_id}
 	</update>
+	
+	<!-- 아이디별 번호 가져오기 -->
+	<select id="sc_ino" resultType="int">
+		select s_no from score_card where s_id=#{s_id} order by s_sort desc
+	</select>
 	
 </mapper>

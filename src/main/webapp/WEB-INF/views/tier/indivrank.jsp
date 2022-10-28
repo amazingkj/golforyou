@@ -162,7 +162,7 @@
 						<th width="15%" id="ListDay">날짜</th>
 						<th width="40%" id="ListLocation">골프장</th>
 						<th width="15%" id="ListRange">최대 비거리</th>
-						<th width="15%" id="ListMax">최고득점</th>
+						<th width="15%" id="ListMax">획득점수</th>
 						<th width="15%" id="ListImg">카드</th>
 					</tr>				
 				</table>	
@@ -185,7 +185,7 @@
 				+"<th width='15%' id='ListDay'>날짜</th>"
 				+"<th width='45%' id='ListLocation'>골프장</th>"
 				+"<th width='16%' id='ListRange'>최대 비거리</th>"
-				+"<th width='12%' id='ListMax'>최고득점</th>"
+				+"<th width='12%' id='ListMax'>획득점수</th>"
 				+"<th width='12%' id='ListImg'>카드</th>"
 				+"</tr>"
 				+"</table>"
@@ -218,6 +218,9 @@
 			var divScoreCard = $("<div></div>").addClass("iScoreCard").attr('id',"iScoreCard_"+(divCount+1));
 			$("#iHighScore_"+(divCount+1)).after(divScoreCard); //iHighScore클래스 div 생성
 			
+			var divNo = $("<div></div>").addClass("iNo").attr('id',"iNo_"+(divCount+1));
+			$("#iScoreCard_"+(divCount+1)).after(divNo); //iNo클래스 div 생성(display:none으로)
+			
 			document.getElementById('iScoreCard_'+(divCount+1)).innerHTML = "<i class='far fa-clipboard'></i>"; //스코어카드 확인용 아이콘 생성
 			
 			divCount = $('.ind_history').length; //divCount 증가
@@ -230,7 +233,7 @@
 		});
 		
 		function showSCImg(i){
-			window.open("scorecardImg?iDate="+$('#iDate_'+i).text()+"&id="+id,"a","width=400,height=400,left=100,top=50");
+			window.open("tier/scorecardImg?&no="+$('#iNo_'+i).text(),"a","width=400,height=400,left=100,top=50");
 		}
 		
 		var id = $("#ind_id").text();
@@ -249,6 +252,7 @@
 		$("#iLocation_"+${i}).append("<c:out value='${viewLocation.get(i-1)}'/>");
 		$("#iHighScore_"+${i}).append("<c:out value='${viewBestScore.get(i-1)}'/>");
 		$("#iRange_"+${i}).append("<c:out value='${viewRange.get(i-1)}'/>m");
+		$("#iNo_"+${i}).append("<c:out value='${noviewNo.get(i-1)}'/>");
 		
 		var loc = $('#iLocation_'+${i}).text();
 		

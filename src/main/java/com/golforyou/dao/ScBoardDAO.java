@@ -43,4 +43,10 @@ public interface ScBoardDAO {
 
 	List<Integer> getScno(ScboardVO sb);
 
+	int getscnodual();
+
+	String getDate(int no);
+
+	String getImg(int no);
+
 }

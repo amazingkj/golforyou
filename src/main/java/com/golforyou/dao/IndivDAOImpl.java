@@ -16,7 +16,7 @@ public class IndivDAOImpl implements IndivDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public String getPoint(String id) {
+	public int getPoint(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("rank_loginpoint", id);
 	}
@@ -46,9 +46,9 @@ public class IndivDAOImpl implements IndivDAO {
 	}
 
 	@Override
-	public List<Integer> getBestScore(String id) {
+	public List<Integer> getSumScore(String id) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_bestscore", id);
+		return sqlSession.selectList("sc_sumscore", id);
 	}
 
 	@Override
@@ -109,6 +109,12 @@ public class IndivDAOImpl implements IndivDAO {
 	public void autoUpdate(ScboardVO sb) {
 		// TODO Auto-generated method stub
 		sqlSession.update("sc_contupdate", sb);
+	}
+
+	@Override
+	public List<Integer> getNo(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("sc_ino",id);
 	}
 	
 }

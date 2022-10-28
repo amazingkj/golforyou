@@ -115,5 +115,23 @@ public class ScBoardServiceImpl implements ScBoardService {
 		// TODO Auto-generated method stub
 		return scBoardDAO.getScno(sb);
 	}
+
+	@Override
+	public int getscnodual() {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getscnodual();
+	}
+
+	@Override
+	public String getDate(int no) {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getDate(no);
+	}
+
+	@Override
+	public String getImg(int no) {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getImg(no);
+	}
 	
 }

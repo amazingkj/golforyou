@@ -16,7 +16,7 @@ public class IndivServiceImpl implements IndivService {
 	private IndivDAO indivDAO;
 
 	@Override
-	public String getPoint(String id) {
+	public int getPoint(String id) {
 		// TODO Auto-generated method stub
 		return indivDAO.getPoint(id);
 	}
@@ -46,9 +46,9 @@ public class IndivServiceImpl implements IndivService {
 	}
 
 	@Override
-	public List<Integer> getBestScore(String id) {
+	public List<Integer> getSumScore(String id) {
 		// TODO Auto-generated method stub
-		return indivDAO.getBestScore(id);
+		return indivDAO.getSumScore(id);
 	}
 
 	@Override
@@ -109,6 +109,12 @@ public class IndivServiceImpl implements IndivService {
 	public void autoUpdate(ScboardVO sb) {
 		// TODO Auto-generated method stub
 		indivDAO.autoUpdate(sb);
+	}
+
+	@Override
+	public List<Integer> getNo(String id) {
+		// TODO Auto-generated method stub
+		return indivDAO.getNo(id);
 	}
 	
 }

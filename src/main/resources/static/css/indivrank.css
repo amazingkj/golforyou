@@ -319,6 +319,12 @@
 	cursor:pointer;
 	left:112px;
 }
+.iNo{
+	display:none;
+	width:0;
+	height:0;
+	font-size:0;
+}
 .iScoreCard:hover{
 	color:#56F569;
 }

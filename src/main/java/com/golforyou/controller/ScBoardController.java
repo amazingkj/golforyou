@@ -208,9 +208,9 @@ public class ScBoardController {
 				path01.mkdirs(); //풀더 생성
 				System.out.println("폴더생성 완료.");
 			}
-			
+			int nodual = scBoardService.getscnodual();
 			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
-			String refileName = sc_playdate+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
+			String refileName = sc_playdate+"_"+nodual+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
 			String fileDBName = ""; //DB에 저장되는 경로명
 			if(month >= 1 && month <= 9) {
 				fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
@@ -326,7 +326,7 @@ public class ScBoardController {
 			}
 			
 			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
-			String refileName = sc_playdate+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
+			String refileName = sc_playdate+"_"+sc_no+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
 			String fileDBName = ""; //DB에 저장되는 경로명
 			if(month >= 1 && month <= 9) {
 				fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;

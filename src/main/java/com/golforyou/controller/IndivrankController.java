@@ -1,5 +1,6 @@
 package com.golforyou.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.golforyou.service.IndivService;
 import com.golforyou.service.RankingService;
+import com.golforyou.service.ScBoardService;
 import com.golforyou.vo.ScorecardVO;
 
 @Controller
@@ -26,6 +28,9 @@ public class IndivrankController {
 	
 	@Autowired
 	private RankingService rankingService;
+	
+	@Autowired
+	private ScBoardService scBoardService;
 	
 	//개인랭크 페이지
 	@GetMapping("/indivrank")
@@ -52,7 +57,7 @@ public class IndivrankController {
 			
 			String rPoint = request.getParameter("rPoint_"); //ranking페이지에서 받아온 포인트값
 			if(rPoint == null) { //ranking페이지에서 타고온 경우가 아니라면
-				rPoint = indivService.getPoint(id); //로그인한 회원의 정보에서 포인트값 가져옴
+				rPoint = Integer.toString(indivService.getPoint(id)); //로그인한 회원의 정보에서 포인트값 가져옴				
 			}
 			String rankno = request.getParameter("rankno"); //순위
 			
@@ -66,7 +71,7 @@ public class IndivrankController {
 			for(int i=0 ; i<s_obandhazard.size() ; ++i) {
 				if(s_obandhazard.get(i) != null) {
 					obandhazard = s_obandhazard.get(i); //지금까지 OB+Hazard 한 횟수 합
-					strike = s_strike.get(i); //지금까지 골프공을 친 횟수 합
+					strike += s_strike.get(i); //지금까지 골프공을 친 횟수 합
 				}				
 			}
 			
@@ -86,8 +91,10 @@ public class IndivrankController {
 			List<Integer> put = new ArrayList<>(); //퍼팅
 			put = indivService.getPutting(id);
 			int sumPutting = 0;
-			for(int i=0 ; i<getCount ; ++i) {						
-				sumPutting += put.get(i);
+			for(int i=0 ; i<getCount ; ++i) {
+				if(put.get(i) != null) {
+					sumPutting += put.get(i);
+				}				
 			}
 			double avgPutting = (double)sumPutting/getCount;
 			String strPutting = String.format("%.2f", avgPutting); //평균 퍼팅횟수
@@ -105,7 +112,7 @@ public class IndivrankController {
 				if(i >= 1 && i <= 9) {
 					sv.setGraph_date(year+"_0"+i+"%");
 				}else if(i >= 10 && i <= 12) {
-					sv.setGraph_date(year+"_1"+i+"%");
+					sv.setGraph_date(year+"_"+i+"%");
 				}
 				
 				if(i == 1) {
@@ -137,19 +144,21 @@ public class IndivrankController {
 			
 			List<String> viewDate = new ArrayList<>();
 			List<String> viewLocation = new ArrayList<>();
-			List<Integer> viewBestScore = new ArrayList<>();
+			List<Integer> viewSumScore = new ArrayList<>();
 			List<Integer> viewRange = new ArrayList<>();
+			List<Integer> noviewNo = new ArrayList<>();
 			for(int i=0 ; i<getCount ; ++i) {
 				viewDate = indivService.getDate(id);
 				viewLocation = indivService.getLocation(id);
-				viewBestScore = indivService.getBestScore(id);
+				viewSumScore = indivService.getSumScore(id);
 				viewRange = indivService.getRange(id);
+				noviewNo = indivService.getNo(id);
 				
 				im.addObject("viewDate", viewDate);
 				im.addObject("viewLocation", viewLocation);
-				im.addObject("viewBestScore", viewBestScore);
+				im.addObject("viewBestScore", viewSumScore);
 				im.addObject("viewRange", viewRange);
-				
+				im.addObject("noviewNo",noviewNo);
 			}
 			
 			List<Integer> pointList = indivService.getSumPoint(id);
@@ -214,8 +223,12 @@ public class IndivrankController {
 		
 	}
 	
-	@RequestMapping(value="/tier/scorecardImg")
-	public void scorecardImg() {
+	@RequestMapping(value="tier/scorecardImg")
+	public void scorecardImg(HttpServletRequest request) {
+		int no = Integer.parseInt(request.getParameter("no"));
 		
+		String imgName = scBoardService.getImg(no);
+		
+		request.setAttribute("imgName", imgName);
 	}
 }

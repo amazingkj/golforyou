@@ -7,7 +7,7 @@ import com.golforyou.vo.ScorecardVO;
 
 public interface IndivService {
 
-	String getPoint(String id);
+	int getPoint(String id);
 
 	List<Integer> getPutting(String id);
 
@@ -17,7 +17,7 @@ public interface IndivService {
 
 	List<String> getDate(String id);
 
-	List<Integer> getBestScore(String id);
+	List<Integer> getSumScore(String id);
 
 	List<String> getLocation(String id);
 
@@ -38,6 +38,8 @@ public interface IndivService {
 	void sortUpdate(ScboardVO sb);
 
 	void autoUpdate(ScboardVO sb);
+
+	List<Integer> getNo(String id);
 
 	
 }

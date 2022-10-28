@@ -40,7 +40,7 @@
 			</c:if>
 			
 			<c:if test="${empty needList }">
-				<td colspan=2>업데이트할 스코어카드가 없습니다.</td>
+				<td colspan=3>업데이트할 스코어카드가 없습니다.</td>
 			</c:if>
 		</table>
 	</div>
@@ -70,7 +70,7 @@
 		<a href="admin_insertCard?page=${page+1 }">[다음]</a>
 	</c:if>
 </div>
-<form method="post" action="/admin_insertCard_Check">
+<form method="post" action="admin_insertCard_Check">
 	<div>
 		<div id="imginfo_wrap">
 			<div class="admin_info">
