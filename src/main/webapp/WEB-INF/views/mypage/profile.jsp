@@ -23,7 +23,7 @@ function openWithdrawalPop(){
 	  
     var url = "withdrawal";
     var name = "WithdrawalPop";
-    var option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=600, height=508, left="+w+",top="+h+""; 
+    var option = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=600, height=430, left="+w+",top="+h+""; 
 
     window.open(url, name, option);
 }
@@ -160,7 +160,7 @@ $('.edit-wrapper .tab').click(function(){
 	 	</div>
 			<div class="inputBoxVertical">
 			<label>이메일</label><input type="email" name="mEmail" class="textField"
-					value="${mEmail}" placeholder="${mEmail}"><br><%--<input
+					value="${member.mEmail}" placeholder="${mEmail}"><br><%--<input
 					type="button" name=button class="checkBtn" value="인증전송">--%>
 			</div>
 		
