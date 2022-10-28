@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="withdrawal">
+
+		<insert id="saveDelcont" parameterType="withdrawal"> 	 
+ 	 		insert into withdrawal (wno, username, mdelcont, mdeldate) values (w_no_seq.nextval,#{username,jdbcType=VARCHAR},#{mdelcont,jdbcType=VARCHAR},sysdate)
+ 	 	</insert>
+  	
+ 	 	
+</mapper>

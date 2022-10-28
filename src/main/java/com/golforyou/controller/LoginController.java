@@ -1,7 +1,6 @@
 package com.golforyou.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -24,7 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
 import com.golforyou.service.LoginService;
-import com.golforyou.vo.GolforyouMemberNEW;
+import com.golforyou.util.MailService;
+import com.golforyou.vo.MemberVO;
 
 @Controller
 public class LoginController {
@@ -37,6 +36,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private MailService mailsender;
 	
 	//@Autowired
 	//private PrincipalDetailsService principalDetail;
@@ -90,7 +92,7 @@ public class LoginController {
 	}
 	
 //	 @GetMapping("/user/login")
-//	    public String userLoginForm(@ModelAttribute("member") GolforyouMemberNEW member, HttpSession session) {
+//	    public String userLoginForm(@ModelAttribute("member") MemberVO member, HttpSession session) {
 //	        if (session.getAttribute("SPRING_SECURITY_CONTEXT") != null) {
 //	            return "redirect:/";
 //	        }
@@ -130,34 +132,6 @@ public class LoginController {
 		return "redirect:/test/login";
 	}
 	
-//	public MemberVO idCheck(String id) {
-//		MemberVO m=null;
-//		
-//		try {
-//			con=ds.getConnection();//커넥션 풀 관리 ds로 db연결 con생성
-//			sql="select * from golformemberNew where m_id=?";
-//			pt = con.prepareStatement(sql);//쿼리문을 미리 컴파일하여 수행할 pt생성
-//			pt.setString(1,id);//쿼리문의 첫번째 물음표에 문자열로 아이디저장
-//			rs=pt.executeQuery();//검색 쿼리문 수행후 결과레코드를 rs에 저장
-//			
-//			if(rs.next()) {//다음 레코드 행이 존재하면 참
-//				m=new MemberVO();
-//				m.setM_id(rs.getString("m_id"));//m_id컬럼으로 부터 문자열로 아이디값을
-//				//가져와서 setter()메서드에 저장
-//			}
-//		}catch(Exception e) {e.printStackTrace();}
-//		finally {
-//			try {
-//			    if(rs != null) rs.close();
-//			    if(pt != null) pt.close();
-//			    if(con != null) con.close();
-//			}catch(Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return m;
-//	}//idCheck()
-//	
 	@RequestMapping("/index")
 	public String loginandSession(HttpServletRequest request, HttpSession session,
 			Authentication authentication,
@@ -170,11 +144,6 @@ public class LoginController {
 	
 		return "redirect:/";
 	}
-//	@RequestMapping("/login_ok")
-//	public String loginOk(GolforyouMemberNEW member,HttpSession session) {
-//	
-//		return "redirect:/";
-//	}
 
 	@GetMapping("/join")
 	public String join(PrincipalDetails principalDetails, HttpSession session) {
@@ -190,45 +159,30 @@ public class LoginController {
 	}
 	 @ResponseBody
 	@RequestMapping("/idcheck")
-    public int idcheck(String username) {
+    public int idcheck(String username, HttpServletRequest request) {
         System.out.println("테스트");
         int count = 0;
         //Map<Object, Object> map = new HashMap<Object, Object>();
  
         count = this.loginService.idCheck(username);
         System.out.println(count);
+        
+        if(count==1) {
+        	request.setAttribute("username", username);
+        }
         //map.put("cnt", count);
         //System.out.println(map);
 
         return count;
     }
 	
-	
-	
-	
-//	@RequestMapping("/idcheck")
-//    @ResponseBody
-//    public Map<Object, Object> idcheck(@RequestBody String username) {
-//        System.out.println("테스트");
-//        int count = 0;
-//        Map<Object, Object> map = new HashMap<Object, Object>();
-// 
-//        count = loginService.idCheck(username);
-//        System.out.println(count);
-//        map.put("cnt", count);
-//        System.out.println(map);
-//    	
-//        return map;
-//    }
-//	
-//	
-	
 	@PostMapping("/join_ok")
-	public String joinOk(GolforyouMemberNEW member,RedirectAttributes Redirect) {
+	public String joinOk(MemberVO member,RedirectAttributes Redirect) {
 		
 
 		System.out.println(member);
-		member.setMRole("ROLE_USER");
+		member.setMrole("ROLE_USER");
+		member.setMstate(1); //default;
 		
 		String rawPassword = member.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
@@ -242,16 +196,36 @@ public class LoginController {
 	//비밀번호 찾기
 		@GetMapping("findPwd")
 		public String findPwd() {
-			return "member/findPwd"; //뷰페이지 경로 WEB-INF/views/member/findPwd.jsp
+			return "member/findPwd"; 
 			
 		}//findPwd()
 		
 		//비밀번호 찾기 인증메일 전송
-		@GetMapping("findPwd_ok")
-		public String findPwd_ok() {
-			return "member/findPwd_ok"; //뷰페이지 경로 WEB-INF/views/member/findPwd_ok.jsp
+		@RequestMapping("findPwd_ok")
+		public String MailSender(MemberVO m, HttpServletRequest request) {
 			
-		}//findPwd_ok()
+			
+			String email=request.getParameter("email");
+		
+			m=this.loginService.getPassword(email);
+			System.out.println("m"+m);
+			String mEmail=m.getMemail(); //전체 email 이 널 
+			int mstate=m.getMstate();
+			
+			System.out.println(mEmail); //null
+			
+			if(email.equals(mEmail) && mstate!=2) {
+				
+				System.out.println("메일 보내도 됨");
+				
+				mailsender.mailSend(m);
+			}
+			
+			
+			return "member/findPwd_ok";
+			
+		}
+		
 		
 	
 	
