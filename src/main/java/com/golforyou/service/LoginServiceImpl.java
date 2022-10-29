@@ -31,6 +31,18 @@ public class LoginServiceImpl implements LoginService {
 			return this.loginDAO.getPassword(mEmail);
 			
 		}
+
+		@Override
+		public void updateMailAuth(MemberVO member) {
+			this.loginDAO.updateMailAuth(member);
+			
+		}
+
+		@Override
+		public void updateTempPwd(MemberVO member) {
+			this.loginDAO.updateTempPwd(member);
+			
+		}
 		
 		
 }

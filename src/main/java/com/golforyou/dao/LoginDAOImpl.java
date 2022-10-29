@@ -28,4 +28,16 @@ public class LoginDAOImpl implements LoginDAO {
 		return this.sqlSession.selectOne("getPassword",mEmail);
 		
 	}
+
+	@Override
+	public void updateMailAuth(MemberVO member) {
+		
+		this.sqlSession.update("updateMailAuth",member);
+	}
+
+	@Override
+	public void updateTempPwd(MemberVO member) {
+		this.sqlSession.update("updateTempPwd",member);
+		
+	}
 }

@@ -7,5 +7,7 @@ public interface LoginDAO {
 	int idCheck(String username);
 	MemberVO getMember(String username);
 	MemberVO getPassword(String mEmail);
+	void updateMailAuth(MemberVO member);
+	void updateTempPwd(MemberVO member);
 
 }

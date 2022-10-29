@@ -21,7 +21,6 @@
  	 	<update id="update_province">
  	 		update ranking set r_province=#{r_province} where r_id=#{r_id,jdbcType=VARCHAR}
  	 	</update>
- 	 	
  	 	<!-- 회원 탈퇴 기능 -->
  	 	<update id="withdrawal">
  	 		update MemberVO set mdelcont=#{mdelcont}, mdeldate=sysdate, mstate=2 where username=#{username} and password=#{password}
@@ -35,6 +34,21 @@
  	 	<select id="getPassword" parameterType="member" resultType="member">
  	 		select username, password, memail from MemberVO where memail=#{memail,jdbcType=VARCHAR}
  	 	</select>
+ 	 	
+ 	 	<update id="updateMailKey">
+ 	 		update MemberVO set mailkey=#{mailkey} where memail=#{memail}
+ 	 	</update>
+ 	 	
+ 	 	<update id="updateMailAuth">
+ 	 		update MemberVO set mstate=1 where memail=#{memail} and mailkey={#mailkey}
+ 	 	</update>
+ 	 	
+ 	 	<update id="updateTempPwd">
+ 	 		update MemberVO set password=#{password} where memail=#{memail}
+ 	 	</update>
+ 	 	
+ 	 	
+ 	 
  	 	
  	 	
 </mapper>

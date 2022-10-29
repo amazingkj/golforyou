@@ -37,7 +37,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	@Autowired
+	@Autowired(required=false)
 	private MailService mailsender;
 	
 	//@Autowired
@@ -188,10 +188,17 @@ public class LoginController {
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		member.setPassword(encPassword);
 		userRepository.save(member);//회원가입 잘됨
-		Redirect.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
+
+		mailsender.insertMemberEmail(member);
 		return "redirect:/";
 	}
-
+	@GetMapping("/regsterEmail")
+	public String emailConfirm(MemberVO member) {
+		
+		loginService.updateMailAuth(member);
+		
+		return "/member/emailAuthSuccess";
+	}
 	
 	//비밀번호 찾기
 		@GetMapping("findPwd")
@@ -217,8 +224,11 @@ public class LoginController {
 			if(email.equals(mEmail) && mstate!=2) {
 				
 				System.out.println("메일 보내도 됨");
+				System.out.println(email);
+				mailsender.findPwdMail(email);
+				//메일로 보내진 authnumber를 비번으로 등록
 				
-				mailsender.mailSend(m);
+			
 			}
 			
 			
