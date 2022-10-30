@@ -51,6 +51,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 					.password(password)
 					.memail(memail)
 					.mrole(mrole)
+					.mstate(1)
 					.mprovider(mprovider)
 					.mprovider(mproviderid)
 					.build();

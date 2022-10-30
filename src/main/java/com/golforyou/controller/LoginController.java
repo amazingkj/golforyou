@@ -182,17 +182,18 @@ public class LoginController {
 
 		System.out.println(member);
 		member.setMrole("ROLE_USER");
-		member.setMstate(1); //default;
+		member.setMstate(0); //default;
 		
 		String rawPassword = member.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		member.setPassword(encPassword);
-		userRepository.save(member);//회원가입 잘됨
+		MemberVO m = userRepository.save(member);//회원가입 잘됨
 
-		mailsender.insertMemberEmail(member);
+		mailsender.insertMemberEmail(m);
+		
 		return "redirect:/";
 	}
-	@GetMapping("/regsterEmail")
+	@GetMapping("/join/registerEmail")
 	public String emailConfirm(MemberVO member) {
 		
 		loginService.updateMailAuth(member);

@@ -39,6 +39,7 @@ public class MailService {
 		authNumber = checkNum;
 	}
     
+    //비밀번호 찾기 메일
 	public String findPwdMail(String email) {
 		makeRandomNumber();
 		//String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
@@ -76,22 +77,28 @@ public class MailService {
 //    	return Integer.toString(authNumber);
 //	}
     
+	 //회원가입 인증 메일 발송 
 	public String insertMemberEmail(MemberVO member) {
 		//렌덤 문자열 
 		
 		makeRandomNumber();
-		int mail_key=authNumber;
+		int mailkey=authNumber;
 		
 		String toMail = member.getMemail();
+		
+		System.out.println("tomail: "+toMail);
 		String title = "GolForYou 가입 인증 이메일 입니다."; // 이메일 제목 
 		String content = 
 				"<h1>GolForYou에 가입해주셔서 감사합니다.<h1>" + 	//html 형식으로 작성 ! 
                 "<br><br>" + 
 			    "<br>아래 [이메일 인증 확인]을 눌러 회원가입을 완료하세요" + 
-			    "<br><a href='http://localhost:8091/join/registerEmail?email=" + 
-			    member.getMemail()+"&mail_key="+mail_key+"' target='_black'>이메일 인증 확인</a>";
+			    "<br><a href='http://localhost:8091/join/registerEmail?memail=" + 
+			    member.getMemail()+"&mailkey="+mailkey+"' target='_black'>이메일 인증 확인</a>";
 		
-
+		member.setMailkey(mailkey);
+		member.setMemail(toMail);
+		loginService.updateMailKey(member); //update mailkey in DB
+		
 		mailSend(setFrom, toMail, title, content);
 		return Integer.toString(authNumber);
 	}

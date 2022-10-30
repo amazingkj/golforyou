@@ -42,10 +42,11 @@ public class MemberVO implements Serializable{
 	private String mgender;
 	private String mfile;
 	
-	@ColumnDefault("'1'")
+	@ColumnDefault("'0'")
 	private int mstate;
 	private String mrole; //ROLE_USER,ROLE_ADMIN,ROLE_MANAGER
-	private String mailkey;
+	@Column(nullable = true)
+	private int mailkey;
 	
 	//ouath2를 위한 설정 
 	private String mprovider;
@@ -57,7 +58,7 @@ public class MemberVO implements Serializable{
 	
 	@Builder
 	public MemberVO(int mno, String username, String nickname, String password, String mphone, String maddr, String memail,
-			String mgender, String mfile, int mstate, String mrole, String mailkey, String mprovider, String mproviderid,
+			String mgender, String mfile, int mstate, String mrole, int mailkey, String mprovider, String mproviderid,
 			Timestamp mcreatedate, String mdelcont, String mdeldate) {
 
 		this.mno = mno;

@@ -14,4 +14,8 @@ public interface MypageDAO {
 
 	void saveDelcont(WithdrawalVO w);
 
+	void changePwd(MemberVO member);
+
+	
+
 }

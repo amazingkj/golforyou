@@ -180,25 +180,53 @@ private LoginService loginService;
 		return "mypage/pwdChange"; 
 	}//profile()
 	
-//	@RequestMapping("changepwd_ok")
-//	public String changepwd_ok(MemberVO m,HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-//		response.setContentType("text/html;charset=UTF-8");
-//		PrintWriter out=response.getWriter();
-//					
-//		String id=(String)session.getAttribute("id");
-//		if(id==null) {
-//			out.println("<script>");
-//			out.println("alert('다시 로그인 하세요!');");
-//			out.println("location='login';");
-//			out.println("</script>");
-//		
-//		}else {
-//		
-//		}
-//		
-//		return "mypage/pwdChange";
-//	}//changepwd_ok()
-//		
+	@RequestMapping("changepwd_ok")
+	public String changepwd_ok(HttpServletRequest request, HttpServletResponse response, 
+		HttpSession session, Authentication authentication, @AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter(); 
+		MemberVO member=new MemberVO();
+		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();	
+		String password=principalDetails.getPassword();
+		String username=principalDetails.getUsername();
+		member.setUsername(username);
+		
+		String inputPw=request.getParameter("mem_password");
+		
+		System.out.println("inputpw "+inputPw);
+		System.out.println("username "+username);
+		System.out.println("password "+password);
+		System.out.println("비교 "+bCryptPasswordEncoder.matches(inputPw,password));	
+		
+		String wantPW=request.getParameter("new_mem_password");
+		String newPw=bCryptPasswordEncoder.encode(wantPW);
+		
+		member.setPassword(newPw);
+		System.out.println(wantPW);	
+		System.out.println(newPw);
+	//비교하는 문자열은 해시처리 하기 전 문자열과 비교해야함. matches 활용
+		if(bCryptPasswordEncoder.matches(inputPw,password)) {
+		
+			this.mypageService.changePwd(member); //여기가 널값. 월요일에 같이 찾아달라고 하자 시간을 너무 많이 투자함
+			
+			out.println("<script>");
+			out.println("alert('비밀번호가 변경되었습니다.');");
+			out.println("</script>");
+			return "redirect:/";
+		}else {
+			out.println("<script>");
+			out.println("alert('입력한 비밀번호가 다릅니다. 비밀번호를 변경할 수 없습니다.');");
+			out.println("self.close();");
+			out.println("</script>");
+			
+		}
+		
+	
+		
+
+		return null;
+	}//changepwd_ok()
+		
 	@RequestMapping("withdrawal")
 	public String withdrawal() {
 		return "mypage/withdrawal"; 
@@ -206,7 +234,8 @@ private LoginService loginService;
 	
 	 @Transactional
 	@RequestMapping("withdrawal_ok")
-	public String withdrawal_ok(MemberVO m, WithdrawalVO w, HttpServletRequest request, HttpServletResponse response, HttpSession session, RedirectAttributes redirect, Authentication authentication,
+	public String withdrawal_ok(MemberVO m, WithdrawalVO w, HttpServletRequest request, HttpServletResponse response, 
+			HttpSession session, RedirectAttributes redirect, Authentication authentication,
 			@AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{	
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();

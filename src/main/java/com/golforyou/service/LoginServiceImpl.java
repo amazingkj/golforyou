@@ -43,6 +43,12 @@ public class LoginServiceImpl implements LoginService {
 			this.loginDAO.updateTempPwd(member);
 			
 		}
+
+		@Override
+		public void updateMailKey(MemberVO member) {
+			this.loginDAO.updateMailKey(member);
+			
+		}
 		
 		
 }

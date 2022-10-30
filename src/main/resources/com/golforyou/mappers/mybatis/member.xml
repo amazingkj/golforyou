@@ -40,12 +40,19 @@
  	 	</update>
  	 	
  	 	<update id="updateMailAuth">
- 	 		update MemberVO set mstate=1 where memail=#{memail} and mailkey={#mailkey}
+ 	 		update MemberVO set mstate=1 where memail=#{memail} and mailkey=#{mailkey}
  	 	</update>
  	 	
  	 	<update id="updateTempPwd">
  	 		update MemberVO set password=#{password} where memail=#{memail}
  	 	</update>
+ 	 	
+ 	 	
+ 	 	<update id="changePwd">
+ 	 		update MemberVO set password=#{password} where username=#{username}
+ 	 	</update>
+ 	 	
+ 	 	
  	 	
  	 	
  	 

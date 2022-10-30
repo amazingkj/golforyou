@@ -14,13 +14,6 @@ function chPw_check(){
 		$("#mem_password").val("").focus();
 		return false;
 	}
-	
-
-	if($.trim($("#mem_password").val())!='${old_pw}'){
-		alert("현재 비밀번호가 다릅니다.");
-		$("#mem_password").val("").focus();
-		return false;
-	}
 
 	if($.trim($("#new_mem_password").val())==""){
 		alert("변경할 새 비밀번호을 입력하세요");
@@ -46,9 +39,11 @@ function chPw_check(){
 <body><div class="clear"></div>
 	<div class="popupBody">
 		<h3>비밀번호 변경하기</h3>
+		
 		<form id="password_Form" name="password_form" method="post" action="changepwd_ok"
 			onsubmit="return chPw_check();">
-		
+		<input type="hidden" name="username" class="textField"
+				value="${id }"><br>
 			<div class="inputBox">
 				<label for="mem_password">현재 비밀번호</label>
 				<input type="password" id="mem_password" name="mem_password"

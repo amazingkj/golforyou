@@ -9,5 +9,7 @@ public interface LoginService {
 	MemberVO getPassword(String mEmail);
 	void updateMailAuth(MemberVO member);
 	void updateTempPwd(MemberVO member);
+	void updateMailKey(MemberVO member);
+	
 
 }

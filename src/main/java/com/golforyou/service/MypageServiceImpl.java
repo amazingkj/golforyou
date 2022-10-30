@@ -41,4 +41,11 @@ public class MypageServiceImpl implements MypageService {
 		
 	}
 
+
+	@Override
+	public void changePwd(MemberVO member) {
+		this.mypageDao.changePwd(member);
+		
+	}
+
 }

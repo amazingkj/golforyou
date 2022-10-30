@@ -39,6 +39,14 @@ public class MypageDAOImpl implements MypageDAO{
 		this.sqlSession.insert("saveDelcont",w);
 		
 	}
+
+	@Override
+	public void changePwd(MemberVO member) {
+		this.sqlSession.update("changePwd",member);
+		
+	}
+
+
 	
 
 	

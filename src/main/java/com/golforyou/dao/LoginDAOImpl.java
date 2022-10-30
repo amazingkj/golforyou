@@ -40,4 +40,11 @@ public class LoginDAOImpl implements LoginDAO {
 		this.sqlSession.update("updateTempPwd",member);
 		
 	}
+
+	@Override
+	public void updateMailKey(MemberVO member) {
+		this.sqlSession.update("updateMailKey",member);
+		
+		
+	}
 }
