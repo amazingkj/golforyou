@@ -23,13 +23,14 @@ import com.golforyou.vo.ScorecardVO;
 
 @Controller
 public class IndivrankController {
-	@Autowired
+	
+	@Autowired (required=false)
 	private IndivService indivService;
 	
-	@Autowired
+	@Autowired (required=false)
 	private RankingService rankingService;
 	
-	@Autowired
+	@Autowired (required=false)
 	private ScBoardService scBoardService;
 	
 	//개인랭크 페이지

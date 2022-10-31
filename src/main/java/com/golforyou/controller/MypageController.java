@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.apache.jasper.tagplugins.jstl.core.Redirect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -68,7 +69,7 @@ private LoginService loginService;
 	
 	//회원 정보 수정 
 	@RequestMapping("profile")
-	public ModelAndView profile( HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+	public ModelAndView profile( HttpServletRequest request, HttpServletResponse response, HttpSession session ) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		
 		String id=(String)session.getAttribute("id");
@@ -83,7 +84,7 @@ private LoginService loginService;
 		System.out.println(member.getUsername()+member.getPassword());
 		
 			ModelAndView m=new ModelAndView("mypage/profile");
-			m.addObject("m",m);//m 키이름에 em객체 저장 
+			m.addObject("m",member);//m 키이름에 em객체 저장 
 			m.addObject("mphone",mphone);		
 			m.addObject("memail",memail);
 			m.addObject("maddr",maddr);
@@ -92,31 +93,23 @@ private LoginService loginService;
 	}
 	
 	
+	@SuppressWarnings("null")
 	@RequestMapping("profileEdit_ok")
 	public ModelAndView profileEdit_ok(MemberVO m, RankingVO r, HttpServletRequest request, HttpServletResponse response, HttpSession session, Authentication authentication,
 			@AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out=response.getWriter();
+	
 		String saveFolder=request.getRealPath("/resources/upload");//이진파일 업로드 실제 경로를 구함.
 		int fileSize=5*1024*1024; //이진파일 업로드 최대 크기 
 		
 		MultipartRequest multi=null;//첨부한 파일을 받을 참조변수 
-//		
-//		
-//		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-//     	System.out.println(principalDetails);
-//		
-//		String username=principalDetails.getUsername();
-
-		String id=(String)session.getAttribute("id");
-		if(id==null) {
-			out.println("<script>");
-			out.println("alert('다시 로그인 하세요!');");
-			out.println("location='login';");
-			out.println("</script>");
+		multi=new MultipartRequest(request,saveFolder,fileSize,"UTF-8");	
 		
-		}else {
-			String username=multi.getParameter("username");
+		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+     	System.out.println(principalDetails);
+		
+     		String username=principalDetails.getUsername();
+			String nickname=multi.getParameter("nickname"); 
 			String mphone=multi.getParameter("mphone"); 
 			String memail=multi.getParameter("memail");
 			String maddr=multi.getParameter("maddr");
@@ -145,7 +138,7 @@ private LoginService loginService;
 			//첫 문자는 0부터 시작 
 			String fileExtendsion=fileName.substring(index+1);//마침표 이후부터 마지막 문자까지 구함. 
 			//즉 첨부파일  확장자를 구함. 
-			String refileName="bbs"+year+month+date+random+"."+fileExtendsion;//새로운 파일명 저장 
+			String refileName="profile"+year+month+date+random+"."+fileExtendsion;//새로운 파일명 저장 
 			String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;//데이터베이스에 저장될 레코드 값
 			upFile.renameTo(new File(homedir+"/"+refileName)); //생성된 폴더에 변경된 파일명으로 실제 업로드 
 			
@@ -161,13 +154,18 @@ private LoginService loginService;
 				}
 			}//수정 첨부파일을 첨부한 경우와 안한 경우 분기 조건문
 		
-		m.setUsername(username); m.setMphone(mphone); m.setMemail(memail); m.setMaddr(maddr);
+		m.setUsername(username);
+		m.setNickname(nickname); 
+		m.setMphone(mphone); 
+		m.setMemail(memail);
+		m.setMaddr(maddr);
 		
-		this.mypageService.updateMember(username);//번호를 기준으로 글쓴이, 글제목, 글내용, 첨부파일 수정 
+		System.out.println(m);
+		this.mypageService.updateMember(m);//번호를 기준으로 글쓴이, 글제목, 글내용, 첨부파일 수정 
 		this.mypageService.updateProvince(r);
 
 	
-		}
+		
 		return new ModelAndView("redirect:/mypage");
 		
 	}//profileEdit_ok()
@@ -185,6 +183,7 @@ private LoginService loginService;
 		HttpSession session, Authentication authentication, @AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter(); 
+		
 		MemberVO member=new MemberVO();
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();	
 		String password=principalDetails.getPassword();
@@ -201,13 +200,15 @@ private LoginService loginService;
 		String wantPW=request.getParameter("new_mem_password");
 		String newPw=bCryptPasswordEncoder.encode(wantPW);
 		
+		
 		member.setPassword(newPw);
+	
 		System.out.println(wantPW);	
 		System.out.println(newPw);
 	//비교하는 문자열은 해시처리 하기 전 문자열과 비교해야함. matches 활용
 		if(bCryptPasswordEncoder.matches(inputPw,password)) {
-		
-			this.mypageService.changePwd(member); //여기가 널값. 월요일에 같이 찾아달라고 하자 시간을 너무 많이 투자함
+			System.out.println(member);
+			this.mypageService.changePwd(member); //여기가 널값. 월요일에 같이 찾아달라고 하자 시간을 너무 많이 투자함 ㅠ 
 			
 			out.println("<script>");
 			out.println("alert('비밀번호가 변경되었습니다.');");
@@ -220,8 +221,6 @@ private LoginService loginService;
 			out.println("</script>");
 			
 		}
-		
-	
 		
 
 		return null;
@@ -268,41 +267,10 @@ private LoginService loginService;
 		        	
 		        }
 		        
-//		        
-//		        	String withdrawalPw=bCryptPasswordEncoder.encode(m.getPassword());
-//			    if (dbPW.equals(withdrawalPw)) {
-//			      
-//			       
-//			    } else {
-//			    	out.println("<script>");
-//					out.println("alert('비밀번호를 확인해주세요');");
-//					out.println("history.back();");
-//					out.println("</script>");
-//			        throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
-//			    	
-//			    }
-//			
-//			
+	
 			 return "redirect:/"; 	
 			
 		
 	}//withdrawal_ok()
-	
-//	@PostMapping("/join_ok")
-//	public String joinOk(MemberVO member,RedirectAttributes Redirect) {
-//		
-//
-//		System.out.println(member);
-//		member.setMrole("ROLE_USER");
-//		
-//		String rawPassword = member.getPassword();
-//		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-//		member.setPassword(encPassword);
-//		userRepository.save(member);//회원가입 잘됨
-//		Redirect.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
-//		return "redirect:/";
-//	}
-
-
 
 }

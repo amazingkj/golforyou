@@ -89,6 +89,13 @@ public class MailService {
 		System.out.println("tomail: "+toMail);
 		String title = "GolForYou 가입 인증 이메일 입니다."; // 이메일 제목 
 		String content = 
+				"<p></p>"
+				+"<p data-ke-size="size16"><b>가입을 축하합니다!&nbsp;</b></p>"
+				+"<p data-ke-size="size16">&nbsp;</p>"
+				+"<p data-ke-size="size16"><b>golforyou</b></p>"
+				+"<p data-ke-size="size16">&nbsp;</p>"
+				
+				+
 				"<h1>GolForYou에 가입해주셔서 감사합니다.<h1>" + 	//html 형식으로 작성 ! 
                 "<br><br>" + 
 			    "<br>아래 [이메일 인증 확인]을 눌러 회원가입을 완료하세요" + 

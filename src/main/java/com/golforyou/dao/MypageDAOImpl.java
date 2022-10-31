@@ -16,8 +16,8 @@ public class MypageDAOImpl implements MypageDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void updateMember(String username) {
-		this.sqlSession.update("update_member", username);
+	public void updateMember(MemberVO m) {
+		this.sqlSession.update("update_member", m);
 		
 	}
 
@@ -41,8 +41,8 @@ public class MypageDAOImpl implements MypageDAO{
 	}
 
 	@Override
-	public void changePwd(MemberVO member) {
-		this.sqlSession.update("changePwd",member);
+	public void changePwd(MemberVO m) {
+		this.sqlSession.update("changePwd",m);
 		
 	}
 

@@ -144,10 +144,12 @@ public class LoginController {
 	public String loginandSession(HttpServletRequest request, HttpSession session,
 			Authentication authentication,
 			@AuthenticationPrincipal PrincipalDetails userDetails){
+		
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 		
 		System.out.println("authentication:"+principalDetails.getUsername()); 
 		System.out.println("userDetails:"+userDetails.getUsername());
+		
 		request.getSession().setAttribute("id", principalDetails.getUsername());
 	
 		return "redirect:/";
@@ -213,15 +215,16 @@ public class LoginController {
 		
 		return "redirect:/";
 	}
-	@GetMapping("/join/registerEmail")
-	public String emailConfirm(MemberVO member) {
+		
+		@GetMapping("/join/registerEmail")
+		public String emailConfirm(MemberVO member) {
 		
 		loginService.updateMailAuth(member);
 		
 		return "/member/emailAuthSuccess";
-	}
+		}
 	
-	//비밀번호 찾기
+		//비밀번호 찾기
 		@GetMapping("findPwd")
 		public String findPwd() {
 			return "member/findPwd"; 
