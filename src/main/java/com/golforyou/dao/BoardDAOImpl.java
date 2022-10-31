@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.golforyou.vo.BoardVO;
 
@@ -36,7 +35,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void editboard(BoardVO eb) {
-		this.sqlSession.update("board_update",eb);
+		this.sqlSession.update("board_up",eb);
 		
 	}
 

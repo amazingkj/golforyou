@@ -50,7 +50,7 @@ function openDelCheck(){
      </script>
  
 <meta charset="UTF-8">
-<title>서블릿 MVC 게시판 내용보기 </title>
+<title></title>
 </head>
  <div class="clear"></div>
  <body class="tablebody">
@@ -58,26 +58,26 @@ function openDelCheck(){
 <div id="bWrite_wrap" class="bWrite_wrap" style="margin-top: 200px" >
   <table id="bCont_t" class="tablebox">
    <tr>
-    <td style="width:100px;" >제목</td><td class="bottom_line"><div class="b_title"><input name="b_title" class="textField" size="100%" value="${bc.b_title}"/></div></td>
+    <td style="width:100px;" >제목</td><td class="bottom_line"><div class="b_title"><div name="b_title" class="textField" size="100%">${b.b_title}</div></div></td>
    </tr>
    <tr>
-    <td>내용</td><td class="bottom_line"><div class="b_cont" ><div class="textField" style="width:100%; height:500px; resize:none; border:none;" >${b_cont}</div></div></td>
+    <td>내용</td><td class="bottom_line"><div class="b_cont" ><div class="textField" style="width:100%; height:500px; resize:none; border:none;" >${b.b_cont}</div></div></td>
    </tr>
    <tr>
-    <td>조회수</td><td class="bottom_line"><div class="b_hit">${bc.b_hit}</div></td>
+    <td>조회수</td><td class="bottom_line"><div class="b_hit">${b.b_hit}</div></td>
     </tr>
 	 <tr>
-    <td>좋아요</td><td>${bc.b_like}</td>
+    <td>좋아요</td><td>${b.b_like}</td>
     </tr>
 
 	<tr><td></td>
 	<td class="buttontd" colspan="2">
 	<form method="post" name="deletefrm">
    <input type="button" class="CheckBtn"  value="답변" onclick="location=
-	   'board_cont.do?b_no=${bc.b_no}&page=${page}&state=reply';" />
-	<c:if test="${id == bc.username}">
+	   'board_cont?b_no=${b.b_no}&page=${page}&state=reply';" />
+	<c:if test="${id == b.username}">
    <input type="button" class="CheckBtn"  value="수정" onclick="location=
-	   'board_cont.do?b_no=${bc.b_no}&page=${page}&state=edit';" />
+	   'board_cont?b_no=${b.b_no}&page=${page}&state=edit';" />
 	   
 
 <input type="hidden" id="b_no" name="b_no" value="${bc.b_no}"/>
@@ -85,15 +85,15 @@ function openDelCheck(){
 <input type="button" class="CheckBtn"  value="삭제" onclick="return openDelCheck();" />
 
 	 </c:if> 
-	    <input type="button" class="CheckBtn" class="buttontd" value="목록" onclick="location='board_list.do?page=${page}';" />	   	   	   
-	 <c:if test="${id != bc.username}">
-	 <c:if test="${!empty bc.b_like}">
+	    <input type="button" class="CheckBtn" class="buttontd" value="목록" onclick="location='board_list?page=${page}';" />	   	   	   
+	 <c:if test="${id != b.username}">
+	 <c:if test="${!empty b.b_like}">
    <input type="button" class="CheckBtn" id=like value="좋아요" onclick="return like();"/></input>
 	</c:if>
 	</c:if>
 	
 	<c:if test="${!empty id}">
-	<c:if test="${empty bc.b_like}">
+	<c:if test="${empty b.b_like}">
 	<input type="button" class="CheckBtn" id=like value="좋아요 취소 " onclick="return like();"/></input>
      </c:if>
      </c:if>

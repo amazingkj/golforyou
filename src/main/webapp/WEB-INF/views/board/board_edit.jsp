@@ -108,7 +108,7 @@
    	  <td></td>
       <td class="buttontd" colspan="2"><input type="submit" class="submitBtn" value="수정">
        <input type="reset" class="CheckBtn" value="취소"><input type="button" class="CheckBtn"
-               value="목록" onclick="location='board_list.do?page=${page}';" /></td>
+               value="목록" onclick="location='board_list?page=${page}';" /></td>
      </tr>
  
     </table>
