@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.golforyou.service.LoginService;
 import com.golforyou.vo.MemberVO;
-//import lombok.AllArgsConstructor;
-
 
 @Service
 public class MailService {
@@ -102,7 +100,7 @@ public class MailService {
 		mailSend(setFrom, toMail, title, content);
 		return Integer.toString(authNumber);
 	}
-	
+
 	public MailService(JavaMailSender jSender)throws MessagingException{
 		this.mailSender = jSender;
 		message = jSender.createMimeMessage();
