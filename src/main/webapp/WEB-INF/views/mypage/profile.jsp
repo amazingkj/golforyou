@@ -149,43 +149,41 @@ $('.edit-wrapper .tab').click(function(){
 		
 		
 		<div style="align:center">
-			<span>프로필 사진 변경</span><br><input id="imgFile" type="file" name="mFile" accept=".jpg,.png, .jpeg, .gif" value=""/><br>
+			<span>프로필 사진 변경</span><br><input id="imgFile" type="file" name="mfile" accept=".jpg,.png, .jpeg, .gif" value=""/><br>
 	 		<%--<button class="del-button" onclick="delImg()">기본 프로필 사진으로 돌아가기</button> --%>
 	 	
 	 	</div>
 	
 		<div class="inputBoxVertical">
-			<label>아이디</label><input type="text" name="id" class="textField"
+			<label>아이디</label><input type="text" name="username" class="textField"
 				value="${id }" readonly><br>
 	 	</div>
 	 	<div class="inputBoxVertical">
-	 	<label>닉네임</label><input type="text" name="nickname" id="nickname" class="textField" placeholder="닉네임">
+	 	<label>닉네임</label><input type="text" name="nickname" id="nickname" class="textField" value="${m.nickname}">
 	 	</div>
 			<div class="inputBoxVertical">
-			<label>이메일</label><input type="email" name="mEmail" class="textField"
-					value="${member.mEmail}" placeholder="${mEmail}"><br><%--<input
+			<label>이메일</label><input type="email" name="memail" class="textField"
+					value="${m.memail}" readonly><br><%--<input
 					type="button" name=button class="checkBtn" value="인증전송">--%>
 			</div>
 		
 			<div class="inputBoxVertical">
-			<label>휴대폰 번호</label><input type="tel" name="mPhone" class="textField"
+			<label>휴대폰 번호</label><input type="tel" name="mphone" class="textField"
 					pattern="^[0][1][0]-\d{4}-\d{4}$"
-					value="${mPhone}" placeholder="${mPhone}"><br> 
+					value="${m.mphone}"><br>
 			</div>
 			
 			<div class="inputBoxVertical">
 			<label>주요 이용지역</label>
-			
-			<select id="mAddr" name="mAddr" class="textField" selected="${mAddr}">
-					<option value="서울" <c:if test="${select_zone =='Seoul'}">${'selected'}
+			<select id="mAddr" name="maddr" class="textField" selected="${m.maddr}">
+			<option value="서울" <c:if test="${select_zone =='Seoul'}">${'selected'}
         			 </c:if>>서울</option>
 					<option value="경기" <c:if test="${select_zone =='gg'}">${'selected'}
         			 </c:if>>경기</option>
 					<option value="인천" <c:if test="${select_zone =='incheon'}">${'selected'}
         			 </c:if>>인천</option>
 					<option value="그외" <c:if test="${select_zone =='etc'}">${'selected'}
-        			 </c:if>>그외</option> 
-				
+        			 </c:if>>그외</option>
 			</select>
 			
 			</div>

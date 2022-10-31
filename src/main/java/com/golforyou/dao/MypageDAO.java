@@ -6,7 +6,7 @@ import com.golforyou.vo.WithdrawalVO;
 
 public interface MypageDAO {
 
-	void updateMember(String m);
+	void updateMember(MemberVO m);
 
 	void updateProvince(RankingVO id);
 

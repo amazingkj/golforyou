@@ -15,7 +15,7 @@
  	 	
  	 	<!-- 회원 정보 수정 -->
  	 	<update id="update_member">
- 	 		update MemberVO set mphone=#{m_Phone}, maddr=#{m_Addr}, memail=#{memail}, mfile=#{mfile} where username=#{username,jdbcType=VARCHAR}
+ 	 		update MemberVO set mphone=#{mphone}, maddr=#{maddr}, memail=#{memail}, mfile=#{mfile} where username=#{username,jdbcType=VARCHAR}
  	 	</update>
  	 	
  	 	<update id="update_province">
@@ -47,15 +47,9 @@
  	 		update MemberVO set password=#{password} where memail=#{memail}
  	 	</update>
  	 	
- 	 	
  	 	<update id="changePwd">
  	 		update MemberVO set password=#{password} where username=#{username}
  	 	</update>
- 	 	
- 	 	
- 	 	
- 	 	
- 	 
  	 	
  	 	
 </mapper>
