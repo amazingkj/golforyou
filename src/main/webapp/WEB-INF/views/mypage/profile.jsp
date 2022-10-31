@@ -156,7 +156,10 @@ $('.edit-wrapper .tab').click(function(){
 	
 		<div class="inputBoxVertical">
 			<label>아이디</label><input type="text" name="id" class="textField"
-				placeholder="${id }" readonly><br>
+				value="${id }" readonly><br>
+	 	</div>
+	 	<div class="inputBoxVertical">
+	 	<label>닉네임</label><input type="text" name="nickname" id="nickname" class="textField" placeholder="닉네임">
 	 	</div>
 			<div class="inputBoxVertical">
 			<label>이메일</label><input type="email" name="mEmail" class="textField"

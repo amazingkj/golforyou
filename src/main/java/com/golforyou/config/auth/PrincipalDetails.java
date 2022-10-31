@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import com.golforyou.vo.GolforyouMemberNEW;
+import com.golforyou.vo.MemberVO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,16 +25,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PrincipalDetails implements UserDetails, OAuth2User{
 
-	private GolforyouMemberNEW member; //콤포지션 
+	private MemberVO member; //콤포지션 
 	private Map<String,Object> attributes;
 	
 	//일반로그인
-		public PrincipalDetails(GolforyouMemberNEW member) {
+		public PrincipalDetails(MemberVO member) {
 			this.member=member;
 
 		}
 	//OAuth로그인 
-		public PrincipalDetails(GolforyouMemberNEW member,Map<String,Object> attributes) {
+		public PrincipalDetails(MemberVO member,Map<String,Object> attributes) {
 			this.member=member;
 			this.attributes=attributes;
 		}
@@ -56,7 +56,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collet = new ArrayList<GrantedAuthority>();
-		collet.add(()->{ return member.getMRole();});
+		collet.add(()->{ return member.getMrole();});
 		return collet;
 	}
 

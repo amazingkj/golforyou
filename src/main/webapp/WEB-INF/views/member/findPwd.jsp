@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(/resources/images/member/login3.png) no-repeat center center fixed; 
+    background: url(/images/member/login3.png) no-repeat center center fixed; 
     -webkit-background-size: cover;
   	-moz-background-size: cover;
  	-o-background-size: cover;
@@ -34,7 +34,7 @@
 }
 
 </style>
-<script src="/resources/js/jquery.js"></script>
+<script src="/js/jquery.js"></script>
 <script>
    function emailAuthentication() { //이메일 입력 유효검증 후, emailValCheck() 호출 후 결과값 확인,
 	   //결과값이 true라면 새 창에 email정보를 get방식으로 전송
@@ -90,13 +90,13 @@
 
 <div>
 <H3>비밀번호 찾기</H3><br>
-<span>계정에 연결된 이메일 주소를 입력하시면,<br>비밀번호를 변경할 수 있는 경로를<br>발송해드립니다.</span><br><br>
+<span>계정에 연결된 이메일 주소를 입력하시면,<br>임시 비밀번호 발송해드립니다.</span><br><br>
 <hr/>
 <br>
 </div>
 
 <div>
-<form name="signUpForm" action="/findPwd_ok" method="post" accept-charset="UTF-8">
+<form name="signUpForm" action="/findPwd_ok" method="post" onsubmit="return emailAuthentication();" accept-charset="UTF-8">
 <input type="email" name="email" class="textField" id="inputEmailForm" placeholder="example aaa@google.net"><br>
 <button type="submit" id="btn_change_password" class="submitBtn" onclick="emailAuthentication()">인증메일 전송</button>
 </form> 

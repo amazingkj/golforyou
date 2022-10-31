@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.golforyou.repository.UserRepository;
-import com.golforyou.vo.GolforyouMemberNEW;
+import com.golforyou.vo.MemberVO;
 
 
 
@@ -27,7 +27,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				
-		GolforyouMemberNEW userEntity = userRepository.findByUsername(username);				
+		MemberVO userEntity = userRepository.findByUsername(username);				
 		System.out.println(userEntity);
 		
 			if(userEntity == null) {
@@ -36,7 +36,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 				
 			}else {
 				
-				System.out.println(userEntity.getUsername()+userEntity.getPassword()+userEntity.getMRole().toString());
+				System.out.println(userEntity.getUsername()+userEntity.getPassword()+userEntity.getMrole().toString());
 
 				return new PrincipalDetails(userEntity);
 				

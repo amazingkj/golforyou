@@ -14,11 +14,11 @@
 <form name="join_ok" method="post" action="join_ok" onsubmit="return join_check();">
 <div class="joinForm">
 <input type="text" name="username" id="username" class="textField" placeholder="아이디">
-<input type=button class="CheckBtn" id="idck" onclick="idcheck();" value=중복확인 /><br/><span id="idcheck"></span>
+<input type=button class="CheckBtn" id="idck" onclick="idcheck();" value=중복확인 /><br/><%--<span id="idcheck"></span>--%>
 <input type="text" name="nickname" id="nickname" class="textField" placeholder="닉네임">
 <input type="password" name="password" id="password" class="textField" placeholder="비밀번호"><br>
 <input type="password" name="pwCheck" id="pwCheck" class="textField" placeholder="비밀번호 확인"><br>
-<input type="tel" name="mphone" class="textField" id="mphone"pattern="^[0][1][0]-\d{4}-\d{4}$" placeholder="휴대폰 번호"><br>
+<input type="tel" name="mphone" class="textField" id="mphone"pattern="^[0][1][0]-\d{4}-\d{4}$" placeholder="휴대폰 번호 (010-****-****)"><br>
 <input type="email" name="memail" id="memail" class="textField" placeholder="이메일"><br>
 <input type="button" class="CheckBtn" value=이메일인증>
 <input type="radio" name="mgender" id="male_gender" class="gender" value="male"><label id="male_gender">남</label>

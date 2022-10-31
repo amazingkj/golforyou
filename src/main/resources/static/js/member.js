@@ -3,8 +3,9 @@
  */
 //아이디 중복확인
     /* end */	
-    var idck = 0;
-  
+    let idck = 0;
+    let oldVal ='';
+   	
   
    function idcheck(){
 	  if ($.trim($('#username').val()) == '') {//trim()함수는 양쪽 공백을 제거
@@ -12,6 +13,7 @@
        $('#username').focus();
        return false;
     }
+   
     
 	  $username =  $("#username").val(); 		//username을 param
       $.ajax({//$는 jQuery란 뜻. $.ajax 뜻은 jQuery 내의 비동기식 아작스 실행
@@ -30,17 +32,34 @@
   	     
         	  }else{//중복 아이디가 아니면
         	 alert("사용 가능한 아이디 입니다");
-    			$("#password").focus();
+    			$("#nickname").focus(); 
         		//아이디가 중복하지 않으면  idck = 1 	
-                 idck = 1;
+                 idck = 1;             	
+             	 oldVal=$.trim($('#username').val());
         	  }  	
         	      	  
           },
+          
+          
       	  error:function(){//비동기식 아작스로 서버디비 데이터를
       		  //못가져와서 에러가 발생했을 때 호출되는 함수이다.
       		  alert("data error 서버가 연결되어 있지 않습니다");
       	  }
         });//$.ajax
+        
+             
+   			$("#username").on("propertychange change keyup paste input", function() {  //다섯가지의 이벤트가 모두 리슨 상태
+  			let currentVal = $(this).val();  		
+  			if(currentVal == oldVal) {
+				return;
+   		 		    
+  		 	}
+ 		
+  			oldVal = currentVal;  			
+  			idck = 0;
+			});
+    
+                 
 	}
 
 function join_check(){	
@@ -97,7 +116,7 @@ function join_check(){
     if(confirm("회원가입을 하시겠습니까?")){
     if(idck==0){
           alert('아이디 중복체크를 해주세요');
-           $('#username').val('').focus();
+           $('#username').focus();
           return false;
       }
 

@@ -6,30 +6,56 @@
 <mapper namespace="member">
 
 		<select id="member_read" parameterType="member" resultType="member"> 	 
- 	 		select * from GolforyouMemberNEW where username=#{username,jdbcType=VARCHAR} and mState=1
+ 	 		select * from MemberVO where username=#{username,jdbcType=VARCHAR} and mstate=1
  	 	</select>
   	
  	 	<select id="id_check" parameterType="member" resultType="int">
- 	 		select count(*) from Golforyou_MemberNEW where username=#{username}
+ 	 		select count(*) from MemberVO where username=#{username}
  	 	</select>
  	 	
  	 	<!-- 회원 정보 수정 -->
- 	 	<update id="update_member" parameterType="member">
- 	 		update GolforyouMemberNEW set mPhone=#{mPhone}, mAddr=#{mAddr}, mEmail=#{mEmail}, mFile=#{mFile} where username=#{username,jdbcType=VARCHAR}
+ 	 	<update id="update_member">
+ 	 		update MemberVO set mphone=#{m_Phone}, maddr=#{m_Addr}, memail=#{memail}, mfile=#{mfile} where username=#{username,jdbcType=VARCHAR}
  	 	</update>
  	 	
  	 	<update id="update_province">
  	 		update ranking set r_province=#{r_province} where r_id=#{r_id,jdbcType=VARCHAR}
  	 	</update>
- 	 	
  	 	<!-- 회원 탈퇴 기능 -->
  	 	<update id="withdrawal">
- 	 		update GolforyouMemberNEW set mDelcont=#{mDelcont}, mDeldate=sysdate, m_state=2 where username=#{username,jdbcType=VARCHAR}
+ 	 		update MemberVO set mdelcont=#{mdelcont}, mdeldate=sysdate, mstate=2 where username=#{username} and password=#{password}
  	 	</update>
  	 	
- 	 	 <select id="getMember" resultType="member">
- 	 		select * from GolforyouMemberNEW where username=#{username,jdbcType=VARCHAR}
+ 	 	 <select id="getMember" parameterType="member" resultType="member">
+ 	 		select * from MemberVO where username=#{username,jdbcType=VARCHAR}
  	 	</select>
+ 	 	
+ 	 	
+ 	 	<select id="getPassword" parameterType="member" resultType="member">
+ 	 		select username, password, memail from MemberVO where memail=#{memail,jdbcType=VARCHAR}
+ 	 	</select>
+ 	 	
+ 	 	<update id="updateMailKey">
+ 	 		update MemberVO set mailkey=#{mailkey} where memail=#{memail}
+ 	 	</update>
+ 	 	
+ 	 	<update id="updateMailAuth">
+ 	 		update MemberVO set mstate=1 where memail=#{memail} and mailkey=#{mailkey}
+ 	 	</update>
+ 	 	
+ 	 	<update id="updateTempPwd">
+ 	 		update MemberVO set password=#{password} where memail=#{memail}
+ 	 	</update>
+ 	 	
+ 	 	
+ 	 	<update id="changePwd">
+ 	 		update MemberVO set password=#{password} where username=#{username}
+ 	 	</update>
+ 	 	
+ 	 	
+ 	 	
+ 	 	
+ 	 
  	 	
  	 	
 </mapper>

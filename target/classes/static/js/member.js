@@ -2,17 +2,20 @@
  * member.js
  */
 //아이디 중복확인
-//username을 param
- //   	var idck = 0;
- //   $(function() {
-	 
-//	 $("#idck").click(function() {
- //)};
- //)};
     /* end */	
-    var idck = 0;
+    let idck = 0;
+    let oldVal ='';
+   	
+  
    function idcheck(){
-	  $username =  $("#username").val(); 		
+	  if ($.trim($('#username').val()) == '') {//trim()함수는 양쪽 공백을 제거
+       alert('아이디를 입력하세요!');
+       $('#username').focus();
+       return false;
+    }
+   
+    
+	  $username =  $("#username").val(); 		//username을 param
       $.ajax({//$는 jQuery란 뜻. $.ajax 뜻은 jQuery 내의 비동기식 아작스 실행
           type:"POST",//데이터를 서버로 보내는 방법
          	//url:"./member/member_idcheck.jsp",    
@@ -28,26 +31,47 @@
             	return false;
   	     
         	  }else{//중복 아이디가 아니면
-        	  
-        	  alert("사용 가능한 아이디 입니다");
-        		$("#password").val('').focus();
-        		//아이디가 중복하지 않으면  idck = 1 
-        		
-                   idck = 1;
+        	 alert("사용 가능한 아이디 입니다");
+    			$("#nickname").focus(); 
+        		//아이디가 중복하지 않으면  idck = 1 	
+                 idck = 1;             	
+             	 oldVal=$.trim($('#username').val());
         	  }  	
         	      	  
           },
+          
+          
       	  error:function(){//비동기식 아작스로 서버디비 데이터를
       		  //못가져와서 에러가 발생했을 때 호출되는 함수이다.
       		  alert("data error 서버가 연결되어 있지 않습니다");
       	  }
         });//$.ajax
+        
+             
+   			$("#username").on("propertychange change keyup paste input", function() {  //다섯가지의 이벤트가 모두 리슨 상태
+  			let currentVal = $(this).val();  		
+  			if(currentVal == oldVal) {
+				return;
+   		 		    
+  		 	}
+ 		
+  			oldVal = currentVal;  			
+  			idck = 0;
+			});
+    
+                 
 	}
 
 function join_check(){	
 	  if ($.trim($('#username').val()) == '') {//trim()함수는 양쪽 공백을 제거
        alert('아이디를 입력하세요!');
        $('#username').val('').focus();
+       return false;
+    }
+    
+ 	if ($.trim($('#nickname').val()) == '') {//trim()함수는 양쪽 공백을 제거
+       alert('닉네임을 입력하세요!');
+       $('#nickname').val('').focus();
        return false;
     }
 
@@ -64,31 +88,46 @@ function join_check(){
        return false;
     }
     
-    if ($.trim($('#mPhone').val()) == '') {
+     if ($.trim($('#pwCheck').val()) != $.trim($('#password').val())) {
+       alert('비밀번호와 비밀번호확인에 입력한 비밀번호가 서로 다릅니다!');
+       $('#pwCheck').val('').focus();
+       return false;
+    }
+    
+    
+    if ($.trim($('#mphone').val()) == '') {
        alert('휴대폰 번호를 입력하세요!');
-       $('#mPhone').val('').focus();
+       $('#mphone').val('').focus();
        return false;
     }
     
-    if ($.trim($('#mEmail').val()) == '') {
+    if ($.trim($('#memail').val()) == '') {
        alert('이메일을 입력하세요!');
-       $('#mEmail').val('').focus();
+       $('#memail').val('').focus();
        return false;
     }
     
-    if ($.trim($('input[name=mGender]:radio:checked').val()) == '') {
+    if ($.trim($('input[name=mgender]:radio:checked').val()) == '') {
         alert('성별을 선택하세요');
-        $('#mEmail').val('').focus();
+        $('#memail').val('').focus();
         return false;
      }
      
     if(confirm("회원가입을 하시겠습니까?")){
     if(idck==0){
           alert('아이디 중복체크를 해주세요');
+           $('#username').focus();
           return false;
-      }else{
-      alert("회원가입을 축하합니다");
+      }
+
+	 if($.trim($('#username').val()) != validUsername){
+		alert('아이디 중복체크를 다시 해주세요');
+		 $('#username').val('').focus();
+          return false;
+		}else{
+  
       $("#frm").submit();
+      alert("회원가입을 축하합니다");
       }
      
 }

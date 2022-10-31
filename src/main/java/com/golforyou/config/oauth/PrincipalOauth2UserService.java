@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
-import com.golforyou.vo.GolforyouMemberNEW;
+import com.golforyou.vo.MemberVO;
 
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
@@ -30,29 +30,30 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		//userRequest 정보 > loadUser함수 호출 > 구글로부터 회원 프로필 받아줌. 
 		System.out.println("getAttributes:"+super.loadUser(userRequest).getAttributes());
 	
-		String mProvider = userRequest.getClientRegistration().getClientId();//google
-		String mProviderid = oauth2User.getAttribute("sub");
+		String mprovider = userRequest.getClientRegistration().getClientId();//google
+		String mproviderid = oauth2User.getAttribute("sub");
 		String username = oauth2User.getAttribute("name"); //mProvider+"_"+mProviderid; //google_***
 		String password = bCryptPasswordEncoder.encode("golforyou");
-		String mEmail = oauth2User.getAttribute("email");
-		String mRole = "ROLE_USER";
+		String memail = oauth2User.getAttribute("email");
+		String mrole = "ROLE_USER";
 		
-		GolforyouMemberNEW userEntity = userRepository.findByUsername(username);
+		MemberVO userEntity = userRepository.findByUsername(username);
 		System.out.println("username: "+username);
-		System.out.println("mProvider: "+mProvider);
-		System.out.println("mProviderid: "+mProviderid);
+		System.out.println("mProvider: "+mprovider);
+		System.out.println("mProviderid: "+mproviderid);
 		
 		if(userEntity == null) {
 		
 			System.out.println("userEntity: "+userEntity);
 			System.out.println("구글 - 로그인이 최초입니다.");
-			userEntity = GolforyouMemberNEW.builder()
+			userEntity = MemberVO.builder()
 					.username(username)
 					.password(password)
-					.mEmail(mEmail)
-					.mRole(mRole)
-					.mProvider(mProvider)
-					.mProviderid(mProviderid)
+					.memail(memail)
+					.mrole(mrole)
+					.mstate(1)
+					.mprovider(mprovider)
+					.mprovider(mproviderid)
 					.build();
 			userRepository.save(userEntity);//회원가입!
 			

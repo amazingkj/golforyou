@@ -52,8 +52,8 @@
 <c:if test="${empty id}"> <%--id가 비어 있다면~ 로그인 전 화면 --%>
 <div class="loginForm">
 <form method="post" class="loginFormin" action="/loginOk" onsubmit="return login_check();" enctype="application/x-www-form-urlencoded" >
-<input type="text" name="username" id="username" class="textField" placeholder="아이디"><br>
-<input type="password" name="password" id="password" class="textField" placeholder="비밀번호"><br>
+<input type="text" name="username" id="username" class="textField" placeholder="아이디" autocomplete="on"><br>
+<input type="password" name="password" id="password" class="textField" placeholder="비밀번호" autocomplete="on"><br>
 <input type=submit class="submitBtn" value=로그인>
 <input type=checkbox name="remember-me" id="remember-me" class="checkbox" value=로그인상태유지><span>로그인 상태 유지</span><br>
 <br>
