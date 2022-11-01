@@ -2,12 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<script>
+alert("로그인 권한이 없습니다. 계정을 확인하고 다시 로그인해주세요.")
+location.href="/login"
+</script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title></title>
 </head>
 <body>
-<a href="/logout">[로그아웃]</a>
-<a href="/login">[로그인]</a>
 </body>
 </html>
