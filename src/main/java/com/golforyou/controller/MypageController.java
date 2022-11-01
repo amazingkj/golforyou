@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -52,17 +54,32 @@ private UserRepository userRepository;
 private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-@Autowired(required=false) @Qualifier
+@Autowired 
 private MypageService mypageService;
 	
-@Autowired(required=false)  @Qualifier
-private LoginService loginService;
-	
+
 
 	//마이페이지 메인
 	@GetMapping("mypage")
-	public String mypage() {
-		return "mypage/main"; //뷰페이지 경로 WEB-INF/views/mypage/main.jsp		
+	public ModelAndView mypage( HttpServletRequest request, HttpServletResponse response, @AuthenticationPrincipal PrincipalDetails userDetails, Authentication authentication) {
+		
+		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+		String username=principalDetails.getUsername();
+		
+		MemberVO member = userRepository.findByUsername(username);
+
+		String nickname=request.getParameter("nickname"); 
+		String maddr=request.getParameter("maddr"); 
+		String mfile=request.getParameter("mfile");
+		
+	
+			ModelAndView m=new ModelAndView("mypage/main");
+			m.addObject("m",member);//m 키이름에 em객체 저장 
+			m.addObject("nickname",nickname);
+			m.addObject("maddr",maddr);
+			m.addObject("mfile",mfile);
+			return m;
+		
 	}//mypage()
 	
 
@@ -81,6 +98,7 @@ private LoginService loginService;
 		System.out.println(memail);
 		String mphone=(String)session.getAttribute("mphone");
 		String maddr=(String)session.getAttribute("maddr");	
+		String mfile=(String)session.getAttribute("mfile");	
 		System.out.println(member.getUsername()+member.getPassword());
 		
 			ModelAndView m=new ModelAndView("mypage/profile");
@@ -88,33 +106,31 @@ private LoginService loginService;
 			m.addObject("mphone",mphone);		
 			m.addObject("memail",memail);
 			m.addObject("maddr",maddr);
+			m.addObject("mfile",mfile);
 			return m;
 		
 	}
 	
 	
-	@SuppressWarnings("null")
+	//@SuppressWarnings("null")
 	@RequestMapping("profileEdit_ok")
-	public ModelAndView profileEdit_ok(MemberVO m, RankingVO r, HttpServletRequest request, HttpServletResponse response, HttpSession session, Authentication authentication,
+	public ModelAndView profileEdit_ok(MemberVO m, RankingVO r, MultipartFile upFile, MultipartHttpServletRequest request, HttpServletResponse response, HttpSession session, Authentication authentication,
 			@AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 	
-		String saveFolder=request.getRealPath("/resources/upload");//이진파일 업로드 실제 경로를 구함.
-		int fileSize=5*1024*1024; //이진파일 업로드 최대 크기 
-		
-		MultipartRequest multi=null;//첨부한 파일을 받을 참조변수 
-		multi=new MultipartRequest(request,saveFolder,fileSize,"UTF-8");	
+		String saveFolder=request.getServletContext().getRealPath("/upload/profile");//이진파일 업로드 실제 경로를 구함.
+	
 		
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
      	System.out.println(principalDetails);
 		
      		String username=principalDetails.getUsername();
-			String nickname=multi.getParameter("nickname"); 
-			String mphone=multi.getParameter("mphone"); 
-			String memail=multi.getParameter("memail");
-			String maddr=multi.getParameter("maddr");
+			String nickname=request.getParameter("nickname"); 
+			String mphone=request.getParameter("mphone"); 
+			String memail=request.getParameter("memail");
+			String maddr=request.getParameter("maddr");
 			
-		File upFile=multi.getFile("mfile");//첨부할 파일을 가져온다. 
+		upFile=request.getFile("file");//첨부할 파일을 가져온다. 
 		if(upFile != null) {//첨부한 파일이 있는 경우
 			String fileName=upFile.getName();//첨부한 파일명을 구함
 			File delFile=new File(saveFolder+m.getMfile()); //삭제할 파일 객체 생성 
@@ -140,8 +156,8 @@ private LoginService loginService;
 			//즉 첨부파일  확장자를 구함. 
 			String refileName="profile"+year+month+date+random+"."+fileExtendsion;//새로운 파일명 저장 
 			String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;//데이터베이스에 저장될 레코드 값
-			upFile.renameTo(new File(homedir+"/"+refileName)); //생성된 폴더에 변경된 파일명으로 실제 업로드 
-			
+			File saveFile =new File(homedir+"/"+refileName); //생성된 폴더에 변경된 파일명으로 실제 업로드 
+			upFile.transferTo(saveFile);
 			m.setMfile(fileDBName);
 			
 			}else {//수정 첨부파일을 하지 않았을 때
@@ -161,7 +177,9 @@ private LoginService loginService;
 		m.setMaddr(maddr);
 		
 		System.out.println(m);
-		this.mypageService.updateMember(m);//번호를 기준으로 글쓴이, 글제목, 글내용, 첨부파일 수정 
+		int i=this.mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
+		
+		System.out.println("결과 출력"+i);
 		this.mypageService.updateProvince(r);
 
 	

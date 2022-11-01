@@ -55,14 +55,14 @@
 <div> 
 <div class="mypageMain">
 		
-			<c:if test="${!empty profile}"> 
+			<c:if test="${!empty m.mfile}"> 
 		<div class="box">
-			<img id="image_section" class="profileImg" src="/upload/member${profile}" alt=""/>
+			<img id="image_section" class="profileImg" src="/upload/profile${m.mfile}" alt=""/>
 			
 		</div>
 			</c:if>
 			
-		<c:if test="${empty profile}"> 
+		<c:if test="${empty m.mfile}"> 
 		<div class="box">
 			<img id="image_section" class="profileImg" src="/images/member/blank_profile.png" alt=""/>
 			
@@ -72,8 +72,8 @@
 		<div class="inputBoxVertical" style="width:500px"  >
 			<c:if test="${!empty id}"> 
 			<strong>${id}</strong>님 로그인을 환영합니다.<br/>
-			<c:if test="${!empty m_addr}"><strong>${id}</strong>님의 주요 이용지역은 <strong>${m_addr}</strong> 입니다.<br/></c:if>
-			<c:if test="${empty m_addr}"><a href="profile">주요 이용 지역 설정하기</a><br/></c:if>
+			<c:if test="${!empty m.maddr}"><strong>${id}</strong>님의 주요 이용지역은 <strong>${m.maddr}</strong> 입니다.<br/></c:if>
+			<c:if test="${empty m.maddr}"><a href="profile">주요 이용 지역 설정하기</a><br/></c:if>
 			 <br/>
 			<a href="profile">회원정보 변경하기</a>
 			

@@ -20,9 +20,9 @@
 <input type="password" name="pwCheck" id="pwCheck" class="textField" placeholder="비밀번호 확인"><br>
 <input type="tel" name="mphone" class="textField" id="mphone"pattern="^[0][1][0]-\d{4}-\d{4}$" placeholder="휴대폰 번호 (010-****-****)"><br>
 <input type="email" name="memail" id="memail" class="textField" placeholder="이메일"><br>
-<input type="button" class="CheckBtn" value=이메일인증>
 <input type="radio" name="mgender" id="male_gender" class="gender" value="male"><label id="male_gender">남</label>
 <input type="radio" name="mgender" id="female_gender" class="gender" value="female"><label id="female_gender">여</label>
+<br><br>
 <input type="submit" class="submitBtn" value=회원가입>
 </div>
 </form>

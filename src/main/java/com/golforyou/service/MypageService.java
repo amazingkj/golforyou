@@ -9,7 +9,7 @@ public interface MypageService {
 
 	void updateProvince(RankingVO id);
 
-	void updateMember(MemberVO m);
+	int updateMember(MemberVO m);
 
 	void withdrawal(String password);
 
