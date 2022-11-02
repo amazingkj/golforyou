@@ -173,18 +173,14 @@ private MypageService mypageService;
 		m.setMemail(memail);
 		m.setMaddr(maddr);
 		
-<<<<<<< HEAD
 		//System.out.println(m);
 		mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
 		
 		System.out.println("결과 출력");
-=======
 		System.out.println(m);
 		this.mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
 		System.out.println("test");
 	
-		
->>>>>>> origin/jiin
 		this.mypageService.updateProvince(r);
 
 	
