@@ -13,7 +13,6 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,6 +20,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,11 +91,14 @@ private MypageService mypageService;
 		String mphone=(String)session.getAttribute("mphone");
 		String maddr=(String)session.getAttribute("maddr");	
 		String mfile=(String)session.getAttribute("mfile");	
+		String nickname=(String)session.getAttribute("nickname");	
+		
 		System.out.println(member.getUsername()+member.getPassword());
 		
 			ModelAndView m=new ModelAndView("mypage/profile");
 			m.addObject("m",member);//m 키이름에 em객체 저장 
 			m.addObject("mphone",mphone);		
+			m.addObject("nickname",nickname);
 			m.addObject("memail",memail);
 			m.addObject("maddr",maddr);
 			m.addObject("mfile",mfile);
@@ -170,10 +173,18 @@ private MypageService mypageService;
 		m.setMemail(memail);
 		m.setMaddr(maddr);
 		
+<<<<<<< HEAD
 		//System.out.println(m);
 		mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
 		
 		System.out.println("결과 출력");
+=======
+		System.out.println(m);
+		this.mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
+		System.out.println("test");
+	
+		
+>>>>>>> origin/jiin
 		this.mypageService.updateProvince(r);
 
 	
@@ -243,7 +254,7 @@ private MypageService mypageService;
 		return "mypage/withdrawal"; 
 	}//withdrawal()
 	
-	 @Transactional
+	@Transactional
 	@RequestMapping("withdrawal_ok")
 	public String withdrawal_ok(MemberVO m, WithdrawalVO w, HttpServletRequest request, HttpServletResponse response, 
 			HttpSession session, RedirectAttributes redirect, Authentication authentication,

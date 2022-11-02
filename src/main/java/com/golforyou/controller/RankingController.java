@@ -28,11 +28,13 @@ public class RankingController {
 		int mem=0;		
 		mem = rankingService.memberCount(); //ranking테이블에 있는 레코드 개수(회원수)
 		
+		List<RankingVO> rankList = rankingService.getRankList();
+		
 		List<String> rankid = new ArrayList<>(); 
 		List<String> rankname = new ArrayList<String>();
 		List<Integer> rankpoint = new ArrayList<Integer>();
 		List<Integer> bestrange = new ArrayList<Integer>();
-		List<Integer> province = new ArrayList<Integer>();
+		List<String> province = new ArrayList<String>();
 		
 		rankid = rankingService.getId(); //점수순으로 정렬된 아이디
 		

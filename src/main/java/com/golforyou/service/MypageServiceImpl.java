@@ -13,13 +13,13 @@ import com.golforyou.vo.WithdrawalVO;
 public class MypageServiceImpl implements MypageService {
 
 
-	@Autowired (required = false) @Qualifier
+	@Autowired 
 	private MypageDAO mypageDao;
 	
 	
 	@Override
 	public void updateMember(MemberVO m) {
-		mypageDao.updateMember(m);
+		this.mypageDao.updateMember(m);
 	}
 
 	@Override
