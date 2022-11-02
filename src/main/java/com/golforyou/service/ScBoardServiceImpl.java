@@ -133,5 +133,11 @@ public class ScBoardServiceImpl implements ScBoardService {
 		// TODO Auto-generated method stub
 		return scBoardDAO.getImg(no);
 	}
+
+	@Override
+	public String getroleCheck(String sc_id) {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getroleCheck(sc_id);
+	}
 	
 }

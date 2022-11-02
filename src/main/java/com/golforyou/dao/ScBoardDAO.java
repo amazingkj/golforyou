@@ -49,4 +49,6 @@ public interface ScBoardDAO {
 
 	String getImg(int no);
 
+	String getroleCheck(String sc_id);
+
 }

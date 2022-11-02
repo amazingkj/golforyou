@@ -26,6 +26,7 @@
 			<tr>
 				<th>번호</th>
 				<th>아이디</th>
+				<th>닉네임</th>
 				<th>플레이날짜</th>
 			</tr>
 			
@@ -34,6 +35,7 @@
 					<tr>
 						<td>${n.s_no }
 						<td id="href"><a href="admin_insertCard_Check?admin_no=${n.s_no }&admin_id=${n.s_id}">${n.s_id }</a></td>
+						<td id="href"><a href="admin_insertCard_Check?admin_no=${n.s_no }&admin_id=${n.s_id}">${n.s_nickname }</a></td>
 						<td>${n.s_date }</td>
 					</tr>
 				</c:forEach>

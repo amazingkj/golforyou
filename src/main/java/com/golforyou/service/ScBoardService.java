@@ -47,4 +47,6 @@ public interface ScBoardService {
 
 	String getImg(int no);
 
+	String getroleCheck(String sc_id);
+
 }

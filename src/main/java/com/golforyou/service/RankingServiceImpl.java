@@ -80,5 +80,23 @@ public class RankingServiceImpl implements RankingService {
 		// TODO Auto-generated method stub
 		rankingDAO.resetScore(sc);
 	}
+
+	@Override
+	public List<RankingVO> getRankList() {
+		// TODO Auto-generated method stub
+		return rankingDAO.getRankList();
+	}
+
+	@Override
+	public List<String> getRankName() {
+		// TODO Auto-generated method stub
+		return rankingDAO.getRankName();
+	}
+
+	@Override
+	public String getNickname(String sc_id) {
+		// TODO Auto-generated method stub
+		return rankingDAO.getNickname(sc_id);
+	}
 	
 }

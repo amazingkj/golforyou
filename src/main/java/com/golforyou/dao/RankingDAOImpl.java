@@ -81,5 +81,23 @@ public class RankingDAOImpl implements RankingDAO {
 		sqlSession.update("rank_reset", sc);
 	}
 
+	@Override
+	public List<RankingVO> getRankList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rank_list");
+	}
+
+	@Override
+	public List<String> getRankName() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rank_name");
+	}
+
+	@Override
+	public String getNickname(String sc_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("rank_onenickname", sc_id);
+	}
+
 	
 }

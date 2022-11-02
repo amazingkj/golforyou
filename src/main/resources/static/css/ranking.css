@@ -44,6 +44,50 @@ li{ padding:0px; margin:0px;}
 	font-weight:bold;
 	text-align:left;
 }
+.tier-explain{
+	position:relative;
+	float:left;
+	width:700px;
+	height:30px;
+	margin-left:30px;
+	left:230px;
+	font-size:20px;
+	line-height:20px;
+	text-align:left;
+}
+.tierexplainPic{
+	position:relative;
+	width:40px;
+	height:40px;
+	top:10px;
+}
+.tier_box {
+  position: relative;
+  width: 120px;
+  padding: 6px;
+  left: 0;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;  
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 14px;
+  bottom:2px;
+}
+.tier_box:after {
+  position: relative;
+  bottom: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -10px;
+  border: solid transparent;
+  border-color: rgba(51, 51, 51, 0);
+  border-bottom-color: #333;
+  border-width: 10px;
+  pointer-events: none;
+  content: " ";
+}
 .search-box {
   position: relative;
   background-color: #56F569;
@@ -306,7 +350,7 @@ th#Listid{
 	background-color:#fff;
 	left:15px;
 }
-.rankid{
+.rankname{
 	position:relative;
 	border:none;
 	width:200px;
@@ -372,10 +416,14 @@ th#Listid{
 .rankprov{
 	display:none;
 }
+.rankid{
+	display:none;
+}
 .tierPic{
 	position:relative;
 	width:55px;
 	height:55px;
 }
+
 
 

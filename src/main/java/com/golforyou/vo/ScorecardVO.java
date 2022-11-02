@@ -6,6 +6,7 @@ import lombok.Data;
 public class ScorecardVO {
 	private int s_no;
 	private String s_id;
+	private String s_nickname;
 	private String s_location;
 	private double s_putting;
 	private int s_range;

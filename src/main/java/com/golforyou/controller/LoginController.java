@@ -197,11 +197,13 @@ public class LoginController {
 		
 		/* 회원가입과 동시에 ranking에 추가 */
 		String r_id = member.getUsername();
+		String r_nickname = member.getNickname();
 		System.out.println("r_id : "+r_id);
 
 		RankingVO r = new RankingVO();
 		
 		r.setR_id(r_id);
+		r.setR_nickname(r_nickname);
 
 		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
 		/* 회원가입과 동시에 ranking에 추가 끝 */

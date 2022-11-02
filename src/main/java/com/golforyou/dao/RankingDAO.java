@@ -29,4 +29,10 @@ public interface RankingDAO {
 
 	void resetScore(ScorecardVO sc);
 
+	List<RankingVO> getRankList();
+
+	List<String> getRankName();
+
+	String getNickname(String sc_id);
+
 }
