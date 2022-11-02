@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 목록 -->
-	<select id="board_list" resultType="List">
+	<select id="board_list" resultType="board">
 	select * from (
 	select rowNum rNum, b_no, username, b_title, b_hit, b_ref, b_step,
 	b_level, b_date
@@ -32,10 +32,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				b_cont like #{find_name}
 			</if>
 		</where>
-	order by b_ref desc, b_level asc)) where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+	order by b_ref desc, b_level asc)) where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
 	<!-- &gt;=은 >=의 뜻, &lt;는 <=의 뜻 -->
 	</select>
 	
-	
-	
+	<!-- 검색 전후 레코드 개수 -->
+    <select id="board_row" parameterType="board" 
+    resultType="int">
+     select count(b_no) from board
+     <where>
+     <if test="find_field == ''">
+      <!-- 검색조건이 없어서 총레코드 개수 -->
+     </if>
+     <if test="find_field == 'b_title'">
+      <!-- 검색 조건이 제목인 경우 -->
+      board_title like #{find_name} <!-- like는 오라클 검색
+      연산자 -->
+     </if>
+     <if test="find_field == 'b_cont'">
+      board_cont like #{find_name}
+     </if>
+     </where>
+    </select>
+    
+    <!-- 조회수 증가 -->
+    <update id="board_hit" parameterType="int">
+     update golforboard set b_hit=b_hit+1 
+     where b_no=#{b_no}
+    </update>
+    
+    <!-- 내용보기 -->
+    <select id="board_co" resultType="board">
+     select * from golforboard where b_no=#{b_no}
+    </select>
+    
+    <!-- 답변 레벨 증가 -->
+    <update id="LevelUp" parameterType="board">
+     update golforboard set b_level=b_level+1
+     where b_ref=#{b_ref} 
+     and b_level>#{b_level}
+    </update>
+    
+    <!-- 답변 저장 -->
+    <insert id="reply_in2">
+     insert into golforboard (b_no,username,b_title,
+     b_cont,b_ref,b_step,b_level,
+     b_date) values(b_no_seq.nextval,#{username},
+     #{b_title},#{b_cont},#{b_ref},
+     #{b_step}+1,#{b_level}+1,sysdate)
+    </insert>
+    
+    <!-- 게시판 수정 -->
+    <update id="board_up" parameterType="board">
+     update golforboard set username=#{username},
+     b_title=#{b_title},b_cont=#{b_cont}
+     where b_no=#{b_no}
+    </update>
+    
+    <!-- 게시판 삭제 -->
+    <delete id="board_del" parameterType="int">
+     delete from golforboard where b_no=#{b_no}
+    </delete>
+
 </mapper>

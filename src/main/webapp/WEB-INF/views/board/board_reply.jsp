@@ -90,7 +90,7 @@
 
 	 	/**
 	 	* 이미지 파일 업로드
-	 	*/
+	 	
 	 	function uploadSummernoteImageFile(file, editor) {
 	 		data = new FormData();
 	 		data.append("file", file);
@@ -106,7 +106,7 @@
 	 			}
 	 		});
 	 	}
-	 	
+	 	*/
 	 	
 	 	$("div.note-editable").on('drop',function(e){
 	         for(i=0; i< e.originalEvent.dataTransfer.files.length; i++){
@@ -123,7 +123,7 @@
  
  <%--유효성 검사--%>
      
- <title>게시판 글쓰기</title>
+ <title></title>
  </head>
  <div class="clear"></div>
  <body class="tablebody">
@@ -135,11 +135,11 @@
      <%--이름 - 로그인해서 입력하면 그냥 입력되게 히든으로 ! 처리하기 --%>
   	 <tr><td><input type="hidden" name="username" id="username" value="${id}"/>
   	 <%--답변 히든값 --%>
-    <input type="hidden" name="b_ref" value="${bc.b_ref}" />
+    <input type="hidden" name="b_ref" value="${b.b_ref}" />
      <%-- 원본글과 답변글을 묶어주는 그룹번호 --%>
-     <input type="hidden" name="b_step" value="${bc.b_step}" />
+     <input type="hidden" name="b_step" value="${b.b_step}" />
   	 <%--원본글이면 0,첫번째 답변글이면 1 즉 원본글과 답변글을 구분하는 번호값이면서 몇번째 답변글인가를 알려준다. --%>
-     <input type="hidden" name="b_level" value="${bc.b_level}" />
+     <input type="hidden" name="b_level" value="${b.b_level}" />
      <%--답변글 정렬순서 --%>
      <input type="hidden" name="page" value="${page}" /></td></tr>
  	 <%--페이징 즉 쪽나누기에서 책갈피 기능때문에 페이지번호를 히든으로 전달함.--%>
@@ -148,7 +148,7 @@
   	 
      <tr>
       <td>제목</td>
-      <td class="bottom_line"><input name="b_title" size="100%" class="textField" maxlength="100" value="Re:${bc.b_title}" ></td>
+      <td class="bottom_line"><input name="b_title" size="100%" class="textField" maxlength="100" value="Re:${b.b_title}" ></td>
    
     
      <tr>

@@ -89,7 +89,7 @@ public class BoardController {
 	//이진파일 업로드 하는 방법 3가지 이상이 있다고 함. 다른 방법도 찾아보기 
 	@RequestMapping("/board_write_ok")
 	public String board_write_ok(BoardVO b, HttpServletRequest request) throws Exception{
-		String saveFolder=request.getRealPath("/upload"); 
+		String saveFolder=request.getServletContext().getRealPath("/upload/board"); 
 		//이진 파일 업로드 서버 경로 => 톰캣 WAS서버에 의해서 변경된 실제 경로 하위의 upload폴더
 		
 		int fileSize=5*1024*1024; //이진파일 업로드 최대 크기 
@@ -97,7 +97,7 @@ public class BoardController {
 		
 		multi=new MultipartRequest(request,saveFolder,fileSize,"UTF-8");
 		
-		String id=multi.getParameter("username");
+		String id=multi.getParameter("nickname");
 		String b_title=multi.getParameter("b_title");
 		String b_pwd=multi.getParameter("b_pwd");
 		String b_cont=multi.getParameter("b_cont");
@@ -237,7 +237,7 @@ public class BoardController {
 			throws Exception{
 				response.setContentType("text/html;charset=UTF-8");//브라우저에 출력되는 문자와 태그 언어 코딩타입을 설정
 				PrintWriter out=response.getWriter();
-				String saveFolder=request.getRealPath("/upload");//이진파일 업로드 실제 경로를 구함.
+				String saveFolder=request.getRealPath("/upload/board");//이진파일 업로드 실제 경로를 구함.
 				int fileSize=5*1024*1024; //이진파일 업로드 최대 크기 
 				
 				MultipartRequest multi=null;//첨부한 파일을 받을 참조변수 
@@ -321,7 +321,7 @@ public class BoardController {
 			throws Exception{
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out=response.getWriter();
-				String up=request.getRealPath("/upload");
+				String up=request.getRealPath("/upload/board");
 				
 				BoardVO db_pwd=this.boardService.getBoardCont2(b_no);
 				if(!db_pwd.getB_pwd().equals(del_pwd)) {

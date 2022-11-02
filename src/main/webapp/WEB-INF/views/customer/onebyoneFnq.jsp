@@ -97,7 +97,7 @@ li {
 
 		</ul>
 
-		<form id="qna_form" action="#" method=post>
+		<form id="qna_form" action="customer_fnq" method=post>
 
 			<dl class=consultQForm>
 
@@ -105,10 +105,10 @@ li {
 				<dd>
 					<select id="consult_type" name="consult_type" title="consult_type">
 						<option value>문의유형을 선택해 주세요</option>
-						<option value="101">골프장 예약</option>
-						<option value="102">수강</option>
-						<option value="103">결제</option>
-						<option value="104">환불</option>
+						<option value="골프장 예약">골프장 예약</option>
+						<option value="수강">수강</option>
+						<option value="결제">결제</option>
+						<option value="환불">환불</option>
 					</select>
 				</dd>
 				<dt>제목</dt>
@@ -146,7 +146,7 @@ li {
 				<dd>
 					<input type="email" name="question_email" id="question_email"
 						class="textField" placeholder="aaa@google.net"> <span>*이메일로
-						답변을 드립니다.</span>
+						답변을 드립니다. 정확한 이메일을 입력해주세요</span>
 				</dd>
 				<div class="question_title"></div>
 				<br>

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.golforyou.dao.BoardDAO;
+import com.golforyou.util.Criteria;
+import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
 
 @Service
@@ -20,7 +22,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 	@Override
 	public List<BoardVO> getboardList(BoardVO b) {
-		
 		return this.boardDAO.getboardList(b);
 	}
 
@@ -57,6 +58,29 @@ public class BoardServiceImpl implements BoardService {
 		this.boardDAO.delboard(b_no);	
 		
 	}
+//댓글
+	@Override
+	public void insertReply(BoardReplyVO vo) {
+		this.boardDAO.insertReply(vo);
+		
+	}
 
+	@Override
+	public List<BoardReplyVO> replyList(int b_no) {
+		return this.boardDAO.replyList(b_no);
+		
+	}
+
+	@Override
+	public void updateReply(BoardReplyVO vo) {
+		this.boardDAO.updateReply(vo);
+		
+	}
+
+	@Override
+	public void delReply(int r_no) {
+		this.boardDAO.delReply(r_no);
+		
+	}
 
 }

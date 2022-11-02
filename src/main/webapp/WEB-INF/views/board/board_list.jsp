@@ -102,7 +102,7 @@ function Change(idx){
 	<div class="fl" >
 		
 			<c:if test="${(!empty find_field) && (!empty find_name)}"> <%--검색이후 --%>
-    		<input type="button" name="list" value="목록" onclick="location='board_list.do?page=${page}';" />
+    		<input type="button" name="list" value="목록" onclick="location='board_list?page=${page}';" />
      		</c:if>
 
 			<select id="search_target" name="find_field">

@@ -2,7 +2,6 @@ create table golforboard( --테이블 생성
   b_no number(38) primary key --게시물 번호
  ,username varchar2(100) not null --글쓴이
  ,b_title varchar2(200) not null --글제목
- ,password varchar2(50) not null --비번
  ,b_cont varchar2(4000) not null --글내용
  ,b_file varchar2(200) --첨부파일명
  ,b_hit number(38) default 0 --조회수
@@ -14,15 +13,41 @@ create table golforboard( --테이블 생성
 );
 
 alter table golforboard add constraint golforboard_username_fk
-foreign key(username) references golforyou_memberNew(username);
+foreign key(username) references MemberVO(username);
 
 drop table golforboard;
 
 
-create sequence board_no_seq
+create sequence b_no_seq
 start with 1 --1부터 시작
 increment by 1 --1씩 증가
 nocache;
+
+
+create table golforboard_reply(
+r_no number(10,0), -- 댓글 번호
+b_no number(10,0) not null, -- 게시물 번호
+reply varchar2(1000) not null, -- 댓글 내용
+replyer varchar2(50) not null, -- 댓글 작성자
+replyDate date default sysdate, -- 작성일
+updateDate date default sysdate -- 수정일
+);
+
+-- 댓글은 게시물 1개당 여러개 등록 가능.
+create sequence seq_reply;
+-- r_no 시퀸스 처리 예정.
+alter table golforboard_reply add constraint pk_reply primary key(r_no);
+--테이블 생성후에 제약조건을 추가, pk는 r_no.
+alter table golforboard_reply add constraint fk_reply_board
+foreign key (b_no) references golforboard(b_no);
+-- 외래키로 golforboard(b_no) 사용.
+commit;
+
+
+
+
+
+
 
 
 --golforboard mvc 계층형 게시판 

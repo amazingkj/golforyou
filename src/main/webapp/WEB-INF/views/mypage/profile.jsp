@@ -133,14 +133,14 @@ $('.edit-wrapper .tab').click(function(){
 	<form name="profile" method="post" action="profileEdit_ok" onsubmit="return profile_check();"  enctype="multipart/form-data">
 	<div class="profileForm">
 		
-		<c:if test="${!empty profile}"> 
+		<c:if test="${!empty m.mfile}"> 
 		<div class="box">
-			<img id="image_section" class="profileImg" src="/upload/member${profile}" alt=""/>
+			<img id="image_section" class="profileImg" src="/upload/profile${m.mfile}" alt=""/>
 			
 		</div>
 			</c:if>
 			
-		<c:if test="${empty profile}"> 
+	<c:if test="${empty m.mfile}"> 
 		<div class="box">
 			<img id="image_section" class="profileImg" src="/images/member/blank_profile.png" alt=""/>
 			
@@ -149,7 +149,7 @@ $('.edit-wrapper .tab').click(function(){
 		
 		
 		<div style="align:center">
-			<span>프로필 사진 변경</span><br><input id="imgFile" type="file" name="mfile" accept=".jpg,.png, .jpeg, .gif" value=""/><br>
+			<span>프로필 사진 변경</span><br><input id="imgFile" type="file" name="file" accept=".jpg,.png, .jpeg, .gif" value=""/><br>
 	 		<%--<button class="del-button" onclick="delImg()">기본 프로필 사진으로 돌아가기</button> --%>
 	 	
 	 	</div>

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.golforyou.service.LoginService;
+import com.golforyou.vo.CustomerVO;
 import com.golforyou.vo.MemberVO;
 
 @Service
@@ -81,18 +82,20 @@ public class MailService {
 		
 		makeRandomNumber();
 		int mailkey=authNumber;
-		
+
 		String toMail = member.getMemail();
 		
 		System.out.println("tomail: "+toMail);
 		String title = "GolForYou 가입 인증 이메일 입니다."; // 이메일 제목 
 		String content = 
 				"<h1>GolForYou에 가입해주셔서 감사합니다.<h1>" + 	//html 형식으로 작성 ! 
-                "<br><br>" + 
+               "<br><br>" + 
 			    "<br>아래 [이메일 인증 확인]을 눌러 회원가입을 완료하세요" + 
 			    "<br><a href='http://localhost:8091/join/registerEmail?memail=" + 
 			    member.getMemail()+"&mailkey="+mailkey+"' target='_black'>이메일 인증 확인</a>";
 		
+		
+	
 		member.setMailkey(mailkey);
 		member.setMemail(toMail);
 		loginService.updateMailKey(member); //update mailkey in DB
@@ -101,12 +104,32 @@ public class MailService {
 		return Integer.toString(authNumber);
 	}
 
+	
+	
+	 //1:1문의 
+	public void OnebyOneFnqEmail(CustomerVO ct) {
+
+		String toMail = "jiin724@gmail.com"; //지정받은 담당자, 보통의 경우 info 메일
+
+		String title = "[고객문의] "+ct.getQuestion_title(); // 이메일 제목 
+		String content ="문의 내용 : "+ct.getQuestion_contents()+"<br>"+
+						"문의 유형 : "+ct.getConsult_type()+"<br>"+
+						"고객 번호 : "+ct.getPhoneNum()+"<br>"+
+						"답변할 고객 메일 : "+ct.getQuestion_email()+"<br>";
+						
+		mailSend(setFrom, toMail, title, content);
+		
+	}
+
+
 	public MailService(JavaMailSender jSender)throws MessagingException{
 		this.mailSender = jSender;
 		message = jSender.createMimeMessage();
 		helper = new MimeMessageHelper(message,true,"utf-8");
 		
 	}
+	
+	
     
     public void mailSend(String setFrom, String toMail, String title, String content) {
     	        
