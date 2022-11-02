@@ -15,7 +15,7 @@
  	 	
  	 	<!-- 회원 정보 수정 -->
  	 	<update id="update_member">
- 	 		update MemberVO set mphone=#{mphone}, nickname=#{nickname}, maddr=#{maddr}, memail=#{memail}, mfile=#{mfile} where username=#{username,jdbcType=VARCHAR}
+ 	 		update MemberVO set mphone=#{mphone}, nickname=#{nickname}, maddr=#{maddr}, memail=#{memail}, mfile=#{mfile} where username=#{username}
  	 	</update>
  	 	
  	 	<update id="update_province">

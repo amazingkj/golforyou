@@ -2,7 +2,6 @@ package com.golforyou.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.golforyou.vo.MemberVO;
@@ -12,13 +11,12 @@ import com.golforyou.vo.WithdrawalVO;
 @Repository
 public class MypageDAOImpl implements MypageDAO{
 
-	@Autowired (required = false)@Qualifier
+	@Autowired 
 	private SqlSession sqlSession;
 	
 	@Override
-	public int updateMember(MemberVO m) {
-		return this.sqlSession.update("update_member", m);
-		
+	public void updateMember(MemberVO m) {
+		this.sqlSession.update("update_member",m);
 	}
 
 	@Override

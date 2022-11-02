@@ -130,7 +130,7 @@ $('.edit-wrapper .tab').click(function(){
 
 
 <div class="mypage">
-	<form name="profile" method="post" action="profileEdit_ok" onsubmit="return profile_check();"  enctype="multipart/form-data">
+	<form name="profile" method="post" action="profileEdit_ok" enctype="multipart/form-data">
 	<div class="profileForm">
 		
 		<c:if test="${!empty m.mfile}"> 
