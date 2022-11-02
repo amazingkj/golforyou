@@ -15,18 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-import org.apache.jasper.tagplugins.jstl.core.Redirect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,14 +30,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
-import com.golforyou.service.LoginService;
 import com.golforyou.service.MypageService;
-
 import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.WithdrawalVO;
-//import com.golforyou.vo.RankingVO;
-import com.oreilly.servlet.MultipartRequest;
 
 
 @Controller
@@ -134,9 +126,11 @@ private MypageService mypageService;
 		if(upFile != null) {//첨부한 파일이 있는 경우
 			String fileName=upFile.getName();//첨부한 파일명을 구함
 			File delFile=new File(saveFolder+m.getMfile()); //삭제할 파일 객체 생성 
+			
 			if(delFile.exists()) {//삭제할 파일이 존재하면 
 				delFile.delete();//기존 첨부파일 삭제 
 			}
+			
 			Calendar cal=Calendar.getInstance();
 			int year=cal.get(Calendar.YEAR);
 			int month=cal.get(Calendar.MONTH)+1;
@@ -160,15 +154,15 @@ private MypageService mypageService;
 			upFile.transferTo(saveFile);
 			m.setMfile(fileDBName);
 			
-			}else {//수정 첨부파일을 하지 않았을 때
-				String fileDBName="";
-				if(m.getMfile()!=null) {
-					m.setMfile(m.getMfile());
-												
-				}else {
-					m.setMfile(fileDBName);
-				}
-			}//수정 첨부파일을 첨부한 경우와 안한 경우 분기 조건문
+		}else {//수정 첨부파일을 하지 않았을 때
+			String fileDBName="";
+			if(m.getMfile()!=null) {
+				m.setMfile(m.getMfile());
+											
+			}else {
+				m.setMfile(fileDBName);
+			}
+		}//수정 첨부파일을 첨부한 경우와 안한 경우 분기 조건문
 		
 		m.setUsername(username);
 		m.setNickname(nickname); 
@@ -176,10 +170,10 @@ private MypageService mypageService;
 		m.setMemail(memail);
 		m.setMaddr(maddr);
 		
-		System.out.println(m);
-		int i=this.mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
+		//System.out.println(m);
+		mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
 		
-		System.out.println("결과 출력"+i);
+		System.out.println("결과 출력");
 		this.mypageService.updateProvince(r);
 
 	

@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 랭킹 수2 -->
 	<select id="rank_count2" resultType="int">
-		select count(*) from ranking where r_province=#{r_province}
+		select count(*) from membervo where maddr=#{r_province}
 	</select>
 	
 	<!-- 랭킹 점수순으로 id정렬 -->

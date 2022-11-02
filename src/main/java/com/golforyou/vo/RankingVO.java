@@ -8,9 +8,6 @@ public class RankingVO {
 	private String r_id;
 	private String r_nickname;
 	private int r_sum;
-	private double r_avg;
-	private double r_putting;
 	private int r_maxrange;
-	private double r_avgrange;
 	private String r_province;
 }

@@ -18,8 +18,8 @@ public class MypageServiceImpl implements MypageService {
 	
 	
 	@Override
-	public int updateMember(MemberVO m) {
-		return this.mypageDao.updateMember(m);
+	public void updateMember(MemberVO m) {
+		mypageDao.updateMember(m);
 	}
 
 	@Override

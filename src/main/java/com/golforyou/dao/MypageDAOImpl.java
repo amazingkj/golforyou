@@ -12,12 +12,12 @@ import com.golforyou.vo.WithdrawalVO;
 @Repository
 public class MypageDAOImpl implements MypageDAO{
 
-	@Autowired (required = false)@Qualifier
+	@Autowired (required = false)
 	private SqlSession sqlSession;
 	
 	@Override
-	public int updateMember(MemberVO m) {
-		return this.sqlSession.update("update_member", m);
+	public void updateMember(MemberVO m) {
+		sqlSession.update("update_member", m);
 		
 	}
 
