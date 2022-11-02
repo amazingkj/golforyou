@@ -41,8 +41,9 @@ public class IndivrankController {
 		
 		PrintWriter out = response.getWriter();
 		
-		String id = request.getParameter("rId");
-		if(id == null) { //ranking페이지에서 타고 온 경우가 아닌 경우
+		String rid = request.getParameter("rId");
+		String nickname = request.getParameter("rNickname");
+		if(rid == null) { //ranking페이지에서 타고 온 경우가 아닌 경우
 			HttpSession session = request.getSession();
 			if((String)session.getAttribute("id") == null) { //로그인이 안되어있는 경우
 				out.println("<script>");
@@ -50,22 +51,22 @@ public class IndivrankController {
 				out.println("location='login'");
 				out.println("</script>");
 			}else { //로그인되어있으면
-				id = (String)session.getAttribute("id");
+				rid = (String)session.getAttribute("id");			
 			}			
 		} 
-		if(id != null) { //ranking페이지에서 타고오거나 로그인한 경우에만 들어갈수있음
-			sv.setS_id(id);
+		if(rid != null) { //ranking페이지에서 타고오거나 로그인한 경우에만 들어갈수있음
+			sv.setS_id(rid);
 			
 			String rPoint = request.getParameter("rPoint_"); //ranking페이지에서 받아온 포인트값
 			if(rPoint == null) { //ranking페이지에서 타고온 경우가 아니라면
-				rPoint = Integer.toString(indivService.getPoint(id)); //로그인한 회원의 정보에서 포인트값 가져옴				
+				rPoint = Integer.toString(indivService.getPoint(rid)); //로그인한 회원의 정보에서 포인트값 가져옴				
 			}
 			String rankno = request.getParameter("rankno"); //순위
 			
-			int getCount = rankingService.playCount(id); //골프 플레이 횟수
+			int getCount = rankingService.playCount(rid); //골프 플레이 횟수
 
-			List<Integer> s_obandhazard = indivService.getOBandHazard(id); //OB+Hazard값
-			List<Integer> s_strike = indivService.getStrike(id); //타수
+			List<Integer> s_obandhazard = indivService.getOBandHazard(rid); //OB+Hazard값
+			List<Integer> s_strike = indivService.getStrike(rid); //타수
 			int obandhazard = 0;
 			int strike = 0;
 			
@@ -79,10 +80,10 @@ public class IndivrankController {
 			if(rankno == null) { //ranking페이지에서 타고온 경우가 아닌 경우 순위를 구해야함
 				int num = 1; //순위 초기값
 				
-				List<String> row_id = indivService.getRowNum(id); //점수 기준으로 테이블에서 아이디가 몇번째인가
+				List<String> row_id = indivService.getRowNum(rid); //점수 기준으로 테이블에서 아이디가 몇번째인가
 				
 				while(num == getCount) {
-					if(row_id.get(num).equals(id)) { //num번째 아이디와 로그인한 아이디가 일치하는지 여부
+					if(row_id.get(num).equals(rid)) { //num번째 아이디와 로그인한 아이디가 일치하는지 여부
 						break; //일치하면 while문 중단
 					}
 					++num; //돌때마다 순위 하나씩 증가
@@ -90,7 +91,7 @@ public class IndivrankController {
 				rankno = num+""; //num값이 순위
 			}
 			List<Integer> put = new ArrayList<>(); //퍼팅
-			put = indivService.getPutting(id);
+			put = indivService.getPutting(rid);
 			int sumPutting = 0;
 			for(int i=0 ; i<getCount ; ++i) {
 				if(put.get(i) != null) {
@@ -149,11 +150,11 @@ public class IndivrankController {
 			List<Integer> viewRange = new ArrayList<>();
 			List<Integer> noviewNo = new ArrayList<>();
 			for(int i=0 ; i<getCount ; ++i) {
-				viewDate = indivService.getDate(id);
-				viewLocation = indivService.getLocation(id);
-				viewSumScore = indivService.getSumScore(id);
-				viewRange = indivService.getRange(id);
-				noviewNo = indivService.getNo(id);
+				viewDate = indivService.getDate(rid);
+				viewLocation = indivService.getLocation(rid);
+				viewSumScore = indivService.getSumScore(rid);
+				viewRange = indivService.getRange(rid);
+				noviewNo = indivService.getNo(rid);
 				
 				im.addObject("viewDate", viewDate);
 				im.addObject("viewLocation", viewLocation);
@@ -162,7 +163,7 @@ public class IndivrankController {
 				im.addObject("noviewNo",noviewNo);
 			}
 			
-			List<Integer> pointList = indivService.getSumPoint(id);
+			List<Integer> pointList = indivService.getSumPoint(rid);
 			int point = 0;
 			for(int i=0 ; i<pointList.size() ; ++i) {
 				if(pointList.get(i) != null) {
@@ -195,7 +196,7 @@ public class IndivrankController {
 				}
 			}			
 			
-			im.addObject("id", id);
+			im.addObject("rid", rid);
 			im.addObject("rPoint", rPoint);
 			im.addObject("rankno", rankno);
 			im.addObject("getCount", getCount);

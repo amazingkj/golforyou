@@ -11,6 +11,7 @@ import com.golforyou.vo.WithdrawalVO;
 @Repository
 public class MypageDAOImpl implements MypageDAO{
 
+
 	@Autowired 
 	private SqlSession sqlSession;
 	

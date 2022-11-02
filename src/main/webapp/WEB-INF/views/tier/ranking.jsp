@@ -22,7 +22,14 @@
 	<hr style="padding:0.5px; background-color:grey; width:1300px; margin-left:	4%; border:0; margin-top:20px;">
 	<div class="rank_title" id="rank_tag">
 		<form method="get" action="ranking">
-			
+		<div class="tier-explain">
+			<img class='tierexplainPic' alt='다이아' src='/images/t_b.png' onmouseover="mouse_over_bronze()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<img class='tierexplainPic' alt='다이아' src='/images/t_s.png' onmouseover="mouse_over_silver()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<img class='tierexplainPic' alt='다이아' src='/images/t_g.png' onmouseover="mouse_over_gold()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<img class='tierexplainPic' alt='다이아' src='/images/t_p.png' onmouseover="mouse_over_platinum()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<img class='tierexplainPic' alt='다이아' src='/images/t_d.png' onmouseover="mouse_over_diamond()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+			<input type="text" class="tier_box" id="tier_box" name="tier_box" readonly value="티어">
+		</div>
 		<div class="search-box">
 			<input type="text" name="searchtxt" class="search-txt" onkeyup="press();" id="search_txt" placeholder="아이디 입력">
 			
@@ -88,7 +95,7 @@
 						<option value="select_unrank">티어없음</option>
 					</select>
 				</th>
-				<th width="25%" id="Listid">아이디</th>
+				<th width="25%" id="Listid">닉네임</th>
 				<th width="14%" id="Listpoint">점수</th>
 				<th width="15%" id="Listdriver">최대비거리</th>				
 				<th width="17%" id="Listcard">플레이 횟수</th>
@@ -117,11 +124,11 @@
 			var divranktier = $("<div></div>").addClass("ranktier").attr('id',"rTier_"+(divCount+1));
 			$("#rProfile_"+(divCount+1)).after(divranktier); //ranktier클래스 div 생성
 						
-			var divrankid = $("<div></div>").addClass("rankid").attr('id',"rId"+(divCount+1));
-			$("#rTier_"+(divCount+1)).after(divrankid); //rankid클래스 div 생성
+			var divrankname = $("<div></div>").addClass("rankname").attr('id',"rNickname_"+(divCount+1));
+			$("#rTier_"+(divCount+1)).after(divrankname); //rankid클래스 div 생성
 			
 			var divrankpoint = $("<div></div>").addClass("rankpoint").attr('id',"rPoint_"+(divCount+1));
-			$("#rId"+(divCount+1)).after(divrankpoint); //rankpoint클래스 div 생성
+			$("#rNickname_"+(divCount+1)).after(divrankpoint); //rankpoint클래스 div 생성
 			
 			var divrankdriver = $("<div></div>").addClass("rankdriver").attr('id',"rDriver_"+(divCount+1));
 			$("#rPoint_"+(divCount+1)).after(divrankdriver); //rankdriver클래스 div 생성
@@ -131,6 +138,9 @@
 			
 			var divrankprov = $("<div></div>").addClass("rankprov").attr('id',"rProv_"+(divCount+1));
 			$("#rCard_"+(divCount+1)).after(divrankprov); //rankprov클래스 div 생성
+			
+			var divrankid = $("<div></div>").addClass("rankid").attr('id',"rId"+(divCount+1));
+			$("#rCard_"+(divCount+1)).after(divrankid); //rankid클래스 div 생성
 			
 			
 			$("#rankpoint"+(divCount+1)).html("<span id='rPoint_"+(divCount+1)+"'></span>");
@@ -152,6 +162,7 @@
 	<script>
 	
 	$('#rId'+${i}).append("<c:out value='${rankid.get(i-1)}'/>");
+	$('#rNickname_'+${i}).append("<c:out value='${rankname.get(i-1)}'/>");
 	$('#rCard_'+${i}).append("<c:out value='${count.get(i-1)}'/>");
 	if($('#rCard_'+${i}).text() == "0"){
 		$('#rPoint_'+${i}).text("X");
@@ -342,6 +353,25 @@
 		}
 	}
 	
+	</script>
+	
+	<!-- 티어정보 마우스오버 스크립트 -->
+	<script >
+		function mouse_over_bronze(){
+			$('#tier_box').attr('value',"브론즈");
+		}
+		function mouse_over_silver(){
+			$('#tier_box').attr('value',"실버");
+		}
+		function mouse_over_gold(){
+			$('#tier_box').attr('value',"골드");
+		}
+		function mouse_over_platinum(){
+			$('#tier_box').attr('value',"플레티넘");
+		}
+		function mouse_over_diamond(){
+			$('#tier_box').attr('value',"다이아몬드");
+		}
 	</script>
 
 </article>

@@ -26,6 +26,9 @@
 		<table class="boardlist" id="board_sclist">
 			<thead>
 				<tr>
+					<c:if test="${roleCheck == 'ROLE_ADMIN' }">
+						<th></th>
+					</c:if>
 					<th width="7%">번호</th>				
 					<th width="52%">글제목</th>
 					<th width="14%">글쓴이</th>
@@ -37,6 +40,9 @@
 			<c:if test="${!empty sclist }">
 				<c:forEach var="s" items="${sclist }">
 				<tr>
+					<c:if test="${roleCheck == 'ROLE_ADMIN' }">
+						<th></th>
+					</c:if>
 					<td width="7%"><c:if test="${s.sc_step == 0 }">${s.sc_ref }</c:if></td>
 					<td width="52%">
 						<c:if test="${s.sc_step != 0 }"> <%-- 답변글일때만 실행, 들여쓰기와 답변글 이미지가 나옴 --%>
@@ -47,7 +53,7 @@
 						</c:if>
 					<a href="scorecard_cont?sc_no=${s.sc_no}&page=${page}&state=cont">${s.sc_title }</a>
 					</td>
-					<td width="14%">${s.sc_id }</td>
+					<td width="14%">${s.sc_name }</td>
 					<td width="13%">${s.sc_date }</td>
 					<td width="9%">${s.sc_hit }</td>
 				</tr>

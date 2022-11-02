@@ -129,9 +129,11 @@ private MypageService mypageService;
 		if(upFile != null) {//첨부한 파일이 있는 경우
 			String fileName=upFile.getName();//첨부한 파일명을 구함
 			File delFile=new File(saveFolder+m.getMfile()); //삭제할 파일 객체 생성 
+			
 			if(delFile.exists()) {//삭제할 파일이 존재하면 
 				delFile.delete();//기존 첨부파일 삭제 
 			}
+			
 			Calendar cal=Calendar.getInstance();
 			int year=cal.get(Calendar.YEAR);
 			int month=cal.get(Calendar.MONTH)+1;
@@ -155,15 +157,15 @@ private MypageService mypageService;
 			upFile.transferTo(saveFile);
 			m.setMfile(fileDBName);
 			
-			}else {//수정 첨부파일을 하지 않았을 때
-				String fileDBName="";
-				if(m.getMfile()!=null) {
-					m.setMfile(m.getMfile());
-												
-				}else {
-					m.setMfile(fileDBName);
-				}
-			}//수정 첨부파일을 첨부한 경우와 안한 경우 분기 조건문
+		}else {//수정 첨부파일을 하지 않았을 때
+			String fileDBName="";
+			if(m.getMfile()!=null) {
+				m.setMfile(m.getMfile());
+											
+			}else {
+				m.setMfile(fileDBName);
+			}
+		}//수정 첨부파일을 첨부한 경우와 안한 경우 분기 조건문
 		
 		m.setUsername(username);
 		m.setNickname(nickname); 
@@ -171,11 +173,14 @@ private MypageService mypageService;
 		m.setMemail(memail);
 		m.setMaddr(maddr);
 		
+		//System.out.println(m);
+		mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
+		
+		System.out.println("결과 출력");
 		System.out.println(m);
 		this.mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
 		System.out.println("test");
 	
-		
 		this.mypageService.updateProvince(r);
 
 	

@@ -49,7 +49,7 @@
 				<td>
 					<div class="sccont_menu">
 						<input type="button" class="CheckBtn_sccont" value="답변" onclick="location='scorecard_cont?sc_no=${sb.sc_no}&page=${page }&state=reply';">
-						<c:if test="${(id == sb.sc_id) || (id == 'admin') }">
+						<c:if test="${(id == sb.sc_id) || (roleCheck == 'ROLE_ADMIN') }"> <!-- 글쓴 본인이거나 관리자인 경우 -->
 							<input type="button" class="CheckBtn_sccont" value="수정" onclick="location='scorecard_cont?sc_no=${sb.sc_no}&page=${page }&state=edit';">
 							<input type="button" class="CheckBtn_sccont" value="삭제" onclick="location='scorecard_cont?sc_no=${sb.sc_no}&page=${page }&state=del';">
 						</c:if>						

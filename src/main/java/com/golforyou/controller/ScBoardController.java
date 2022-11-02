@@ -2,11 +2,9 @@ package com.golforyou.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -21,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -30,9 +27,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.golforyou.service.IndivService;
+import com.golforyou.service.RankingService;
 import com.golforyou.service.ScBoardService;
 import com.golforyou.vo.ScboardVO;
-import com.oreilly.servlet.MultipartRequest;
 
 @Controller
 public class ScBoardController {
@@ -40,6 +37,8 @@ public class ScBoardController {
 	private ScBoardService scBoardService;
 	@Autowired
 	private IndivService indivService;
+	@Autowired
+	private RankingService rankingService;
 	
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
@@ -106,6 +105,7 @@ public class ScBoardController {
 		response.setContentType("text/html;charset=utf-8");
 		
 		String sc_id = (String)session.getAttribute("id");
+		String roleCheck = scBoardService.getroleCheck(sc_id);
 		
 		page = 1;
 		if(request.getParameter("page") != null) {
@@ -122,6 +122,7 @@ public class ScBoardController {
 		String sc_cont = sb.getSc_cont().replace("\n", "<br>");
 		
 		scm.addObject("id",sc_id);
+		scm.addObject("roleCheck", roleCheck);
 		scm.addObject("page", page);
 		scm.addObject("sb",sb);
 		scm.addObject("sc_cont",sc_cont);
@@ -176,7 +177,7 @@ public class ScBoardController {
 	public String scorecard_write_ok(@ModelAttribute ScboardVO sb, MultipartFile file, RedirectAttributes redirectAttributes,  HttpServletResponse response, MultipartHttpServletRequest request, HttpSession session) throws Exception{
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		String saveFolder = request.getServletContext().getRealPath("/upload");
+		String saveFolder = request.getServletContext().getRealPath("/upload/scboard");
 		
 		int page = 1;
 		if(request.getParameter("page") != null) {
@@ -184,6 +185,7 @@ public class ScBoardController {
 		}
 		
 		String sc_id = (String)session.getAttribute("id");
+		String sc_name = rankingService.getNickname(sc_id);
 		String sc_title = request.getParameter("sc_title"); //제목
 		String sc_playdate = request.getParameter("sc_playdate"); //골프 친 날짜
 		sc_playdate = sc_playdate.replace("-", "_"); //2022-01-01을 2022_01_01로
@@ -231,6 +233,7 @@ public class ScBoardController {
 		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
 		
 		sb.setSc_id(sc_id);
+		sb.setSc_name(sc_name);
 		sb.setSc_title(sc_title);
 		sb.setSc_playdate(sc_playdate);
 		sb.setSc_cont(sc_cont);
@@ -264,6 +267,7 @@ public class ScBoardController {
 		int sc_level = Integer.parseInt(request.getParameter("sc_level"));
 		
 		String sc_id = request.getParameter("sc_id");
+		String sc_name = rankingService.getNickname(sc_id);
 		String sc_title = request.getParameter("sc_title");
 		String sc_cont = request.getParameter("sc_cont");
 		
@@ -271,6 +275,7 @@ public class ScBoardController {
 		sb.setSc_step(sc_step);
 		sb.setSc_level(sc_level);
 		sb.setSc_id(sc_id);
+		sb.setSc_name(sc_name);
 		sb.setSc_title(sc_title);
 		sb.setSc_cont(sc_cont);
 		
@@ -294,6 +299,7 @@ public class ScBoardController {
 		}
 		
 		String sc_id = request.getParameter("sc_id");
+		String sc_name = rankingService.getNickname(sc_id);
 		String sc_playdate = request.getParameter("sc_playdate");
 		sc_playdate = sc_playdate.replace("-", "_"); //2022-01-01을 2022_01_01로
 		String sc_title = request.getParameter("sc_title");
@@ -301,6 +307,7 @@ public class ScBoardController {
 		
 		sb.setSc_no(sc_no);
 		sb.setSc_id(sc_id);
+		sb.setSc_name(sc_name);
 		sb.setSc_playdate(sc_playdate);
 		sb.setSc_title(sc_title);
 		sb.setSc_cont(sc_cont);

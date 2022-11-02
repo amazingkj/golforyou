@@ -134,5 +134,11 @@ public class ScBoardDAOImpl implements ScBoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("scb_justfile", no);
 	}
+
+	@Override
+	public String getroleCheck(String sc_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member_rolecheck", sc_id);
+	}
 	
 }

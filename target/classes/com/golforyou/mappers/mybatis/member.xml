@@ -51,5 +51,8 @@
  	 		update MemberVO set password=#{password} where username=#{username}
  	 	</update>
  	 	
- 	 	
+ 	 	<!-- 아이디의 권한 체크 -->
+ 	 	<select id="member_rolecheck" resultType="String">
+ 	 		select mrole from memberVO where username=#{sc_id}
+ 	 	</select>
 </mapper>
