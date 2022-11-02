@@ -11,15 +11,7 @@ public interface RankingService {
 
 	int memberCount(String prov);
 
-	List<String> getId();
-
 	int playCount(String r_id);
-
-	List<Integer> getRankPoint();
-
-	List<Integer> getBestRange();
-
-	List<Integer> getProvince();
 
 	void updateAvgScore(ScorecardVO sc);
 

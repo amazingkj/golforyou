@@ -9,21 +9,9 @@ public interface IndivDAO {
 
 	int getPoint(String id);
 
-	List<Integer> getPutting(String id);
-
 	int monthCount(ScorecardVO sv);
 
 	List<String> getRowNum(String id);
-
-	List<String> getDate(String id);
-
-	List<Integer> getSumScore(String id);
-
-	List<String> getLocation(String id);
-
-	List<Integer> getRange(String id);
-
-	List<Integer> getSumPoint(String id);
 
 	void autoInsert(ScboardVO sb);
 

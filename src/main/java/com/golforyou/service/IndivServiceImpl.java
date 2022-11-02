@@ -22,12 +22,6 @@ public class IndivServiceImpl implements IndivService {
 	}
 
 	@Override
-	public List<Integer> getPutting(String id) {
-		// TODO Auto-generated method stub
-		return indivDAO.getPutting(id);
-	}
-
-	@Override
 	public int monthCount(ScorecardVO sv) {
 		// TODO Auto-generated method stub
 		return indivDAO.monthCount(sv);
@@ -37,36 +31,6 @@ public class IndivServiceImpl implements IndivService {
 	public List<String> getRowNum(String id) {
 		// TODO Auto-generated method stub
 		return indivDAO.getRowNum(id);
-	}
-
-	@Override
-	public List<String> getDate(String id) {
-		// TODO Auto-generated method stub
-		return indivDAO.getDate(id);
-	}
-
-	@Override
-	public List<Integer> getSumScore(String id) {
-		// TODO Auto-generated method stub
-		return indivDAO.getSumScore(id);
-	}
-
-	@Override
-	public List<String> getLocation(String id) {
-		// TODO Auto-generated method stub
-		return indivDAO.getLocation(id);
-	}
-
-	@Override
-	public List<Integer> getRange(String id) {
-		// TODO Auto-generated method stub
-		return indivDAO.getRange(id);
-	}
-
-	@Override
-	public List<Integer> getSumPoint(String id) {
-		// TODO Auto-generated method stub
-		return indivDAO.getSumPoint(id);
 	}
 
 	@Override

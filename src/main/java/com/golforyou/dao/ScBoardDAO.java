@@ -51,4 +51,6 @@ public interface ScBoardDAO {
 
 	String getroleCheck(String sc_id);
 
+	List<ScorecardVO> getScorecardList(String rid);
+
 }

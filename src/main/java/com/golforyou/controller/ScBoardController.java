@@ -121,6 +121,7 @@ public class ScBoardController {
 		System.out.println(sb.getSc_cont());
 		String sc_cont = sb.getSc_cont().replace("\n", "<br>");
 		
+		//scm.addObject("no",sc_no);
 		scm.addObject("id",sc_id);
 		scm.addObject("roleCheck", roleCheck);
 		scm.addObject("page", page);
@@ -290,7 +291,7 @@ public class ScBoardController {
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
-		String saveFolder = request.getServletContext().getRealPath("/upload"); //이진파일 업로드 실제경로
+		String saveFolder = request.getServletContext().getRealPath("/upload/scboard"); //이진파일 업로드 실제경로
 		
 		int sc_no = Integer.parseInt(request.getParameter("sc_no"));
 		int page = 1;
@@ -366,9 +367,9 @@ public class ScBoardController {
 		String strdate = indivService.makeDate(sb); //playdate를 s_sort인 int로 만들기 위해 발골하는 작업
 		strdate = strdate.replace("_", "");
 		int numdate = Integer.parseInt(strdate);
-		sb.setNumdate(numdate);
+		sb.setS_sort(numdate);
 	
-		indivService.sortUpdate(sb); //scboard s_sort 수정
+		indivService.sortUpdate(sb); //스코어카드 s_sort 수정
 		
 		return "redirect:/scorecard_cont?sc_no="+sc_no+"&page="+page+"&state=cont";
 	}

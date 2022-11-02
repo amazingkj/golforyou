@@ -80,7 +80,7 @@
 }
 
 #wrap {
-	width: 90%;
+	width: 80%;
 	margin: 0 auto;
 	top: 200px;
 	/*border: 1px solid #ccc;*/
@@ -152,19 +152,19 @@
 
 #wrap .section01 .right_side .class_name {
 	width: 100%;
-	height: 10%;
-	padding: 0px 0px 30px 0px;
-	/*border: 1px solid gray;*/
+	height: 13%;
+	/* border: 1px solid gray; */
 	font-weight: bold;
 	font-size: 1.5em;
 	float: left;
 	text-align: left;
+	box-sizing: border-box;
 }
 
 #tab1 {
 	width: 100%;
 	height: 100%;
-	/*border: 3px solid red;*/
+	/* border: 3px solid red; */
 }
 
 #wrap .section01 .right_side .tab_container {
@@ -182,65 +182,72 @@
 	color: #666;
 	font-size: 0.9em;
 	text-align: left;
-	/*border: 1px solid black;*/
+	/* border: 1px solid black; */
 	box-sizing: border-box;
 	float: left;
 }
 
 .tab_container .price .totalPrice {
+	width: 80%;
 	color: black;
-	font-size: 1.5em;
+	font-size: 1.7em;
 	font-weight: bold;
-	margin-left: 65px;
+	margin-left: 10%;
+	/* border: 1px solid red; */
 }
 
 .tab_container .price .vat {
-	font-size: 0.9em;
+	/* border: 1px solid gray; */
+	font-size: 1.1em;
 }
 
 .tab_content .class_detail {
 	width: 100%;
-	height: 130px;
-	/*border: 1px solid blue;*/
+	height: 150px;
+	/* border: 1px solid blue; */
 	box-sizing: border-box;
 	color: gray;
-	margin-left: 65px;
 }
 
 .class_detail .class_info {
-	width: 100%;
-	height: 30px;
+	width: 80%;
 	font-weight: bold;
-	/*border: 1px solid red;*/
+	font-size: 1.3em;
+	/* border: 1px solid red; */
 	box-sizing: border-box;
-	margin-left: 10px;
+	margin: 0 auto;
+	margin-bottom: 1%;
 }
 
 .class_detail .class_desc {
-	width: 100%;
-	height: 100px;
-	/*border: 1px solid green;*/
+	width: 80%;
+	height: 80%;
+	/* border: 1px solid green; */
 	box-sizing: border-box;
+	margin: 0 auto;
+	font-size: 1.1em;
 }
 
 .tab_content .class_detail2 {
-	width: 100%;
+	width: 80%;
 	height: 70px;
-	/*border: 1px solid blue;*/
+	/* border: 1px solid blue; */
 	box-sizing: border-box;
 	color: gray;
 	font-size: 0.9em;
-	padding: 5px 0px;
-	margin-bottom: 10px;
+	margin: 0 auto;
+	margin-top: 2%;
+	margin-bottom: 3%;
+	font-size: 1.1em;
 }
 
 .class_detail2  .detail_group {
-	width: 80%;
-	height: 30%;
+	width: 100%;
+	height: 32%;
 	box-sizing: border-box;
-	/*border: 1px solid red;*/
+	/* border: 1px solid red; */
 	overflow: hidden;
-	margin: 2px 0px 0px 40px;
+	margin: 0 auto;
 }
 
 .detail_group .detail_left {
@@ -248,7 +255,6 @@
 	height: 100%;
 	box-sizing: border-box;
 	float: left;
-	margin-left: 30px;
 }
 
 .detail_group .detail_right {
@@ -260,25 +266,23 @@
 }
 
 .tab_content .btn01 {
-	width: 220px;
-	height: 50px;
-	margin-left: 70px;
-	margin-bottom: 15px;
+	width: 40%;
+	height: 8%;
 	background-color: #56F569;
 	font-size: 1.2em;
 	cursor: pointer;
 	border: none;
+	margin-left: 9.5%;
 }
 
 .tab_content .btn02 {
-	width: 220px;
-	height: 50px;
-	margin-left: 10px;
-	margin-bottom: 15px;
+	width: 40%;
+	height: 8%;
 	border: 1px solid black;
 	background-color: white;
 	font-size: 1.2em;
 	cursor: pointer;
+	margin-left: 1%;
 }
 
 .tabs ul {
@@ -762,10 +766,28 @@
 	float: left;
 }
 
-real_review .realreview_search {
+.real_review .realreview_search {
 	width: 80%;
 	height: 100px;
 	/*border: 1px solid gray;*/
 	float: left;
 	font-size: 1.5em;
+}
+
+.thumbnail-img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+#wrap .section01 .right_side .class_name2 {
+	width: 100%;
+	height: 13%;
+	/* border: 1px solid gray; */
+	border-bottom: 1px solid black;
+	font-weight: bold;
+	font-size: 1.5em;
+	float: left;
+	text-align: left;
+	box-sizing: border-box;
 }

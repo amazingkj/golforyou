@@ -28,7 +28,7 @@
 				</div>
 				<div class="ind_ID">
 					<div class="ind_prof">
-						<strong id="ind_id">${rid }</strong> 님은
+						<strong id="ind_id">${rNickname }</strong> 님은
 					</div>
 					<div class="ind_prof">
 						<c:if test="${getCount < 5 }">

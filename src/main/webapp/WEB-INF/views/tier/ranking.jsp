@@ -191,7 +191,7 @@
 
 		var tier = '';
 		for(var i=1 ; i<=memberCount ; ++i){
-			$("#rank"+i).attr('onclick',"location.href='indivrank?rId="+document.getElementById("rId"+i).innerHTML+"&rPoint_="+$("#rPoint_"+i).text()+"&rankno="+$("#rankno"+i).text()+"'");	
+			$("#rank"+i).attr('onclick',"location.href='indivrank?rId="+document.getElementById("rId"+i).innerHTML+"&rPoint_="+$("#rPoint_"+i).text()+"&rankno="+$("#rankno"+i).text()+"&rNickname="+$("#rNickname_"+i).text()+"'");	
 			
 			if(parseInt($('#rCard_'+i).text()) < 5){ //5판 미만으로 플레이시 언랭 티어로 지정
 				tier = 'un_rank.png';

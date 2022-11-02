@@ -82,7 +82,7 @@
 		<div id="imginfo_wrap">
 			<div>
 			<h2>스코어카드 이미지</h2> <br>
-			<img src="/upload${sb.sc_file }" width="900" height="300" alt="스코어카드">
+			<img src="/upload/scboard${sb.sc_file }" width="900" height="300" alt="스코어카드">
 					
 			</div>
 			<br>

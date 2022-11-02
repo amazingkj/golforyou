@@ -65,16 +65,40 @@ public class IndivrankController {
 			
 			int getCount = rankingService.playCount(rid); //골프 플레이 횟수
 
-			List<Integer> s_obandhazard = indivService.getOBandHazard(rid); //OB+Hazard값
-			List<Integer> s_strike = indivService.getStrike(rid); //타수
-			int obandhazard = 0;
-			int strike = 0;
+			List<ScorecardVO> scorecardList = scBoardService.getScorecardList(rid);
 			
-			for(int i=0 ; i<s_obandhazard.size() ; ++i) {
-				if(s_obandhazard.get(i) != null) {
-					obandhazard = s_obandhazard.get(i); //지금까지 OB+Hazard 한 횟수 합
-					strike += s_strike.get(i); //지금까지 골프공을 친 횟수 합
-				}				
+			List<String> viewDate = new ArrayList<>(); //골프친날
+			List<String> viewLocation = new ArrayList<>(); //골프친장소
+			List<Double> viewSumScore = new ArrayList<>(); //점수
+			List<Integer> viewRange = new ArrayList<>(); //최대비거리
+			List<Integer> noviewNo = new ArrayList<>(); //스코어카드 올린 게시판 글번호
+			List<Double> put = new ArrayList<>(); //퍼팅
+			List<Double> pointList = new ArrayList<>();
+			int point = 0;			
+			int obandhazard = 0;
+			int strike = 0;			
+			int sumPutting = 0;
+			
+			for(int i=0 ; i<getCount ; ++i) {
+				put.add(scorecardList.get(i).getS_putting());
+				sumPutting += put.get(i);			
+				obandhazard += scorecardList.get(i).getS_obandhazard(); //지금까지 OB+Hazard 한 횟수 합
+				strike += scorecardList.get(i).getS_strike(); //지금까지 골프공을 친 횟수 합		
+				
+				viewDate.add(scorecardList.get(i).getS_date());
+				viewLocation.add(scorecardList.get(i).getS_location());
+				viewSumScore.add(scorecardList.get(i).getS_sumscore());
+				viewRange.add(scorecardList.get(i).getS_range());;
+				noviewNo.add(scorecardList.get(i).getS_no());
+				
+				pointList.add(scorecardList.get(i).getS_sumscore());
+				point += pointList.get(i);
+				
+				im.addObject("viewDate", viewDate);
+				im.addObject("viewLocation", viewLocation);
+				im.addObject("viewBestScore", viewSumScore);
+				im.addObject("viewRange", viewRange);
+				im.addObject("noviewNo",noviewNo);
 			}
 			
 			if(rankno == null) { //ranking페이지에서 타고온 경우가 아닌 경우 순위를 구해야함
@@ -90,14 +114,9 @@ public class IndivrankController {
 				}			
 				rankno = num+""; //num값이 순위
 			}
-			List<Integer> put = new ArrayList<>(); //퍼팅
-			put = indivService.getPutting(rid);
-			int sumPutting = 0;
-			for(int i=0 ; i<getCount ; ++i) {
-				if(put.get(i) != null) {
-					sumPutting += put.get(i);
-				}				
-			}
+			
+			
+			
 			double avgPutting = (double)sumPutting/getCount;
 			String strPutting = String.format("%.2f", avgPutting); //평균 퍼팅횟수
 			
@@ -144,32 +163,9 @@ public class IndivrankController {
 				}
 			}
 			
-			List<String> viewDate = new ArrayList<>();
-			List<String> viewLocation = new ArrayList<>();
-			List<Integer> viewSumScore = new ArrayList<>();
-			List<Integer> viewRange = new ArrayList<>();
-			List<Integer> noviewNo = new ArrayList<>();
-			for(int i=0 ; i<getCount ; ++i) {
-				viewDate = indivService.getDate(rid);
-				viewLocation = indivService.getLocation(rid);
-				viewSumScore = indivService.getSumScore(rid);
-				viewRange = indivService.getRange(rid);
-				noviewNo = indivService.getNo(rid);
-				
-				im.addObject("viewDate", viewDate);
-				im.addObject("viewLocation", viewLocation);
-				im.addObject("viewBestScore", viewSumScore);
-				im.addObject("viewRange", viewRange);
-				im.addObject("noviewNo",noviewNo);
-			}
 			
-			List<Integer> pointList = indivService.getSumPoint(rid);
-			int point = 0;
-			for(int i=0 ; i<pointList.size() ; ++i) {
-				if(pointList.get(i) != null) {
-					point += pointList.get(i);
-				}
-			}
+			
+			
 			String tierURL = null;
 			String tierStr = null;
 			
@@ -197,6 +193,7 @@ public class IndivrankController {
 			}			
 			
 			im.addObject("rid", rid);
+			im.addObject("rNickname", nickname);
 			im.addObject("rPoint", rPoint);
 			im.addObject("rankno", rankno);
 			im.addObject("getCount", getCount);

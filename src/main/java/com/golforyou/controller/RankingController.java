@@ -31,22 +31,23 @@ public class RankingController {
 		List<RankingVO> rankList = rankingService.getRankList();
 		
 		List<String> rankid = new ArrayList<>(); 
-		List<String> rankname = new ArrayList<String>();
-		List<Integer> rankpoint = new ArrayList<Integer>();
-		List<Integer> bestrange = new ArrayList<Integer>();
-		List<String> province = new ArrayList<String>();
+		List<String> rankname = new ArrayList<>();
+		List<Integer> rankpoint = new ArrayList<>();
+		List<Integer> bestrange = new ArrayList<>();
+		List<String> province = new ArrayList<>();
 		
-		rankid = rankingService.getId(); //점수순으로 정렬된 아이디
+		for(int i=0 ; i<rankList.size() ; ++i) {
+			rankid.add(rankList.get(i).getR_id());
+			rankname.add(rankList.get(i).getR_nickname());
+			rankpoint.add(rankList.get(i).getR_sum());
+			bestrange.add(rankList.get(i).getR_maxrange());
+			province.add(rankList.get(i).getR_province());
+		}		
 		
 		List<Integer> count = new ArrayList<>();
 		for(int i=0 ; i<mem ; ++i) {
 			count.add(rankingService.playCount(rankid.get(i))); //플레이횟수							
 		}
-		
-		rankname = rankingService.getRankName(); //닉네임
-		rankpoint = rankingService.getRankPoint(); //점수합계
-		bestrange = rankingService.getBestRange(); //최대비거리
-		province = rankingService.getProvince(); //주소지
 	
 		List<String> fileaddr = new ArrayList<>();
 		for(int i=0 ; i<mem ; ++i) {

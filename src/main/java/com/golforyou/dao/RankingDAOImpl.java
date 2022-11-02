@@ -27,34 +27,11 @@ public class RankingDAOImpl implements RankingDAO {
 		return sqlSession.selectOne("rank_count2", prov);
 	}
 
-	@Override
-	public List<String> getId() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("rank_id");
-	}
 
 	@Override
 	public int playCount(String r_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("s_count",r_id);
-	}
-
-	@Override
-	public List<Integer> getRankPoint() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("rank_point");
-	}
-
-	@Override
-	public List<Integer> getBestRange() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("rank_range");
-	}
-
-	@Override
-	public List<Integer> getProvince() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("rank_prov");
 	}
 
 	@Override

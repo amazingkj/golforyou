@@ -28,33 +28,9 @@ public class RankingServiceImpl implements RankingService {
 	}
 
 	@Override
-	public List<String> getId() {
-		// TODO Auto-generated method stub
-		return rankingDAO.getId();
-	}
-
-	@Override
 	public int playCount(String r_id) {
 		// TODO Auto-generated method stub
 		return rankingDAO.playCount(r_id);
-	}
-
-	@Override
-	public List<Integer> getRankPoint() {
-		// TODO Auto-generated method stub
-		return rankingDAO.getRankPoint();
-	}
-
-	@Override
-	public List<Integer> getBestRange() {
-		// TODO Auto-generated method stub
-		return rankingDAO.getBestRange();
-	}
-
-	@Override
-	public List<Integer> getProvince() {
-		// TODO Auto-generated method stub
-		return rankingDAO.getProvince();
 	}
 
 	@Override

@@ -139,5 +139,11 @@ public class ScBoardServiceImpl implements ScBoardService {
 		// TODO Auto-generated method stub
 		return scBoardDAO.getroleCheck(sc_id);
 	}
+
+	@Override
+	public List<ScorecardVO> getScorecardList(String rid) {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getScorecardList(rid);
+	}
 	
 }

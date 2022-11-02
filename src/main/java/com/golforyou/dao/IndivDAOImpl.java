@@ -22,12 +22,6 @@ public class IndivDAOImpl implements IndivDAO {
 	}
 
 	@Override
-	public List<Integer> getPutting(String id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_putting", id);
-	}
-
-	@Override
 	public int monthCount(ScorecardVO sv) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("sc_graph", sv);
@@ -37,36 +31,6 @@ public class IndivDAOImpl implements IndivDAO {
 	public List<String> getRowNum(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("sc_row", id);
-	}
-
-	@Override
-	public List<String> getDate(String id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_date", id);
-	}
-
-	@Override
-	public List<Integer> getSumScore(String id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_sumscore", id);
-	}
-
-	@Override
-	public List<String> getLocation(String id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_location", id);
-	}
-
-	@Override
-	public List<Integer> getRange(String id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_range", id);
-	}
-
-	@Override
-	public List<Integer> getSumPoint(String id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("sc_sumpoint", id);
 	}
 
 	@Override

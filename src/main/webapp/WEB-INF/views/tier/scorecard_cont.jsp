@@ -30,7 +30,7 @@
 				
 				<th>
 				<c:if test="${sb.sc_file != null }">
-					<img src="/upload${sb.sc_file }" width="800px" height="200px" alt="스코어카드">
+					<img src="/upload/scboard${sb.sc_file }" width="800px" height="200px" alt="스코어카드">
 					<br>
 				</c:if>
 				<input class="sccont_text" id="sccont_date" readonly value="[방문 날짜] ${sb.sc_playdate }">

@@ -2,6 +2,7 @@ package com.golforyou.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +43,7 @@ public class AdminRankController {
 		sv.setEndrow(sv.getStartrow()+limit-1);
 		
 		List<ScorecardVO> needList = scBoardService.getNeedUpdateScorecardList(sv); //업데이트해야할 스코어카드 목록
+		//String nickname = rankingService.getNickname(sc_id);
 						
 		int maxpage = (int)((double)needCount/limit + 0.95); //총 페이지 수;
 		int startpage = (((int)((double)page/10 + 0.9))-1)*10 + 1; //시작 페이지;
@@ -114,7 +116,6 @@ public class AdminRankController {
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		double point_sum = Double.parseDouble(request.getParameter("point_sum"));
 		int s_strike = Integer.parseInt(request.getParameter("strike"));
-		//int bestPoint = Integer.parseInt(request.getParameter("bestPoint"));
 		double put_avg = Double.parseDouble(request.getParameter("put_avg"));
 		int range = Integer.parseInt(request.getParameter("range"));
 		String location = request.getParameter("location");
@@ -122,7 +123,6 @@ public class AdminRankController {
 		
 		sc.setS_id(s_id);
 		sc.setS_no(s_no);
-		//sc.setS_bestscore(bestPoint);
 		sc.setS_range(range);
 		sc.setS_location(location);
 		sc.setS_putting(put_avg);
@@ -131,13 +131,12 @@ public class AdminRankController {
 		sc.setS_obandhazard(s_obandhazard);
 		
 		int updatedCount = rankingService.getUpdatedScorecardCount(sc); //score_card테이블 레코드개수
-		
-		scBoardService.updateCard(sc);
-		
 		if(updatedCount == 0) {
 			rankingService.resetScore(sc); //첫 가입시 r_sum 초기값 9999로 설정된걸 0으로 바꿔줌. 첫 입력에만 발동하게 조건을 걸어야함
 			//s_updated가 1인게 하나도 없다면? 첫 업데이트때만 9999가 0이된다. 이게 맞네.
-		}		
+		}
+		
+		scBoardService.updateCard(sc);
 		
 		rankingService.updateAvgScore(sc); //point_sum,s_id
 		
