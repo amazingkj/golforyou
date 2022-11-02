@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>골프클래스 - 장바구니</title>
 <script src="/js/jquery.js"></script>
-<script src="/js/class_cart.js"></script>
+<script src="/js/class.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/class_cart.css" />
 <jsp:include page="/WEB-INF/views/includes/header.jsp" /> 
 

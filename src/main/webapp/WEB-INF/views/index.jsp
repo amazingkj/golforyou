@@ -117,10 +117,10 @@
        <li><a href="/yeyag/yeyag_list">골프장 예약하기</a></li>
        </ul>
        </li>
-      <li><a href="class_main.do"class=btn1>클래스</a>
+      <li><a href="class_main"class=btn1>클래스</a>
        <ul>
-       <li><a href="class_main.do">필드 클래스</a></li>
-       <li><a href="class_online.do">온라인 클래스</a></li>
+       <li><a href="class_field">필드 클래스</a></li>
+       <li><a href="class_online">온라인 클래스</a></li>
        </ul>
        </li>
       <li><a href="/customer_main"class=btn1>고객센터</a>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Class">
+
+	<!-- 강사 관리 -->
+	<!-- 강사 검색 전후 레코드 개수 -->
+	<select id="teacher_count" resultType="int"> <!-- resultType은 반환 자료형 -->
+		select count(tno) from cteacher
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
+			<if test="find_field == 'tname'"> <!-- 강사명 기준으로 검색한 경우 -->
+				tname like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='tgender'"> <!-- 강사 성별 기준 검색 -->
+				tgender like #{find_name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 강사 검색 전후 목록 -->
+	<select id="teacher_list" parameterType="cteacher"
+		resultType="cteacher">
+		select * from (
+		select rowNum
+		rNum,tno,tname,tgender
+		from (select * from
+		cteacher
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
+			<if test="find_field == 'tname'"> <!-- 강사명 기준으로 검색한 경우 -->
+				tname like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='tgender'"> <!-- 강사 성별 기준 검색 -->
+				tgender like #{find_name}
+			</if>
+		</where>
+		order by tno desc)) where rNum &gt;= #{startrow} and rNum
+		&lt;=#{endrow}
+		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
+	</select>
+
+	<!-- 강사 검색 전후 목록 -->
+	<select id="teacher_list_all" resultType="cteacher">
+		select * from cteacher
+	</select>
+
+	<!-- 강사 등록 -->
+	<insert id="teacher_in" parameterType="cteacher">
+		insert into cteacher (tno,
+		tname, tgender, tcareer) values (ct_seq.nextval, #{tname}, #{tgender},
+		#{tcareer})
+	</insert>
+
+	<!-- specific tno 검색 -->
+	<select id="teacher_detail" parameterType="int"
+		resultType="cteacher">
+		select * from cteacher
+		where tno = #{tno}
+	</select>
+
+	<!-- 강사 정보 수정 -->
+	<update id="teacher_edit">
+		update cteacher set
+		tname=#{tname},tgender=#{tgender},tcareer=#{tcareer}
+		where tno=#{tno}
+	</update>
+
+	<!-- 강사 삭제 -->
+	<delete id="teacher_delete">
+		delete from cteacher where tno=#{tno}
+	</delete>
+
+
+
+	<!-- 필드 클래스 관리 -->
+
+	<!-- 필드 클래스 검색 전후 레코드 개수 -->
+	<select id="fieldc_count" resultType="int"> <!-- resultType은 반환 자료형 -->
+		select count(fno) from field_class
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
+			<if test="find_field == 'ftitle'"> <!-- 강사명 기준으로 검색한 경우 -->
+				ftitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='faddr'"> <!-- 클래스 지역 기준 검색 -->
+				faddr like #{find_name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 필드 클래스 검색 전후 목록 -->
+	<select id="fieldc_list" parameterType="fieldclass"
+		resultType="fieldclass">
+		select * from (
+		select rowNum
+		rNum,fno,tno,ftitle,fphone,faddr,faddr2,fimage,fdate,
+		fsprice,fsrounding,fsdesc,fstime,
+		fdprice,fdrounding,fddesc,fdtime,
+		fpprice,fprounding,fpdesc,fptime
+		from (select * from field_class
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
+			<if test="find_field == 'ftitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
+				ftitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='faddr'"> <!-- 지역명 기준 검색 -->
+				faddr like #{find_name}
+			</if>
+		</where>
+		order by fdate desc)) where rNum &gt;= #{startrow} and rNum
+		&lt;=#{endrow}
+		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
+	</select>
+
+	<!-- 필드 클래스 등록 -->
+	<insert id="fieldc_in" parameterType="fieldclass">
+		insert into field_class
+		values(
+		fd_seq.nextval, #{tno}, #{ftitle}, #{fphone}, #{faddr},
+		#{faddr2},#{fimage},sysdate,
+		#{fsprice}, #{fsrounding}, #{fsdesc},
+		#{fstime},
+		#{fdprice}, #{fdrounding}, #{fddesc}, #{fdtime},
+		#{fpprice},
+		#{fprounding}, #{fpdesc}, #{fptime})
+	</insert>
+
+	<!-- specific fno 검색 -->
+	<select id="fieldc_detail" parameterType="int"
+		resultType="fieldclass">
+		select * from field_class
+		where fno = #{fno}
+	</select>
+
+	<!-- 필드 클래스 수정 -->
+	<update id="fieldc_edit">
+		update field_class set
+		ftitle=#{ftitle},tno=#{tno},fphone=#{fphone},faddr=#{faddr},faddr2=#{faddr2},fimage=#{fimage},
+		fsprice=#{fsprice},fsrounding=#{fsrounding},fsdesc=#{fsdesc},fstime=#{fstime},
+		fdprice=#{fdprice},fdrounding=#{fdrounding},fddesc=#{fddesc},fdtime=#{fdtime},
+		fpprice=#{fpprice},fprounding=#{fprounding},fpdesc=#{fpdesc},fptime=#{fptime}
+		where fno=#{fno}
+	</update>
+
+	<!-- 필드 클래스 삭제 -->
+	<delete id="fieldc_delete">
+		delete from field_class where fno=#{fno}
+	</delete>
+
+
+	<!-- 온라인 클래스 관리 -->
+
+	<!-- 온라인 클래스 검색 전후 레코드 개수 -->
+	<select id="onlinec_count" resultType="int"> <!-- resultType은 반환 자료형 -->
+		select count(ono) from online_class
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
+			<if test="find_field == 'otitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
+				otitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='olevel'"> <!-- 추천 레벨 기준 검색 -->
+				olevel like #{find_name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 온라인 클래스 검색 전후 목록 -->
+	<select id="onlinec_list" resultType="onlineclass">
+		select * from (
+		select *
+		from (select rowNum rNum,c.tno,tname,tgender,tcareer,
+         ono,otitle,ophone,oimage,odate,oprice,odesc,otime,olevel from cteacher c inner join online_class o on c.tno=o.tno
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
+			<if test="find_field == 'otitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
+				otitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='olevel'"> <!-- 추천 레벨 기준 검색 -->
+				olevel like #{find_name}
+			</if>
+		</where>
+		order by odate desc)) where rNum &gt;= #{startrow} and rNum
+		&lt;=#{endrow}
+		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
+	</select>
+   
+	<!-- 온라인 클래스 등록 -->
+	<insert id="onlinec_in" parameterType="onlineclass">
+		insert into online_class
+		values(
+		ol_seq.nextval, #{tno},
+		#{otitle}, #{ophone}, #{oimage},
+		sysdate,
+		#{oprice}, #{odesc}, #{otime}, #{olevel})
+	</insert>
+
+	<!-- specific ono 검색 -->
+	<select id="onlinec_detail" parameterType="int"
+		resultType="onlineclass">
+		select * from online_class
+		where ono = #{ono}
+	</select>
+
+	<!-- 온라인 클래스 수정 -->
+	<update id="onlinec_edit">
+		update online_class set
+		otitle=#{otitle},tno=#{tno},ophone=#{ophone},oimage=#{oimage},
+		oprice=#{oprice},odesc=#{odesc},otime=#{otime},olevel=#{olevel}
+		where
+		ono=#{ono}
+	</update>
+
+	<!-- 온라인 클래스 삭제 -->
+	<delete id="onlinec_delete">
+		delete from online_class where ono=#{ono}
+	</delete>
+
+
+	<!-- 검색 전후 레코드 개수 -->
+	<select id="class_count" resultType="int"> <!-- resultType은 반환 자료형 -->
+		select count(cno) from golf_class
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
+			<if test="find_field == 'ctitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
+				ctitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='cteacher'"> <!-- 강사명 기준 검색 -->
+				cteacher like #{find_name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 검색 전후 목록 -->
+	<select id="class_list" parameterType="class" resultType="class">
+		select * from (
+		select rowNum
+		rNum,cno,ckind,ctitle,cteacher,cgender,ccareer,cphone,cimage,
+		csprice,csrounding,csdesc,cstime,
+		cdprice,cdrounding,cddesc,cdtime,
+		cpprice,cprounding,cpdesc,cptime,
+		caddr,caddr2,
+		coprice,codesc,cotime,clevel,cdate
+		from (select * from golf_class
+		<where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
+			<if test="find_field == 'ctitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
+				ctitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			</if>
+			<if test="find_field =='cteacher'"> <!-- 강사명 기준 검색 -->
+				cteacher like #{find_name}
+			</if>
+		</where>
+		order by cdate desc)) where rNum &gt;= #{startrow} and rNum &lt;=
+		#{endrow}
+		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
+	</select>
+
+
+</mapper>
