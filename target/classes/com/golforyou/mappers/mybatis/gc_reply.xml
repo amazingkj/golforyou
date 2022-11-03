@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Gc_Reply"> <!-- 보드네임 Gc_Reply -->
+	 <!-- 댓글저장 -->
+   <insert id="gc_reply_in" parameterType="Gc_Reply">
+   insert into gc_reply (gc_rno,gc_no,gc_replyer,gc_replytext,gc_regdate) values(gc_rno_seq.nextval,#{gc_no},#{gc_replyer},#{gc_replytext},sysdate)
+   </insert>
+	
+	<!-- 댓글목록 -->
+	<select id="gc_reply_list" resultType="Gc_Reply">
+		select * from Gc_reply where gc_no=#{gc_no} order by gc_rno desc <!--bno=#{no}를 줘도 실행은된다 DAO와 1:1반응을 하고있기때문에 가능하다.
+		하지만  다른번호값도 있으면 실행되지못할수있기때문에 bno로 주는게 가독성을위헤 bno로하는게 좋다.-->
+	</select>
+	
+<!-- 댓글수정 -->
+	<update id="gc_replyedit" parameterType="Gc_Reply">
+	update gc_reply set gc_replytext=#{gc_replytext},gc_updatedate=sysdate where gc_rno=#{gc_rno}
+	</update>
+	
+<!-- 댓글 삭제 -->
+	<delete id="gc_reply_del">
+	 delete Gc_reply where Gc_rno=#{gc_rno} <!-- delete문에서 from절 생략가능함. -->
+	</delete>
+	
+	<!-- 댓글로 부터 게시판 번호값 알아내기 -->
+	<select id="gc_reply_gc_no" parameterType="int" resultType="int">
+	 select bno from Gc_reply where gc_rno=#{gc_rno}
+	</select>
+</mapper>

@@ -15,6 +15,7 @@
         <typeAlias type="com.golforyou.vo.ScorecardVO" alias="sc"/>   
 		<typeAlias type="com.golforyou.vo.WithdrawalVO" alias="withdrawal"/>
 		 <typeAlias type="com.golforyou.vo.GolfcouseVO" alias="golfcouse"/> 
+		  <typeAlias type="com.golforyou.vo.Gc_replyVO" alias="Gc_Reply"/> 
 		
 	</typeAliases>
 </configuration>

@@ -111,11 +111,12 @@
        <li><a href="/scorecard_list">스코어카드<br>게시판</a></li>
        </ul>
        </li>
-      <li><a href="/yeyag/yeyag_list"class=btn1>골프장</a>
+    	<li><a href="/golfcouse_list" class=btn1>골프장</a>
        <ul>
-       <li><a href="/yeyag/field_search">골프장 검색</a></li>
-       <li><a href="/yeyag/yeyag_list">골프장 예약하기</a></li>
+       <li><a href="/golfcouse_search">골프장 검색</a></li>
+       <li><a href="/golfcouse_list">골프장 목록</a></li>
        </ul>
+       </li>
        </li>
       <li><a href="class_main.do"class=btn1>클래스</a>
        <ul>
@@ -207,15 +208,15 @@
 					<div id="foot_menu2">SOCIAL</div>
 					
 					<div id="menu_bottom1"><a href="#" class="btn">고객센터</a><br/>
-							<a href="#" class="btn">김캐디홈페이지</a></div>				
+							<a href="https://kimcaddie.com/" class="btn">김캐디홈페이지</a></div>				
 				
 					
 					<div id="menu_bottom2"><a href="#" class="btn">클래스안내</a><br/>
-										<a href="#" class="btn">골프장안내</a></div>
+										<a href="/golfcouse_list"  class="btn">골프장안내</a></div>
 										
 				
-					<div id="menu_bottom3"><a href="#" class="btn">유튜브</a><br/>
-											<a href="#" class="btn">인스타그램</a></div>					
+					<div id="menu_bottom3"><a href="https://www.youtube.com/" class="btn">유튜브</a><br/>
+											<a href="https://www.instagram.com/"class="btn">인스타그램</a></div>					
 	
 			<br/>
 			<br/>
