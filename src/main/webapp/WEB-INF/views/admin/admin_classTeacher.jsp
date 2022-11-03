@@ -42,7 +42,7 @@
 						<th>강사 고유번호</th>
 						<th>강사명</th>
 						<th>강사 성별</th>
-						<th>강사 소개 또는 경력 사항</th>
+						<th>강사 등록 날짜</th>
 						<th>수정/삭제</th>
 					</tr>
 					<tr>
@@ -54,7 +54,7 @@
 								<td align="center">${t.tno}</td>
 								<td align="center">${t.tname}</td>
 								<td align="center">${t.tgender}</td>
-								<td align="center">${t.tcareer}</td>
+								<td align="center">${t.tdate}</td>
 								<td align="center"><input type="button" class="modifybtn"
 									value="수정" onclick="location='admin_editTeacher?tno=${t.tno}';" />
 									<input type="button" class="modifybtn" value="삭제"

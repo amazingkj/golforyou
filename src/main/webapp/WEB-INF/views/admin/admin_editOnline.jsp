@@ -17,7 +17,7 @@
 	<div id="wrap-edit2">
 		<h2>온라인 클래스 수정하기</h2>
 		<br />
-		<form name="form4" method="post" action="/editOnline_ok" enctype="multipart/form-data">
+		<form name="form4" method="post" action="/admin/editOnline_ok" enctype="multipart/form-data">
 			<input type="hidden" name="ono" value="${item.ono}">
 			<table>
 				<tr>
@@ -41,11 +41,13 @@
 				</tr>
 				<tr>
 					<td>강사명</td>
-					<td><input name="tname" id="tname" size="15" value="${item.tname}"> 프로</td>
+					<td><select name="tno" id="tname">
+							<option>강사를 선택해주세요</option>
+					</select> 프로</td>
 				</tr>
 				<tr>
 					<td>강사 성별</td>
-					<td><select name="tgender" id="tgender">
+					<td><select name="tgender" id="tgender" disabled>
 							<option>성별을 선택해주세요</option>
 							<option value="남성">남성</option>
 							<option value="여성">여성</option>
@@ -53,7 +55,7 @@
 				</tr>
 				<tr>
 					<td>강사 소개 또는 경력사항</td>
-					<td><textarea name="tcareer" id="tcareer" rows="9" cols="60" >${item.tcareer}</textarea></td>
+					<td><textarea name="tcareer" id="tcareer" rows="9" cols="60" disabled></textarea></td>
 				</tr>
 				<tr>
 					<td>클래스 전화번호</td>
@@ -61,7 +63,7 @@
 				</tr>
 				<tr>
 					<td>클래스 이미지</td>
-					<td><input type="file" name="oimage" ></td>
+					<td><input type="file" name="oimage2" ></td>
 				</tr>
 				<tr>
 					<td><br /> <br /></td>
@@ -119,7 +121,7 @@
 				<tr>
 					<td colspan="2" align="center">
 					<input type="submit" value="수정" class="btn01">
-					<input type="button" value="목록" class="btn01" onclick="location='admin_classList';" />
+					<input type="button" value="목록" class="btn01" onclick="location='admin_classOnline';" />
 					</td>
 				</tr>
 			</table>

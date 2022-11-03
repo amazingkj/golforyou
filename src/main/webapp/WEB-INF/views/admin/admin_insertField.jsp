@@ -18,7 +18,7 @@
 		<h2>필드 클래스 등록하기</h2>
 		<br />
 		<!-- form name="form1" method="post" action="/insertField_ok" onsubmit="write_check_field()" enctype="multipart/form-data" -->
-		<form name="form1" method="post" action="/insertField_ok" enctype="multipart/form-data">
+		<form name="form1" method="post" action="/admin/insertField_ok" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td><hr /></td>
@@ -41,13 +41,13 @@
 				</tr>
 				<tr>
 					<td>강사명</td>
-					<td><select name="tname" id="tname">
+					<td><select name="tno" id="tname">
 							<option>강사를 선택해주세요</option>
 					</select> 프로</td>
 				</tr>
 				<tr>
 					<td>강사 성별</td>
-					<td><select name="cgender" id="cgender">
+					<td><select name="tgender" id="tgender" disabled>
 							<option>성별을 선택해주세요</option>
 							<option value="남성">남성</option>
 							<option value="여성">여성</option>
@@ -55,11 +55,11 @@
 				</tr>
 				<tr>
 					<td>강사 소개 또는 경력사항</td>
-					<td><textarea name="ccareer" id="ccareer" rows="9" cols="60"></textarea></td>
+					<td><textarea name="tcareer" id="tcareer" rows="9" cols="60" disabled></textarea></td>
 				</tr>
 				<tr>
 					<td>클래스 전화번호</td>
-					<td><input name="cphone" id="cphone" size="30" placeholder="예) 010-1234-5678"></td>
+					<td><input name="fphone" id="fphone" size="30" placeholder="예) 010-1234-5678"></td>
 				</tr>
 				<tr>
 					<td>클래스 지역</td>
@@ -77,7 +77,7 @@
 					</select></td>--%>
 
 					<td>
-					<select name="caddr" id="caddr" >
+					<select name="faddr" id="faddr" >
 							<option>지역을 선택해주세요</option>
 							<option value="수도권">수도권</option>
 							<option value="강원도">강원도</option>
@@ -87,12 +87,14 @@
 							<option value="제주도">제주도</option>
 					</select> 
 					
+					<!--  
 					<select name="caddr2" id="caddr2">
 							<option>지역을 선택해주세요</option>
 							<option value="경기도 전체">경기도 전체</option>
 							<option value="서울">서울</option>
 							<option value="인천">인천</option>
 					</select>
+					
 						<select name="caddr2" id="caddr2">
 							<option>지역을 선택해주세요</option>
 							<option value="강원도 전체">강원도 전체</option>
@@ -123,11 +125,12 @@
 							<option value="제주시">제주시</option>
 							<option value="서귀포시">서귀포시</option>
 					</select>
+					-->
 					</td>
 				</tr>
 				<tr>
 					<td>클래스 이미지</td>
-					<td><input type="file" name="fimage"></td>
+					<td><input type="file" name="fimage2"></td>
 				</tr>
 				<tr>
 					<td><br /> <br /></td>

@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>온라인 클래스 등록</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/class_admin.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>

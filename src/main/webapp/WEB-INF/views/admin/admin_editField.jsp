@@ -17,7 +17,7 @@
 	<div id="wrap-edit">
 		<h2>필드 클래스 수정하기</h2>
 		<br />
-		<form name="form3" method="post" action="/editField_ok" enctype="multipart/form-data">
+		<form name="form3" method="post" action="/admin/editField_ok" enctype="multipart/form-data">
 			<input type="hidden" name="fno" value="${item.fno}">
 			<table>
 				<tr>
@@ -42,12 +42,13 @@
 				</tr>
 				<tr>
 					<td>강사명</td>
-					<td><input name="tname" id="tname" size="15"
-						value="${item.tname}"> 프로</td>
+					<td><select name="tno" id="tname">
+							<option>강사를 선택해주세요</option>
+					</select> 프로</td>
 				</tr>
 				<tr>
 					<td>강사 성별</td>
-					<td><select name="tgender" id="tgender">
+					<td><select name="tgender" id="tgender" disabled>
 							<option>성별을 선택해주세요.</option>
 							<option value="남성">남성</option>
 							<option value="여성">여성</option>
@@ -55,7 +56,7 @@
 				</tr>
 				<tr>
 					<td>강사 소개 또는 경력사항</td>
-					<td><textarea name="tcareer" id="tcareer" rows="9" cols="60">${item.tcareer}</textarea></td>
+					<td><textarea name="tcareer" id="tcareer" rows="9" cols="60" disabled></textarea></td>
 				</tr>
 				<tr>
 					<td>클래스 전화번호</td>
@@ -76,7 +77,7 @@
 					</select> <select id="good">
 							<option>지역을 선택해주세요</option>
 					</select></td> --%>
-					<td><select name="caddr" id="caddr">
+					<td><select name="faddr" id="faddr">
 							<option>지역을 선택해주세요</option>
 							<option value="수도권">수도권</option>
 							<option value="강원도">강원도</option>
@@ -84,7 +85,9 @@
 							<option value="전라도">전라도</option>
 							<option value="경상도">경상도</option>
 							<option value="제주도">제주도</option>
-					</select> <select name="caddr2" id="caddr2">
+					</select> 
+					
+					<!-- <select name="caddr2" id="caddr2">
 							<option>지역을 선택해주세요</option>
 							<option value="경기도 전체">경기도 전체</option>
 							<option value="서울">서울</option>
@@ -105,11 +108,11 @@
 							<option value="제주도 전체">제주도 전체</option>
 							<option value="제주시">제주시</option>
 							<option value="서귀포시">서귀포시</option>
-					</select></td>
+					</select> --></td>
 				</tr>
 				<tr>
 					<td>클래스 이미지</td>
-					<td><input type="file" name="fimage"></td>
+					<td><input type="file" name="fimage2"></td>
 				</tr>
 				<tr>
 					<td><br /> <br /></td>
