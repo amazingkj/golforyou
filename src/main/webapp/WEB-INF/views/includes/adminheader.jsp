@@ -14,11 +14,11 @@
 
     <nav class="headerNav"> 
    
-    <div id="login">관리자님 안녕하세요</div>  
+    <div id="login">${id} 관리자님 안녕하세요 |<a href="/logout" class=btn1>로그아웃</a></div>
     
      
     <%-- 회사로고 --%>
-  	<div id="logo"><a href="/admin/adminmain"><img src="/images/logo1.png"
+  	<div id="logo"><a href="/admin"><img src="/images/logo1.png"
     width="70px" height="70px" alt="Golf" /></a></div>
  
      <%--상단 메뉴 --%>
