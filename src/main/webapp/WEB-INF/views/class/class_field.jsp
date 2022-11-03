@@ -110,7 +110,7 @@
 								<c:if test="${find_field=='ftitle'}">
    ${'selected'}</c:if>>클래스명</option>
 							<option value="fno"
-								<c:if test="${find_field=='fno'}">
+								<c:if test="${find_field=='tname'}">
    ${'selected'}</c:if>>강사명</option>
 						</select> <input name="find_name" id="find_name" size="14"
 							value="${find_name}" /> <input type="submit" value="검색"
@@ -121,27 +121,29 @@
 				</div>
 				<div class="class-btns">
 					<c:forEach var="f" items="${flist}">
-							<button id="class-btn" type="button" onclick="location.href='class_detailField?fno='+fno;">
-								<div class="class-box">
-									<c:choose>
-										<c:when test="${!empty f.fimage}">
-											<div class="fimage">
-												<img src="/upload${f.fimage}" class="thumbnail-img" />
-											</div>
-										</c:when>
-										<c:otherwise>
-											<div class="fimage">
-												<img src="/images/class/aaaa.jpg" class="thumbnail-img" />
-											</div>
-										</c:otherwise>
-									</c:choose>
-									<div class="tname">&nbsp;프로</div>
-									<div class="ftitle">${f.ftitle}</div>
-									<div class="fsprice">
-										<fmt:formatNumber value="${f.fsprice}" pattern="#,###" /> 원
-									</div>
+						<button id="class-btn" type="button"
+							onclick="location.href='class_detailField?fno='+fno;">
+							<div class="class-box">
+								<c:choose>
+									<c:when test="${!empty f.fimage}">
+										<div class="fimage">
+											<img src="/upload/class${f.fimage}" class="thumbnail-img" />
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="oimage">
+											<img src="/images/class/aaaa.jpg" class="thumbnail-img" />
+										</div>
+									</c:otherwise>
+								</c:choose>
+								<div class="tname">${f.tname}&nbsp;프로</div>
+								<div class="ftitle">${f.ftitle}</div>
+								<div class="fsprice">
+									<fmt:formatNumber value="${f.fsprice}" pattern="#,###" />
+									원
 								</div>
-							</button>
+							</div>
+						</button>
 					</c:forEach>
 				</div>
 			</div>
@@ -208,10 +210,11 @@
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 </html>
 <script>
-
-function onDetail(type, cno) {
-	//alert('test'+type+cno);
-	if(type === '필드') location.href='class_detailField?cno='+cno;
-	else if(type === '온라인') location.href='class_detailOnline?cno='+cno;
-}
+	function onDetail(type, cno) {
+		//alert('test'+type+cno);
+		if (type === '필드')
+			location.href = 'class_detailField?cno=' + cno;
+		else if (type === '온라인')
+			location.href = 'class_detailOnline?cno=' + cno;
+	}
 </script>

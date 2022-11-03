@@ -55,7 +55,7 @@
 							<tr>
 								<td align="center">${o.ono}</td>
 								<td align="center">${o.otitle}</td>
-								<td align="center"> 프로</td>
+								<td align="center">${o.tname} 프로</td>
 								<td align="center">${fn:substring(o.odate,0,10)}</td>
 								<td align="center"><input type="button" class="modifybtn"
 									value="수정" onclick="location='admin_editOnline?ono=${o.ono}';" />
