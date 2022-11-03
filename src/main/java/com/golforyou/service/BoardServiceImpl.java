@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.golforyou.dao.BoardDAO;
+import com.golforyou.util.Criteria;
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
 

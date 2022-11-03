@@ -4,8 +4,6 @@
  <head><meta charset="UTF-8">
  <link rel="stylesheet" type="text/css" href="/css/common.css" />
  <link rel="stylesheet" type="text/css" href="/css/board.css" />
-<script src="/js/jquery.js"></script>
-<script src="/js/board.js"></script>
 <jsp:include page="/WEB-INF/views/includes/header.jsp" /> 
 
 
