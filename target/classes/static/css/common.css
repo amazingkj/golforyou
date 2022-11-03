@@ -117,5 +117,26 @@
 #map_text .keyword{font-size: 20px;}
 #map_text{margin-left:40%;}
 
-
-
+.submitBtn {
+  font-size: 14px;
+  border: none;
+  padding: 10px;
+  width: 260px;
+  background-color: #56F569;
+  margin-bottom: 30px;
+  color: #000000;
+  cursor: pointer;
+} 
+ 
+.CheckBtn {
+  font-size: 14px;
+  border: none;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 10px;
+  width: 100px;
+  background-color: #c0c0c0;
+  margin-bottom: 30px;
+  color: #000000;
+  cursor: pointer;
+}
