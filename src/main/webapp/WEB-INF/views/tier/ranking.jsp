@@ -31,7 +31,7 @@
 			<input type="text" class="tier_box" id="tier_box" name="tier_box" readonly value="티어">
 		</div>
 		<div class="search-box">
-			<input type="text" name="searchtxt" class="search-txt" onkeyup="press();" id="search_txt" placeholder="아이디 입력">
+			<input type="text" name="searchtxt" class="search-txt" onkeyup="press();" id="search_txt" placeholder="닉네임 입력">
 			
 			<button type="button" class="search-btn" onclick="searching();"><i class="fas fa-search"></i></button>	
 				
@@ -287,7 +287,7 @@
 				$(".rank").css({
 					"display" : "block"
 				});
-			}else if(!(searchname() == document.getElementById("rId"+i).innerText)){
+			}else if(!(searchname() == document.getElementById("rNickname_"+i).innerText)){
 				$("#rank"+i).css({
 					"display" : "none"
 				});
