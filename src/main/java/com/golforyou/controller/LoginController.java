@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.golforyou.config.auth.PrincipalDetails;
@@ -233,6 +234,33 @@ public class LoginController {
 			
 		}//findPwd()
 		
+		
+
+//	
+//			@RequestMapping("/findPwdValidate")
+//		    public ModelAndView findPwd_ok(String email, HttpServletRequest request) {
+//		        System.out.println("테스트");
+//		        int count = 0;
+//		        //Map<Object, Object> map = new HashMap<Object, Object>();
+//		 
+//		        count = this.loginService.emailCheck(email);
+//		        System.out.println(count);
+//		        
+//		        if(count==1) {
+//		        	request.setAttribute("email", email);
+//		        	
+//		        }
+//		        //map.put("cnt", count);
+//		        //System.out.println(map);
+//		        
+//		        return count;
+//		        ModelAndView m=new ModelAndView("findPwd_ok");
+//		     
+//		        
+//		        
+//		    }
+	
+		
 		//비밀번호 찾기 인증메일 전송
 		@RequestMapping("findPwd_ok")
 		public String MailSender(MemberVO m, HttpServletRequest request) {
@@ -262,8 +290,6 @@ public class LoginController {
 			
 		}
 		
-		
-	
 	
 	//@Secured("ROLE_ADMIN") 이렇게 쓰거나 
 	//@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole()")  _ 두 개 이상 걸고 싶을 때 이렇게 사용 : 함수 시작 전, 
