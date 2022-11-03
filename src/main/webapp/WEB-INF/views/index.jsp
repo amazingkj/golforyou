@@ -199,27 +199,6 @@
 
 <footer>
 	<div id="foot_main"  > 
-
-	
-		
-					<div id="foot_menu">FOR YOU</div>
-					<div id="foot_menu1">GolForYou</div>
-					<div id="foot_menu2">SOCIAL</div>
-					
-					<div id="menu_bottom1"><a href="#" class="btn">고객센터</a><br/>
-							<a href="https://kimcaddie.com/" class="btn">김캐디홈페이지</a></div>				
-				
-					
-					<div id="menu_bottom2"><a href="#" class="btn">클래스안내</a><br/>
-										<a href="/golfcouse_list"  class="btn">골프장안내</a></div>
-										
-				
-					<div id="menu_bottom3"><a href="https://www.youtube.com/" class="btn">유튜브</a><br/>
-											<a href="https://www.instagram.com/"class="btn">인스타그램</a></div>					
-	
-			<br/>
-			<br/>
-			<br/>
 			<br/>
 			<div id="logo_1">
 				<img src="/images/logo4.png"/>

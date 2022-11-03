@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="cteacher">
 		select * from (
 		select rowNum
-		rNum,tno,tname,tgender
+		rNum,tno,tname,tgender,tcareer,tdate
 		from (select * from
 		cteacher
 		<where>
@@ -51,13 +51,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 강사 등록 -->
 	<insert id="teacher_in" parameterType="cteacher">
 		insert into cteacher (tno,
-		tname, tgender, tcareer) values (ct_seq.nextval, #{tname}, #{tgender},
-		#{tcareer})
+		tname, tgender, tcareer, tdate) values (ct_seq.nextval, #{tname}, #{tgender},
+		#{tcareer},sysdate)
 	</insert>
 
 	<!-- specific tno 검색 -->
-	<select id="teacher_detail" parameterType="int"
-		resultType="cteacher">
+	<select id="teacher_detail" parameterType="int" resultType="cteacher">
 		select * from cteacher
 		where tno = #{tno}
 	</select>
@@ -93,26 +92,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 필드 클래스 검색 전후 목록 -->
-	<select id="fieldc_list" parameterType="fieldclass"
-		resultType="fieldclass">
+	<select id="fieldc_list" parameterType="fieldclass" resultType="fieldclass">
 		select * from (
-		select rowNum
-		rNum,fno,tno,ftitle,fphone,faddr,faddr2,fimage,fdate,
-		fsprice,fsrounding,fsdesc,fstime,
-		fdprice,fdrounding,fddesc,fdtime,
-		fpprice,fprounding,fpdesc,fptime
-		from (select * from field_class
+		select *
+		from (select rowNum rNum,c.tno,tname,tgender,tcareer,
+         fno,ftitle,fphone,fimage,faddr,fdate,
+         fsprice,fsrounding,fsdesc,fstime,
+         fdprice,fdrounding,fddesc,fdtime, 
+         fpprice,fprounding,fpdesc,fptime
+         from cteacher c inner join field_class f on c.tno=f.tno
 		<where>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
 			<if test="find_field == 'ftitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
 				ftitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
-			<if test="find_field =='faddr'"> <!-- 지역명 기준 검색 -->
-				faddr like #{find_name}
+			<if test="find_field =='tname'"> <!-- 강사명 기준 검색 -->
+				tname like #{find_name}
 			</if>
 		</where>
-		order by fdate desc)) where rNum &gt;= #{startrow} and rNum
-		&lt;=#{endrow}
+		order by fdate desc)) where rNum &gt;= #{startrow} and rNum&lt;=#{endrow}
 		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
 	</select>
 
@@ -130,8 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<!-- specific fno 검색 -->
-	<select id="fieldc_detail" parameterType="int"
-		resultType="fieldclass">
+	<select id="fieldc_detail" parameterType="int" resultType="fieldclass">
 		select * from field_class
 		where fno = #{fno}
 	</select>
@@ -179,8 +176,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="find_field == 'otitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
 				otitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
-			<if test="find_field =='olevel'"> <!-- 추천 레벨 기준 검색 -->
-				olevel like #{find_name}
+			<if test="find_field =='tname'"> <!-- 강사명 기준 검색 -->
+				tname like #{find_name}
 			</if>
 		</where>
 		order by odate desc)) where rNum &gt;= #{startrow} and rNum
@@ -199,10 +196,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<!-- specific ono 검색 -->
-	<select id="onlinec_detail" parameterType="int"
-		resultType="onlineclass">
-		select * from online_class
-		where ono = #{ono}
+	<select id="onlinec_detail" parameterType="int" resultType="onlineclass">
+		select * from cteacher c inner join online_class o on c.tno=o.tno where ono=#{ono}
 	</select>
 
 	<!-- 온라인 클래스 수정 -->
@@ -219,10 +214,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from online_class where ono=#{ono}
 	</delete>
 
-
+ 
 	<!-- 검색 전후 레코드 개수 -->
 	<select id="class_count" resultType="int"> <!-- resultType은 반환 자료형 -->
-		select count(cno) from golf_class
+ 	select count(cno) from golf_class
 		<where>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
 			<if test="find_field == 'ctitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
@@ -233,6 +228,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
+
 
 	<!-- 검색 전후 목록 -->
 	<select id="class_list" parameterType="class" resultType="class">
