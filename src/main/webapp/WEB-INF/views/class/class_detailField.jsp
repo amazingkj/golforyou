@@ -25,7 +25,7 @@
 		<form name="form5" method="post" action="/class_detailField" enctype="multipart/form-data">
 			<input type="hidden" name="fno" value="${item.fno}">
 
-s
+
 			<%-- wrap에서 윗부분 --%>
 			<div class="section01">
 
@@ -39,7 +39,7 @@ s
 					<c:choose>
 						<c:when test="${!empty item.fimage}">
 							<div class="image01">
-								<img src="/upload${item.fimage}" class="thumbnail-img" />
+								<img src="/upload/class${item.fimage}" class="thumbnail-img" />
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -227,7 +227,7 @@ s
 							<br />
 							<p>
 								안녕하세요.<br /> <br /> 필드 골프 레슨 전문 <strong><c:out
-										value="${item.cteacher}" /> 프로</strong>입니다.<br /> <br /> 인도어에서 혹은 실내에서
+										value="${item.tname}" /> 프로</strong>입니다.<br /> <br /> 인도어에서 혹은 실내에서
 								많은 레슨이 이루어집니다.<br /> <br /> 이것을 실전에 사용하려면 많은 시간과 노력이 필요합니다.<br />
 								<br /> 그래서 저희는 체계적인 레슨 프로그램으로 필드에서 <br /> <br /> 고객의 요구에 부합하는
 								레슨 서비스를 제공하고 있습니다.<br /> <br /> <br /> <br /> 본 레슨 서비스는<br />
@@ -258,7 +258,7 @@ s
 							</div>
 							<div class="class_teacher">
 								<div class="teacher_name">
-									<span><c:out value="${item.fno}" />&nbsp;프로</span>
+									<span><c:out value="${item.tname}" />&nbsp;프로</span>
 								</div>
 								<div class="teacher_career">
 									<div class="introduce">
@@ -266,7 +266,7 @@ s
 									</div>
 									<div class="introduce_detail">
 										<p>
-											<c:out value="${item.fno}" />
+											<c:out value="${item.tcareer}" />
 										</p>
 										<div class="phone">전화번호</div>
 										<div class="phone_detail">
