@@ -94,11 +94,7 @@ public class LoginController {
 		System.out.println("principalDetails:"+principalDetails.getUsername());
 		return "user";
 	}
-	
-	@GetMapping("/admin")
-	public String admin() {
-		return "admin/adminTest";
-	}
+
 	
 //	 @GetMapping("/user/login")
 //	    public String userLoginForm(@ModelAttribute("member") MemberVO member, HttpSession session) {

@@ -7,7 +7,7 @@
 <title>골프 클래스 관리자 페이지 메인</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/class_admin.css" />
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 	<div id="wrap">

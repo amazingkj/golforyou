@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>클래스 전체 목록</title>
 <link rel="stylesheet" href="/css/class_admin.css">
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 	<form method="get" action="admin_classList">
