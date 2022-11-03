@@ -7,8 +7,7 @@
 <title>골프 클래스 상세페이지</title>
 <script src="/js/jquery.js"></script>
 <script src="/js/class_detail.js"></script>
-<script src="https://kit.fontawesome.com/7e87ecac1e.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/7e87ecac1e.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
 	href="/css/class_detail.css" />
 <link rel="stylesheet"

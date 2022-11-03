@@ -110,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				tname like #{find_name}
 			</if>
 		</where>
-		order by fdate desc)) where rNum &gt;= #{startrow} and rNum&lt;=#{endrow}
+		order by fno desc)) where rNum &gt;= #{startrow} and rNum&lt;=#{endrow}
 		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
 	</select>
 
@@ -129,8 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- specific fno 검색 -->
 	<select id="fieldc_detail" parameterType="int" resultType="fieldclass">
-		select * from field_class
-		where fno = #{fno}
+		select * from cteacher c inner join field_class f on c.tno=f.tno where fno=#{fno}
 	</select>
 
 	<!-- 필드 클래스 수정 -->
@@ -180,7 +179,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				tname like #{find_name}
 			</if>
 		</where>
-		order by odate desc)) where rNum &gt;= #{startrow} and rNum
+		order by ono desc)) where rNum &gt;= #{startrow} and rNum
 		&lt;=#{endrow}
 		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
 	</select>

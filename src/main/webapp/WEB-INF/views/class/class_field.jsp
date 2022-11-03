@@ -109,7 +109,7 @@
 							<option value="ftitle"
 								<c:if test="${find_field=='ftitle'}">
    ${'selected'}</c:if>>클래스명</option>
-							<option value="fno"
+							<option value="tname"
 								<c:if test="${find_field=='tname'}">
    ${'selected'}</c:if>>강사명</option>
 						</select> <input name="find_name" id="find_name" size="14"
@@ -122,7 +122,7 @@
 				<div class="class-btns">
 					<c:forEach var="f" items="${flist}">
 						<button id="class-btn" type="button"
-							onclick="location.href='class_detailField?fno='+fno;">
+							onclick="location='class_detailField?fno=${f.fno}';">
 							<div class="class-box">
 								<c:choose>
 									<c:when test="${!empty f.fimage}">
