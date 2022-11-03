@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.golforyou.util.Criteria;
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
 
