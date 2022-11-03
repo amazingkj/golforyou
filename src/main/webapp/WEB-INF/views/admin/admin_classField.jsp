@@ -55,7 +55,7 @@
 						<tr>
 							<td align="center">${f.fno}</td>
 							<td align="center">${f.ftitle}</td>
-							<td align="center"> 프로</td>
+							<td align="center">${f.tname} 프로</td>
 							<td align="center">${fn:substring(f.fdate,0,10)}</td>
 							<td align="center">
 							<input type="button" class="modifybtn" value="수정" onclick="location='admin_editField?fno=${f.fno}';" />

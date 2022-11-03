@@ -100,10 +100,12 @@ public class AdminClassController {
 		String tname=request.getParameter("tname"); //강사명
 		String tgender=request.getParameter("tgender"); //강사 성별
 		String tcareer=request.getParameter("tcareer"); //강사 소개 또는 경력사항
+		String tdate=request.getParameter("tdate"); //강사 등록날짜
 
 		ct.setTname(tname);
 		ct.setTgender(tgender);
 		ct.setTcareer(tcareer);
+		ct.setTdate(tdate);
 
 		this.classService.insertTeacher(ct);
 
@@ -127,11 +129,13 @@ public class AdminClassController {
 		String tname=request.getParameter("tname"); //강사명
 		String tgender=request.getParameter("tgender"); //강사 성별
 		String tcareer=request.getParameter("tcareer"); //강사 소개 또는 경력사항
+		String tdate=request.getParameter("tdate"); //강사 등록날짜
 
 		ct.setTno(tno);
 		ct.setTname(tname);
 		ct.setTgender(tgender);
 		ct.setTcareer(tcareer);
+		ct.setTdate(tdate);
 		
 		this.classService.updateTeacher(ct);
 
@@ -203,47 +207,45 @@ public class AdminClassController {
 		return wm;
 	}//admin_insertField()
 
-	//관리자 페이지 필드 클래스 등록(저장)
+	//필드 클래스 등록(저장)
 	@PostMapping("/admin/insertField_ok")
-	public String insertField_ok(FieldClassVO fc, HttpServletRequest request) throws Exception {
-
-		String saveFolder = request.getRealPath("/upload/class");
-
-		int fileSize = 5 * 1024 * 1024;
-		MultipartRequest multi = null;
-
-		multi = new MultipartRequest(request, saveFolder, fileSize, "UTF-8");
-
-		//클래스 기본 정보
-		String ftitle=multi.getParameter("ftitle"); //클래스명
-		int tno=Integer.parseInt(multi.getParameter("tno"));//강사 고유번호
-		String fphone=multi.getParameter("fphone"); //클래스 전화번호
+	public String insertField_ok(FieldClassVO fc, MultipartHttpServletRequest request,MultipartFile file) throws Exception {
+		//System.out.println("================================================="+oc.toString());
 		
+		String saveFolder = request.getServletContext().getRealPath("/upload/class");
+
+		//int fileSize = 5 * 1024 * 1024;
+
+		//기본 정보
+		String ftitle=request.getParameter("ftitle");
+		int tno=Integer.parseInt(request.getParameter("tno"));
+		String fphone=request.getParameter("fphone");
+
 		//지역 정보
-		String faddr=multi.getParameter("faddr"); //필드 클래스 지역(대분류)
-		String faddr2=multi.getParameter("faddr2"); //필드 클래스 지역2(소분류)
+		String faddr=request.getParameter("faddr"); //필드 클래스 지역(대분류)
+		/* String faddr2=request.getParameter("faddr2"); */ //필드 클래스 지역2(소분류)
 
 		//가격 정보
-		int fsprice=Integer.parseInt(multi.getParameter("fsprice")); //STANDARD 가격
-		int fsrounding=Integer.parseInt(multi.getParameter("fsrounding")); //STANDARD 라운딩 횟수
-		String fsdesc=multi.getParameter("fsdesc"); //STANDARD 상세 설명
-		int fstime=Integer.parseInt(multi.getParameter("fstime")); //STANDARD 1회당 레슨시간(분)
+		int fsprice=Integer.parseInt(request.getParameter("fsprice")); //STANDARD 가격
+		int fsrounding=Integer.parseInt(request.getParameter("fsrounding")); //STANDARD 라운딩 횟수
+		String fsdesc=request.getParameter("fsdesc"); //STANDARD 상세 설명
+		int fstime=Integer.parseInt(request.getParameter("fstime")); //STANDARD 1회당 레슨시간(분)
 
-		int fdprice=Integer.parseInt(multi.getParameter("fdprice")); //DELUXE 가격
-		int fdrounding=Integer.parseInt(multi.getParameter("fdrounding")); //DELUXE 라운딩 횟수
-		String fddesc=multi.getParameter("fddesc"); //DELUXE 상세 설명
-		int fdtime=Integer.parseInt(multi.getParameter("fdtime")); //DELUXE 1회당 레슨시간(분)
+		int fdprice=Integer.parseInt(request.getParameter("fdprice")); //DELUXE 가격
+		int fdrounding=Integer.parseInt(request.getParameter("fdrounding")); //DELUXE 라운딩 횟수
+		String fddesc=request.getParameter("fddesc"); //DELUXE 상세 설명
+		int fdtime=Integer.parseInt(request.getParameter("fdtime")); //DELUXE 1회당 레슨시간(분)
 
-		int fpprice=Integer.parseInt(multi.getParameter("fpprice")); //PREMIUM 가격
-		int fprounding=Integer.parseInt(multi.getParameter("fprounding")); //PREMIUM 라운딩 횟수
-		String fpdesc=multi.getParameter("fpdesc"); //PREMIUM 상세 설명
-		int fptime=Integer.parseInt(multi.getParameter("fptime")); //PREMIUM 1회당 레슨시간(분)
-
+		int fpprice=Integer.parseInt(request.getParameter("fpprice")); //PREMIUM 가격
+		int fprounding=Integer.parseInt(request.getParameter("fprounding")); //PREMIUM 라운딩 횟수
+		String fpdesc=request.getParameter("fpdesc"); //PREMIUM 상세 설명
+		int fptime=Integer.parseInt(request.getParameter("fptime")); //PREMIUM 1회당 레슨시간(분)
+		
 		//이미지 업로드
-		File upFile = multi.getFile("fimage"); //클래스 썸네일
-
-		if(upFile != null) {
-			String fileName = upFile.getName();
+		file = request.getFile("fimage2");
+		
+		if(file != null) {
+			String fileName = file.getName();
 			Calendar cal = Calendar.getInstance();
 			int year=cal.get(Calendar.YEAR);//년도값
 			int month=cal.get(Calendar.MONTH)+1;//월값, +1을 한 이유는 1월이 0으로 반환 되기 때문에
@@ -259,39 +261,44 @@ public class AdminClassController {
 			int random = r.nextInt(100000000);
 
 			// 첨부 파일 확장자를 구함 
-			int index = fileName.lastIndexOf(".");
+			//int index = fileName.lastIndexOf(".");
 
-			String fileExtendsion = fileName.substring(index+1);
-			String refileName = "class" + year + month + date + random + "." + fileExtendsion;
+			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
+			String refileName = "class" + year + month + date + random + "." + fileExtension;
 			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-			upFile.renameTo(new File(homedir+"/"+refileName));
+			
+			File saveFile = new File(homedir+"/"+refileName);
+			file.transferTo(saveFile);
 
 			fc.setFimage(fileDBName);
 		} else {
 			String fileDBName="";
 			fc.setFimage(fileDBName);
 		}
-		
+		 
 		fc.setFtitle(ftitle);
 		fc.setTno(tno);
 		fc.setFphone(fphone);
-		fc.setFaddr(faddr2);
-		fc.setFaddr2(faddr2);
+		fc.setFaddr(faddr);
+		/* fc.setFaddr2(faddr2); */
+		
 		fc.setFsprice(fsprice);
 		fc.setFsrounding(fsrounding);
 		fc.setFsdesc(fsdesc);
 		fc.setFstime(fstime);
+		
 		fc.setFdprice(fdprice);
 		fc.setFdrounding(fdrounding);
 		fc.setFddesc(fddesc);
 		fc.setFdtime(fdtime);
+		
 		fc.setFpprice(fpprice);
 		fc.setFprounding(fprounding);
 		fc.setFpdesc(fpdesc);
 		fc.setFptime(fptime);
-
+		
 		this.classService.insertField(fc);
-
+		
 		return "redirect:/admin/admin_classField";
 	}
 	
@@ -305,48 +312,47 @@ public class AdminClassController {
 		return "admin/admin_editField";
 	}
 
-	//관리자 페이지 필드 클래스 수정
+	//필드 클래스 수정
 	@PostMapping("/admin/editField_ok")
-	public String editField_ok(FieldClassVO fc, HttpServletRequest request) throws Exception {
-		//System.out.println("test");
-		String saveFolder = request.getRealPath("/upload/class");
-
-		int fileSize = 5 * 1024 * 1024;
-		MultipartRequest multi = null;
-
-		multi = new MultipartRequest(request, saveFolder, fileSize, "UTF-8");
-
-		//클래스 기본 정보
-		int fno=Integer.parseInt(multi.getParameter("fno")); //클래스 고유번호
-		String ftitle=multi.getParameter("ftitle"); //클래스명
-		int tno=Integer.parseInt(multi.getParameter("tno")); //강사 고유번호
-		String fphone=multi.getParameter("fphone"); //클래스 전화번호
+	public String editField_ok(FieldClassVO fc, MultipartHttpServletRequest request,MultipartFile file) throws Exception {
+		//System.out.println("================================================="+oc.toString());
 		
+		String saveFolder = request.getServletContext().getRealPath("/upload/class");
+
+		//int fileSize = 5 * 1024 * 1024;
+
+		//기본 정보
+		int fno=Integer.parseInt(request.getParameter("fno"));
+		String ftitle=request.getParameter("ftitle");
+		int tno=Integer.parseInt(request.getParameter("tno"));
+		String fphone=request.getParameter("fphone");
+
 		//지역 정보
-		String faddr=multi.getParameter("faddr"); //필드 클래스 지역(대분류)
-		String faddr2=multi.getParameter("faddr2"); //필드 클래스 지역2(소분류)
+		String faddr=request.getParameter("faddr"); //필드 클래스 지역(대분류)
+		/* String faddr2=request.getParameter("faddr2"); */ //필드 클래스 지역2(소분류)
 
 		//가격 정보
-		int fsprice=Integer.parseInt(multi.getParameter("fsprice")); //STANDARD 가격
-		int fsrounding=Integer.parseInt(multi.getParameter("fsrounding")); //STANDARD 라운딩 횟수
-		String fsdesc=multi.getParameter("fsdesc"); //STANDARD 상세 설명
-		int fstime=Integer.parseInt(multi.getParameter("fstime")); //STANDARD 1회당 레슨시간(분)
+		int fsprice=Integer.parseInt(request.getParameter("fsprice")); //STANDARD 가격
+		int fsrounding=Integer.parseInt(request.getParameter("fsrounding")); //STANDARD 라운딩 횟수
+		String fsdesc=request.getParameter("fsdesc"); //STANDARD 상세 설명
+		int fstime=Integer.parseInt(request.getParameter("fstime")); //STANDARD 1회당 레슨시간(분)
 
-		int fdprice=Integer.parseInt(multi.getParameter("fdprice")); //DELUXE 가격
-		int fdrounding=Integer.parseInt(multi.getParameter("fdrounding")); //DELUXE 라운딩 횟수
-		String fddesc=multi.getParameter("fddesc"); //DELUXE 상세 설명
-		int fdtime=Integer.parseInt(multi.getParameter("fdtime")); //DELUXE 1회당 레슨시간(분)
+		int fdprice=Integer.parseInt(request.getParameter("fdprice")); //DELUXE 가격
+		int fdrounding=Integer.parseInt(request.getParameter("fdrounding")); //DELUXE 라운딩 횟수
+		String fddesc=request.getParameter("fddesc"); //DELUXE 상세 설명
+		int fdtime=Integer.parseInt(request.getParameter("fdtime")); //DELUXE 1회당 레슨시간(분)
 
-		int fpprice=Integer.parseInt(multi.getParameter("fpprice")); //PREMIUM 가격
-		int fprounding=Integer.parseInt(multi.getParameter("fprounding")); //PREMIUM 라운딩 횟수
-		String fpdesc=multi.getParameter("fpdesc"); //PREMIUM 상세 설명
-		int fptime=Integer.parseInt(multi.getParameter("fptime")); //PREMIUM 1회당 레슨시간(분)
+		int fpprice=Integer.parseInt(request.getParameter("fpprice")); //PREMIUM 가격
+		int fprounding=Integer.parseInt(request.getParameter("fprounding")); //PREMIUM 라운딩 횟수
+		String fpdesc=request.getParameter("fpdesc"); //PREMIUM 상세 설명
+		int fptime=Integer.parseInt(request.getParameter("fptime")); //PREMIUM 1회당 레슨시간(분)
 
+		
 		//이미지 업로드
-		File upFile = multi.getFile("fimage"); //클래스 썸네일
-
-		if(upFile != null) {
-			String fileName = upFile.getName();
+		file = request.getFile("fimage2");
+		
+		if(file != null) {
+			String fileName = file.getName();
 			Calendar cal = Calendar.getInstance();
 			int year=cal.get(Calendar.YEAR);//년도값
 			int month=cal.get(Calendar.MONTH)+1;//월값, +1을 한 이유는 1월이 0으로 반환 되기 때문에
@@ -362,40 +368,45 @@ public class AdminClassController {
 			int random = r.nextInt(100000000);
 
 			// 첨부 파일 확장자를 구함 
-			int index = fileName.lastIndexOf(".");
+			//int index = fileName.lastIndexOf(".");
 
-			String fileExtendsion = fileName.substring(index+1);
-			String refileName = "class" + year + month + date + random + "." + fileExtendsion;
+			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
+			String refileName = "class" + year + month + date + random + "." + fileExtension;
 			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-			upFile.renameTo(new File(homedir+"/"+refileName));
+			
+			File saveFile = new File(homedir+"/"+refileName);
+			file.transferTo(saveFile);
 
 			fc.setFimage(fileDBName);
 		} else {
 			String fileDBName="";
 			fc.setFimage(fileDBName);
 		}
-
+		 
 		fc.setFno(fno);
 		fc.setFtitle(ftitle);
 		fc.setTno(tno);
 		fc.setFphone(fphone);
-		fc.setFaddr(faddr2);
-		fc.setFaddr2(faddr2);
+		fc.setFaddr(faddr);
+		/* fc.setFaddr2(faddr2); */
+		
 		fc.setFsprice(fsprice);
 		fc.setFsrounding(fsrounding);
 		fc.setFsdesc(fsdesc);
 		fc.setFstime(fstime);
+		
 		fc.setFdprice(fdprice);
 		fc.setFdrounding(fdrounding);
 		fc.setFddesc(fddesc);
 		fc.setFdtime(fdtime);
+		
 		fc.setFpprice(fpprice);
 		fc.setFprounding(fprounding);
 		fc.setFpdesc(fpdesc);
 		fc.setFptime(fptime);
-		
-		this.classService.updateField(fc);
 
+		this.classService.updateField(fc);
+		
 		return "redirect:/admin/admin_classField";
 	}
 	
@@ -430,7 +441,10 @@ public class AdminClassController {
 		oc.setEndrow(oc.getStartrow()+limit-1);//끝행 번호
 
 		List<OnlineClassVO> olist=this.classService.getOnlineList(oc); //검색 전후 목록
-
+		for(OnlineClassVO vo: olist) {
+			System.out.println("==============================="+vo.toString());
+		}
+		
 		//총 페이지수
 		int maxpage=(int)((double)totalCount/limit+0.95);
 		//시작페이지(1,11,21 ..)
@@ -512,7 +526,6 @@ public class AdminClassController {
 			String fileDBName="";
 			oc.setOimage(fileDBName);
 		}
-		 
 		
 		oc.setOtitle(otitle);
 		oc.setTno(tno);
@@ -537,35 +550,33 @@ public class AdminClassController {
 		return "admin/admin_editOnline";
 	}
 	
-	//관리자 페이지 온라인 클래스 수정
+	//온라인 클래스 수정
 	@PostMapping("/admin/editOnline_ok")
-	public String editOnline_ok(OnlineClassVO oc, HttpServletRequest request) throws Exception {
+	public String editOnline_ok(OnlineClassVO oc, MultipartHttpServletRequest request,MultipartFile file) throws Exception {
+		//System.out.println("================================================="+oc.toString());
+		
+		String saveFolder = request.getServletContext().getRealPath("/upload/class");
 
-		String saveFolder = request.getRealPath("/upload/class");
-
-		int fileSize = 5 * 1024 * 1024;
-		MultipartRequest multi = null;
-
-		multi = new MultipartRequest(request, saveFolder, fileSize, "UTF-8");
+		//int fileSize = 5 * 1024 * 1024;
 
 		//기본 정보
-		int ono=Integer.parseInt(multi.getParameter("ono"));
-		/* System.out.println("클래스 번호 : " +ono); */
-		String otitle=multi.getParameter("otitle");
-		int tno=Integer.parseInt(multi.getParameter("tno"));
-		String ophone=multi.getParameter("ophone");
+		int ono=Integer.parseInt(request.getParameter("ono"));
+		String otitle=request.getParameter("otitle");
+		int tno=Integer.parseInt(request.getParameter("tno"));
+		String ophone=request.getParameter("ophone");
 
 		//가격 정보
-		int oprice=Integer.parseInt(multi.getParameter("oprice")); //온라인 클래스 가격
-		String odesc=multi.getParameter("odesc"); //온라인 클래스 상세 설명
-		int otime=Integer.parseInt(multi.getParameter("otime")); //온라인 클래스 수강기간
-		String olevel=multi.getParameter("olevel"); //온라인 클래스 추천 레벨
+		int oprice=Integer.parseInt(request.getParameter("oprice")); //온라인 클래스 가격
+		String odesc=request.getParameter("odesc"); //온라인 클래스 상세 설명
+		int otime=Integer.parseInt(request.getParameter("otime")); //온라인 클래스 수강기간
+		String olevel=request.getParameter("olevel"); //온라인 클래스 추천 레벨
 
+		
 		//이미지 업로드
-		File upFile = multi.getFile("oimage");
-
-		if(upFile != null) {
-			String fileName = upFile.getName();
+		file = request.getFile("oimage2");
+		
+		if(file != null) {
+			String fileName = file.getName();
 			Calendar cal = Calendar.getInstance();
 			int year=cal.get(Calendar.YEAR);//년도값
 			int month=cal.get(Calendar.MONTH)+1;//월값, +1을 한 이유는 1월이 0으로 반환 되기 때문에
@@ -581,19 +592,21 @@ public class AdminClassController {
 			int random = r.nextInt(100000000);
 
 			// 첨부 파일 확장자를 구함 
-			int index = fileName.lastIndexOf(".");
+			//int index = fileName.lastIndexOf(".");
 
-			String fileExtendsion = fileName.substring(index+1);
-			String refileName = "class" + year + month + date + random + "." + fileExtendsion;
+			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
+			String refileName = "class" + year + month + date + random + "." + fileExtension;
 			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-			upFile.renameTo(new File(homedir+"/"+refileName));
+			
+			File saveFile = new File(homedir+"/"+refileName);
+			file.transferTo(saveFile);
 
 			oc.setOimage(fileDBName);
 		} else {
 			String fileDBName="";
 			oc.setOimage(fileDBName);
 		}
-
+		 
 		oc.setOno(ono);
 		oc.setOtitle(otitle);
 		oc.setTno(tno);
@@ -602,12 +615,83 @@ public class AdminClassController {
 		oc.setOdesc(odesc);
 		oc.setOtime(otime);
 		oc.setOlevel(olevel);
-		
-		
-		this.classService.updateOnline(oc);
 
+		this.classService.updateOnline(oc);
+		
 		return "redirect:/admin/admin_classOnline";
 	}
+	
+//	//관리자 페이지 온라인 클래스 수정
+//	@PostMapping("/admin/editOnline_ok")
+//	public String editOnline_ok(OnlineClassVO oc, HttpServletRequest request) throws Exception {
+//
+//		String saveFolder = request.getRealPath("/upload/class");
+//
+//		int fileSize = 5 * 1024 * 1024;
+//		MultipartRequest multi = null;
+//
+//		multi = new MultipartRequest(request, saveFolder, fileSize, "UTF-8");
+//
+//		//기본 정보
+//		int ono=Integer.parseInt(multi.getParameter("ono"));
+//		/* System.out.println("클래스 번호 : " +ono); */
+//		String otitle=multi.getParameter("otitle");
+//		int tno=Integer.parseInt(multi.getParameter("tno"));
+//		String ophone=multi.getParameter("ophone");
+//
+//		//가격 정보
+//		int oprice=Integer.parseInt(multi.getParameter("oprice")); //온라인 클래스 가격
+//		String odesc=multi.getParameter("odesc"); //온라인 클래스 상세 설명
+//		int otime=Integer.parseInt(multi.getParameter("otime")); //온라인 클래스 수강기간
+//		String olevel=multi.getParameter("olevel"); //온라인 클래스 추천 레벨
+//
+//		//이미지 업로드
+//		File upFile = multi.getFile("oimage");
+//
+//		if(upFile != null) {
+//			String fileName = upFile.getName();
+//			Calendar cal = Calendar.getInstance();
+//			int year=cal.get(Calendar.YEAR);//년도값
+//			int month=cal.get(Calendar.MONTH)+1;//월값, +1을 한 이유는 1월이 0으로 반환 되기 때문에
+//			int date=cal.get(Calendar.DATE);//일값
+//
+//			String homedir = saveFolder + "/" + year + "-" + month + "-" +date;
+//			File path01 = new File(homedir);
+//
+//			if(!(path01.exists())) {
+//				path01.mkdir();
+//			}
+//			Random r = new Random();
+//			int random = r.nextInt(100000000);
+//
+//			// 첨부 파일 확장자를 구함 
+//			int index = fileName.lastIndexOf(".");
+//
+//			String fileExtendsion = fileName.substring(index+1);
+//			String refileName = "class" + year + month + date + random + "." + fileExtendsion;
+//			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
+//			upFile.renameTo(new File(homedir+"/"+refileName));
+//
+//			oc.setOimage(fileDBName);
+//		} else {
+//			String fileDBName="";
+//			oc.setOimage(fileDBName);
+//		}
+//
+//		oc.setOno(ono);
+//		oc.setOtitle(otitle);
+//		oc.setTno(tno);
+//		oc.setOphone(ophone);
+//		oc.setOprice(oprice);
+//		oc.setOdesc(odesc);
+//		oc.setOtime(otime);
+//		oc.setOlevel(olevel);
+//		
+//		
+//		this.classService.updateOnline(oc);
+//
+//		return "redirect:/admin/admin_classOnline";
+//	}
 
 	//온라인 클래스 삭제
 	@RequestMapping("/admin/admin_online_del")
@@ -734,5 +818,8 @@ public class AdminClassController {
 		MultipartRequest multi = new MultipartRequest(request, "C:\\20220607\\Last_Project_Golforyou\\Last_Project_Golforyou\\src\\main\\webapp\\upload", 5*1024*1024, "UTF-8");
 		return "redirect:/test";
 	}
+	
+
+
 
 }

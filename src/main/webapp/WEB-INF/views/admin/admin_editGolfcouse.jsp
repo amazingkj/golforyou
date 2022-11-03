@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +74,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="/css/class_admin.css">
+<link rel="stylesheet" href="/css/golfcouse_admin.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
 <jsp:include page="/WEB-INF/views/includes/header.jsp" />
@@ -106,7 +106,7 @@
 				
 				<tr>
 					<td>골프장 이미지</td>
-					<td><input type="file" name="gc_image" ></td>
+					<td><input type="file" id="gc_image" name="file"value="${item.gc_image}" /></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -213,7 +213,7 @@
 					<td>골프장 설계자</td>
 					<td><input name="gc_architects" id="gc_architects" size="60" value="${item.gc_architects}" ></td>
 				</tr>
-<tr>
+				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
@@ -221,17 +221,17 @@
 					<td><textarea name="gc_content" id="gc_content" rows="9"
 							cols="100" value="${item.gc_content}" ></textarea></td>
 				</tr>
-<tr>
+				<tr>
 					<td><br /></td>
 				</tr>
-				<tr>
+				<!--  <tr>
 					<td>지도 좌표값</td>
 					<td>
 					<input name="gc_coordinates" id="gc_coordinates" size="60"value="${item.gc_coordinates}" >
 					<input type="button" value="골프장 찾기"  onclick="showPopup();"" class="btn01" />	
 						</td>
-				</tr>
-	<tr>
+				</tr>-->
+				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
@@ -245,6 +245,10 @@
 						<input type="text" id="gc_address_detailAddress" name="gc_address_detailAddress"placeholder="상세주소" value="${item.gc_address_detailAddress}">
 						<input type="text" id="gc_address_extraAddress" name="gc_address_extraAddress" placeholder="참고항목" value="${item.gc_address_extraAddress}">
 					</td>
+					<tr>
+					<td></td>
+					<td>※찾으시는 골프장지도는 입력하신주소로 자동출력됩니다.</td>
+				</tr>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -252,7 +256,7 @@
 				<tr>
 					<td>골프장 전화번호</td>
 					<td><input name="gc_phone" id="gc_phone" size="30"
-						placeholder="예) 010-1234-5678" value="${item.gc_phone}"></td>
+						placeholder="예) 02)-1234-5678" value="${item.gc_phone}"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -260,7 +264,7 @@
 				<tr>
 					<td>골프장 팩스번호</td>
 					<td><input name="gc_fax" id="gc_fax" size="30"
-						placeholder="예) 010-1234-5678" value="${item.gc_fax}"></td>
+						placeholder="예) 02)-1235-5678" value="${item.gc_fax}"></td>
 				</tr>
 				<tr>
 					<td><br /></td>

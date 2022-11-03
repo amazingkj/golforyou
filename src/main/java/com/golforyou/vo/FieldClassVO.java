@@ -25,6 +25,12 @@ public class FieldClassVO {
 	private Integer fprounding; //PREMIUM 라운딩 횟수
 	private String fpdesc; //PREMIUM 상세 설명
 	private Integer fptime; //PREMIUM 1회당 레슨 시간(분)
+	
+	//강사 정보
+	private String tname; //강사명
+	private String tgender; //강사 성별
+	private String tcareer; //강사 소개 또는 경력 사항
+	private String tdate; //강사 등록 날짜
 
 	//페이징(쪽나누기) 관련 변수
 	private int startrow; //시작행 번호

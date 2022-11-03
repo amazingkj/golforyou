@@ -225,13 +225,13 @@
 <tr>
 					<td><br /></td>
 				</tr>
-				<tr>
+				<!--  <tr>
 					<td>지도 좌표값</td>
 					<td>
 					<input name="gc_coordinates" id="gc_coordinates" size="60">
 					<input type="button" value="골프장 찾기"  onclick="showPopup();"" class="btn01" />	
 						</td>
-				</tr>
+				</tr>-->
 	<tr>
 					<td><br /></td>
 				</tr>
@@ -248,12 +248,16 @@
 					</td>
 				</tr>
 				<tr>
+					<td></td>
+					<td>※찾으시는 골프장지도는 입력하신주소로 자동출력됩니다.</td>
+				</tr>
+				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
 					<td>골프장 전화번호</td>
 					<td><input name="gc_phone" id="gc_phone" size="30"
-						placeholder="예) 010-1234-5678"></td>
+						placeholder="예) 02)-1234-5678"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -261,7 +265,7 @@
 				<tr>
 					<td>골프장 팩스번호</td>
 					<td><input name="gc_fax" id="gc_fax" size="30"
-						placeholder="예) 010-1234-5678"></td>
+						placeholder="예) 02)-1235-5678"></td>
 				</tr>
 				<tr>
 					<td><br /></td>

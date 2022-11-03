@@ -25,8 +25,8 @@
 
 	<%-- header와 footer를 제외한 전체 --%>
 	<div id="wrap">
-		<form name="form5" method="post" action="/class_deatilOnline" enctype="multipart/form-data">
-			<input type="hidden" name="cno" value="${item.cno}">
+		<form name="form5" method="post" action="/class_detailOnline" enctype="multipart/form-data">
+			<input type="hidden" name="ono" value="${item.ono}">
 
 			<%-- wrap에서 윗부분 --%>
 			<div class="section01">
@@ -39,9 +39,9 @@
 								<img src="/upload${c.cimage}" />
 							</div>--%>
 					<c:choose>
-						<c:when test="${!empty item.cimage}">
+						<c:when test="${!empty item.oimage}">
 							<div class="image01">
-								<img src="/upload${item.cimage}" class="thumbnail-img" />
+								<img src="/upload/class${item.oimage}" class="thumbnail-img" />
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -58,7 +58,7 @@
 				<div class="right_side">
 					<div class="category">골프 클래스</div>
 					<div class="class_name2">
-						${item.ctitle}
+						${item.otitle}
 						<%-- request.setAttribute로 담은 이름의 컬럼명으로 데이터를 뿌림. --%>
 					</div>
 
@@ -68,25 +68,25 @@
 							<br>
 							<div class="price">
 								<span class="totalPrice">
-								<fmt:formatNumber value="${item.coprice}" pattern="#,###" />
+								<fmt:formatNumber value="${item.oprice}" pattern="#,###" />
 								</span> 원 
 								<span class="vat">(VAT 포함가)</span><br /> <br />
 							</div>
 							<div class="class_detail">
-								<div class="class_info">${item.ctitle}</div>
+								<div class="class_info">${item.otitle}</div>
 								<div class="class_desc">
-									<p>${item.codesc}</p>
+									<p>${item.odesc}</p>
 								</div>
 							</div>
 							<div class="class_detail2">
 								<div class="detail_group">
 									<div class="detail_left">수강기간</div>
-									<div class="detail_right">${item.cotime} 일</div>
+									<div class="detail_right">${item.otime} 일</div>
 								</div>
 								<div class="detail_group">
 									<div class="detail_left">추천 레벨</div>
 									<div class="detail_right">
-										<c:out value="${item.clevel}" />
+										<c:out value="${item.olevel}" />
 									</div>
 								</div>
 							</div>
@@ -99,18 +99,18 @@
 						<div id="tab2" class="tab_content">
 							<br>
 							<div class="price">
-								<span class="totalPrice"><c:out value="${item.cdprice}" />원</span>
+								<span class="totalPrice"><c:out value="${item.oprice}" />원</span>
 								<span class="vat">(VAT 포함가)</span><br /> <br />
 							</div>
 							<div class="class_detail">
 								<div class="class_info">
 									라운딩 골프 레슨
-									<c:out value="${item.cdrounding}" />
+									<c:out value="${item.odesc}" />
 									회
 								</div>
 								<div class="class_desc">
 									<p>
-										<c:out value="${item.cddesc}" />
+										<c:out value="${item.otime}" />
 									</p>
 								</div>
 							</div>
@@ -122,14 +122,14 @@
 								<div class="detail_group">
 									<div class="detail_left">1회당 레슨 시간(분)</div>
 									<div class="detail_right">
-										<c:out value="${item.cdtime}" />
+										<c:out value="${item.otime}" />
 										분
 									</div>
 								</div>
 								<div class="detail_group">
 									<div class="detail_left">레슨 횟수</div>
 									<div class="detail_right">
-										<c:out value="${item.cdrounding}" />
+										<c:out value="${item.olevel}" />
 										회
 									</div>
 								</div>
@@ -145,18 +145,18 @@
 						<div id="tab3" class="tab_content">
 							<br>
 							<div class="price">
-								<span class="totalPrice"><c:out value="${item.cpprice}" />원</span>
+								<span class="totalPrice"><c:out value="${item.oprice}" />원</span>
 								<span class="vat">(VAT 포함가)</span><br /> <br />
 							</div>
 							<div class="class_detail">
 								<div class="class_info">
 									라운딩 골프 레슨
-									<c:out value="${item.cprounding}" />
+									<c:out value="${item.odesc}" />
 									회
 								</div>
 								<div class="class_desc">
 									<p>
-										<c:out value="${item.cpdesc}" />
+										<c:out value="${item.otime}" />
 									</p>
 								</div>
 							</div>
@@ -168,14 +168,14 @@
 								<div class="detail_group">
 									<div class="detail_left">1회당 레슨 시간(분)</div>
 									<div class="detail_right">
-										<c:out value="${item.cptime}" />
+										<c:out value="${item.otime}" />
 										분
 									</div>
 								</div>
 								<div class="detail_group">
 									<div class="detail_left">레슨 횟수</div>
 									<div class="detail_right">
-										<c:out value="${item.cprounding}" />
+										<c:out value="${item.olevel}" />
 										회
 									</div>
 								</div>
@@ -213,7 +213,7 @@
 							<br />
 							<p>
 								안녕하세요.<br /> <br /> 필드 골프 레슨 전문 <strong><c:out
-										value="${item.cteacher}" /> 프로</strong>입니다.<br /> <br /> 인도어에서 혹은 실내에서
+										value="${item.tname}" /> 프로</strong>입니다.<br /> <br /> 인도어에서 혹은 실내에서
 								많은 레슨이 이루어집니다.<br /> <br /> 이것을 실전에 사용하려면 많은 시간과 노력이 필요합니다.<br />
 								<br /> 그래서 저희는 체계적인 레슨 프로그램으로 필드에서 <br /> <br /> 고객의 요구에 부합하는
 								레슨 서비스를 제공하고 있습니다.<br /> <br /> <br /> <br /> 본 레슨 서비스는<br />
@@ -244,7 +244,7 @@
 							</div>
 							<div class="class_teacher">
 								<div class="teacher_name">
-									<span><c:out value="${item.cteacher}" />&nbsp;프로</span>
+									<span><c:out value="${item.tname}" />&nbsp;프로</span>
 								</div>
 								<div class="teacher_career">
 									<div class="introduce">
@@ -252,19 +252,19 @@
 									</div>
 									<div class="introduce_detail">
 										<p>
-											<c:out value="${item.ccareer}" />
+											<c:out value="${item.tcareer}" />
 										</p>
 										<div class="phone">전화번호</div>
 										<div class="phone_detail">
 											<p>
-												<c:out value="${item.cphone}" />
+												<c:out value="${item.ophone}" />
 											</p>
 										</div>
 										<div class="address">추천 레벨</div>
 
 										<div class="address_detail">
 											<p>
-												<c:out value="${item.clevel}" />
+												<c:out value="${item.olevel}" />
 											</p>
 										</div>
 									</div>
@@ -286,21 +286,21 @@
 								<div class="detail_vertical">
 									<div class="standard1">STANDARD</div>
 									<div class="standard2">
-										<c:out value="${item.csprice}" />
+										
 										원
 									</div>
 								</div>
 								<div class="detail_vertical">
 									<div class="deluxe1">DELUXE</div>
 									<div class="deluxe2">
-										<c:out value="${item.cdprice}" />
+										<c:out value="${item.oprice}" />
 										원
 									</div>
 								</div>
 								<div class="detail_vertical">
 									<div class="premium1">PREMIUM</div>
 									<div class="premium2">
-										<c:out value="${item.cpprice}" />
+										
 										원
 									</div>
 								</div>
@@ -310,36 +310,36 @@
 								<div class="detail_vertical">
 									<div class="standard_info">
 										라운딩 골프 레슨
-										<c:out value="${item.csrounding}" />
+										
 										회
 									</div>
 									<div class="standard_desc">
 										<p>
-											<c:out value="${item.csdesc}" />
+											
 										</p>
 									</div>
 								</div>
 								<div class="detail_vertical">
 									<div class="deluxe_info">
 										라운딩 골프 레슨
-										<c:out value="${item.cdrounding}" />
+										
 										회
 									</div>
 									<div class="deluxe_desc">
 										<p>
-											<c:out value="${item.cddesc}" />
+											
 										</p>
 									</div>
 								</div>
 								<div class="detail_vertical">
 									<div class="premium_info">
 										라운딩 골프 레슨
-										<c:out value="${item.cprounding}" />
+										
 										회
 									</div>
 									<div class="premium_desc">
 										<p>
-											<c:out value="${item.cpdesc}" />
+											
 										</p>
 									</div>
 								</div>
@@ -353,30 +353,30 @@
 							<div class="detail4">
 								<div class="detail4_1">1회당 레슨시간(분)</div>
 								<div class="detail_vertical">
-									<c:out value="${item.cstime}" />
+									
 									&nbsp;분
 								</div>
 								<div class="detail_vertical">
-									<c:out value="${item.cdtime}" />
+									
 									&nbsp;분
 								</div>
 								<div class="detail_vertical">
-									<c:out value="${item.cptime}" />
+									
 									&nbsp;분
 								</div>
 							</div>
 							<div class="detail5">
 								<div class="detail5_1">레슨 횟수</div>
 								<div class="detail_vertical">
-									<c:out value="${item.csrounding}" />
+									
 									&nbsp;회
 								</div>
 								<div class="detail_vertical">
-									<c:out value="${item.cdrounding}" />
+									
 									&nbsp;회
 								</div>
 								<div class="detail_vertical">
-									<c:out value="${item.cprounding}" />
+									
 									&nbsp;회
 								</div>
 							</div>

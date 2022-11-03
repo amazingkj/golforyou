@@ -67,9 +67,9 @@ public class GolfcouseController {
 	
 	//골프장 상세 페이지
 	@RequestMapping(value="/golfcouse_Main",method=RequestMethod.GET)
-	public String golfcouse_Main(@RequestParam int gcno, Model model) throws Exception {
-		System.out.println(gcno);
-		GolfcouseVO golfcouseVO = golfcouseService.getGolfcouse(gcno);
+	public String golfcouse_Main(@RequestParam int gc_no, Model model) throws Exception {
+		System.out.println(gc_no);
+		GolfcouseVO golfcouseVO = golfcouseService.getGolfcouse(gc_no);
 		
 		model.addAttribute("item", golfcouseVO);
 		

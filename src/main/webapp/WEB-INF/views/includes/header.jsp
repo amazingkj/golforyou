@@ -45,10 +45,10 @@
        <li><a href="/scorecard_list">스코어카드<br>게시판</a></li>
        </ul>
        </li>
-      <li><a href="/yeyag/yeyag_list" class=btn1>골프장</a>
+      <li><a href="/golfcouse_list" class=btn1>골프장</a>
        <ul>
-       <li><a href="/yeyag/field_search">골프장 검색</a></li>
-       <li><a href="/yeyag/yeyag_list">골프장 예약하기</a></li>
+      <li><a href="/golfcouse_search">골프장 검색</a></li>
+       <li><a href="/golfcouse_list">골프장 목록</a></li>
        </ul>
        </li>
       <li><a href="/class_main" class=btn1>클래스</a>

@@ -30,6 +30,15 @@
 	}
 	navigo()
 </script>
+<script>
+
+function onLevel(type, olevel) {
+	//alert('test'+type+olevel);
+	if(type === '골드') location="'class_online?olevel==='골드';"
+	else if(type === '실버') location.href='class_online?olevel='+'실버';
+	else if(type === '브론즈') location.href='class_online?olevel='+'브론즈';
+}
+</script>
 </head>
 <body>
 
@@ -42,9 +51,9 @@
 			<div class="category">
 				<ul class="province_3">
 					<li><a href="class_online">온라인 전체</a></li>
-					<li><a href="class_online">골드</a></li>
-					<li><a href="class_online">실버</a></li>
-					<li><a href="class_online">브론즈</a></li>
+					<li class="gold_level"><a href="class_online">골드</a></li>
+					<li class="silver_level"><a href="class_online">실버</a></li>
+					<li class="bronze_level"><a href="class_online">브론즈</a></li>
 				</ul>
 			</div>
 			<div class="subject">
@@ -69,7 +78,8 @@
 				</div>
 				<div class="class-btns">
 					<c:forEach var="o" items="${olist}">
-							<button id="class-btn" type="button" onclick="onDetail('${c.ckind}', '${c.cno}')">
+							<!--  <button id="class-btn" type="button" onclick="onDetail('${c.ckind}', '${c.cno}')"> -->
+							<button id="class-btn" type="button" onclick="location='class_detailOnline?ono=${o.ono}';">
 								<div class="class-box">
 									<%--c:if test="${!empty c.cimage}">
 									<div class="cimage">
@@ -89,7 +99,7 @@
 										</c:otherwise>
 									</c:choose>
 
-									<div class="tname"> ${o.tno}&nbsp;프로</div>
+									<div class="tname"> ${o.tname}&nbsp;프로</div>
 									<div class="otitle">${o.otitle}</div>
 									<div class="oprice">
 											<fmt:formatNumber value="${o.oprice}" pattern="#,###" /> 원

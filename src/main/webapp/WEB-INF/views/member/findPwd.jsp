@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="/css/login.css" />
+<script src="/js/jquery.js"></script>
 <div class="clear"></div>
 <style>
 
@@ -43,6 +44,35 @@
          $('#email').val('').focus();
          return false;
       }
+   }
+ /*  
+      $email =  $("#email").val(); 		//username을 param
+      $.ajax({//$는 jQuery란 뜻. $.ajax 뜻은 jQuery 내의 비동기식 아작스 실행
+          type:"POST",//데이터를 서버로 보내는 방법
+         	//url:"./member/member_idcheck.jsp",    
+          url:"/idcheck", //아작스 서버 주소 파일명
+          data: {"memail":$email},  //좌측 id 피라미터 이름에 우측 $username변수값을 저장
+          datatype:"int",//서버의 실행된 결과값을 사용자로 받아오는 방법
+          success: function (data) {//success는 아작스로 받아오는것이 성공했을경우
+          	//서버 데이터를 data변수에 저장
+        	  if(data= 0){//DB에 메일 주소가 없으면
+        	  
+        	  alert("해당 이메일 주소로 가입한 계정이 없습니다./n다시 확인해주세요");        		
+            	$("#email").val('').focus();
+            	return false;
+  	     
+        	  }
+        	      	  
+          },
+          
+          
+      	  error:function(){//비동기식 아작스로 서버디비 데이터를
+      		  //못가져와서 에러가 발생했을 때 호출되는 함수이다.
+      		  alert("서버가 연결되어 있지 않습니다\n관리자에게 문의하세요.");
+      	  }
+        });//$.ajax
+     */   
+   
 	
    /*
 	if (!emailValCheck()){
@@ -77,14 +107,12 @@
        return false;
    }
    */
+   
 
 </script>
 
 <%-- 비밀번호 찾기--%>
 <body class="findPwd">
-
-
-<c:if test="${empty email}">
 
 <div class="findPwdForm">
 
@@ -98,33 +126,11 @@
 <div>
 <form name="signUpForm" action="/findPwd_ok" method="post" onsubmit="return emailAuthentication();" accept-charset="UTF-8">
 <input type="email" name="email" class="textField" id="inputEmailForm" placeholder="example aaa@google.net"><br>
-<button type="submit" id="btn_change_password" class="submitBtn" onclick="emailAuthentication()">인증메일 전송</button>
-</form> 
-</div>
-
-</div>
-
-</c:if>
-
-<c:if test="${!empty email}">
-<div class="findPwdForm">
-
-<div>
-<H3>인증번호 입력</H3><br>
-<span>메일로 확인한 인증 번호를<br>입력하세요.</span><br><br>
-<hr/>
-<br>
-</div>
-
-<div>
-<form name="signUpForm" action="/findPwd_ok" method="post" accept-charset="UTF-8">
-<input type="email" name="email" class="textField" id="inputEmailForm" placeholder="인증 번호"><br>
-<button type="submit" id="btn_change_password" class="submitBtn" onclick="emailAuthentication()">인증번호 전송</button>
+<button type="submit" id="btn_change_password" class="submitBtn" >인증메일 전송</button>
 </form> 
 </div>
 </div>
 
-</c:if>
 </body>
 
 
