@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -149,9 +150,9 @@ private MypageService mypageService;
 			int index=fileName.lastIndexOf(".");
 			//마침표를 맨 오른쪽부터 찾아서 가장 먼저 나오는 .의 위치 번호를  맨 왼쪽부터 카운터해서 반환 
 			//첫 문자는 0부터 시작 
-			String fileExtendsion=fileName.substring(index+1);//마침표 이후부터 마지막 문자까지 구함. 
+			String fileExtendsion=FilenameUtils.getExtension(upFile.getOriginalFilename()); // fileName.substring(index+1);//마침표 이후부터 마지막 문자까지 구함. 
 			//즉 첨부파일  확장자를 구함. 
-			String refileName="profile"+year+month+date+random+"."+fileExtendsion;//새로운 파일명 저장 
+			String refileName="profile"+year+month+date+random+"."+fileExtendsion;//새로운 파s일명 저장 
 			String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;//데이터베이스에 저장될 레코드 값
 			File saveFile =new File(homedir+"/"+refileName); //생성된 폴더에 변경된 파일명으로 실제 업로드 
 			upFile.transferTo(saveFile);
@@ -182,8 +183,7 @@ private MypageService mypageService;
 		System.out.println("test");
 	
 		this.mypageService.updateProvince(r);
-
-	
+		
 		
 		return new ModelAndView("redirect:/mypage");
 		
@@ -227,10 +227,11 @@ private MypageService mypageService;
 	//비교하는 문자열은 해시처리 하기 전 문자열과 비교해야함. matches 활용
 		if(bCryptPasswordEncoder.matches(inputPw,password)) {
 			System.out.println(member);
-			this.mypageService.changePwd(member); //여기가 널값. 월요일에 같이 찾아달라고 하자 시간을 너무 많이 투자함 ㅠ 
+			this.mypageService.changePwd(member); 
 			
 			out.println("<script>");
 			out.println("alert('비밀번호가 변경되었습니다.');");
+			out.println("self.close();");
 			out.println("</script>");
 			return "redirect:/";
 		}else {
