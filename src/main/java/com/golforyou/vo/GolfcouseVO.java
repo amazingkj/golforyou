@@ -40,4 +40,6 @@ public class GolfcouseVO {
 	//검색관련 변수
 	private String find_field;//검색 필드
 	private String find_name;//검색어
+	
+
 }

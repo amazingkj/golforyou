@@ -12,7 +12,7 @@ public interface GolfcouseService {
 	void insertGolfcouse(GolfcouseVO gc);//관리자 골프장등록
 	void updategolfcouse(GolfcouseVO gc);//골프장수정
 	void deleteGolfcouse(int gc_no);//골프장삭제
-
+	
 	
 	
 

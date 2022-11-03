@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(gc_no) from golf_couse
 		<where>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
-			<if test="find_field == 'gc_ctitle'"> <!-- 골프장명 기준으로 검색한 경우 -->
-				gc_ctitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			<if test="find_field == 'gc_title'"> <!-- 골프장명 기준으로 검색한 경우 -->
+				gc_title like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
 			<if test="find_field =='gc_area'"> <!-- 지역명 기준 검색 -->
 				gc_area like #{find_name}
@@ -26,13 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rowNum
 		rNum,gc_no,gc_image,gc_title,gc_english,gc_area,gc_hole,gc_golf,gc_length,
 		gc_kind,gc_type,gc_configuration,gc_caddy,gc_cart,gc_architects,
-		gc_content,gc_coordinates,gc_address_postcode,gc_address_roadAddress,gc_address_jibunAddress,
+		gc_content,gc_address_postcode,gc_address_roadAddress,gc_address_jibunAddress,
 		gc_address_detailAddress,gc_address_extraAddress,gc_phone,gc_fax,gc_move,gc_date
 		from (select * from golf_couse
 		<where>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
-			<if test="find_field == 'gc_ctitle'"> <!-- 골프장명 기준으로 검색한 경우 -->
-				gc_ctitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			<if test="find_field == 'gc_title'"> <!-- 골프장명 기준으로 검색한 경우 -->
+				gc_title like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
 			<if test="find_field =='gc_area'"> <!-- 지역명 기준 검색 -->
 				gc_area like #{find_name}
@@ -56,11 +56,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into golf_couse (
 		gc_no,gc_image,gc_title,gc_english,gc_area,gc_hole,gc_golf,gc_length,
 		gc_kind,gc_type,gc_configuration,gc_caddy,gc_cart,gc_architects,
-		gc_content,gc_coordinates,gc_address_postcode,gc_address_roadAddress,gc_address_jibunAddress,
+		gc_content,gc_address_postcode,gc_address_roadAddress,gc_address_jibunAddress,
 		gc_address_detailAddress,gc_address_extraAddress,gc_phone,gc_fax,gc_move,gc_date
 		) values(golf_couse_seq.nextval,#{gc_image},#{gc_title},#{gc_english},#{gc_area},#{gc_hole},#{gc_golf},#{gc_length},
 		#{gc_kind},#{gc_type},#{gc_configuration},#{gc_caddy},#{gc_cart},#{gc_architects},
-		#{gc_content},#{gc_coordinates},#{gc_address_postcode},#{gc_address_roadAddress},
+		#{gc_content},#{gc_address_postcode},#{gc_address_roadAddress},
 		#{gc_address_jibunAddress},#{gc_address_detailAddress},#{gc_address_extraAddress},#{gc_phone},#{gc_fax},#{gc_move},#{gc_date})
 	</insert>
 
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		gc_image=#{gc_imag},gc_title=#{gc_title},gc_english=#{gc_english},gc_area=#{gc_area},gc_hole=#{gc_hole},
 		gc_golf=#{gc_golf},gc_length=#{gc_length},gc_kind=#{gc_kind},gc_type=#{gc_type},gc_configuration=#{gc_configuration},
 		gc_caddy=#{gc_caddy},gc_cart=#{gc_cart},gc_architects=#{gc_architects},
-		gc_content=#{gc_content},gc_coordinates=#{gc_coordinates},gc_address_postcode=#{gc_address_postcode},gc_address_roadAddress=#{gc_address_roadAddress},
+		gc_content=#{gc_content},gc_address_postcode=#{gc_address_postcode},gc_address_roadAddress=#{gc_address_roadAddress},
 		gc_address_jibunAFddress=#{gc_address_jibunAddress},gc_address_detailAddress=#{gc_address_detailAddress},gc_address_extraAddress=#{gc_address_extraAddress},
 		gc_phone=#{gc_phone},gc_fax=#{gc_fax},gc_move=#{gc_move},gc_date=#{gc_date}
 		where gc_no=#{gc_no}
