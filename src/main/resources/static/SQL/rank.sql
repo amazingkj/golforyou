@@ -34,4 +34,16 @@ r_no number(38)
 ,r_nickname varchar2(255)
 ,r_sum number(38)
 ,r_maxrange number(38)
+,r_province varchar2(50)
 );
+
+create sequence rno_seq
+start with 1
+increment by 1
+nocache;
+
+create sequence test_scboard_seq
+start with 1
+increment by 1
+nocache;
+
