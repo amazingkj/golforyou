@@ -36,7 +36,7 @@
 		
       	  error:function(){//비동기식 아작스로 서버디비 데이터를
       		  //못가져와서 에러가 발생했을 때 호출되는 함수이다.
-      		  alert("data error 서버가 연결되어 있지 않습니다");
+      		  alert("댓글을 입력하지 않으셨거나, 서버가 연결되어 있지 않습니다");
       	  }
 	});
 	
@@ -46,12 +46,14 @@
 		//댓글 수정 화면 
 			$('#replies').on("click",".replyLi button",function(){
 	
-			var reply = $(this).parent(); //부모요소를 선택 => li태그를 가리킴 this는 버튼 
-			var r_no =reply.attr("data-r_no"); //data-rno속성값을 구함 =>댓글 번호 
-			var replytext=reply.children('.com').text(); //댓글 내용 
+			let reply = $(this).parent(); //부모요소를 선택 => li태그를 가리킴 this는 버튼 
+			let r_no =reply.attr("data-r_no"); //data-rno속성값을 구함 =>댓글 번호 
+			let replytext=reply.children('.com').text(); //댓글 내용 
+			let date=reply.children('.date').text(); 
 			
 			$('.modal-title').html(r_no); //댓글번호를 표시
 			$('#replytext').val(replytext);//댓글내용을 표시 
+			$('#replydate').val(date);
 			$('#modDiv').show('slow');//댓글수정화면을 나오게 한다. 
 				
 			});
@@ -64,7 +66,7 @@
 		
 		$('#replyModBtn').on('click',function(){
 			$r_no = $('.modal-title').html(); //댓글 번호 
-			$reply = $("#reply").val(); //수정할 댓글 내용 
+			$reply = $("#replytext").val(); //수정할 댓글 내용 
 			
 			$.ajax({
 				type:'put', //메서드 방식 
@@ -90,7 +92,7 @@
 
 		
 		$('#replyDelBtn').on("click",function(){
-			$rno = $('.modal-title').html();//댓글 번호 
+			$r_no = $('.modal-title').html();//댓글 번호 
 			
 			$.ajax({
 				type:'delete',
@@ -109,3 +111,7 @@
 				}
 			});
 		 });
+		 
+		 
+		 
+		 

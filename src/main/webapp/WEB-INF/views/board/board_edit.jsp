@@ -34,7 +34,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
  
  <%--섬머노트 설정--%>
- 
+  
 	<script>
 	$(document).ready(function() {
 	     $('#summernote').summernote({
@@ -67,16 +67,75 @@
 	 			  // 추가한 글꼴
 	 			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
 	 			 // 추가한 폰트사이즈
-	 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+	 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+	            callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+						onImageUpload : function(files) {
+							uploadSummernoteImageFile(files[0],this);
+						},
+						onPaste: function (e) {
+							var clipboardData = e.originalEvent.clipboardData;
+							if (clipboardData && clipboardData.items && clipboardData.items.length) {
+								var item = clipboardData.items[0];
+								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+									e.preventDefault();
+								}
+							}
+						}
+					}
+	             
+	             
 	     });
+	     
+	     
+
+	 	/**
+	 	* 이미지 파일 업로드*/
+	 	
+	 	function uploadSummernoteImageFile(file, editor) {
+	 		data = new FormData();
+	 		data.append("file", file);
+	 		$.ajax({
+	 			data : data,
+	 			type : "POST",
+	 			url : "/uploadSummernoteImageFile",
+	 			contentType : false,
+	 			processData : false,
+	 			success : function(data) {
+	             	//항상 업로드된 파일의 url이 있어야 한다.
+	 				$(editor).summernote('insertImage', data.url);
+	 			}
+	 		});
+	 	}
+	 	
+	 	
+	 	$("div.note-editable").on('drop',function(e){
+	         for(i=0; i< e.originalEvent.dataTransfer.files.length; i++){
+	         	uploadSummernoteImageFile(e.originalEvent.dataTransfer.files[i],$("#summernote")[0]);
+	         }
+	        e.preventDefault();
+	   })
 	});
 
-	</script>
-	
-	 
  <%--섬머노트 설정 끝 --%>
  
  <%--유효성 검사--%>
+     	function bw_check(){
+
+			if($.trim($("#b_title").val())==""){
+				alert("제목을 입력하세요!");
+				$("#b_title").val("").focus();
+				return false;
+			}
+
+			if($.trim($("#summernote").val())==""){
+				alert("글내용을 입력하세요!");
+				$("#summernote").val("").focus();
+				return false;
+			}
+		}
+
+    	</script>
+     
      
  <title>게시판 글쓰기</title>
  </head>
@@ -89,19 +148,19 @@
          
    <table id="bWrite_t" class="tablebox">
      <%--이름 - 로그인해서 입력하면 그냥 입력되게 히든으로 ! 처리하기 --%>
-  	 <tr><td>  <input type="hidden" name="b_no" value="${bc.b_no}"/> <%--번호가 전달 --%>
+  	 <tr><td>  <input type="hidden" name="b_no" value="${b.b_no}"/> <%--번호가 전달 --%>
     <input type="hidden" name="page" value="${page}" /> <%--페이징 쪽나누기에서 책갈피 기능을 구현하기
          위해서 히든으로 쪽번호를 전달.책갈피 기능이란 내가 본 페이지 번호로 바로 이동하는 것을 말한다. --%>     
-         <input type="hidden" name="username" id="username" value="${id}"/></td></tr>
+         <input type="hidden" name="username" id="username" value="${id}"/><input type="hidden" name="nickname" id="nickname" value="${id}"/></td></tr>
     
      <tr>
       <td>제목</td>
-      <td class="bottom_line"><input name="b_title" size="50%" class="textField" maxlength="100" value="${bc.b_title}"></td>
+      <td class="bottom_line"><input name="b_title" id="b_title" size="50%" class="textField" maxlength="100" value="${b.b_title}"></td>
    
     
      <tr>
       <td>내용</td>
-      <td class="bottom_line"><textarea name="b_cont" id="summernote" cols="50%" rows="25%" >${bc.b_cont}</textarea></td>
+      <td class="bottom_line"><textarea name="b_cont" id="summernote" cols="50%" rows="25%" >${b.b_cont}</textarea></td>
      </tr>
      
    	<tr>

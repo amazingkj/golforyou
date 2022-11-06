@@ -79,7 +79,7 @@ function Change(idx){
      		 <a href="board_cont?b_no=${b.b_no}&page=${page}&state=cont">${b.b_title}</a>
     		</td>
 			
-       			<td class="boardWriter">${b.username}</td>
+       			<td class="boardWriter">${b.nickname}</td>
          		<td class="boardDate">${b.b_date}</td>
          		<td class="boardlike"><i class="fas fa-heart" style="color:#56F569"></i>&nbsp;&nbsp;&nbsp;${b.b_like}</td>
      			<td class="boardView">${b.b_hit}</td>
