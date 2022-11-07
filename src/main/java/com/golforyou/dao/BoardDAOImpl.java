@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
+import com.golforyou.vo.LikesVO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -123,4 +124,28 @@ public class BoardDAOImpl implements BoardDAO {
 		this.sqlSession.delete("reply_del",r_no);
 		
 	}//댓글 삭제
+
+	@Override
+	public int SaveHeart(LikesVO to) {
+		return this.sqlSession.insert("heart_save",to);
+		
+	}
+
+	@Override
+	public int RemoveHeart(LikesVO to) {
+		return this.sqlSession.delete("heart_remove",to);
+		
+	}
+
+	@Override
+	public BoardVO CountHeart(BoardVO pto) {
+		return this.sqlSession.selectOne("heart_count",pto);
+		
+	}
+
+	@Override
+	public void UpHeart(int no) {
+		this.sqlSession.selectOne("heart_up",no);
+		
+	}
 }

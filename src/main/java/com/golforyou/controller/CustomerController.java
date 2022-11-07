@@ -29,7 +29,7 @@ public class CustomerController {
 	@Autowired(required=false)
 	private MailService mailsender;
 	
-	@RequestMapping(value = "/customer_main", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/customer_main", method = RequestMethod.GET)
 	public String Customer_main() {
 		return "customer/main"; 
 		
@@ -43,7 +43,9 @@ public class CustomerController {
 		
 		
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
- 		String username=principalDetails.getUsername();
+ 		
+		
+		String username=principalDetails.getUsername();
 		String consult_type=request.getParameter("consult_type"); 
 		String question_title=request.getParameter("question_title"); 
 		String question_contents=request.getParameter("question_contents");

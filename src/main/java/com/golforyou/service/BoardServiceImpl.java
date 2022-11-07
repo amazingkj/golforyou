@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.golforyou.dao.BoardDAO;
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
+import com.golforyou.vo.LikesVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -81,5 +82,29 @@ public class BoardServiceImpl implements BoardService {
 		this.boardDAO.delReply(r_no);
 		
 	}
+	
+	//좋아요 기능
+	
+	@Override
+	public int SaveHeart(LikesVO to) {
+		return this.boardDAO.SaveHeart(to);
+	
+	}
+	@Override
+	public int RemoveHeart(LikesVO to) {
+		return this.boardDAO.RemoveHeart(to);
+		
+	}
+	@Override
+	public BoardVO CountHeart(BoardVO pto) {
+		return this.boardDAO.CountHeart(pto);
+		
+	}
+	@Override
+	public void UpHeart(int no) {
+		 this.boardDAO.UpHeart(no);
+		
+	}
+	
 
 }

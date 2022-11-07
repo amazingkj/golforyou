@@ -10,9 +10,13 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +29,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.oreilly.servlet.MultipartRequest;
+import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.service.BoardService;
 import com.golforyou.vo.BoardVO;
+import com.golforyou.vo.LikesVO;
 import com.google.gson.JsonObject;
-//import com.google.gson.JsonObject;
-
 
 @Controller
 public class BoardController {
@@ -53,8 +56,7 @@ public class BoardController {
 	}//board_write()
 	
 	
-	  //summernotefile 저장
-	  
+	  //summernotefile 저장	  
 	  @PostMapping(value="/uploadSummernoteImageFile", produces =
 	 "application/json")
 	 
@@ -87,59 +89,16 @@ public class BoardController {
 	
 	
 	//게시판 글쓰기 저장
-	//이진파일 업로드 하는 방법 3가지 이상이 있다고 함. 다른 방법도 찾아보기 
 	@RequestMapping("/board_write_ok")
 	public String board_write_ok(BoardVO b, HttpServletRequest request) throws Exception{
-		String saveFolder=request.getServletContext().getRealPath("/upload/board"); 
-		//이진 파일 업로드 서버 경로 => 톰캣 WAS서버에 의해서 변경된 실제 경로 하위의 upload폴더
-		
-		int fileSize=5*1024*1024; //이진파일 업로드 최대 크기 
-		MultipartRequest multi=null; //이진파일을 가져올 참조변수 
-		
-		multi=new MultipartRequest(request,saveFolder,fileSize,"UTF-8");
-		
-		String id=multi.getParameter("nickname");
-		String b_title=multi.getParameter("b_title");
-		String b_pwd=multi.getParameter("b_pwd");
-		String b_cont=multi.getParameter("b_cont");
-		
-		File upFile= multi.getFile("b_file");//첨부한 이진파일을 가져온다. 
-		
-		if(upFile != null) { //첨부한 이진파일이 있는 경우 실행
-			String fileName=upFile.getName();//첨부한 파일명
-			Calendar cal=Calendar.getInstance();//캘린더는 추상클래스 new로 객체 생성을 못함**
-			int year=cal.get(Calendar.YEAR);//년도값
-			int month=cal.get(Calendar.MONTH)+1; //월값, +1 을 한 이유는 1월이 0 으로 반환 되기 때문
-			int date=cal.get(Calendar.DATE); //일값
-			
-			String homedir=saveFolder+"/"+year+"-"+month+"-"+date; //오늘 날짜 폴더 경로 저장 
-			File path01=new File(homedir);
 
-			if(!(path01.exists())) {
-				path01.mkdir(); //오늘 날짜 폴더 생성 
-				//난수 발생하는 건, 매스 랜덤 정적 메서드, 자바유틸 랜덤 클래스 두가지 방법이 있다.
-			}
-			Random r = new Random(); //난수를 발생시키는 클랫 
-			int random=r.nextInt(100000000); //0이상 1억 미만의 정수 숫자 난수 발생
-			
-			/*첨부 파일 확장자를 구함*/
-			int index=fileName.lastIndexOf(".");
-			//마침표를 맨 오른쪽부터 찾아서 가장 먼저 나오는 .의 위치 번호를  맨 왼쪽부터 카운터해서 반환 
-			//첫 문자는 0부터 시작 
-			String fileExtendsion=fileName.substring(index+1);//마침표 이후부터 마지막 문자까지 구함. 
-			//즉 첨부파일  확장자를 구함. 
-			String refileName="board"+year+month+date+random+"."+fileExtendsion;//새로운 파일명 저장 
-			String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;//데이터베이스에 저장될 레코드 값
-			upFile.renameTo(new File(homedir+"/"+refileName)); //생성된 폴더에 변경된 파일명으로 실제 업로드 
-			
-			b.setB_file(fileDBName);
-			
-		}else {//첨부파일이 없는 경우 
-			String fileDBName="";
-			b.setB_file(fileDBName);
-		}
-		
-		b.setB_title(b_title); b.setB_pwd(b_pwd); b.setB_cont(b_cont);
+		String nickname=request.getParameter("nickname");
+		String b_title=request.getParameter("b_title");
+		String b_cont=request.getParameter("b_cont");
+
+		b.setNickname(nickname);		
+		b.setB_title(b_title);
+		b.setB_cont(b_cont);
 				
 		this.boardService.insertBoard(b); //게시판 저장 
 		
@@ -170,7 +129,7 @@ public class BoardController {
 		      
 		      List<BoardVO> blist=this.boardService.getboardList(b); //검색 전후 목록
 		      //목록
-      
+		      System.out.println(blist);
 		      //총 페이지수
 		      int maxpage=(int)((double)totalCount/limit+0.95);
 		      //시작페이지(1,11,21 ..)
@@ -238,70 +197,20 @@ public class BoardController {
 			throws Exception{
 				response.setContentType("text/html;charset=UTF-8");//브라우저에 출력되는 문자와 태그 언어 코딩타입을 설정
 				PrintWriter out=response.getWriter();
-				String saveFolder=request.getRealPath("/upload/board");//이진파일 업로드 실제 경로를 구함.
-				int fileSize=5*1024*1024; //이진파일 업로드 최대 크기 
 				
-				MultipartRequest multi=null;//첨부한 파일을 받을 참조변수 
-				multi=new MultipartRequest(request,saveFolder,fileSize,"UTF-8");
 				
-				int b_no=Integer.parseInt(multi.getParameter("b_no"));
+				int b_no=Integer.parseInt(request.getParameter("b_no"));
 				int page=1;
-						if(multi.getParameter("page") !=null) {
-							page=Integer.parseInt(multi.getParameter("page"));
+						if(request.getParameter("page") !=null) {
+							page=Integer.parseInt(request.getParameter("page"));
 						}
-						String username=multi.getParameter("username");
-						String b_title=multi.getParameter("b_title");
-						String b_pwd=multi.getParameter("b_pwd");
-						String b_cont=multi.getParameter("b_cont");
+						String id=request.getParameter("nickname");						
+						String username=request.getParameter("username");
+						String b_title=request.getParameter("b_title");
+						String b_cont=request.getParameter("b_cont");
 						
-						BoardVO db_pwd=this.boardService.getBoardCont2(b_no);//DB로 부터 비번을 가져옴 
-						
-						if(!db_pwd.getB_pwd().contentEquals(b_pwd)) {
-							out.println("<script>");
-							out.println("alert('비밀번호가 다릅니다!');");
-							out.println("history.go(-1);");
-							out.println("</script>");
-						}else {
-							File upFile=multi.getFile("board_file");//첨부할 파일을 가져온다. 
-							if(upFile != null) {//첨부한 파일이 있는 경우
-								String fileName=upFile.getName();//첨부한 파일명을 구함
-								File delFile=new File(saveFolder+db_pwd.getB_file()); //삭제할 파일 객체 생성 
-								if(delFile.exists()) {//삭제할 파일이 존재하면 
-									delFile.delete();//기존 첨부파일 삭제 
-								}
-								Calendar cal=Calendar.getInstance();
-								int year=cal.get(Calendar.YEAR);
-								int month=cal.get(Calendar.MONTH)+1;
-								int date=cal.get(Calendar.DATE);
-								
-								String homedir=saveFolder+"/"+year+"-"+month+"-"+date;
-								File path01=new File(homedir);
-								if(!(path01.exists())) {path01.mkdir();}
-								Random r=new Random();
-								int random=r.nextInt(100000000);
-								
-								/*첨부파일 확장자 구함*/
-								int index=fileName.lastIndexOf(".");
-								//마침표를 맨 오른쪽부터 찾아서 가장 먼저 나오는 .의 위치 번호를  맨 왼쪽부터 카운터해서 반환 
-								//첫 문자는 0부터 시작 
-								String fileExtendsion=fileName.substring(index+1);//마침표 이후부터 마지막 문자까지 구함. 
-								//즉 첨부파일  확장자를 구함. 
-								String refileName="board"+year+month+date+random+"."+fileExtendsion;//새로운 파일명 저장 
-								String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;//데이터베이스에 저장될 레코드 값
-								upFile.renameTo(new File(homedir+"/"+refileName)); //생성된 폴더에 변경된 파일명으로 실제 업로드 
-								
-								eb.setB_file(fileDBName);
-								
-								}else {//수정 첨부파일을 하지 않았을 때
-									String fileDBName="";
-									if(db_pwd.getB_file()!=null) {
-										eb.setB_file(db_pwd.getB_file());
-																	
-									}else {
-										eb.setB_file(fileDBName);
-									}
-								}//수정 첨부파일을 첨부한 경우와 안한 경우 분기 조건문
-							eb.setB_no(b_no); eb.setUsername(username); eb.setB_title(b_title); eb.setB_cont(b_cont);
+						eb.setB_no(b_no); eb.setNickname(id); eb.setUsername(username); 
+						eb.setB_title(b_title); eb.setB_cont(b_cont);
 							
 							this.boardService.editboard(eb);//번호를 기준으로 글쓴이, 글제목, 글내용, 첨부파일 수정 
 							
@@ -310,37 +219,79 @@ public class BoardController {
 							em.addObject("page",page);
 							em.addObject("state","cont"); //state구분값
 							return em; //브라우저 주소창에 다음과 같이 실행된다. board_cont?board_no=번호&page=쪽번호&state=cont 즉 주소창에 노출되는 get 방식으로 3개의 인자값이 전달 된다. 
-						}
 						
-				return null;
+						
+				
 			
 			}//board_edit_ok
 			
 			//게시판 삭제 
 			@RequestMapping("/board_del_ok") //get or post양쪽 방식 모두 실행됨 board_no는 get방식, 그외 정보는 post이기 때문
-			public String board_del_ok(int b_no,int page,String del_pwd,HttpServletResponse response, HttpServletRequest request)
+			public String board_del_ok(int b_no,int page,HttpServletResponse response, HttpServletRequest request)
 			throws Exception{
 				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out=response.getWriter();
-				String up=request.getRealPath("/upload/board");
 				
-				BoardVO db_pwd=this.boardService.getBoardCont2(b_no);
-				if(!db_pwd.getB_pwd().equals(del_pwd)) {
-					out.println("<script>");
-					out.println("alert('비번이 다릅니다!');");
-					out.println("history.back()"); //history.go(-1); 와 같다
-					out.println("</script>");
-					
-				}else {
-					this.boardService.delboard(b_no);//번호를 기준으로 게시판 삭제 
-					if(db_pwd.getB_file() != null) {//첨부파일이 있는 경우
-						 File delFile=new File(up+db_pwd.getB_file()); //삭제할 파일 객체 생성 
-						 delFile.delete(); //폴더는 삭제 안되고 폴더 안의 파일만 삭제됨
-					}
-					return "redirect:/board_list?page="+page;
-				}
-					return null;
+				this.boardService.delboard(b_no);//번호를 기준으로 게시판 삭제 
+				
+				return "redirect:/board_list?page="+page;
+				
 			
 			}//board_del_ok()
+			
+			
+			//게시판 좋아요 
+			// 빈하트 클릭시 하트 저장
+			@ResponseBody
+			@RequestMapping(value = "/saveHeart", method = RequestMethod.GET, headers = "Accept=application/json")
+			public BoardVO save_heart(@RequestParam int b_no,  HttpSession session) {
+				BoardVO pto =new BoardVO();
+				LikesVO to = new LikesVO();
+
+			    // 게시물 번호 세팅
+			    to.setBoard_no(b_no);
+
+			    // 좋아요 누른 사람 nick세팅
+			    to.setNickname("member02");
+
+			    // +1된 하트 갯수를 담아오기위함
+			  
+			    		
+			    int result=boardService.SaveHeart(to);
+			    System.out.println(result);
+			    if(result==1) {
+			    		boardService.UpHeart(b_no);
+			    	 pto=boardService.CountHeart(pto);
+			    }
+			    
+			   
+			    return pto;
+			}
+
+			// 꽉찬하트 클릭시 하트 해제
+			@ResponseBody
+			@RequestMapping(value = "/removeHeart")
+			public BoardVO remove_heart(@RequestParam int b_no, HttpSession session) {
+				BoardVO pto =new BoardVO();
+				LikesVO to = new LikesVO();
+
+			    // 게시물 번호 세팅
+			    to.setBoard_no(b_no);
+
+			    // 좋아요 누른 사람 nick세팅
+			    to.setNickname((String) session.getAttribute("nick"));
+
+			    // -1된 하트 갯수를 담아오기위함
+			    
+		   		
+			    int result=boardService.RemoveHeart(to);
+			    
+			    if(result==1) {
+			    	 pto=boardService.CountHeart(pto);
+			    }
+			    
+			   
+
+			    return pto;
+			}
 			
 }
