@@ -62,7 +62,7 @@ public class LoginController {
 		System.out.println("userDetails:"+userDetails.getUsername());
 		request.getSession().setAttribute("id", principalDetails.getUsername());
 		request.getSession().setAttribute("pw", principalDetails.getPassword());
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	@GetMapping("/test/oauth/login")
@@ -78,13 +78,25 @@ public class LoginController {
 		request.getSession().setAttribute("pw", oauth2User.getName()); //수정예정
 	
 		//request.getSession().setAttribute("id", oauth2User.getAttribute);
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	
+	@RequestMapping("/addjoin")
+	public String OauthJoin(HttpServletRequest request,
+			Authentication authentication,
+			@AuthenticationPrincipal OAuth2User oauth){
+		
+		//로그인 할 때 검증해서 nickname 있으면 넘기고, 없으면 추가 정보 기입하게 하기 
+		
+	
+		return "redirect:/addjoin";
+	}
+	
+
 	@GetMapping({"","/"})
 	public String index() {
-		return "index";	
+		return "redirect:/index";	
 	}
 	
 	
