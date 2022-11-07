@@ -7,46 +7,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="rank">
 	<!-- 랭킹 수 -->
 	<select id="rank_count" resultType="java.lang.Integer">
-		select count(*) from ranking
+		select count(*) from memberVO m inner join ranking r on m.mno=r.r_no where mstate=0 and m.mrole='ROLE_USER'
 	</select>
 	
-	<!-- 랭킹 수2 -->
-	<select id="rank_count2" resultType="int">
-		select count(*) from membervo where maddr=#{r_province}
-	</select>
-
 	<!-- 로그인한 회원의 점수 -->
 	<select id="rank_loginpoint" resultType="int">
-		select r_sum from ranking where r_id=#{r_id}
+		select r_sum from memberVO m inner join ranking r on m.mno=r.r_no where m.username = #{rid}
 	</select>
 
 	<!-- 총합 점수 업데이트 -->
 	<update id="rank_editAvg">
-		update ranking set r_sum=r_sum+#{s_sumscore},r_maxrange=#{s_range} where r_id=#{s_id}
+		<!-- update ranking set r_sum=r_sum+#{s_sumscore},r_maxrange=#{s_range} where r_id=#{s_id} -->
+		update ranking set r_sum=r_sum+#{s_sumscore},r_maxrange=#{s_range} where r_no=(select r_no from memberVO m inner join ranking r on m.mno = r.r_no where username=#{s_id})
 	</update>
 	
 	<!-- 회원가입과 동시에 랭킹레코드 발생 -->
 	<insert id="rank_insert">
-		insert into ranking(r_no,r_id,r_sum,r_nickname) values(rno_seq.nextval,#{r_id},9999,#{r_nickname})
+		insert into ranking(r_no) values((select max(mno) from memberVO))
 	</insert>
 	
 	<!-- r_sum의 초기값 9999를 0으로 리셋 -->
 	<update id="rank_reset">
-		update ranking set r_sum=0 where r_id=#{s_id}
+		update ranking set r_sum=0 where r_no=(select r_no from memberVO m inner join ranking r on m.mno = r.r_no where username=#{s_id})
 	</update>
 	
-	<!-- 1~5위까지 랭크리스트 얻어오기 -->
+	<!-- 랭크리스트 얻어오기(rankingVO기준) -->
 	<select id="rank_list" resultType="rank">
-		select * from ranking order by r_sum asc
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' order by r_sum asc
 	</select>
 	
-	<!-- 닉네임 반환 -->
-	<select id="rank_name" resultType="String">
-		select r_nickname from ranking order by r_sum asc
+	<!-- 랭크리스트 얻어오기(MemberVO기준) -->
+	<select id="rank_list2" resultType="member">
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' order by r_sum asc
 	</select>
 	
 	<!-- 아이디에 맞는 닉네임 하나 반환 -->
 	<select id="rank_onenickname" resultType="String">
-		select r_nickname from ranking where r_id=#{sc_id}
+		select nickname from memberVO where username=#{sc_id}
 	</select>
+	
 </mapper>

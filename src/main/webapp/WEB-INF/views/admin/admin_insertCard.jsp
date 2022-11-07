@@ -42,7 +42,7 @@
 			</c:if>
 			
 			<c:if test="${empty needList }">
-				<td colspan=3>업데이트할 스코어카드가 없습니다.</td>
+				<td colspan=4>업데이트할 스코어카드가 없습니다.</td>
 			</c:if>
 		</table>
 	</div>

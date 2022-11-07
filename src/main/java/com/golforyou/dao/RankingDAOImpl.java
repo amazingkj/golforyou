@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.ScorecardVO;
 
@@ -20,13 +21,6 @@ public class RankingDAOImpl implements RankingDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("rank_count");
 	}
-
-	@Override
-	public int memberCount(String prov) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("rank_count2", prov);
-	}
-
 
 	@Override
 	public int playCount(String r_id) {
@@ -65,15 +59,15 @@ public class RankingDAOImpl implements RankingDAO {
 	}
 
 	@Override
-	public List<String> getRankName() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("rank_name");
-	}
-
-	@Override
 	public String getNickname(String sc_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("rank_onenickname", sc_id);
+	}
+
+	@Override
+	public List<MemberVO> getRankList2() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rank_list2");
 	}
 
 	

@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 로그인한 경우 순위 -->
 	<select id="sc_row" resultType="String">
-		select r_id from (select * from ranking order by r_sum asc)
+		select username from (select * from memberVO m inner join ranking r on m.mno = r.r_no order by r.r_sum asc)
 	</select>
 	
 	<!-- 날짜 가져오기 -->
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- sortdate값 만들기 -->
 	<update id="sc_sort">
-		update score_card set s_sort=#{s_sort} where s_id=#{sc_id} and s_no=#{sc_no}
+		update score_card set s_sort=#{numdate} where s_id=#{sc_id} and s_no=#{sc_no}
 	</update>
 	
 	<!-- scorecard 삭제 -->

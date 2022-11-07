@@ -84,7 +84,7 @@ public class LoginController {
 	
 	@GetMapping({"","/"})
 	public String index() {
-		return "index";	
+		return "redirect:/index";	
 	}
 	
 	
@@ -191,24 +191,12 @@ public class LoginController {
 		member.setMrole("ROLE_USER");
 		member.setMstate(0); //default;
 		
-		
-		/* 회원가입과 동시에 ranking에 추가 */
-		String r_id = member.getUsername();
-		String r_nickname = member.getNickname();
-		System.out.println("r_id : "+r_id);
-
-		RankingVO r = new RankingVO();
-		
-		r.setR_id(r_id);
-		r.setR_nickname(r_nickname);
-
-		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
-		/* 회원가입과 동시에 ranking에 추가 끝 */
-		
 		String rawPassword = member.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		member.setPassword(encPassword);
 		MemberVO m = userRepository.save(member);//회원가입 잘됨
+		RankingVO r = new RankingVO();
+		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
 
 		mailsender.insertMemberEmail(m);
 		

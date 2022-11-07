@@ -305,6 +305,7 @@ public class ScBoardController {
 		sc_playdate = sc_playdate.replace("-", "_"); //2022-01-01을 2022_01_01로
 		String sc_title = request.getParameter("sc_title");
 		String sc_cont = request.getParameter("sc_cont");
+		String filecheck = request.getParameter("file_route");
 		
 		sb.setSc_no(sc_no);
 		sb.setSc_id(sc_id);
@@ -313,50 +314,55 @@ public class ScBoardController {
 		sb.setSc_title(sc_title);
 		sb.setSc_cont(sc_cont);
 		
-		file = request.getFile("file");
-		
-		if(file != null) { //첨부파일 있는경우
-			Calendar c = Calendar.getInstance();
-			int year = c.get(Calendar.YEAR); //년도
-			int month = c.get(Calendar.MONTH)+1; //1월이 0이라 +1
-			int date = c.get(Calendar.DATE);
+		if(!filecheck.equals("스코어카드 사진을 올리세요")) {
+			file = request.getFile("file");
 			
-			String homedir = "";
-			if(month >= 1 && month <= 9) {
-				homedir = saveFolder+"/"+year+"-"+"0"+month+"-"+date; //폴더경로 저장
-			}else if(month >= 10 && month <= 12) {
-				homedir = saveFolder+"/"+year+"-"+month+"-"+date; //폴더경로 저장
+			if(file != null) { //첨부파일 있는경우
+				Calendar c = Calendar.getInstance();
+				int year = c.get(Calendar.YEAR); //년도
+				int month = c.get(Calendar.MONTH)+1; //1월이 0이라 +1
+				int date = c.get(Calendar.DATE);
+				
+				String homedir = "";
+				if(month >= 1 && month <= 9) {
+					homedir = saveFolder+"/"+year+"-"+"0"+month+"-"+date; //폴더경로 저장
+				}else if(month >= 10 && month <= 12) {
+					homedir = saveFolder+"/"+year+"-"+month+"-"+date; //폴더경로 저장
+				}
+				File path01 = new File(homedir);
+				if(!(path01.exists())) { //여기서 폴더생성이 안되고있음?
+					path01.mkdirs(); //풀더 생성
+					System.out.println("폴더생성 완료.");
+				}
+				
+				String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
+				String refileName = sc_playdate+"_"+sc_no+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
+				String fileDBName = ""; //DB에 저장되는 경로명
+				if(month >= 1 && month <= 9) {
+					fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
+				}else if(month >= 10 && month <= 12) {
+					fileDBName = "/"+year+"-"+month+"-"+date+"/"+refileName;
+				}
+				Path filePath = Paths.get(homedir+"/"+refileName);
+				if(new File("/"+homedir+"/"+refileName).exists()) {
+					Files.delete(filePath);
+				}			
+				File saveFile = new File("/"+homedir+"/"+refileName);
+				
+				try {
+					file.transferTo(saveFile); //새롭게 생성된 폴더 경로에 변경된 파일로 실제 업로드
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				sb.setSc_file(fileDBName);
+				
 			}
-			File path01 = new File(homedir);
-			if(!(path01.exists())) { //여기서 폴더생성이 안되고있음?
-				path01.mkdirs(); //풀더 생성
-				System.out.println("폴더생성 완료.");
-			}
-			
-			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename()); //파일 확장자
-			String refileName = sc_playdate+"_"+sc_no+"_"+sc_id+"."+fileExtension; //새로운 파일첨부명
-			String fileDBName = ""; //DB에 저장되는 경로명
-			if(month >= 1 && month <= 9) {
-				fileDBName = "/"+year+"-"+"0"+month+"-"+date+"/"+refileName;
-			}else if(month >= 10 && month <= 12) {
-				fileDBName = "/"+year+"-"+month+"-"+date+"/"+refileName;
-			}
-			Path filePath = Paths.get(homedir+"/"+refileName);
-			if(new File("/"+homedir+"/"+refileName).exists()) {
-				Files.delete(filePath);
-			}			
-			File saveFile = new File("/"+homedir+"/"+refileName);
-			
-			try {
-				file.transferTo(saveFile); //새롭게 생성된 폴더 경로에 변경된 파일로 실제 업로드
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			sb.setSc_file(fileDBName);
-			
+		}else {
+			ScboardVO scfile = scBoardService.getScBoardCont(sc_no);
+			sb.setSc_file(scfile.getSc_file());
 		}
-		
+				
 		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
 		
 		scBoardService.updateBoard(sb);

@@ -181,10 +181,7 @@ private MypageService mypageService;
 		System.out.println(m);
 		this.mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 
 		System.out.println("test");
-	
-		this.mypageService.updateProvince(r);
-		
-		
+
 		return new ModelAndView("redirect:/mypage");
 		
 	}//profileEdit_ok()

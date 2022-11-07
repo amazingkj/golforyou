@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.golforyou.service.RankingService;
 import com.golforyou.vo.RankingVO;
+import com.golforyou.vo.MemberVO;
 
 @Controller
 public class RankingController {
@@ -23,12 +24,12 @@ public class RankingController {
 	@GetMapping("/ranking")
 	public ModelAndView ranking(RankingVO rv, HttpServletRequest request) {
 		ModelAndView rm = new ModelAndView("/tier/ranking");
-		String prov = request.getParameter("prov");
 		
 		int mem=0;		
 		mem = rankingService.memberCount(); //ranking테이블에 있는 레코드 개수(회원수)
 		
 		List<RankingVO> rankList = rankingService.getRankList();
+		List<MemberVO> rankList2 = rankingService.getRankList2();
 		
 		List<String> rankid = new ArrayList<>(); 
 		List<String> rankname = new ArrayList<>();
@@ -37,20 +38,20 @@ public class RankingController {
 		List<String> province = new ArrayList<>();
 		
 		for(int i=0 ; i<rankList.size() ; ++i) {
-			rankid.add(rankList.get(i).getR_id());
-			rankname.add(rankList.get(i).getR_nickname());
+			rankid.add(rankList2.get(i).getUsername());
+			rankname.add(rankList2.get(i).getNickname());
 			rankpoint.add(rankList.get(i).getR_sum());
 			bestrange.add(rankList.get(i).getR_maxrange());
 			province.add(rankList.get(i).getR_province());
 		}		
 		
 		List<Integer> count = new ArrayList<>();
-		for(int i=0 ; i<mem ; ++i) {
+		for(int i=0 ; i<rankList.size() ; ++i) {
 			count.add(rankingService.playCount(rankid.get(i))); //플레이횟수							
 		}
 	
 		List<String> fileaddr = new ArrayList<>();
-		for(int i=0 ; i<mem ; ++i) {
+		for(int i=0 ; i<rankList.size() ; ++i) {
 			fileaddr.add(""); //프로필 사진 경로
 		}
 		
@@ -60,7 +61,6 @@ public class RankingController {
 		rm.addObject("rankpoint", rankpoint);
 		rm.addObject("bestrange", bestrange);
 		rm.addObject("province", province);
-		rm.addObject("prov", prov);
 		rm.addObject("mem",mem);		
 		rm.addObject("fileaddr", fileaddr);
 				
