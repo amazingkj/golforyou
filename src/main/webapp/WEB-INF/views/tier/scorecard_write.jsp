@@ -25,6 +25,11 @@
 			$('#sc_cont').val('').focus();
 			return false;
 		}
+		if($.trim($('#sc_playdate').val()) == ''){
+			alert('날짜를 입력하세요');
+			$('#sc_playdate').val('').focus();
+			return false;
+		}
 	}
 </script>
 

@@ -25,5 +25,6 @@
 		<typeAlias type="com.golforyou.vo.BoardReplyVO" alias="br" />
 		<typeAlias type="com.golforyou.vo.GolfcouseVO" alias="golfcouse" />
 		<typeAlias type="com.golforyou.vo.Gc_replyVO" alias="Gc_Reply"/> 
+		<typeAlias type="com.golforyou.vo.AbBoardVO" alias="abboard" />
 	</typeAliases>
 </configuration>

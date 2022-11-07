@@ -37,12 +37,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 날짜 구하기 -->
 	<select id="sc_makedate" resultType="String">
-		select s_date from score_card where s_id=#{sc_id} and s_no=#{sc_no}
+		select s_date from score_card where s_no=#{sc_no}
 	</select>
 	
 	<!-- sortdate값 만들기 -->
 	<update id="sc_sort">
-		update score_card set s_sort=#{numdate} where s_id=#{sc_id} and s_no=#{sc_no}
+		update score_card set s_sort=#{numdate} where s_no=#{sc_no}
 	</update>
 	
 	<!-- scorecard 삭제 -->

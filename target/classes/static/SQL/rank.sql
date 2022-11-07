@@ -32,7 +32,6 @@ create table ranking(
 r_no number(38)
 ,r_sum number(38)
 ,r_maxrange number(38)
-,r_province varchar2(50)
 );
 
 create sequence test_scboard_seq

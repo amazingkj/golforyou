@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
-import com.golforyou.vo.LikesVO;
 
 public interface BoardService {
 	
@@ -47,9 +46,11 @@ public interface BoardService {
 
 	void delReply(int r_no);
 
-	int RemoveHeart(LikesVO to);
-
-	int SaveHeart(LikesVO to);
+	/*
+	 * int RemoveHeart(LikesVO to);
+	 * 
+	 * int SaveHeart(LikesVO to);
+	 */
 
 	BoardVO CountHeart(BoardVO pto);
 

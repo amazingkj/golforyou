@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="abboard">
+	<!-- 조회수 증가 -->
+	 <update id="ab_board_hi" parameterType="int">
+     update abboard set abboard_hit=abboard_hit+1 
+     where abboard_no=#{abboard_no}
+    </update>
+	<!-- 검색전후 레코드 개수 -->
+	<select id="ab_count" parameterType="abboard" resultType="int">
+		select count(abboard_no) from abboard
+		<where>
+			<if test="find_field == ''">
+				<!-- 검색조건이 없어서 총레코드 개수 -->
+			</if>
+			<if test="find_field == 'abboard_title'">
+				<!-- 검색 조건이 제목인 경우 -->
+				abboard_title like #{find_name} <!-- like는 오라클 검색 연산자 -->
+			</if>
+			<if test="find_field == 'abboard_cont'">
+				abboard_cont like #{find_name}
+			</if>
+		</where>
+	</select>
+
+	<!-- 검색 전후 목록 -->
+	<select id="ab_list" resultType="abboard">
+		<!-- resultType 속성은 반환 타입 -->
+		select * from
+		(select rowNum
+		rNum,abboard_no,abboard_name,abboard_title,
+		abboard_hit,abboard_ref,abboard_step,abboard_level,abboard_date
+		from
+		(select * from abboard
+		<where>
+			<if test="find_field == ''">
+				<!-- 검색조건이 없어서 총레코드 개수 -->
+			</if>
+			<if test="find_field == 'abboard_title'">
+				<!-- 검색 조건이 제목인 경우 -->
+				abboard_title like #{find_name} <!-- like는 오라클 검색 연산자 -->
+			</if>
+			<if test="find_field == 'abboard_cont'">
+				abboard_cont like #{find_name}
+			</if>
+		</where>
+		order by abboard_ref desc,
+		abboard_level asc))
+		where rNum &gt;=
+		#{startrow} and rNum &lt;= #{endrow}
+		<!-- &gt;은 ~보다 크다(>), &lt;은 ~보다 작다(<) -->
+	</select>
+
+	<!-- 관리자 게시판 저장 -->
+	<insert id="ab_in" parameterType="abboard">
+		insert into abboard
+		(abboard_no,abboard_name,abboard_title,
+		abboard_cont,abboard_ref,abboard_step,abboard_level,
+		abboard_date)
+		values(abboard_no_seq.nextval,#{abboard_name},
+		#{abboard_title},#{abboard_cont},
+		abboard_no_seq.nextval,0,0,sysdate)
+	</insert>
+
+	<!-- 관리자 게시판 내용보기+수정폼 -->
+	<select id="ab_cont" parameterType="int" resultType="abboard">
+		select *
+		from abboard where abboard_no=#{abboard_no}
+	</select>
+
+	<!-- 관리자 게시판 수정완료 -->
+	<update id="ab_edit">
+		update abboard set
+		abboard_name=#{abboard_name},
+		abboard_title=#{abboard_title},
+		abboard_cont=#{abboard_cont} where
+		abboard_no=#{abboard_no}
+	</update>
+
+	<!-- 관리자 게시판 삭제 -->
+	<delete id="ab_del">
+		delete from abboard where abboard_no=#{no}
+	</delete>
+</mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
