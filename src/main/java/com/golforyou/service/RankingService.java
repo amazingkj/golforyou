@@ -26,5 +26,7 @@ public interface RankingService {
 
 	List<MemberVO> getRankList2();
 
+	int getPoint(int mno);
+
 	
 }

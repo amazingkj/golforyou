@@ -46,4 +46,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select nickname from memberVO where username=#{sc_id}
 	</select>
 	
+	<!-- 점수 반환 -->
+	<select id="rank_point" resultType="int">
+		select r_sum from memberVO m inner join ranking r on m.mno=r.r_no where m.mno=#{mno}
+	</select>
+	
 </mapper>

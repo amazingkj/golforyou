@@ -157,5 +157,11 @@ public class ScBoardServiceImpl implements ScBoardService {
 		// TODO Auto-generated method stub
 		scBoardDAO.setScnotice2(sc_no);
 	}
+
+	@Override
+	public List<ScboardVO> getBoardListNotice(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getBoardListNotice(sb);
+	}
 	
 }

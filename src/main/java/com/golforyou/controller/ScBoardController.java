@@ -74,6 +74,7 @@ public class ScBoardController {
 		sb.setEndrow(sb.getStartrow()+limit-1);
 		
 		List<ScboardVO> sclist = scBoardService.getBoardList(sb); //게시판 목록 리스트
+		List<ScboardVO> sclist_notice = scBoardService.getBoardListNotice(sb); //게시판 목록 리스트
 		
 		String id = (String)session.getAttribute("id");
 		
@@ -87,6 +88,7 @@ public class ScBoardController {
 		
 		listM.addAttribute("id", id);
 		listM.addAttribute("sclist", sclist);
+		listM.addAttribute("sclist_notice", sclist_notice);
 		listM.addAttribute("page", page);
 		listM.addAttribute("startpage", startpage);
 		listM.addAttribute("endpage", endpage);

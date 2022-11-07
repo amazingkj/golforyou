@@ -33,9 +33,9 @@
 					<th width="9%">조회수</th>
 				</tr>
 				
-				<c:forEach var="s" items="${sclist }">
-				<c:if test="${s.sc_notice == 1 && find_name.equals('') }">
-					<tr style="background-color:#DCF4F5">
+				<c:forEach var="s" items="${sclist_notice }">
+				<c:if test="${s.sc_notice == 1 }">
+					<tr style="background-color:#D7F5D2">
 						<td width="7%"><c:if test="${s.sc_step == 0 }">공지</c:if></td>
 						<td width="52%">
 							<c:if test="${s.sc_step != 0 }"> <%-- 답변글일때만 실행, 들여쓰기와 답변글 이미지가 나옴 --%>

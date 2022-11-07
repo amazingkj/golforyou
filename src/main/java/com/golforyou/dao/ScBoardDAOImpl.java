@@ -158,5 +158,11 @@ public class ScBoardDAOImpl implements ScBoardDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update("scb_notice2",sc_no);
 	}
+
+	@Override
+	public List<ScboardVO> getBoardListNotice(ScboardVO sb) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("scb_noticelist",sb);
+	}
 	
 }

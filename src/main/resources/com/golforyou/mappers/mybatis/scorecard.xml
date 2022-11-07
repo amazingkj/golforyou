@@ -69,12 +69,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 업데이트 해야할 스코어카드 갯수 찾기 -->
 	<select id="sc_needCount" resultType="int">
-		select count(*) from score_card where s_updated=0
+		select count(*) from score_card s inner join memberVO m on s.s_id=m.username where s_updated=0 and mrole='ROLE_USER'
 	</select>
 	
 	<!-- 업데이트 해야할 스코어카드 목록 -->
 	<select id="sc_needList" resultType="sc">
-		select * from (select rowNum rNum,s_no,s_id,s_date,s_sort,s_nickname from (select * from score_card order by s_sort asc) where s_updated=0) where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
+		select * from (select rowNum rNum,s_no,s_id,s_date,s_sort,s_nickname from (select * from score_card s inner join memberVO m on s.s_id=m.username order by s_sort asc) where s_updated=0 and mrole='ROLE_USER') where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
 	</select>
 	
 	<!-- 업데이트된 스코어카드 갯수 반환 -->

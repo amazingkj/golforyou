@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.sql.*, java.util.*, javax.sql.*, javax.naming.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/admin_insertCard2.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 <br/>

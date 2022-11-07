@@ -44,7 +44,7 @@
 			<tr height="58%">
 				<th>
 					<hr style="border:0; padding:0.5px; background-color:grey; width:80%;">
-					<textarea class="sccont_text" readonly >${sb.sc_cont }</textarea>
+					<textarea class="sccont_text" readonly style="resize:none">${sb.sc_cont }</textarea>
 				</th>
 			</tr>
 			

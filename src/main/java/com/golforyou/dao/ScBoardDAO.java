@@ -57,4 +57,6 @@ public interface ScBoardDAO {
 
 	void setScnotice2(int sc_no);
 
+	List<ScboardVO> getBoardListNotice(ScboardVO sb);
+
 }

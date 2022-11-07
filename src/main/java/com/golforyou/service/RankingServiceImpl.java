@@ -69,5 +69,11 @@ public class RankingServiceImpl implements RankingService {
 		// TODO Auto-generated method stub
 		return rankingDAO.getRankList2();
 	}
+
+	@Override
+	public int getPoint(int mno) {
+		// TODO Auto-generated method stub
+		return rankingDAO.getPoint(mno);
+	}
 	
 }

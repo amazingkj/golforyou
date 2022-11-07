@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
 import com.golforyou.service.MypageService;
+import com.golforyou.service.RankingService;
 import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.WithdrawalVO;
@@ -40,16 +41,17 @@ import com.golforyou.vo.WithdrawalVO;
 @Controller
 public class MypageController {
 	
-@Autowired
-private UserRepository userRepository;
-
-@Autowired
-private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
-@Autowired 
-private MypageService mypageService;
+	@Autowired
+	private UserRepository userRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	
+	@Autowired 
+	private MypageService mypageService;
+	@Autowired
+	private RankingService rankingService;
 
 
 	//마이페이지 메인
@@ -60,17 +62,46 @@ private MypageService mypageService;
 		String username=principalDetails.getUsername();
 		
 		MemberVO member = userRepository.findByUsername(username);
-
+		
+		int mno = member.getMno();
 		String nickname=request.getParameter("nickname"); 
 		String maddr=request.getParameter("maddr"); 
 		String mfile=request.getParameter("mfile");
 		
+		int tierNum = rankingService.getPoint(mno);
+		String tier = "";
+		String tierStr = "";
+		String tierURL = "";
+		
+		if(tierNum < -15){
+			tier = "d.png";
+			tierStr = "다이아몬드";
+			tierURL = "/images/t_"+tier;
+		}else if(tierNum >= -15 && tierNum < -10){
+			tier = "p.png";
+			tierStr = "플레티넘";
+			tierURL = "/images/t_"+tier;
+		}else if(tierNum >= -10 && tierNum < -5){
+			tier = "g.png";
+			tierStr = "골드";
+			tierURL = "/images/t_"+tier;
+		}else if(tierNum >= -5 && tierNum < 5){
+			tier = "s.png";
+			tierStr = "실버";
+			tierURL = "/images/t_"+tier;
+		}else{
+			tier = "b.png";
+			tierStr = "브론즈";
+			tierURL = "/images/t_"+tier;
+		}
 	
 			ModelAndView m=new ModelAndView("mypage/main");
 			m.addObject("m",member);//m 키이름에 em객체 저장 
 			m.addObject("nickname",nickname);
 			m.addObject("maddr",maddr);
 			m.addObject("mfile",mfile);
+			m.addObject("tierURL",tierURL);
+			m.addObject("tierStr",tierStr);
 			return m;
 		
 	}//mypage()
