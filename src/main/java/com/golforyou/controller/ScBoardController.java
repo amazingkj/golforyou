@@ -2,6 +2,7 @@ package com.golforyou.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -99,10 +100,11 @@ public class ScBoardController {
 	
 	//스코어카드 게시판 내용보기(+수정,답변,삭제)
 	@RequestMapping(value="/scorecard_cont")
-	public ModelAndView scorecard_cont(@RequestParam("sc_no") int sc_no, String state, int page, ScboardVO sb, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView scorecard_cont(@RequestParam("sc_no") int sc_no, String state, int page, ScboardVO sb, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		ModelAndView scm = new ModelAndView();
 		
 		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		
 		String sc_id = (String)session.getAttribute("id");
 		String roleCheck = scBoardService.getroleCheck(sc_id);
@@ -119,7 +121,7 @@ public class ScBoardController {
 			sb = this.scBoardService.getScBoardCont2(sc_no); //다른데서 들어가면 조회수증가 없음
 		}
 		System.out.println(sb.getSc_cont());
-		String sc_cont = sb.getSc_cont().replace("\n", "<br>");
+		String sc_cont = sb.getSc_cont().replace("\n", "<br/>");
 		
 		//scm.addObject("no",sc_no);
 		scm.addObject("id",sc_id);
@@ -401,6 +403,25 @@ public class ScBoardController {
 		scBoardService.delBoard(sb);
 		
 		return "redirect:/scorecard_list?page="+page;
-	}		
+	}
+	
+	@RequestMapping(value="/scorecard_notice")
+	public String scorecard_notice(HttpServletRequest request) {
+		int page = 1;
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		int sc_no = Integer.parseInt(request.getParameter("sc_no"));
+		
+		int noticecheck = scBoardService.getScBoardCont(sc_no).getSc_notice();
+		
+		if(noticecheck == 0) {
+			scBoardService.setScnotice(sc_no);
+		}else if(noticecheck == 1) {
+			scBoardService.setScnotice2(sc_no);
+		}
+		
+		return "redirect:/scorecard_list?page="+page;
+	}
 	
 }

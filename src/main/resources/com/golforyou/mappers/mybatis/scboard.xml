@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시판 내용 -->
 	<select id="scb_list" parameterType="scb" resultType="Scb">
 		select * from (
-		select rowNum rNum,sc_no,sc_id,sc_name,sc_title,sc_hit,sc_ref,sc_step,sc_level,sc_date from(
+		select rowNum rNum,sc_no,sc_id,sc_name,sc_title,sc_hit,sc_ref,sc_step,sc_level,sc_date,sc_notice from(
 		select * from scboard
 		<where>
 			<if test="find_field == ''"></if> <!-- 검색전 기준. 검색어 입력하지 않으면 전체목록 -->
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 내용보기 -->
 	<select id="scb_cont" parameterType="scb" resultType="Scb">
-		select sc_no,sc_id,sc_title,sc_cont,sc_file,sc_hit,sc_playdate,sc_ref from scboard where sc_no=#{sc_no}
+		select sc_no,sc_id,sc_title,sc_cont,sc_file,sc_hit,sc_playdate,sc_ref,sc_notice from scboard where sc_no=#{sc_no}
 	</select>
 	
 	<!-- 글쓰기 -->
@@ -111,4 +111,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="scb_justfile" resultType="String">
 		select sc_file from scboard where sc_no=#{no}
 	</select>
+	
+	<!-- 공지사항 등록 -->
+	<update id="scb_notice">
+		update scboard set sc_notice=1 where sc_no=#{sc_no}
+	</update>
+	
+	<!-- 공지사항 등록해제 -->
+	<update id="scb_notice2">
+		update scboard set sc_notice=0 where sc_no=#{sc_no}
+	</update>
 </mapper>

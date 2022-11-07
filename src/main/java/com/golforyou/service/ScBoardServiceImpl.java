@@ -145,5 +145,17 @@ public class ScBoardServiceImpl implements ScBoardService {
 		// TODO Auto-generated method stub
 		return scBoardDAO.getScorecardList(rid);
 	}
+
+	@Override
+	public void setScnotice(int sc_no) {
+		// TODO Auto-generated method stub
+		scBoardDAO.setScnotice(sc_no);
+	}
+
+	@Override
+	public void setScnotice2(int sc_no) {
+		// TODO Auto-generated method stub
+		scBoardDAO.setScnotice2(sc_no);
+	}
 	
 }

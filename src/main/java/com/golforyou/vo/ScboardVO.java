@@ -17,6 +17,7 @@ public class ScboardVO {
 	private int sc_level;
 	private String sc_date;
 	private int s_sort;
+	private int sc_notice;
 	
 	//쪽나누기용 변수
 	private int startrow; //시작행 번호

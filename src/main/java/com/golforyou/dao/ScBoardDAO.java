@@ -53,4 +53,8 @@ public interface ScBoardDAO {
 
 	List<ScorecardVO> getScorecardList(String rid);
 
+	void setScnotice(int sc_no);
+
+	void setScnotice2(int sc_no);
+
 }

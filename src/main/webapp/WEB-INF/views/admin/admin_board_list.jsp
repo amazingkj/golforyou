@@ -17,6 +17,7 @@
 
 
 <body>
+	<form>
 	<div class="left_navi"
 		style="margin-top: 260px; z-index: 2; position: absolute;">
 		<h3>고객센터</h3>
