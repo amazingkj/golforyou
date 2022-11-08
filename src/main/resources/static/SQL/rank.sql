@@ -27,7 +27,6 @@ s_no number(38)
 ,s_updated number(38) default 0
 ,s_strike number(38)
 ,s_obandhazard number(38)
-,s_nickname varchar2(255)
 );
 
 create table ranking(
