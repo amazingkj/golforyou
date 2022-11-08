@@ -55,4 +55,10 @@
  	 	<select id="member_rolecheck" resultType="String">
  	 		select mrole from memberVO where username=#{sc_id}
  	 	</select>
+ 	 	<!-- addjoin -->
+ 	 	<update id="updateaddjoin">
+ 	 		update MemberVO set mphone=#{mphone}, nickname=#{nickname}, maddr=#{maddr} where username=#{username}
+ 	 	</update>
+ 	 	
+ 	 	
 </mapper>

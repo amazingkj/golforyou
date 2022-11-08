@@ -1,10 +1,7 @@
 package com.golforyou.controller;
 
-
-
-
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,12 +61,23 @@ public class LoginController {
 		request.getSession().setAttribute("pw", principalDetails.getPassword());
 		
 		MemberVO m= loginService.getMember(principalDetails.getUsername());
+		
+		if(m.getNickname()==null || m.getMphone()==null) {
+			
+			return "redirect:/addjoin";
+			
+		}else {
+			
+		
 		request.getSession().setAttribute("nickname", m.getNickname());
 
 		System.out.println(m.getNickname()); 
 		
 		return "redirect:/index";
+		}
+		
 	}
+	
 	
 	@GetMapping("/test/oauth/login")
 	public String testOauthLogin(HttpServletRequest request,
@@ -82,16 +90,18 @@ public class LoginController {
 		System.out.println("oauth2user:"+oauth.getAttributes());
 		System.out.println("getname?:"+oauth2User.getName());
 		
+		
+		
+		
 		request.getSession().setAttribute("id", oauth2User.getName());
 		request.getSession().setAttribute("pw", oauth2User.getName()); //수정예정
 		request.getSession().setAttribute("nickname", oauth2User.getName()); 
 		//request.getSession().setAttribute("id", oauth2User.getAttribute);
-		
 		//MemberVO m= loginService.getMember(oauth2User.getNickname());
 		//System.out.println(m);
 		//request.getSession().setAttribute("nickname", m.getNickname());
-
 		
+				
 		return "redirect:/index";
 	}
 	
@@ -104,7 +114,7 @@ public class LoginController {
 		//로그인 할 때 검증해서 nickname 있으면 넘기고, 없으면 추가 정보 기입하게 하기 
 		
 	
-		return "redirect:/addjoin";
+		return "member/addjoin";
 	}
 	
 
@@ -244,9 +254,6 @@ public class LoginController {
 			
 		}//findPwd()
 		
-		
-
-//	
 //			@RequestMapping("/findPwdValidate")
 //		    public ModelAndView findPwd_ok(String email, HttpServletRequest request) {
 //		        System.out.println("테스트");
@@ -266,8 +273,6 @@ public class LoginController {
 //		        return count;
 //		        ModelAndView m=new ModelAndView("findPwd_ok");
 //		     
-//		        
-//		        
 //		    }
 	
 		
@@ -292,15 +297,12 @@ public class LoginController {
 				mailsender.findPwdMail(email);
 				//메일로 보내진 authnumber를 비번으로 등록
 				
-			
 			}
 			
-			
 			return "member/findPwd_ok";
-			
+		
 		}
 		
-	
 	//@Secured("ROLE_ADMIN") 이렇게 쓰거나 
 	//@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole()")  _ 두 개 이상 걸고 싶을 때 이렇게 사용 : 함수 시작 전, 
 	@Secured("ROLE_ADMIN")
@@ -308,6 +310,38 @@ public class LoginController {
 	public @ResponseBody String info() {
 		return "개인정보";
 	}
+	
+	//@SuppressWarnings("null")
+		@RequestMapping("addjoin_ok")
+		public ModelAndView profileEdit_ok(MemberVO m, HttpServletRequest request, HttpServletResponse response, HttpSession session, Authentication authentication,
+				@AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{
+			response.setContentType("text/html;charset=UTF-8");
+	
+			PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+	     	System.out.println(principalDetails);
+			
+	     		String username=principalDetails.getUsername();
+				String nickname=request.getParameter("nickname"); 
+				String mphone=request.getParameter("mphone"); 
+				String memail=request.getParameter("memail");
+				String maddr=request.getParameter("maddr");
+			
+			
+			m.setUsername(username);
+			m.setNickname(nickname); 
+			m.setMphone(mphone); 
+			m.setMemail(memail);
+			m.setMaddr(maddr);
+			
+			//System.out.println(m);
+			loginService.updateMember(m);//username 기준으로 닉네임, 휴대폰, maddr update
+			
+		
+			return new ModelAndView("redirect:/test/login");
+			
+		}//profileEdit_ok()
+
+	
 	
 
 }

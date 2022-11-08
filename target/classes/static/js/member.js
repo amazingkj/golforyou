@@ -151,15 +151,8 @@ function joinOauth_check(){
     }
     
 
-    if ($.trim($('input[name=mgender]:radio:checked').val()) == '') {
-        alert('성별을 선택하세요');
-        $('#mphone').focus();
-        return false;
-     }
-     
-  
       $("#frm").submit();
-      alert("회원가입을 축하합니다");
+      alert("반영되었습니다.");
      
      
 }
