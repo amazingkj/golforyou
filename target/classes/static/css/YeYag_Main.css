@@ -55,17 +55,60 @@ span{
     list-style: none;
    
 }
-ul li button{
+
+
+#info_button{
 	float:left;  
 	font-size:20px; 
     font-weight:80px;
     margin-left:40px;
     width:100px;
+    height:30px;
     background-color: white;
     border:0;
-    outlineL0;
-    
+    outlineL0;	
 }
+
+.gc_button1{
+	
+	font-size:15px; 
+    font-weight:80px;
+    margin-left:50%;
+    width:100px;
+    height:30px;
+    background-color: #00ff00;
+    border:0;
+    outlineL0;	
+}
+
+.gc_button2{
+	
+	font-size:15px;
+	 margin-left:50px; 
+    width:70px;
+    height:30px;
+    background-color: #00ff00;
+    border:0;
+    outlineL0;	
+}
+
+
+.gc_button3{
+	
+	font-size:15px;
+    width:70px;
+    height:30px;
+    background-color: #00ff00;
+    border:0;
+    outlineL0;	
+}
+
+.gc_replyLi{
+	list-style-type: "\1F44D";
+	margin-top:20px;
+	 margin-left:20%;
+}
+
 
 #image{
 float:left;
@@ -136,145 +179,29 @@ left:100px;
   transform: scale(1, 1)
 }
 
-
-
-
-	/* 글 내용의 경계선 표시 */
-	.text {
-    font-size: 22px;
-    margin:0px 200px 0px 120px; 
-    border-bottom: 1px solid #d2d2d2;
+#for{
+	 margin:5px 0px 0px 200px;
 }
-	.content{
-	  	margin-top: 100px;
-		border: 1px dotted #cecece;
-	}
-	/* 글 내용안에 있는 이미지의 크기 제한 */
-	.content img{
-		max-width: 100%;
-	}
-	/* 댓글에 관련된 css */
-	.comments ul{
-		padding: 0;
-		margin: 0;
-		list-style-type: none;
-	}
-	.comments ul li{
-		border-top: 1px solid #888; /* li 의 윗쪽 경계선 */
-	}
-	.comments dt{
-		margin-top: 5px;
-	}
-	.comments dd{
-		margin-left: 26px;
-	}
-	.comments form textarea, .comments form button{
-		float: left;
-	}
-	.comments li{
-		clear: left;
-	}
-	.comments form textarea{
-		width: 85%;
-		height: 100px;
-	}
-	.comments form button{
-		width: 15%;
-		height: 100px;
-	}
-	/* 댓글에 댓글을 다는 폼과 수정폼을 일단 숨긴다. */
-	.comment form{
-		display: none;
-	}
-	.comment{
-		position: relative;
-	}
-	.comment .reply_icon{
-		width: 8px;
-		height: 8px;
-		position: absolute;
-		top: 10px;
-		left: 30px;
-	}
-	.comments .user-img{
-		width: 20px;
-		height: 20px;
-		border-radius: 50%;
-	}
-
-
-/* 레이아웃 외곽 너비 400px 제한*/
-.wrap{
-    max-width:100%;
-    margin-left:300px;
-    background-color: #fff;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-
-}
-.reviewform textarea{
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-.review_rating{
-	clear: both;
-}
-.rating{
-	height: 60px;
-	width: 300px;
-}
-.rating .rate_radio {
-    position: relative;
-    display: inline-block;
-    z-index: 20;
-    opacity: 0.001;
-    width: 60px;
-    height: 60px;
-    background-color: #fff;
-    cursor: pointer;
-    vertical-align: top;
-    display: none;
-}
-.rating .rate_radio + label {
-    position: relative;
-    display: inline-block;
-    margin-left: -4px;
-    z-index: 10;
-    width: 60px;
-    height: 60px;
-    background-image: url('../images/star.png');
-    background-repeat: no-repeat;
-    background-size: 60px 60px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-}
-.rating .rate_radio:checked + label {
-    background-color: #56F569;
+#newGc_ReplyText{
+	 margin-left:80px;
 }
 
-.warning_msg {
-    display: none;
-    position: relative;
-    text-align: center;
-    background: #ffffff;
-    line-height: 26px;
-    width: 100%;
-    color: red;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #e0e0e0;
-}
-.cmd{
-    margin-top: 20px;
-    text-align: right;
-    margin-right: 5%;
-}
-.cmd input[type="button"]{
-    padding: 10px 20px;
-    border: 1px solid #e8e8e8;
-    background-color: #fff;
-    background-color:#000;  
-    color: #fff;
-}
+
+ #modDiv{ /*댓글 수정 화면 영역*/
+ width:300px; height:100px;
+ background-color:gray;
+ position:absolute;
+ top:50%;
+ left:80%;
+ margin-top: -50px; margin-left:-150px;
+ padding:500px;
+ z-index:1000; /*position속성값이 absolute of fixed인 곳에서 사용 가능하다. 겹쳐지는 순서 제어(값이 클 수록 위에)) */
+ }
+ 
+   #star a{
+   text-decoration: none;
+   color: gray;
+  }
+  #star a.on{
+   color: red;
+  } 

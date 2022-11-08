@@ -4,9 +4,15 @@ import java.util.List;
 
 import com.golforyou.vo.Gc_replyVO;
 
+//import java.util.List;
+
+//import com.golforyou.vo.Gc_replyVO;
+
 
 
 public interface Gc_ReplyService {
+
+;
 
 	void insertgcReply(Gc_replyVO vo);//댓글등록
 

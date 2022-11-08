@@ -1,8 +1,16 @@
 **
  * golfcouse.js
  */
-$function golf_couse(e){
-
+function golfcouse(){
+	
+	
+	 var fileCheck = document.getElementById("file2").value;
+    if(!fileCheck){
+        alert("이미지를 첨부해주세요!");
+        return false;
+    }
+	
+	
 	if($.trim($("#gc_title").val())==""){
 		alert("골프장을 입력하세요!");
 		$("#gc_title").val("").focus();
@@ -19,11 +27,13 @@ $function golf_couse(e){
 		$("#gc_area").val("").focus();
 		return false;
 	}
-	if($.trim($("#gc_hole").val())==""){
-		alert("홀을 선택하세요!");
-		$("#gc_hole").val("").focus();
-		return false;
-	}
+
+	   if(form1.gc_hole.value == 'none'){
+         alert("홀수를 선택해주세요!");
+         return false;
+     }
+	
+	
 	if($.trim($("#gc_length").val())==""){
 		alert("길이를 입력하세요!");
 		$("#gc_length").val("").focus();
@@ -44,17 +54,18 @@ $function golf_couse(e){
 		$("#gc_configuration").val("").focus();
 		return false;
 	}
-		if($.trim($("#gc_caddy").val())==""){
-		alert("캐디를 선택하세요!");
-		$("#gc_caddy").val("").focus();
-		return false;
-	}
-	if($.trim($("#gc_cart").val())==""){
-		alert("카트를 선택하세요!");
-		$("#gc_cart").val("").focus();
-		return false;
-	}
+	
+		 if(form1.gc_caddy.value == 'none'){
+         alert("캐디를 선택해주세요!");
+         return false;
+     }
 
+		 if(form1.gc_cart.value == 'none'){
+         alert("카트를 선택해주세요!");
+         return false;
+     }
+	
+	
 	if($.trim($("#gc_architects").val())==""){
 		alert("설계자를 입력하세요!");
 		$("#gc_architects").val("").focus();
@@ -100,18 +111,12 @@ $function golf_couse(e){
 	}
 	
 		
-		if($.trim($("#gc_date").val())==""){
-		alert("개장년도를 선택하세요!");
-		$("#gc_date").val("").focus();
-		return false;
+		 if(form1.gc_date.value == 'none'){
+         alert("개장년도를 선택해주세요!");
+         return false;
+     }
 	
-	
-	}
-	
-	
-	
-	
-	
+
 
 	
   }

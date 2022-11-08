@@ -35,7 +35,11 @@ DROP SEQUENCE golf_couse_seq
 
 SELECT * FROM golf_couse;
 commit;
+<<<<<<< HEAD
 select * from golf_couse where gc_title='ï¿½Ò³ï¿½ ï¿½ç¸®Ã¼ CC'
+=======
+
+>>>>>>> origin/jong
 
 --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create sequence golf_couse_seq
@@ -56,6 +60,7 @@ update golf_couse set gc_replycnt=(select count(gc_no) from gc_reply where gc_no
 
 --ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ gc_reply ï¿½ï¿½ï¿½ï¿½
 create table gc_reply(
+<<<<<<< HEAD
     gc_rno number(38) primary key--ï¿½ï¿½ï¿½ ï¿½ï¿½È£
     ,gc_no number(38) default 0 --ï¿½Ü·ï¿½Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½. golf_couse ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½è°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
     ,gc_replyer varchar2(100) not null --ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½ï¿½
@@ -65,6 +70,19 @@ create table gc_reply(
 
 );
 -- gc_no_seq ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+=======
+    gc_rno number(38) primary key--´ñ±Û ¹øÈ£
+    ,gc_no number(38) default 0 --¿Ü·¡Å° Á¦¾à Á¶°ÇÀ¸·Î Ãß°¡ ¼³Á¤. golf_couse Å×ÀÌºí ÀÇ ¹øÈ£°ª¸¸ ÀúÀåµÊ.ÁÖÁ¾ °ü°è°¡ ¼º¸³µÊ.
+    ,gc_replyer varchar2(100)  --´ñ±ÛÀÛ¼ºÀÚ
+    ,gc_replytext varchar2(4000) --´ñ±Û ³»¿ë
+    ,gc_regdate  date-- ´ñ±Û µî·Ï³¯Â¥
+    ,gc_update date-- ´ñ±Û ¼öÁ¤³¯Â¥
+);
+select * from gc_reply
+DROP TABLE  gc_reply;
+
+-- gc_no_seq ½ÃÄö½º »ý¼º
+>>>>>>> origin/jong
 create sequence gc_no_seq
 start with 1 --1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 increment by 1 -- 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
@@ -73,7 +91,14 @@ nocache; --ï¿½Ó½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°Ú´Ù´ï¿½ ï¿½Ç¹ï¿½
 -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ È®ï¿½ï¿½
 select gc_no_seq.nextval from dual;
 
+<<<<<<< HEAD
 --ï¿½Ü·ï¿½Å° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
+=======
+
+Drop sequence gc_no_seq
+
+--¿Ü·¡Å° Á¦¾àÁ¶°Ç Ãß°¡ ¼³Á¤
+>>>>>>> origin/jong
 alter table gc_reply add constraint gc_reply_gc_no_fk
 foreign key(gc_no) references golf_couse(gc_no);
 
@@ -87,3 +112,7 @@ increment by 1 --1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 nocache;
 
 select gc_rno_seq.nextval from dual;
+
+
+
+Drop sequence gc_rno_seq

@@ -11,7 +11,7 @@ public class Gc_replyVO {
 	private String gc_replyer;//댓글 작성자
 	private String gc_replytext;//댓글 내용
 	private String gc_regdate;//댓글등록날짜
-	private String gc_updatedate;//댓글수정날짜
+	private String gc_update;//댓글수정날짜
 	
 	
 
