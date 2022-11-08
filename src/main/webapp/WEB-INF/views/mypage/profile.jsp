@@ -29,59 +29,7 @@ function openWithdrawalPop(){
 }
 
 <%--팝업창 끝--%>
-
-$("#image_section").on("change", function(e){ // change는 변화감지 , e는 이벤트를 전달받음
-	var f = e.target.files[0];
-	if(!f.type.match("image*")){ //match도 사용 가능
-		$("#img_preview").val("");
-		alert('이미지만 첨부할 수 있습니다.');
-		
-		}
-	 
-}); 
-
-function readURL(input) {
-	if(input.files && input.files[0]) {
-		var reader = new FileReader();
-		
-		reader.onload =function(e){
-			$("#imgFile").attr('src', e.target.result);
-		}
-		
-		reader.readAsDataURL(input.files[0]);
-		
-	}
-}
-
-$("#imgFile").change(function (){
-	readURL(this);
-});
-
-function delImg(){
-	$('#image_section').removeAttr('src');
-	$('#image_section').attr('src','/images/member/blank_profile.png');
-}
-
-$('.edit-wrapper .tab').click(function(){
-	if ($(this).hasClass('fix-button')){
-		$('.edit-wrapper .tab').removeClass('active');
-		$('.update-button').addClass('active');
-		$('.cont').hide();
-		$('.contents-input').show();
-	}
-	if ($(this).hasClass('update-button')){
-			$('.edit-wrapper .tab').removeClass('active');
-			$('.fix-button').addClass('active');
-			$('.cont').hide();
-			$('.contents').show();
-			console.log(this);
-	}		
-	
-});
-
 </script>
-
-
 <div class="clear"></div>
 <br>
 
@@ -198,6 +146,7 @@ $('.edit-wrapper .tab').click(function(){
 	</form>
 	</div>
 </body>
+<script src="/js/profile.js"></script>
 </html>
 
 
