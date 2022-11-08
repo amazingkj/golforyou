@@ -83,28 +83,34 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
-	//좋아요 기능
-	
 	@Override
-	public int SaveHeart(LikesVO to) {
-		return this.boardDAO.SaveHeart(to);
-	
-	}
-	@Override
-	public int RemoveHeart(LikesVO to) {
-		return this.boardDAO.RemoveHeart(to);
+	public void likeupdate(LikesVO vo) {
+		this.boardDAO.likeupdate(vo);
 		
 	}
 	@Override
-	public BoardVO CountHeart(BoardVO pto) {
-		return this.boardDAO.CountHeart(pto);
+	public int likecount(LikesVO vo) {
+		return this.boardDAO.likecount(vo);
+	}
+	@Override
+	public void likeinsert(LikesVO vo) {
+		this.boardDAO.likeinsert(vo);
 		
 	}
 	@Override
-	public void UpHeart(int no) {
-		 this.boardDAO.UpHeart(no);
+	public int likegetinfo(LikesVO vo) {
+		return this.boardDAO.likegetinfo(vo);
+	}
+	@Override
+	public int liketotalcount(int b_no) {
+		return this.boardDAO.liketotalcount(b_no);
 		
 	}
+//	@Override
+//	public void updateliketotalcount(BoardVO b) {
+//		this.boardDAO.updateliketotalcount(b);
+//		
+//	}
 	
 
 }

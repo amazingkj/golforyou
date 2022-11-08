@@ -24,35 +24,29 @@ public interface BoardService {
 
 	void delboard(int b_no);
 	
-	
-//	//여기 부터 댓글
-//	int register(BoardReplyVO vo);
-//
-//	BoardReplyVO getOneReply(Long r_no);  
-//	
-//	int deleteReply(Long r_no);
-//	int modify(BoardReplyVO reply);
-//
-//	List<BoardReplyVO> getReplyList(
-//			@Param("cri") Criteria cri,
-//			@Param("bno") Long b_no);
-	
+	//여기 부터 댓글
+
 	void insertReply(BoardReplyVO vo);
 
 	List<BoardReplyVO> replyList(int b_no);
- //타입이 Object로 만들어지는 경우가 간혹 있으니, 주의하고 꼭 타입을 수정할 것
+	//타입이 Object로 만들어지는 경우가 간혹 있으니, 주의하고 꼭 타입을 수정할 것
 	//타입이 오류가 있으면 Controller도 오류가 생김
 
 	void updateReply(BoardReplyVO vo);
 
 	void delReply(int r_no);
 
-	int RemoveHeart(LikesVO to);
+	//좋아요 
+	void likeupdate(LikesVO vo);
 
-	int SaveHeart(LikesVO to);
+	int likecount(LikesVO vo);
 
-	BoardVO CountHeart(BoardVO pto);
+	void likeinsert(LikesVO vo);
 
-	void UpHeart(int no);
+	int likegetinfo(LikesVO vo);
+
+	int liketotalcount(int b_no);
+
+//void updateliketotalcount(BoardVO b);
 	
 }

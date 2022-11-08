@@ -44,6 +44,26 @@ alter table golforboard_reply add constraint fk_reply_board
 foreign key (b_no) references golforboard(b_no);
 -- 외래키로 golforboard(b_no) 사용.
 
+
+--좋아요 
+create table likes (
+    likes_idx number(10,0) primary key,
+    likes_no number(10,0),
+    board_no number(10,0),
+    nickname varchar2(50),
+    foreign key (board_no) references golforboard (b_no),
+    foreign key (nickname) references memberVO (nickname)
+
+);
+
+
+create sequence likes_no_seq
+start with 1 --1부터 시작
+increment by 1 --1씩 증가
+nocache;
+ 
+
+
 --===========================
 --김민우(랭킹)
 

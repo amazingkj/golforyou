@@ -8,7 +8,6 @@
 		$reply = $('#newReplyText').val();//댓글 내용
 		
 	
-	
 	$.ajax({
 		type:'post',
 		url:'/replies/',//URL매핑주소
@@ -28,6 +27,7 @@
 			//비동기식으로 받아오는 것이 성공시 호출. 받아온 데이터는 result매개변수에 저장
 			if(result == 'SUCCESS'){
 				alert('댓글이 등록되었습니다!');
+				$('#newReplyText').val('');
 				//location.reload();//새로고침(단축키 F5)
 				getAllList();//댓글 목록 함수 호출 
 			}
