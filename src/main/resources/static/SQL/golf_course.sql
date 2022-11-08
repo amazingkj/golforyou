@@ -35,7 +35,7 @@ DROP SEQUENCE golf_couse_seq
 
 SELECT * FROM golf_couse;
 commit;
-select * from golf_couse where gc_title='소노 펠리체 CC'
+
 
 --골프장 고유번호 시퀀스 생성
 create sequence golf_couse_seq
@@ -58,12 +58,14 @@ update golf_couse set gc_replycnt=(select count(gc_no) from gc_reply where gc_no
 create table gc_reply(
     gc_rno number(38) primary key--댓글 번호
     ,gc_no number(38) default 0 --외래키 제약 조건으로 추가 설정. golf_couse 테이블 의 번호값만 저장됨.주종 관계가 성립됨.
-    ,gc_replyer varchar2(100) not null --댓글작성자
-    ,gc_replytext varchar2(4000) not null --댓글 내용
-    ,gc_regdate date -- 댓글 등록날짜
-    ,gc_updatedate date -- 댓글 수정날짜
-
+    ,gc_replyer varchar2(100)  --댓글작성자
+    ,gc_replytext varchar2(4000) --댓글 내용
+    ,gc_regdate  date-- 댓글 등록날짜
+    ,gc_update date-- 댓글 수정날짜
 );
+select * from gc_reply
+DROP TABLE  gc_reply;
+
 -- gc_no_seq 시퀀스 생성
 create sequence gc_no_seq
 start with 1 --1부터 시작
@@ -72,6 +74,9 @@ nocache; --임시 메모리 사용하지 않겠다는 의미
 
 -- 시퀀스 다음 번호값 확인
 select gc_no_seq.nextval from dual;
+
+
+Drop sequence gc_no_seq
 
 --외래키 제약조건 추가 설정
 alter table gc_reply add constraint gc_reply_gc_no_fk
@@ -87,3 +92,7 @@ increment by 1 --1씩 증가
 nocache;
 
 select gc_rno_seq.nextval from dual;
+
+
+
+Drop sequence gc_rno_seq

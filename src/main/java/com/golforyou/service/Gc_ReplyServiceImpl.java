@@ -2,10 +2,13 @@ package com.golforyou.service;
 
 import java.util.List;
 
+//import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.golforyou.dao.Gc_RelpyDAO;
+//import com.golforyou.vo.Gc_replyVO;
 import com.golforyou.vo.Gc_replyVO;
 
 

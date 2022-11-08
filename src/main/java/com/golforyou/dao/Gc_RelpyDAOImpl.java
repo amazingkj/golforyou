@@ -2,12 +2,16 @@ package com.golforyou.dao;
 
 import java.util.List;
 
+//import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import com.golforyou.vo.Gc_replyVO;
+
+
+//import com.golforyou.vo.Gc_replyVO;
 
 @Repository
 public class Gc_RelpyDAOImpl implements Gc_RelpyDAO {
@@ -37,6 +41,4 @@ public class Gc_RelpyDAOImpl implements Gc_RelpyDAO {
 		
 		this.sqlSession.delete("gc_reply_del",gc_rno);
 	}
-	
-
 }
