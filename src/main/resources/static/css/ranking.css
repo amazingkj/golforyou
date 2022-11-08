@@ -216,12 +216,12 @@ li{ padding:0px; margin:0px;}
 	color:#56F569;
 }
 .province_1>li:hover .province_2#province_2-1{
-	height:50px;
+	height:120px;
 	transition-duration:0.5s;
 	cursor:pointer;
 }
 .province_1>li:hover .province_2#province_2-2{
-	height:85px;
+	height:120px;
 	transition-duration:0.5s;
 	cursor:pointer;
 }
@@ -232,6 +232,11 @@ li{ padding:0px; margin:0px;}
 }
 .province_1>li:hover .province_2#province_2-4{
 	height:155px;
+	transition-duration:0.5s;
+	cursor:pointer;
+}
+.province_1>li:hover .province_2#province_2-5{
+	height:120px;
 	transition-duration:0.5s;
 	cursor:pointer;
 }

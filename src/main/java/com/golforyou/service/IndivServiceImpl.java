@@ -80,5 +80,11 @@ public class IndivServiceImpl implements IndivService {
 		// TODO Auto-generated method stub
 		return indivDAO.getNo(id);
 	}
+
+	@Override
+	public String getProfile(String rid) {
+		// TODO Auto-generated method stub
+		return indivDAO.getProfile(rid);
+	}
 	
 }

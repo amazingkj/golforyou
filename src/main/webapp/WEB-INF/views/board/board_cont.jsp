@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head> 
+<style>
+input[type="submit"]{
+	font-family:Font AweSome\ 5 Free;
+}
+</style>
 <script src="/js/jquery.js"></script>
 
  <link rel="stylesheet" type="text/css" href="/css/common.css" />
@@ -84,18 +89,26 @@ function openDelCheck(){
     
     <div id="like">
     <c:choose>
-        <c:when test="${likes_no == 0}">
-            <button type="button" id="likebtn" class="btn btn-light">
-           <i class="far fa-heart" style="color:#56F569"></i> 좋아요</button>
-            <input type="hidden" id="likecheck" value="${likes_no}">
-             <input type="hidden" id="nickname" id="nickname" value="${nickname}">
+        <c:when test="${check == 0}">
+        <form method="post" action="likeupload_yes">
+            <i class="far fa-heart" style="color:#56F569"></i><input type="submit" id="likebtn" class="btn btn-light" value="좋아요">
+            
+            <input type="hidden" id="likecheck" name="likecheck_yes" value="${check}">
+             <input type="hidden" id="nickname" name="nickname_yes" value="${nickname}">
+             <input type="hidden" id="bno" name="bno_yes" value="${b.b_no}">
+             <input type="hidden" id="page" name="page" value="${page}">
+        </form>
         </c:when>
         
-        <c:when test="${likes_no == 1}">
-        	<button type="button" id="likebtn" class="btn btn-danger">
-             <i class="fas fa-heart"  style="color:#56F569"></i> 좋아요 취소</button>
-             <input type="hidden" id="likecheck" value="${likes_no}">
-               <input type="hidden" id="nickname" id="nickname" value="${nickname}">
+        <c:when test="${check == 1}">
+        <form method="post" action="/likeupload_no">
+        	<i class="fas fa-heart"  style="color:#56F569"></i> <input type="submit" id="likebtn" class="btn btn-danger" value="좋아요 취소">
+             
+             <input type="hidden" id="likecheck" name="likecheck_no" value="${check}">
+               <input type="hidden" id="nickname" name="nickname_no" value="${nickname}">
+               <input type="hidden" id="bno" name="bno_no" value="${b.b_no}">
+               <input type="hidden" id="page" name="page" value="${page}">
+        </form>
         </c:when>	
     </c:choose>	  			
 	</div>

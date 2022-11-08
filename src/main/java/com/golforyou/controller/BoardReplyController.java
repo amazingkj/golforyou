@@ -1,14 +1,19 @@
 package com.golforyou.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.golforyou.service.BoardService;
 import com.golforyou.vo.BoardReplyVO;
+import com.golforyou.vo.BoardVO;
 import com.golforyou.vo.LikesVO;
 
 @RestController
@@ -29,13 +35,18 @@ public class BoardReplyController {
 	private BoardService boardService;
 	
 	//좋아요 
-	@PutMapping("/likeupdate")
+	/*@PutMapping("/likeupdate")
 	public Map<String,String> likeupdate(@RequestBody LikesVO vo){
 						
 		Map<String,String> map = new HashMap<String, String>();
 		
 		try {
-			boardService.likeupdate(vo);
+			if(vo.getCount() == 0) {
+				boardService.likeupdate(vo);
+			}else if(vo.getCount() == 1){
+				boardService.likeupdate2(vo);
+			}
+			
 			map.put("result", "success");
 			
 		}catch(Exception e) {
@@ -44,7 +55,9 @@ public class BoardReplyController {
 		}
 		
 		return map;
-	}
+	}*/
+
+	
 	
 	//댓글 등록 
 	@RequestMapping(value="",method=RequestMethod.POST,produces="application/json") 

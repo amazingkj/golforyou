@@ -192,7 +192,14 @@ public class IndivrankController {
 					tierURL = "/images/t_b.png";
 					tierStr = "브론즈";
 				}
-			}			
+			}
+			String profile = "";
+			if(indivService.getProfile(rid) == null) {
+				profile = "/images/member/blank_profile.png";
+			}else {
+				profile = "/upload/profile"+indivService.getProfile(rid);
+			}
+			
 			
 			//List<GolfcouseVO> field = scBoardService.getFieldList();
 			
@@ -219,6 +226,7 @@ public class IndivrankController {
 			im.addObject("dec", dec);
 			im.addObject("tierURL", tierURL);
 			im.addObject("tierStr", tierStr);
+			im.addObject("profile", profile);
 			//im.addObject("field", field);
 			return im;
 		}

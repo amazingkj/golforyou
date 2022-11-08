@@ -76,5 +76,22 @@ public class RankingDAOImpl implements RankingDAO {
 		return sqlSession.selectOne("rank_point", mno);
 	}
 
+	@Override
+	public List<RankingVO> getRankList(String prov) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rank_listprov",prov);
+	}
+
+	@Override
+	public List<MemberVO> getRankList2(String prov) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rank_listprov2",prov);
+	}
+
+	@Override
+	public int memberCount(String prov) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("rank_countprov",prov);
+	}
 	
 }

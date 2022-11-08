@@ -75,5 +75,23 @@ public class RankingServiceImpl implements RankingService {
 		// TODO Auto-generated method stub
 		return rankingDAO.getPoint(mno);
 	}
+
+	@Override
+	public List<RankingVO> getRankList(String prov) {
+		// TODO Auto-generated method stub
+		return rankingDAO.getRankList(prov);
+	}
+	
+	@Override
+	public List<MemberVO> getRankList2(String prov) {
+		// TODO Auto-generated method stub
+		return rankingDAO.getRankList2(prov);
+	}
+
+	@Override
+	public int memberCount(String prov) {
+		// TODO Auto-generated method stub
+		return rankingDAO.memberCount(prov);
+	}
 	
 }

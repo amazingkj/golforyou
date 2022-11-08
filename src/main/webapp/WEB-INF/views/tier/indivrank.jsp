@@ -227,7 +227,7 @@
 		}
 		
 		$(".ind_profile").css({
-			"background-image": "url('/upload/member/<c:out value='${img}'/>')",
+			"background-image": "url('<c:out value='${profile}'/>')",
 			"background-repeat" : "no-repeat",
 			"background-size" : "90px 90px",			
 		});

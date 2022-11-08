@@ -51,4 +51,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select r_sum from memberVO m inner join ranking r on m.mno=r.r_no where m.mno=#{mno}
 	</select>
 	
+	<!-- 해당 아이디의 프로필사진 반환 -->
+	<select id="rank_profile" resultType="String">
+		select mfile from memberVO m inner join ranking r on m.mno = r.r_no where m.username=#{rid}
+	</select>
+	
+	<!-- 랭크리스트 얻어오기(rankingVO기준),prov포함 -->
+	<select id="rank_listprov" resultType="rank">
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' and m.maddr=#{prov} order by r_sum asc
+	</select>
+	
+	<!-- 랭크리스트 얻어오기(MemberVO기준),prov포함 -->
+	<select id="rank_listprov2" resultType="member">
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' and m.maddr=#{prov} order by r_sum asc
+	</select>
+	
+	<!-- 랭킹 수, 그런데 prov를 곁들인 -->
+	<select id="rank_countprov" resultType="java.lang.Integer">
+		select count(*) from memberVO m inner join ranking r on m.mno=r.r_no where mstate=0 and m.mrole='ROLE_USER' and m.maddr=#{prov}
+	</select>
 </mapper>

@@ -28,4 +28,10 @@ public interface RankingDAO {
 
 	int getPoint(int mno);
 
+	List<RankingVO> getRankList(String prov);
+
+	List<MemberVO> getRankList2(String prov);
+
+	int memberCount(String prov);
+
 }

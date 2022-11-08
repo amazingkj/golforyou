@@ -118,8 +118,17 @@ public class BoardDAOImpl implements BoardDAO {
 	//좋아요 2차시도 
 	@Override
 	public void likeupdate(LikesVO vo) {
-		this.sqlSession.update("likeupdate",vo);
-		
+		//this.sqlSession.update("likeupdate",vo);
+		sqlSession.insert("like_yes",vo);
+		sqlSession.update("heart_up",vo);
+	}
+	
+
+	@Override
+	public void likeupdate2(LikesVO vo) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("like_no",vo);
+		sqlSession.update("heart_down",vo);
 	}
 
 	@Override
@@ -143,9 +152,30 @@ public class BoardDAOImpl implements BoardDAO {
 		return this.sqlSession.selectOne("liketotalcount",b_no);
 	}
 
+	@Override
+	public LikesVO getlike(LikesVO like) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("like_exist",like);
+	}
+
+	@Override
+	public void likeyes(LikesVO like) {
+		// TODO Auto-generated method stub
+		sqlSession.insert("like_plus",like);
+		sqlSession.update("board_likeplus",like);
+	}
+
+	@Override
+	public void likeno(LikesVO like) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("like_minus",like);
+		sqlSession.update("board_likeminus",like);
+	}
+
 //	@Override
 //	public void updateliketotalcount(BoardVO b) {
 //		this.sqlSession.update("updateliketotalcount",b);
 //		
 //	}
+	
 }

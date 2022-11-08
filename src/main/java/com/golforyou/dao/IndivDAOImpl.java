@@ -80,5 +80,11 @@ public class IndivDAOImpl implements IndivDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("sc_ino",id);
 	}
+
+	@Override
+	public String getProfile(String rid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("rank_profile", rid);
+	}
 	
 }

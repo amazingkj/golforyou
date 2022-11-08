@@ -124,14 +124,9 @@ function openWithdrawalPop(){
 			<div class="inputBoxVertical">
 			<label>주요 이용지역</label>
 			<select id="mAddr" name="maddr" class="textField" selected="${m.maddr}">
-			<option value="서울" <c:if test="${select_zone =='Seoul'}">${'selected'}
-        			 </c:if>>서울</option>
-					<option value="경기" <c:if test="${select_zone =='gg'}">${'selected'}
-        			 </c:if>>경기</option>
-					<option value="인천" <c:if test="${select_zone =='incheon'}">${'selected'}
-        			 </c:if>>인천</option>
-					<option value="그외" <c:if test="${select_zone =='etc'}">${'selected'}
-        			 </c:if>>그외</option>
+        		<c:forEach var="a" items="${addrList }">
+        			<option value="${a.adname2 }">${a.adname2 }</option>
+        		</c:forEach>
 			</select>
 			
 			</div>

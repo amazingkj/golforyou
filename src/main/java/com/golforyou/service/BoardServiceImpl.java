@@ -101,6 +101,12 @@ public class BoardServiceImpl implements BoardService {
 		this.boardDAO.likeupdate(vo);
 		
 	}
+	
+	@Override
+	public void likeupdate2(LikesVO vo) {
+		// TODO Auto-generated method stub
+		boardDAO.likeupdate2(vo);
+	}
 	@Override
 	public int likecount(LikesVO vo) {
 		return this.boardDAO.likecount(vo);
@@ -124,6 +130,21 @@ public class BoardServiceImpl implements BoardService {
 //		this.boardDAO.updateliketotalcount(b);
 //		
 //	}
+	@Override
+	public LikesVO getlike(LikesVO like) {
+		// TODO Auto-generated method stub
+		return boardDAO.getlike(like);
+	}
+	@Override
+	public void likeyes(LikesVO like) {
+		// TODO Auto-generated method stub
+		boardDAO.likeyes(like);
+	}
+	@Override
+	public void likeno(LikesVO like) {
+		// TODO Auto-generated method stub
+		boardDAO.likeno(like);
+	}
 	
 
 }

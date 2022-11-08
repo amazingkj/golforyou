@@ -29,5 +29,7 @@ public interface IndivService {
 
 	List<Integer> getNo(String id);
 
+	String getProfile(String rid);
+
 	
 }

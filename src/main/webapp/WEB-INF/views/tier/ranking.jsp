@@ -46,35 +46,44 @@
 			<li><a href="ranking">전체</a></li>
 			<li>서울・경기・인천
 				<ul class="province_2" id="province_2-3">
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=서울"> 서울</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=경기"> 경기</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=인천"> 인천</a></li>
+					<c:forEach var="a" items="${addrList }" begin="0" end="2">
+					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=${a.adname2 }"> ${a.adname2 }</a></li>
+					</c:forEach>
 				</ul>
 			</li>
 			<li>강원
 				<ul class="province_2" id="province_2-1">
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=강원"> 강원</a></li>
+					<c:forEach var="a" items="${addrList }" begin="3" end="5">
+					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=${a.adname2 }"> ${a.adname2 }</a></li>
+					</c:forEach>
 				</ul>
 			</li>
 			<li>충청・대전・세종
 				<ul class="province_2" id="province_2-3">
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=충청"> 충청</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=대전"> 대전</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=세종"> 세종</a></li>
+					<c:forEach var="a" items="${addrList }" begin="6" end="8">
+					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=${a.adname2 }"> ${a.adname2 }</a></li>
+					</c:forEach>
 				</ul>
 			</li>
 			<li>전라・광주
 				<ul class="province_2" id="province_2-2">
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=전라"> 전라</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=광주"> 광주</a></li>
+					<c:forEach var="a" items="${addrList }" begin="9" end="11">
+					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=${a.adname2 }"> ${a.adname2 }</a></li>
+					</c:forEach>
 				</ul>
 			</li>
 			<li>경상・부산・대구・울산
 				<ul class="province_2" id="province_2-4">
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=경상"> 경상</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=부산"> 부산</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=대구"> 대구</a></li>
-					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=울산"> 울산</a></li>
+					<c:forEach var="a" items="${addrList }" begin="12" end="15">
+					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=${a.adname2 }"> ${a.adname2 }</a></li>
+					</c:forEach>
+				</ul>
+			</li>
+			<li>제주
+				<ul class="province_2" id="province_2-5">
+					<c:forEach var="a" items="${addrList }" begin="16" end="18">
+					<li><i class="fas fa-map-marker-alt"></i><a href="ranking?prov=${a.adname2 }"> ${a.adname2 }</a></li>
+					</c:forEach>
 				</ul>
 			</li>
 		</ul>

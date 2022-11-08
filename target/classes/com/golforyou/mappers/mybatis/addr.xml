@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="addr">
+ 	 <!-- 주소 리스트 불러오기 -->
+ 	 <select id="addr_list" resultType="addr">
+ 	 	select * from address order by adno asc
+ 	 </select>
+</mapper>

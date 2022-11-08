@@ -3,6 +3,7 @@ package com.golforyou.controller;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 //import java.io.File;
@@ -33,6 +34,7 @@ import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
 import com.golforyou.service.MypageService;
 import com.golforyou.service.RankingService;
+import com.golforyou.vo.AddrVO;
 import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.WithdrawalVO;
@@ -125,6 +127,8 @@ public class MypageController {
 		String mfile=(String)session.getAttribute("mfile");	
 		String nickname=(String)session.getAttribute("nickname");	
 		
+		List<AddrVO> addrList = mypageService.getAddrList();
+		
 		System.out.println(member.getUsername()+member.getPassword());
 		
 			ModelAndView m=new ModelAndView("mypage/profile");
@@ -133,6 +137,7 @@ public class MypageController {
 			m.addObject("nickname",nickname);
 			m.addObject("memail",memail);
 			m.addObject("maddr",maddr);
+			m.addObject("addrList",addrList);
 			m.addObject("mfile",mfile);
 			return m;
 		

@@ -1,10 +1,13 @@
 package com.golforyou.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.golforyou.dao.MypageDAO;
+import com.golforyou.vo.AddrVO;
 import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.WithdrawalVO;
@@ -46,6 +49,12 @@ public class MypageServiceImpl implements MypageService {
 	public void changePwd(MemberVO member) {
 		this.mypageDao.changePwd(member);
 		
+	}
+
+	@Override
+	public List<AddrVO> getAddrList() {
+		// TODO Auto-generated method stub
+		return mypageDao.getAddrList();
 	}
 
 }

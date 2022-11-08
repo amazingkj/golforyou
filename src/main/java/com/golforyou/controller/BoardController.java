@@ -163,27 +163,21 @@ public class BoardController {
 				vo=new LikesVO();
 				vo.setBoard_no(b_no);
 				vo.setNickname(nickname);
-				//vo.setLikes_no(0);
 				
 				System.out.println(vo);
 				
 				//좋아요 갯수 카운트 
 				int likestotal=boardService.liketotalcount(b_no);
 				
-				//System.out.println("likestotal"+likestotal); 
-				//vo.setLikestotal(likestotal);
-				//b.setB_like(likestotal);
 				
-				int likes_no=0;
+				
+				//int likes_no=0;
 				int check = boardService.likecount(vo); 
 				if(check==0) {
-						boardService.likeinsert(vo);
+						//boardService.likeinsert(vo);
 				}else if(check==1) {
-					likes_no=boardService.likegetinfo(vo);
+					//likes_no=boardService.likegetinfo(vo);
 				}
-				
-				//this.boardService.updateliketotalcount(b);
-				
 				
 				
 				if(state.equals("cont")) {//내용보기 일때만 조회수 증가
@@ -197,7 +191,7 @@ public class BoardController {
 				cm.addObject("b",b);//키, 값 쌍으로 저장 
 				cm.addObject("board_cont",board_cont);
 				cm.addObject("page",page); //페이징에서 내가 본 쪽번호로 이동하기 위해서 
-				cm.addObject("likes_no",likes_no); 
+				cm.addObject("check",check); 
 				cm.addObject("likestotal",likestotal); 
 				
 				
@@ -270,6 +264,79 @@ public class BoardController {
 				
 			
 			}//board_del_ok()
+			
+	@RequestMapping(value="/likeupload_yes")
+	public String likeupload(HttpServletRequest request, HttpServletResponse response, HttpSession session, LikesVO like) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		int likecheck = Integer.parseInt(request.getParameter("likecheck_yes"));
+		String nickname = request.getParameter("nickname_yes");
+		int bno = Integer.parseInt(request.getParameter("bno_yes"));
+		int page = 1;
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		//ModelAndView lym = new ModelAndView("board_cont?b_no="+bno+"&page="+page+"&state=cont");
+		PrintWriter out = response.getWriter();
+		String loginid = (String)session.getAttribute("id");
+		
+		if(loginid == null) {
+			out.println("<script>");
+			out.println("alert('로그인부터 하세요')");
+			out.println("location='login'");
+			out.println("</script>");
+		}else {
+			
+			like.setNickname(nickname);
+			like.setBoard_no(bno);
+			like.setLikes_no(likecheck);
+			
+			LikesVO check = boardService.getlike(like);
+			if(check == null) {
+				boardService.likeyes(like);
+			}
+			
+			return "redirect:/board_cont?b_no="+bno+"&page="+page+"&state=cont";
+		}
+		return null;
+		
+	}
+	@RequestMapping(value="/likeupload_no")
+	public String likeuploadno(HttpServletRequest request, HttpServletResponse response, HttpSession session, LikesVO like) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		int likecheck = Integer.parseInt(request.getParameter("likecheck_no"));
+		String nickname = request.getParameter("nickname_no");
+		int bno = Integer.parseInt(request.getParameter("bno_no"));
+		int page = 1;
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		//ModelAndView lym = new ModelAndView("board_cont?b_no="+bno+"&page="+page+"&state=cont");
+		PrintWriter out = response.getWriter();
+		String loginid = (String)session.getAttribute("id");
+		
+		if(loginid == null) {
+			out.println("<script>");
+			out.println("alert('로그인부터 하세요')");
+			out.println("location='login'");
+			out.println("</script>");
+		}else {
+			
+			like.setNickname(nickname);
+			like.setBoard_no(bno);
+			like.setLikes_no(likecheck);
+			
+			LikesVO check = boardService.getlike(like);
+			if(check != null) {
+				boardService.likeno(like);
+			}
+			
+			return "redirect:/board_cont?b_no="+bno+"&page="+page+"&state=cont";
+		}
+		return null;
+		
+	}
 						
 		
 }

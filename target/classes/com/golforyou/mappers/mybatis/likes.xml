@@ -22,10 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!--좋아요 2차 시도 -->
 
-<update id="likeupdate">
+<!-- <update id="likeupdate">
 	update Likes set <include refid="cal"></include>
 	where nickname=#{nickname} and board_no=#{board_no}
-</update>
+</update> -->
 
 <sql id="cal">
 		<if test="count == 1">
@@ -36,6 +36,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			likes_no = likes_no + 1 
 		</if>
 	</sql>
+	
+	<!-- 좋아요 생성 -->
+	<insert id="like_yes">
+		insert into likes values(0,#{likes_no}+1,#{board_no})
+	</insert>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="like_no">
+		delete from likes where board_no=#{board_no} and nickname=#{nickname}
+	</delete>
 
 <select id="likecount" resultType="Integer" parameterType="likes">
 	select count(likes_no) from Likes where nickname=#{nickname} and board_no=#{board_no}
@@ -54,6 +64,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select count(*) from Likes where board_no=#{b_no} and likes_no=1
 </select>
 
+<!-- 좋아요 여부 확인 -->
+<select id="like_exist" resultType="likes">
+	select * from Likes where board_no=#{board_no} and nickname=#{nickname} and likes_no=#{likes_no}
+</select>
+
+<!-- 좋아요 입력작업 -->
+<insert id="like_plus">
+	insert into Likes values(likes_no_seq.nextval,1,#{board_no},#{nickname})
+</insert>
+
+<!-- 좋아요 입력작업 -->
+<delete id="like_minus">
+	delete from Likes where likes_no=1 and board_no=#{board_no} and nickname=#{nickname}
+</delete>
 <!--
 <update id="updateliketotalcount" >
 	update golforboard set b_like=(select count(*) from Likes where board_no=#{b_no} and likes_no=1)

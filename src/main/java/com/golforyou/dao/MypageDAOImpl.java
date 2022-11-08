@@ -1,9 +1,12 @@
 package com.golforyou.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.golforyou.vo.AddrVO;
 import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.WithdrawalVO;
@@ -44,6 +47,12 @@ public class MypageDAOImpl implements MypageDAO{
 	public void changePwd(MemberVO m) {
 		this.sqlSession.update("changePwd",m);
 		
+	}
+
+	@Override
+	public List<AddrVO> getAddrList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("addr_list");
 	}
 
 

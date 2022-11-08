@@ -29,4 +29,6 @@ public interface IndivDAO {
 
 	List<Integer> getNo(String id);
 
+	String getProfile(String rid);
+
 }

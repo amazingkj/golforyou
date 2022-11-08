@@ -1,6 +1,9 @@
 package com.golforyou.service;
 
 
+import java.util.List;
+
+import com.golforyou.vo.AddrVO;
 import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.WithdrawalVO;
@@ -16,6 +19,8 @@ public interface MypageService {
 	void saveDelcont(WithdrawalVO w);
 
 	void changePwd(MemberVO member);
+
+	List<AddrVO> getAddrList();
 
 
 

@@ -53,6 +53,14 @@ public interface BoardService {
 
 	int liketotalcount(int b_no);
 
+	void likeupdate2(LikesVO vo);
+
+	LikesVO getlike(LikesVO like);
+
+	void likeyes(LikesVO like);
+
+	void likeno(LikesVO like);
+
 //void updateliketotalcount(BoardVO b);
 	
 }

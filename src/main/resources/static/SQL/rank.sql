@@ -31,7 +31,7 @@ s_no number(38)
 
 create table ranking(
 r_no number(38)
-,r_sum number(38)
+,r_sum number(38) default 9999
 ,r_maxrange number(38)
 );
 

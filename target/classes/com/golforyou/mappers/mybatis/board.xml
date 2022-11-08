@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from (
 	select rowNum rNum, b_no, username, nickname, b_title, b_hit, b_like, b_ref, b_step,
 	b_level, b_date
-	from (select * from golforboard	
+	from (select * from golforboard
 		<where>
 			<if test="find_field == ''"></if><!-- 검색어를 입력하지 않은 경우 => 전체목록 -->
 			<if test="find_field == 'title_cont'"><!-- 제목+내용 기준으로 검색한 경우 -->
@@ -102,21 +102,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 좋아요 up -->
 	<update id="heart_up">
     update golforboard set b_like=b_like+1 
-    where b_no=#{b_no}
+    where b_no=#{board_no}
 	</update>
 
 	<!-- 좋아요 down -->
 	<update id="heart_down">
     update golforboard set b_like=b_like-1 
-    where b_no=#{b_no}
+    where b_no=#{board_no}
 	</update>
 	
     <!-- 좋아요 추가/삭제시 좋아요 갯수 가져오기 -->
 <select id="heart_count" parameterType="board" resultType="board">
-    select b_like 
-    from golforboard
-    where b_no=#{b_no} 
+    select likes_no
+    from likes 
+    where board_no=#{b_no} 
 </select>
+
+<!-- golforboard의 좋아요 1 추가 -->
+<update id="board_likeplus">
+	update golforboard set b_like=b_like+1 where b_no=#{board_no}
+</update>
+
+<!-- 좋아요 1 감소 -->
+<update id="board_likeminus">
+	update golforboard set b_like=b_like-1 where b_no=#{board_no}
+</update>
   
 
 </mapper>
