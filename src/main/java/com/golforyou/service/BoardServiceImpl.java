@@ -96,15 +96,33 @@ public class BoardServiceImpl implements BoardService {
 	 * }
 	 */
 	@Override
-	public BoardVO CountHeart(BoardVO pto) {
-		return this.boardDAO.CountHeart(pto);
+	public void likeupdate(LikesVO vo) {
+		this.boardDAO.likeupdate(vo);
 		
 	}
 	@Override
-	public void UpHeart(int no) {
-		 this.boardDAO.UpHeart(no);
+	public int likecount(LikesVO vo) {
+		return this.boardDAO.likecount(vo);
+	}
+	@Override
+	public void likeinsert(LikesVO vo) {
+		this.boardDAO.likeinsert(vo);
 		
 	}
+	@Override
+	public int likegetinfo(LikesVO vo) {
+		return this.boardDAO.likegetinfo(vo);
+	}
+	@Override
+	public int liketotalcount(int b_no) {
+		return this.boardDAO.liketotalcount(b_no);
+		
+	}
+//	@Override
+//	public void updateliketotalcount(BoardVO b) {
+//		this.boardDAO.updateliketotalcount(b);
+//		
+//	}
 	
 
 }

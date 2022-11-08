@@ -71,34 +71,6 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
-
-//	@Override
-//	public int register(BoardReplyVO vo) {
-//		return this.sqlSession.insert("register",vo);
-//		 
-//	}
-//
-//	@Override
-//	public BoardReplyVO getOneReply(Long r_no) {
-//		
-//		return this.sqlSession.selectOne("getOneReply",r_no);
-//	}
-//
-//	@Override
-//	public int deleteReply(Long r_no) {
-//		return this.sqlSession.delete("deleteReply",r_no);
-//	}
-//
-//	@Override
-//	public int modify(BoardReplyVO reply) {
-//		return this.sqlSession.update("modify",reply);
-//	}
-//
-//	@Override
-//	public List<BoardReplyVO> getReplyList(Criteria cri, Long b_no) {
-//		return this.sqlSession.selectMap("getReplyList",cri,b_no);
-//	}
-
 	@Override
 	public void insertReply(BoardReplyVO vo) {
 		 this.sqlSession.insert("register", vo);
@@ -125,6 +97,7 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}//댓글 삭제
 
+
 	/*
 	 * @Override public int SaveHeart(LikesVO to) { return
 	 * this.sqlSession.insert("heart_save",to);
@@ -140,15 +113,38 @@ public class BoardDAOImpl implements BoardDAO {
 	 * }
 	 */
 
+	
+	//좋아요 2차시도 
 	@Override
-	public BoardVO CountHeart(BoardVO pto) {
-		return this.sqlSession.selectOne("heart_count",pto);
+	public void likeupdate(LikesVO vo) {
+		this.sqlSession.update("likeupdate",vo);
 		
 	}
 
 	@Override
-	public void UpHeart(int no) {
-		this.sqlSession.selectOne("heart_up",no);
+	public int likecount(LikesVO vo) {
+		return this.sqlSession.selectOne("likecount",vo);
+	}
+
+	@Override
+	public void likeinsert(LikesVO vo) {
+		this.sqlSession.insert("likeinsert",vo);
 		
 	}
+
+	@Override
+	public int likegetinfo(LikesVO vo) {
+		return this.sqlSession.selectOne("likegetinfo",vo);
+	}
+
+	@Override
+	public int liketotalcount(int b_no) {
+		return this.sqlSession.selectOne("liketotalcount",b_no);
+	}
+
+//	@Override
+//	public void updateliketotalcount(BoardVO b) {
+//		this.sqlSession.update("updateliketotalcount",b);
+//		
+//	}
 }

@@ -11,35 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 	 <script>
 
-	 
-    // 좋아요 버튼을 클릭 시 실행되는 코드 (old)
-$("#like").on("click", function () {
-	$.ajax({
-      url: '/board/board_cont',
-      type: 'POST',
-      data: { 'b_no': b_no, 'username': username },
-      success: function (data) {
-          if (data == 1) {             
-              location.reload();
-          } else {
-              location.reload();
-          }
-      }, error: function () {
-          console.log('오타 찾으세요')
-      }
 
-  });
-
-  });
-    
-
-
-
-function like_func(nickname){		 
-	var params = '';
-	params = params.addParam('b_no', b_no);
-	ajaxReq("saveHeart/" + params , "get");
-}
 
 function openDelCheck(){
 	var resultvalue = confirm('정말로 삭제하시겠습니까?');
@@ -64,7 +36,7 @@ function openDelCheck(){
 //댓글
 
 
-			var b_no=${b.b_no}; //스프링 MVC 게시판 번호값 
+			let b_no=${b.b_no}; //스프링 MVC 게시판 번호값 
 			getAllList()
 			function getAllList(){
 				$.getJSON("/replies/all/"+b_no,function(data){//json데이터를 get방식으로 처리,
@@ -75,8 +47,8 @@ function openDelCheck(){
 						 result += "<li data-r_no='"+this.r_no+"' class='replyLi'>"
 						 +this.replyer +" |  <span class='com' style='color:black;font-weight:bold;'>"+this.reply
 						 +"</span><br/><br/><span class='date' style='color:gray; text-align:right; font-style:italic'>"+this.updateDate
-						 +"</span><button>수정</button></li><br/>";
-						// button +="<li><i class="fal fa-times"></i></li>";
+						 +"</span><c:if test="${nickname==vo.replyer}"><button class='button'>수정</button></c:if></li><br/>";
+						 //c:if 내 true 되게 잘 해봅시다.
 					 });
 					 
 					 $('#replies').html(result); //해당영역에 html()함수로 문자와 태그를 함께 변경적용.
@@ -102,52 +74,41 @@ function openDelCheck(){
     <td style="width:100px;" >제목</td><td class="bottom_line"><div class="b_title"><div name="b_title" class="textField" size="100%">${b.b_title}</div></div></td>
    </tr>
    <tr>
-    <td>내용</td><td class="bottom_line"><div class="b_cont" ><div class="textField" style="width:100%; height:500px; resize:none; border:none;" >${b.b_cont}</div></div></td>
+    <td>내용</td><td class="bottom_line"><div class="b_cont" ><div class="textField" style="width:100%; height:500px; overflow-y:scroll; resize:none; border:none;" >${b.b_cont}</div></div></td>
    </tr>
    <tr>
     <td>조회수</td><td class="bottom_line"><div class="b_hit">${b.b_hit}</div></td>
     </tr>
 	 <tr>
-    <td>좋아요</td><td>${b.b_like}</td>
+    <td>
+    
+    <div id="like">
+    <c:choose>
+        <c:when test="${likes_no == 0}">
+            <button type="button" id="likebtn" class="btn btn-light">
+           <i class="far fa-heart" style="color:#56F569"></i> 좋아요</button>
+            <input type="hidden" id="likecheck" value="${likes_no}">
+             <input type="hidden" id="nickname" id="nickname" value="${nickname}">
+        </c:when>
+        
+        <c:when test="${likes_no == 1}">
+        	<button type="button" id="likebtn" class="btn btn-danger">
+             <i class="fas fa-heart"  style="color:#56F569"></i> 좋아요 취소</button>
+             <input type="hidden" id="likecheck" value="${likes_no}">
+               <input type="hidden" id="nickname" id="nickname" value="${nickname}">
+        </c:when>	
+    </c:choose>	  			
+	</div>
+    
+    </td><td id='likeCount' >${likestotal }  Likes</td>
     </tr>
     
-     <%-- 테스트중 --%>
+     <%-- 좋아요 버튼 테스트중 --%>
 	 <tr>
     <td>좋아요 test</td><td>
     
-    <div>
-    <c:choose>
-        <c:when test="${count ==1}">
-            <a href='javascript:'class='heart-click like_func(${b.nickname});'><i class="fal fa-heart" style="color:#56F569"></i></a>
-        </c:when>
-	  					
-        <c:otherwise>
-            <a href='javascript: like_func(${b.nickname});'><i class="fas fa-heart" style="color:#56F569"></i></a>
-        </c:otherwise>
-    </c:choose>
-	  				
-    <br><span id='likeCount' >${b.b_like}</span> Likes
-</div>
-                <%-- 빈 하트일때 --%>
-                <span> <i class="fal fa-heart" style="color:#56F569"></i>
-                <input type="hidden" value="${b.b_no}">
-           
-                </span>
-      
-           
-                <%-- 꽉찬 하트일때 
-                <span>
-                <i class="fas fa-heart" style="color:#56F569"></i>
-          
-                </span>--%>
-           
-
-<span id="heart${b.b_no}">${b.b_like}</span>
-
-   <%-- 테스트중 --%>
-
-</td>
-    </tr>
+	</td>
+     </tr>
 
 	<tr><td></td>
 	<td class="buttontd" colspan="2">
@@ -172,6 +133,7 @@ function openDelCheck(){
 	</c:if>
 	
 	<c:if test="${!empty id}">
+	
 	<c:if test="${empty b.b_like}">
 	<input type="button" class="CheckBtn" id=like value="좋아요 취소 " onclick="return like();"/></input>
      </c:if>
@@ -183,7 +145,7 @@ function openDelCheck(){
 		<input type="hidden" id="page" name="page" value="${page}">-->
  		
 		<tr>
-		<td></td><td><input type=hidden name="replyer" id="newReplyWriter" value="${id}" /></td>
+		<td></td><td><input type=hidden name="replyer" id="newReplyWriter" value="${nickname}" /></td>
 		</tr>
 		<tr>
 		<td colspan="2"><textarea name="reply" id="newReplyText" class="textField" style="width: 90%; hight:5%; border-bottom: 2px; " placeholder="댓글을 입력해주세요" border></textarea>
@@ -234,6 +196,7 @@ function openDelCheck(){
 </div> 
 <script src="/js/reply.js"></script>
 <script src="/js/board.js"></script>
+<script src="/js/likes.js"></script>
 </body>
 </html>
 

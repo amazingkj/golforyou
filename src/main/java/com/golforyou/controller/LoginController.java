@@ -62,6 +62,12 @@ public class LoginController {
 		System.out.println("userDetails:"+userDetails.getUsername());
 		request.getSession().setAttribute("id", principalDetails.getUsername());
 		request.getSession().setAttribute("pw", principalDetails.getPassword());
+		
+		MemberVO m= loginService.getMember(principalDetails.getUsername());
+		request.getSession().setAttribute("nickname", m.getNickname());
+
+		System.out.println(m.getNickname()); 
+		
 		return "redirect:/index";
 	}
 	
@@ -74,10 +80,18 @@ public class LoginController {
 		
 		System.out.println("authentication:"+oauth2User.getAttributes());
 		System.out.println("oauth2user:"+oauth.getAttributes());
+		System.out.println("getname?:"+oauth2User.getName());
+		
 		request.getSession().setAttribute("id", oauth2User.getName());
 		request.getSession().setAttribute("pw", oauth2User.getName()); //수정예정
-	
+		request.getSession().setAttribute("nickname", oauth2User.getName()); 
 		//request.getSession().setAttribute("id", oauth2User.getAttribute);
+		
+		//MemberVO m= loginService.getMember(oauth2User.getNickname());
+		//System.out.println(m);
+		//request.getSession().setAttribute("nickname", m.getNickname());
+
+		
 		return "redirect:/index";
 	}
 	

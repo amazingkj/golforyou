@@ -149,7 +149,8 @@
  <form method="post" action="board_write_ok" onsubmit="return bw_check();" enctype="multipart/form-data"> 
    <table id="bWrite_t" class="tablebox">
      <%--이름 - 로그인해서 입력하면 그냥 입력되게 히든으로 ! 처리하기 --%>
-  	 <tr><td><input type="hidden" name="username" id="username" value="${id}"/></td></tr>
+  	 <tr><td><input type="hidden" name="username" id="username" value="${id}"/>
+  	 <input type="hidden" name="nickname" id="nickname" value="${nickname}"/></td></tr>
     
      <tr>
       <td>제목</td>

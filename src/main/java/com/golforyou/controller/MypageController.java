@@ -156,9 +156,13 @@ public class MypageController {
 			String mphone=request.getParameter("mphone"); 
 			String memail=request.getParameter("memail");
 			String maddr=request.getParameter("maddr");
+		
+		
 			
 		upFile=request.getFile("file");//첨부할 파일을 가져온다. 
 		if(upFile != null) {//첨부한 파일이 있는 경우
+			
+			
 			String fileName=upFile.getName();//첨부한 파일명을 구함
 			File delFile=new File(saveFolder+m.getMfile()); //삭제할 파일 객체 생성 
 			

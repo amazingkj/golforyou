@@ -132,6 +132,40 @@ function join_check(){
      
 }
 }
+
+function joinOauth_check(){	
+	 
+    
+ 	if ($.trim($('#nickname').val()) == '') {//trim()함수는 양쪽 공백을 제거
+       alert('닉네임을 입력하세요!');
+       $('#nickname').val('').focus();
+       return false;
+    }
+
+
+    
+    if ($.trim($('#mphone').val()) == '') {
+       alert('휴대폰 번호를 입력하세요!');
+       $('#mphone').val('').focus();
+       return false;
+    }
+    
+
+    if ($.trim($('input[name=mgender]:radio:checked').val()) == '') {
+        alert('성별을 선택하세요');
+        $('#mphone').focus();
+        return false;
+     }
+     
+  
+      $("#frm").submit();
+      alert("회원가입을 축하합니다");
+     
+     
+}
+
+
+
    function email_Check(){  //작업중 더블체크할 것 
 
 	//이메일 중복확인

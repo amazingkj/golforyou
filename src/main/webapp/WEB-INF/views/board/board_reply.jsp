@@ -152,7 +152,7 @@
    <table id="bWrite_t" class="tablebox">
      <%--이름 - 로그인해서 입력하면 그냥 입력되게 히든으로 ! 처리하기 --%>
   	 <tr><td><input type="hidden" name="username" id="username" value="${id}"/>
-  	 <input type="hidden" name="nickname" id="nickname" value="${id}"/>
+  	 <input type="hidden" name="nickname" id="nickname" value="${nickname}"/>
   	 <%--답변 히든값 --%>
     <input type="hidden" name="b_ref" value="${b.b_ref}" />
      <%-- 원본글과 답변글을 묶어주는 그룹번호 --%>

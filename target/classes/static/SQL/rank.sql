@@ -15,7 +15,8 @@ sc_no number(38)
 );
 
 create table score_card(
-s_id varchar2(50)
+s_no number(38)
+,s_id varchar2(50)
 ,s_nickname varchar2(255)
 ,s_location varchar2(50)
 ,s_putting number(38)
@@ -26,6 +27,7 @@ s_id varchar2(50)
 ,s_updated number(38) default 0
 ,s_strike number(38)
 ,s_obandhazard number(38)
+,s_nickname varchar2(255)
 );
 
 create table ranking(

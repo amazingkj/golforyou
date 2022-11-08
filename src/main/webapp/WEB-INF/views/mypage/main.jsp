@@ -71,8 +71,8 @@
 		
 		<div class="inputBoxVertical" style="width:500px"  >
 			<c:if test="${!empty id}"> 
-			<strong>${id}</strong>님 로그인을 환영합니다.<br/>
-			<c:if test="${!empty m.maddr}"><strong>${id}</strong>님의 주요 이용지역은 <strong>${m.maddr}</strong> 입니다.<br/></c:if>
+			<strong>${m.nickname}</strong>님 로그인을 환영합니다.<br/>
+			<c:if test="${!empty m.maddr}"><strong>${m.nickname}</strong>님의 주요 이용지역은 <strong>${m.maddr}</strong> 입니다.<br/></c:if>
 			<c:if test="${empty m.maddr}"><a href="profile">주요 이용 지역 설정하기</a><br/></c:if>
 			 <br/>
 			<a href="profile">회원정보 변경하기</a>
@@ -86,7 +86,7 @@
 	
 		<div class="inputBoxVertical" style="width:500px"  >
 			<c:if test="${!empty id}"> 
-			<strong>${id}</strong>님 수강중인 강의가 없습니다. <br/>
+			<strong>${m.nickname}</strong>님 수강중인 강의가 없습니다. <br/>
 		
 			</c:if>
 			</div>
@@ -99,7 +99,7 @@
 			<c:if test="${!empty id}"> 
 			
 			<div class="ind_prof">
-			<strong id="ind_id">${id }</strong> 님은
+			<strong id="ind_id">${m.nickname }</strong> 님은
 			</div>
 			<div class="ind_prof">
 			<img id="tier_img" src="${tierURL }" alt="티어이미지" width="25" height="25" />

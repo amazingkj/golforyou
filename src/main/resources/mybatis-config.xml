@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias type="com.golforyou.vo.MemberVO" alias="member" />
 		<typeAlias type="com.golforyou.vo.BoardVO" alias="board" />
+		<typeAlias type="com.golforyou.vo.LikesVO" alias="likes" />
 
 		<typeAlias type="com.golforyou.vo.RankingVO" alias="rank" />
 		<typeAlias type="com.golforyou.vo.ScboardVO" alias="Scb" />

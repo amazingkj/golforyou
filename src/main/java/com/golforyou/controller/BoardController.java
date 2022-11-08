@@ -3,25 +3,25 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 import java.util.UUID;
 
+import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,10 +29,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.service.BoardService;
 import com.golforyou.vo.BoardVO;
 import com.golforyou.vo.LikesVO;
+import com.golforyou.vo.MemberVO;
 import com.google.gson.JsonObject;
 
 @Controller
@@ -109,8 +109,9 @@ public class BoardController {
 	
 	//게시판 목록 
 	@RequestMapping(value="/board_list",method=RequestMethod.GET)//get으로 접근하는 매핑주소를 처리 
-	public String board_list(Model listM, HttpServletRequest request,@ModelAttribute BoardVO b) {
-				 
+	public String board_list(Model listM, HttpServletRequest request, @ModelAttribute BoardVO b) {
+		
+		
 		int page=1;
 		int limit=10;//한페이지에 보여지는 목록개수
 		if(request.getParameter("page") != null) {
@@ -122,6 +123,7 @@ public class BoardController {
 		        b.setFind_name("%"+find_name+"%");
 
 		      int totalCount=this.boardService.getRowCount(b);
+		     
 		      //총레코드 개수,검색후 레코드 개수
 		      
 		      b.setStartrow((page-1)*10+1);//시작행번호
@@ -153,8 +155,36 @@ public class BoardController {
 	
 	//내용보기+답변폼+수정폼+삭제폼
 			@RequestMapping("/board_cont")
-			public ModelAndView board_cont(@RequestParam("b_no") int b_no, String state, int page, BoardVO b) {
+			public ModelAndView board_cont(@RequestParam("b_no") int b_no, String state, int page, BoardVO b, LikesVO vo, HttpSession session) {
 				//@RequestParam("board_no")를 서블릿으로 표현하면 request.getParameter("board_no")와 같다. int page로 표현해도 get으로 전달된 page 파라미터값을 받을 수 있다. 
+			
+				String nickname = (String)session.getAttribute("nickname");
+				//좋아요 기능 
+				vo=new LikesVO();
+				vo.setBoard_no(b_no);
+				vo.setNickname(nickname);
+				//vo.setLikes_no(0);
+				
+				System.out.println(vo);
+				
+				//좋아요 갯수 카운트 
+				int likestotal=boardService.liketotalcount(b_no);
+				
+				//System.out.println("likestotal"+likestotal); 
+				//vo.setLikestotal(likestotal);
+				//b.setB_like(likestotal);
+				
+				int likes_no=0;
+				int check = boardService.likecount(vo); 
+				if(check==0) {
+						boardService.likeinsert(vo);
+				}else if(check==1) {
+					likes_no=boardService.likegetinfo(vo);
+				}
+				
+				//this.boardService.updateliketotalcount(b);
+				
+				
 				
 				if(state.equals("cont")) {//내용보기 일때만 조회수 증가
 					b=this.boardService.getBoardCont(b_no);
@@ -167,7 +197,10 @@ public class BoardController {
 				cm.addObject("b",b);//키, 값 쌍으로 저장 
 				cm.addObject("board_cont",board_cont);
 				cm.addObject("page",page); //페이징에서 내가 본 쪽번호로 이동하기 위해서 
-			
+				cm.addObject("likes_no",likes_no); 
+				cm.addObject("likestotal",likestotal); 
+				
+				
 				if(state.equals("cont")) { //내용보기 일때 
 					cm.setViewName("board/board_cont"); //뷰리졸브 경로 : 
 				}else if(state.equals("reply")){
@@ -204,12 +237,12 @@ public class BoardController {
 						if(request.getParameter("page") !=null) {
 							page=Integer.parseInt(request.getParameter("page"));
 						}
-						String id=request.getParameter("nickname");						
+						String nickname=request.getParameter("nickname");						
 						String username=request.getParameter("username");
 						String b_title=request.getParameter("b_title");
 						String b_cont=request.getParameter("b_cont");
 						
-						eb.setB_no(b_no); eb.setNickname(id); eb.setUsername(username); 
+						eb.setB_no(b_no); eb.setNickname(nickname); eb.setUsername(username); 
 						eb.setB_title(b_title); eb.setB_cont(b_cont);
 							
 							this.boardService.editboard(eb);//번호를 기준으로 글쓴이, 글제목, 글내용, 첨부파일 수정 
@@ -237,61 +270,6 @@ public class BoardController {
 				
 			
 			}//board_del_ok()
-			
-			
-			//게시판 좋아요 
-			// 빈하트 클릭시 하트 저장
-			@ResponseBody
-			@RequestMapping(value = "/saveHeart", method = RequestMethod.GET, headers = "Accept=application/json")
-			public BoardVO save_heart(@RequestParam int b_no,  HttpSession session) {
-				BoardVO pto =new BoardVO();
-				LikesVO to = new LikesVO();
-
-			    // 게시물 번호 세팅
-			    to.setBoard_no(b_no);
-
-			    // 좋아요 누른 사람 nick세팅
-			    to.setNickname("member02");
-
-			    // +1된 하트 갯수를 담아오기위함
-			  
-			    		
-			    int result=boardService.SaveHeart(to);
-			    System.out.println(result);
-			    if(result==1) {
-			    		boardService.UpHeart(b_no);
-			    	 pto=boardService.CountHeart(pto);
-			    }
-			    
-			   
-			    return pto;
-			}
-
-			// 꽉찬하트 클릭시 하트 해제
-			@ResponseBody
-			@RequestMapping(value = "/removeHeart")
-			public BoardVO remove_heart(@RequestParam int b_no, HttpSession session) {
-				BoardVO pto =new BoardVO();
-				LikesVO to = new LikesVO();
-
-			    // 게시물 번호 세팅
-			    to.setBoard_no(b_no);
-
-			    // 좋아요 누른 사람 nick세팅
-			    to.setNickname((String) session.getAttribute("nick"));
-
-			    // -1된 하트 갯수를 담아오기위함
-			    
-		   		
-			    int result=boardService.RemoveHeart(to);
-			    
-			    if(result==1) {
-			    	 pto=boardService.CountHeart(pto);
-			    }
-			    
-			   
-
-			    return pto;
-			}
-			
+						
+		
 }
