@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.golforyou.dao.BoardDAO;
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
+import com.golforyou.vo.LikesVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
