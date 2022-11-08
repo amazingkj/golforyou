@@ -23,6 +23,8 @@
 		<typeAlias type="com.golforyou.vo.CTeacherVO" alias="cteacher" />
 		<typeAlias type="com.golforyou.vo.FieldClassVO" alias="fieldclass" />
 		<typeAlias type="com.golforyou.vo.OnlineClassVO" alias="onlineclass" />
+		<typeAlias type="com.golforyou.vo.AllClassVO" alias="allclass" />
+		<typeAlias type="com.golforyou.vo.ClassPayVO" alias="classpay" />
 		<typeAlias type="com.golforyou.vo.BoardReplyVO" alias="br" />
 		<typeAlias type="com.golforyou.vo.GolfcouseVO" alias="golfcouse" />
 		<typeAlias type="com.golforyou.vo.Gc_replyVO" alias="Gc_Reply"/> 
