@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.golforyou.dao.ClassDAO;
+import com.golforyou.vo.AllClassVO;
 import com.golforyou.vo.CTeacherVO;
+import com.golforyou.vo.ClassPayVO;
 import com.golforyou.vo.ClassVO;
 import com.golforyou.vo.FieldClassVO;
 import com.golforyou.vo.OnlineClassVO;
@@ -120,5 +122,29 @@ public class ClassServiceImpl implements ClassService {
 	public void deleteOnline(int ono) {
 		this.classDao.deleteOnline(ono);
 	}
+
+	/* 전체 클래스 관리 */
+	@Override
+	public int getRowCountAll(AllClassVO allclassVO) {
+		return this.classDao.getRowCountAll(allclassVO);
+	}
+
+	@Override
+	public List<AllClassVO> getAllList(AllClassVO allclassVO) {
+		return this.classDao.getAllList(allclassVO);
+	}
+
+	/* 결제 페이지 */
+	@Override
+	public void insertOnlinePayOk(ClassPayVO cp) {
+		this.classDao.insertOnlinePayOk(cp);	
+	}
+	
+	@Override
+	public ClassPayVO getClassPayDetail(int pno) {
+		return this.classDao.getClassPayDetail(pno);
+	}
+
+
 	
 }

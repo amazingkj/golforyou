@@ -2,7 +2,10 @@ package com.golforyou.service;
 
 import java.util.List;
 
+import com.golforyou.vo.AllClassVO;
 import com.golforyou.vo.CTeacherVO;
+import com.golforyou.vo.ClassPayVO;
+import com.golforyou.vo.ClassVO;
 import com.golforyou.vo.FieldClassVO;
 import com.golforyou.vo.OnlineClassVO;
 
@@ -32,6 +35,15 @@ public interface ClassService {
 	OnlineClassVO getOnlineDetail(int ono);
 	void updateOnline(OnlineClassVO oc);
 	void deleteOnline(int ono);
+	
+	/* 전체 클래스 관리 */
+	int getRowCountAll(AllClassVO allclassVO);
+	List<AllClassVO> getAllList(AllClassVO allclassVO);
+	
+	/* 결제 페이지 */
+	void insertOnlinePayOk(ClassPayVO cp);
+	ClassPayVO getClassPayDetail(int pno);
+	
 	
 	
 

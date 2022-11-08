@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.golforyou.vo.AllClassVO;
 import com.golforyou.vo.CTeacherVO;
+import com.golforyou.vo.ClassPayVO;
 import com.golforyou.vo.ClassVO;
 import com.golforyou.vo.FieldClassVO;
 import com.golforyou.vo.OnlineClassVO;
@@ -119,7 +121,28 @@ public class ClassDAOImpl implements ClassDAO{
 		this.sqlSession.delete("onlinec_delete", ono);
 	}
 
+	/* 전체 클래스 관리 */
+	@Override
+	public int getRowCountAll(AllClassVO allclassVO) {
+		return this.sqlSession.selectOne("allclass_count", allclassVO);
+	}
+
+	@Override
+	public List<AllClassVO> getAllList(AllClassVO allclassVO) {
+		return this.sqlSession.selectList("all_list", allclassVO);
+	}
+
+	/* 결제 페이지 */
+	@Override
+	public void insertOnlinePayOk(ClassPayVO cp) {
+		this.sqlSession.insert("classpay_in", cp);
+	}
 	
+	@Override
+	public ClassPayVO getClassPayDetail(int pno) {
+		return this.sqlSession.selectOne("classpay_detail", pno);
+	}
+
 
 
 }

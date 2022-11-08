@@ -102,10 +102,10 @@
 								</div>
 
 							</div>
-							<button class="btn01" type="button"
-								onclick="location.href='class_cart'">장바구니</button>
+							<!-- <button class="btn01" type="button"
+								onclick="location.href='class_cart'">장바구니</button> -->
 							<button class="btn02" type="button"
-								onclick="location.href='class_pay'">바로 결제</button>
+								onclick="location='class_payField?fno=${item.fno}';">바로 결제</button>
 						</div>
 
 						<div id="tab2" class="tab_content">
@@ -148,10 +148,10 @@
 								</div>
 
 							</div>
-							<button class="btn01" type="button"
-								onclick="location.href='class_cart'">장바구니</button>
+							<!-- <button class="btn01" type="button"
+								onclick="location.href='class_cart'">장바구니</button> -->
 							<button class="btn02" type="button"
-								onclick="location.href='class_pay'">바로 결제</button>
+								onclick="location='class_payField?fno=${item.fno}';">바로 결제</button>
 
 						</div>
 
@@ -195,10 +195,10 @@
 								</div>
 
 							</div>
-							<button class="btn01" type="button"
-								onclick="location.href='class_cart'">장바구니</button>
+							<!-- <button class="btn01" type="button"
+								onclick="location.href='class_cart'">장바구니</button> -->
 							<button class="btn02" type="button"
-								onclick="location.href='class_pay'">바로 결제</button>
+								onclick="location='class_payField?fno=${item.fno}';">바로 결제</button>
 
 						</div>
 					</div>
@@ -214,7 +214,7 @@
 						<ul>
 							<li class="active"><a href="#" rel="tab4">클래스 설명</a></li>
 							<li><a href="#" rel="tab5">가격 정책</a></li>
-							<li><a href="#" rel="tab6">리뷰</a></li>
+							<!-- <li><a href="#" rel="tab6">리뷰</a></li> -->
 							<li><a href="#" rel="tab7">취소 및 환불 규정</a></li>
 						</ul>
 					</div>
@@ -454,7 +454,7 @@
 		</form>
 	</div>
 </body>
-<div style="margin: 200px 0px 0px 0px;"></div>
+<div style="margin: 3% 0% 0% 0%;"></div>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 </html>
 

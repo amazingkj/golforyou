@@ -44,27 +44,18 @@
 					<li><a href="class_main">전체</a></li>
 					<li><a href="class_field">필드 클래스</a>
 						<ul class="province_2" id="province_2">
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_field"> 수도권</a></li>
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_field"> 강원도</a></li>
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_field"> 충청도</a></li>
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_field"> 전라도</a></li>
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_field"> 경상도</a></li>
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_field"> 제주도</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_field?faddr=수도권"> 수도권</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_field?faddr=강원도"> 강원도</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_field?faddr=충청도"> 충청도</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_field?faddr=전라도"> 전라도</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_field?faddr=경상도"> 경상도</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_field?faddr=제주도"> 제주도</a></li>
 						</ul></li>
 					<li><a href="class_online">온라인 클래스</a>
 						<ul class="province_2" id="province_2">
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_online"> 골드</a></li>
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_online"> 실버</a></li>
-							<li><i class="fas fa-map-marker-alt"></i><a
-								href="class_online"> 브론즈</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_online?olevel=골드"> 골드</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_online?olevel=실버"> 실버</a></li>
+							<li><i class="fas fa-map-marker-alt"></i><a href="class_online?olevel=브론즈"> 브론즈</a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -75,11 +66,11 @@
 					<%--검색 폼추가 --%>
 					<div id="cFind_wrap">
 						<select name="find_field" class="class-title">
-							<option value="ctitle"
-								<c:if test="${find_field=='ctitle'}">
+							<option value="atitle"
+								<c:if test="${find_field=='atitle'}">
    ${'selected'}</c:if>>클래스명</option>
-							<option value="cteacher"
-								<c:if test="${find_field=='cteacher'}">
+							<option value="tname"
+								<c:if test="${find_field=='tname'}">
    ${'selected'}</c:if>>강사명</option>
 						</select> <input name="find_name" id="find_name" size="14"
 							value="${find_name}" /> <input type="submit" value="검색"
@@ -89,9 +80,9 @@
 					</div>
 				</div>
 				<div class="class-btns">
-					<c:if test="${!empty clist}">
-						<c:forEach var="c" items="${clist}">
-							<button id="class-btn" type="button" onclick="onDetail('${c.ckind}', '${c.cno}')">
+					<c:if test="${!empty alist}">
+						<c:forEach var="a" items="${alist}">
+							<button id="class-btn" type="button" onclick="onDetail('${a.classtype}', '${a.ano}')">
 								<div class="class-box">
 									<%--c:if test="${!empty c.cimage}">
 									<div class="cimage">
@@ -99,26 +90,23 @@
 									</div>
 								</c:if--%>
 									<c:choose>
-										<c:when test="${!empty c.cimage}">
+										<c:when test="${!empty a.aimage}">
 											<div class="cimage">
-												<img src="/upload${c.cimage}" class="thumbnail-img" />
+												<img src="/upload/class${a.aimage}" class="thumbnail-img" />
 											</div>
 										</c:when>
 										<c:otherwise>
-											<div class="cimage">
+											<div class="fimage">
 												<img src="/images/class/aaaa.jpg" class="thumbnail-img" />
 											</div>
 										</c:otherwise>
 									</c:choose>
 
-									<div class="cteacher">${c.cteacher}&nbsp;프로</div>
-									<div class="ctitle">${c.ctitle}</div>
-									<div class="cprice">
-										<c:if test="${c.csprice != '0'}">
-											<fmt:formatNumber value="${c.csprice}" pattern="#,###" />
-										</c:if>
-										<c:if test="${c.coprice != '0'}">
-											<fmt:formatNumber value="${c.coprice}" pattern="#,###" />
+									<div class="tname">${a.tname}&nbsp;프로</div>
+									<div class="atitle">${a.atitle}</div>
+									<div class="aprice">
+										<c:if test="${a.aprice != '0'}">
+											<fmt:formatNumber value="${a.aprice}" pattern="#,###" />
 										</c:if>
 										원
 									</div>
@@ -191,10 +179,15 @@
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 </html>
 <script>
-
-function onDetail(type, cno) {
-	//alert('test'+type+cno);
-	if(type === '필드') location.href='class_detailField?cno='+cno;
-	else if(type === '온라인') location.href='class_detailOnline?cno='+cno;
+function onDetail(classtype, ano) {
+	//alert('test'+classtype+ano);
+ 	if(classtype === 'field'){
+ 		var fno = ano;
+		location.href='class_detailField?fno='+fno;
+ 	}
+	else if(classtype === 'online'){
+		var ono = ano;
+		location.href='class_detailOnline?ono='+ono;
+	}
 }
 </script>

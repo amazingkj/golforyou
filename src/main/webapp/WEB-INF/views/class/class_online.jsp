@@ -30,15 +30,6 @@
 	}
 	navigo()
 </script>
-<script>
-
-function onLevel(type, olevel) {
-	//alert('test'+type+olevel);
-	if(type === '골드') location="'class_online?olevel==='골드';"
-	else if(type === '실버') location.href='class_online?olevel='+'실버';
-	else if(type === '브론즈') location.href='class_online?olevel='+'브론즈';
-}
-</script>
 </head>
 <body>
 
@@ -51,9 +42,9 @@ function onLevel(type, olevel) {
 			<div class="category">
 				<ul class="province_3">
 					<li><a href="class_online">온라인 전체</a></li>
-					<li class="gold_level"><a href="class_online">골드</a></li>
-					<li class="silver_level"><a href="class_online">실버</a></li>
-					<li class="bronze_level"><a href="class_online">브론즈</a></li>
+					<li class="gold_level"><a href="class_online?olevel=골드">골드</a></li>
+					<li class="silver_level"><a href="class_online?olevel=실버">실버</a></li>
+					<li class="bronze_level"><a href="class_online?olevel=브론즈">브론즈</a></li>
 				</ul>
 			</div>
 			<div class="subject">
@@ -174,9 +165,9 @@ function onLevel(type, olevel) {
 </html>
 <script>
 
-function onDetail(type, cno) {
+function onDetail(type, ano) {
 	//alert('test'+type+cno);
-	if(type === '필드') location.href='class_detailField?cno='+cno;
-	else if(type === '온라인') location.href='class_detailOnline?cno='+cno;
+	if(type === 'field') location.href='class_detailField?ano='+ano;
+	else if(type === 'online') location.href='class_detailOnline?ano='+ano;
 }
 </script>

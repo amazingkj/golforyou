@@ -90,10 +90,9 @@
 									</div>
 								</div>
 							</div>
-							<button class="btn01" type="button"
-								onclick="location.href='class_cart'">장바구니</button>
-							<button class="btn02" type="button"
-								onclick="location.href='class_pay'">바로 결제</button>
+							<!-- <button class="btn01" type="button"
+								onclick="location.href='class_cart'">장바구니</button> -->
+							<button class="btn02" type="button" onclick="location='class_payOnline?ono=${item.ono}';">바로 결제</button>
 						</div>
 
 						<div id="tab2" class="tab_content">
@@ -135,8 +134,8 @@
 								</div>
 
 							</div>
-							<button class="btn01" type="button"
-								onclick="location.href='class_cart'">장바구니</button>
+							<!-- <button class="btn01" type="button"
+								onclick="location.href='class_cart'">장바구니</button> -->
 							<button class="btn02" type="button"
 								onclick="location.href='class_pay'">바로 결제</button>
 
@@ -181,8 +180,8 @@
 								</div>
 
 							</div>
-							<button class="btn01" type="button"
-								onclick="location.href='class_cart'">장바구니</button>
+							<!-- <button class="btn01" type="button"
+								onclick="location.href='class_cart'">장바구니</button> -->
 							<button class="btn02" type="button"
 								onclick="location.href='class_pay'">바로 결제</button>
 
@@ -200,7 +199,7 @@
 						<ul>
 							<li class="active"><a href="#" rel="tab4">클래스 설명</a></li>
 							<li><a href="#" rel="tab5">가격 정책</a></li>
-							<li><a href="#" rel="tab6">리뷰</a></li>
+							<!-- <li><a href="#" rel="tab6">리뷰</a></li> -->
 							<li><a href="#" rel="tab7">취소 및 환불 규정</a></li>
 						</ul>
 					</div>
@@ -212,27 +211,18 @@
 							</h4>
 							<br />
 							<p>
-								안녕하세요.<br /> <br /> 필드 골프 레슨 전문 <strong><c:out
-										value="${item.tname}" /> 프로</strong>입니다.<br /> <br /> 인도어에서 혹은 실내에서
-								많은 레슨이 이루어집니다.<br /> <br /> 이것을 실전에 사용하려면 많은 시간과 노력이 필요합니다.<br />
-								<br /> 그래서 저희는 체계적인 레슨 프로그램으로 필드에서 <br /> <br /> 고객의 요구에 부합하는
-								레슨 서비스를 제공하고 있습니다.<br /> <br /> <br /> <br /> 본 레슨 서비스는<br />
-								<br /> 1. 라운딩 전 60~90분 인도어에서 레슨이 이루어집니다. 이 때 고객님께 필요한 부분을
-								체크합니다.<br /> <br /> 2. 라운딩 레슨에서 꼭 필요한 부분을 정확한 설명과 응용방법으로 고객님의
-								실력 향상에 도움을 드립니다.<br /> <br /> 3. 레슨이 끝난 후, 개개인의 연습장에서 어떻게 연습을
-								하여야 되는지 알려드립니다.<br /> <br /> 4. 라운딩 중 레슨 동영상을 통해 다시 한 번 연습 방법을
-								찾을 수 있도록 보내드립니다.<br /> <br /> 5. 레슨인원은 총 3명으로 필드에서 충분한 연습과 레슨이
-								이루어지도록 합니다. <br /> <br /> <br />
-							</p>
-
-							<h4>
-								<br /> <br />의뢰인 준비사항
-							</h4>
-							<br />
-							<p>
-								- 본인 골프 클럽<br /> 1. 필드 레슨은 시작 4일 이후에는 취소가 되지 않습니다.<br /> 2. 우천
-								및 천재 지변으로 인해 레슨이 불가할 경우 2주내 다시 진행합니다.<br /> 3. 18홀 레슨 중 중도 정지는
-								9홀 단위로 계산합니다.
+								안녕하세요.<br /> <br />
+								<strong><c:out value="${item.tname}" /> 프로</strong>입니다.<br /><br /> 
+								골프는 반드시 원칙과 이론을 익혀서 골프 본질을 파악하고 배우기 시작해야 합니다.<br /><br />
+								가르쳐주신 분의 주입식으로 배우면 절대 즐거운 골프가 되지 않습니다.<br /><br />
+								시작할 때는 모르지만 어느정도 시일이 지나 이제 잘 쳐보야겠다 싶을 땐 이미 늦습니다.<br /><br />
+								기초가 잘못되면 절대 실력향상이 안 됩니다. 물론 교정은 더더욱 어렵습니다.<br /><br />
+								이미 잘못된 폼이 몸에, 근육에 기억되어있기 때문입니다.<br /><br /><br />
+								이 강의는 골프를 배우기 전에 준비할 내용, 알아야 할 내용을 가르쳐 드립니다.<br /><br />
+								많은 도움 되시길 바랍니다.<br /><br /><br />
+								골프는 평생 하는 운동입니다.<br /><br />
+								연습을 많이 한다고 잘 칠 수 있는 것이 아닙니다.<br /><br />
+								골프 전문가가 되고 싶어하는 분들에게 보물같은 클래스가 될 것으로 믿습니다.<br /><br />
 							</p>
 						</div>
 						<div class="tab4_right">
@@ -260,9 +250,9 @@
 												<c:out value="${item.ophone}" />
 											</p>
 										</div>
-										<div class="address">추천 레벨</div>
+										<div class="address_online">추천 레벨</div>
 
-										<div class="address_detail">
+										<div class="address_detail_online">
 											<p>
 												<c:out value="${item.olevel}" />
 											</p>
@@ -280,27 +270,13 @@
 						</h4>
 						<br />
 
-						<div class="table_price">
+						<div class="table_price_online">
 							<div class="detail1">
 								<div class="detail1_1"></div>
 								<div class="detail_vertical">
-									<div class="standard1">STANDARD</div>
+									<div class="standard1">가격</div>
 									<div class="standard2">
-										
-										원
-									</div>
-								</div>
-								<div class="detail_vertical">
-									<div class="deluxe1">DELUXE</div>
-									<div class="deluxe2">
 										<c:out value="${item.oprice}" />
-										원
-									</div>
-								</div>
-								<div class="detail_vertical">
-									<div class="premium1">PREMIUM</div>
-									<div class="premium2">
-										
 										원
 									</div>
 								</div>
@@ -308,76 +284,23 @@
 							<div class="detail2">
 								<div class="detail2_1">패키지 설명</div>
 								<div class="detail_vertical">
-									<div class="standard_info">
-										라운딩 골프 레슨
-										
-										회
-									</div>
 									<div class="standard_desc">
 										<p>
-											
+											${item.odesc}
 										</p>
 									</div>
 								</div>
-								<div class="detail_vertical">
-									<div class="deluxe_info">
-										라운딩 골프 레슨
-										
-										회
-									</div>
-									<div class="deluxe_desc">
-										<p>
-											
-										</p>
-									</div>
-								</div>
-								<div class="detail_vertical">
-									<div class="premium_info">
-										라운딩 골프 레슨
-										
-										회
-									</div>
-									<div class="premium_desc">
-										<p>
-											
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="detail3">
-								<div class="detail3_1">강의실 제공 포함</div>
-								<div class="detail_vertical">✔</div>
-								<div class="detail_vertical">✔</div>
-								<div class="detail_vertical">✔</div>
 							</div>
 							<div class="detail4">
-								<div class="detail4_1">1회당 레슨시간(분)</div>
+								<div class="detail4_1">수강기간</div>
 								<div class="detail_vertical">
-									
-									&nbsp;분
+												${item.otime}&nbsp;일			
 								</div>
-								<div class="detail_vertical">
-									
-									&nbsp;분
 								</div>
-								<div class="detail_vertical">
-									
-									&nbsp;분
-								</div>
-							</div>
 							<div class="detail5">
-								<div class="detail5_1">레슨 횟수</div>
+								<div class="detail5_1">추천 레벨</div>
 								<div class="detail_vertical">
-									
-									&nbsp;회
-								</div>
-								<div class="detail_vertical">
-									
-									&nbsp;회
-								</div>
-								<div class="detail_vertical">
-									
-									&nbsp;회
+											${item.olevel}
 								</div>
 							</div>
 						</div>
@@ -417,18 +340,16 @@
 						</h4>
 						<br />
 						<p>
-							가. 레슨 환불기준 원칙<br /> 학원의 설립/운영 및 과외교습에 관한 법률 제 18조(교습비 등의 반환 등)<br />
-							- 학원설립, 운영자, 교습자 및 개인과외교습자는 학습자가 수강을 계속할 수 없는 경우 또는 학원의 등록말소, 교습소
-							폐지 등으로 교습을 계속할 수 없는 경우에는 학습자로부터 받은 교습비를 반환하는 등 학습자를 보호하기 위하여 필요한
-							조치를 하여야 한다. <br /> <br /> 1. 레슨을 제공할 수 없거나, 레슨 장소를 제공할 수 없게 된 날
-							: 이미 납부한 레슨비 등을 일한 계산한 금액 환불 <br /> <br /> 2. 레슨기간이 1개월 이내의 경우<br />
-							- 레슨 시작전 : 이미 납부한 레슨비 전액 환불<br /> - 총 레슨 시간의 1/3 경과전 : 이미 납부한
-							레슨비의 2/3에 해당액 환불<br /> - 총 레슨 시간의 1/2 경과전 : 이미 납부한 레슨비용의 1/2에
-							해당액 환불<br /> - 총 레슨시간의 1/2 경과후 : 반환하지 않음 <br /> <br /> 3.레슨
-							기간이 1개월을 초과하는 경우 - 레슨 시작전 : 이미 납부한 레슨비 전액 환불<br /> - 레슨 시작후 :
-							반환사유가 발생한 당해 월의 반환 대상 레슨비(레슨비 징수기간이 1개월 이내인 경우에 따라 산출된 수강료를 말한다)와
-							나머지 월의 레슨비 전액을 합산한 금액 환불 <br /> <br /> * 총 레슨 시간의 레슨비 징수기간 중의
-							총레슨시간을 말하며, 반환 금액의 산정은 반환 사유가 발생한 날까지 경과 된 레슨시간을 기준으로 함
+							가. 환불 상세<br /> - 결제 후 14일 이내에 영상 재생 이력이 없는 경우 전액 환불됩니다.<br/>
+							- 그 외에는 영상 재생 여부와 상관없이 환불이 불가합니다.<br/><br/>
+							나. 유의사항<br/>
+							- GolForYou가 무상으로 제공하는 무료 서비스 혹은 추가 이용 기간(보너스 기간)은 환불에 영향을 미치지 않습니다.<br/>
+							- 환불금액은 실제 결제금액을 기준으로 계산되며, 결제수수료·제세공과금 등을 공제할 수 있습니다.<br/>
+							- GolForYou는 회원이 관계 법령 또는 이용약관 등을 위반한 경우 이용약관 및 정책에 따라 환불을 거부할 수 있습니다.<br/><br/>
+							다. 기타<br/>
+							- 서비스 품질 및 시스템에 관한 허위 사실을 근거로 환불을 요청한 경우, 손해배상청구 및 민사처벌의 대상이 될 수 있습니다.<br/>
+							- GolForYou는 전자상거래 등에서의 소비자 보호에 관한 법률 및 기타 관계 법령을 참고하며, 또한 본 내용에 포함되지 않는 내용은 크몽 이용약관에 의거하여 기준을 판단합니다.
+							<br/><br/><br/>
 						</p>
 					</div>
 
@@ -441,7 +362,7 @@
 
 
 </body>
-<div style="margin: 200px 0px 0px 0px;"></div>
+<div style="margin: 1% 0% 0% 0%;"></div>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 </html>
 

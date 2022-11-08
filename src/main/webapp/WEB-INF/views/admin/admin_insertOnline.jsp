@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/class_admin.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 	<div id="wrap-edit2">
 		<h2>온라인 클래스 등록하기</h2>
 		<br />
-		<form name="form2" method="post" action="/admin/insertOnline_ok" enctype="multipart/form-data">
+		<form name="form2" method="post" action="/admin/insertOnline_ok" enctype="multipart/form-data" onsubmit="return write_check_online();">
 			<table>
 				<tr>
 					<td><hr /></td>
@@ -41,7 +41,7 @@
 				<tr>
 					<td>강사명</td>
 					<td><select name="tno" id="tname">
-							<option>강사를 선택해주세요</option>
+							<option value="none">강사를 선택해주세요</option>
 					</select> 프로</td>
 				</tr>
 				<tr>
@@ -63,7 +63,7 @@
 				</tr>
 				<tr>
 					<td>클래스 이미지</td>
-					<td><input type="file" name="oimage2"></td>
+					<td><input type="file" name="oimage2" id="oimage2" accept="image/*" /></td>
 				</tr>
 				<tr>
 					<td><br /> <br /></td>
@@ -95,7 +95,7 @@
 					<td>온라인 클래스 수강기간</td>
 					<td>
 					<select name="otime" id="otime">
-							<option>수강 기간을 선택해주세요</option>
+							<option value="none">수강 기간을 선택해주세요</option>
 							<option value="90">90</option>
 							<option value="120">120</option>
 							<option value="180">180</option>
@@ -104,7 +104,7 @@
 				<tr>
 					<td>온라인 클래스 추천 레벨</td>
 					<td><select name="olevel" id="olevel">
-							<option>레벨을 선택해주세요</option>
+							<option value="none">레벨을 선택해주세요</option>
 							<option value="골드">골드</option>
 							<option value="실버">실버</option>
 							<option value="브론즈">브론즈</option>

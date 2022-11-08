@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/class_admin.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 	<div id="wrap-edit2">
 		<h2>강사 등록하기</h2>
 		<br />
-		<form name="form5" method="post" action="/admin/insertTeacher_ok">
+		<form name="form5" method="post" action="/admin/insertTeacher_ok" onsubmit="return write_check_teacher();">
 			<table>
 				<tr>
 					<td><hr /></td>
@@ -41,7 +41,7 @@
 				<tr>
 					<td>강사 성별</td>
 					<td><select name="tgender" id="tgender">
-							<option>성별을 선택해주세요</option>
+							<option value="none">성별을 선택해주세요</option>
 							<option value="남성">남성</option>
 							<option value="여성">여성</option>
 					</select></td>

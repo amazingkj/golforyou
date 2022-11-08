@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/class_admin.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 
@@ -18,7 +18,7 @@
 		<h2>필드 클래스 등록하기</h2>
 		<br />
 		<!-- form name="form1" method="post" action="/insertField_ok" onsubmit="write_check_field()" enctype="multipart/form-data" -->
-		<form name="form1" method="post" action="/admin/insertField_ok" enctype="multipart/form-data">
+		<form name="form1" method="post" action="/admin/insertField_ok" enctype="multipart/form-data" onsubmit="return write_check_field();">
 			<table>
 				<tr>
 					<td><hr /></td>
@@ -42,7 +42,7 @@
 				<tr>
 					<td>강사명</td>
 					<td><select name="tno" id="tname">
-							<option>강사를 선택해주세요</option>
+							<option value="none">강사를 선택해주세요</option>
 					</select> 프로</td>
 				</tr>
 				<tr>
@@ -78,7 +78,7 @@
 
 					<td>
 					<select name="faddr" id="faddr" >
-							<option>지역을 선택해주세요</option>
+							<option value="none">지역을 선택해주세요</option>
 							<option value="수도권">수도권</option>
 							<option value="강원도">강원도</option>
 							<option value="충청도">충청도</option>
@@ -130,7 +130,7 @@
 				</tr>
 				<tr>
 					<td>클래스 이미지</td>
-					<td><input type="file" name="fimage2"></td>
+					<td><input type="file" name="fimage2" id="fimage2"></td>
 				</tr>
 				<tr>
 					<td><br /> <br /></td>

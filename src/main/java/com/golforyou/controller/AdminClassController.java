@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.golforyou.service.ClassService;
+import com.golforyou.vo.AllClassVO;
 import com.golforyou.vo.CTeacherVO;
 import com.golforyou.vo.FieldClassVO;
 import com.golforyou.vo.OnlineClassVO;
@@ -35,10 +36,45 @@ public class AdminClassController {
 	private ClassService classService;
 	
 	/* 골프 클래스 관리자 메인 페이지 */
-	@GetMapping("/admin/admin_classMain")
-	public ModelAndView admin_classMain() {
-		ModelAndView wm = new ModelAndView("admin/admin_classMain");
-		return wm;
+	@RequestMapping(value="/admin/admin_classMain",method=RequestMethod.GET) //get으로 접근하는 매핑주소를 처리
+	public String admin_classMain(Model listC, HttpServletRequest request,@ModelAttribute AllClassVO allclassVO) {
+		int page=1;
+		int limit=10;//한페이지에 보여지는 목록개수
+		if(request.getParameter("page") != null) {
+			page=Integer.parseInt(request.getParameter("page"));//페이지번호를 정수숫자로 변경해서 저장         
+		}
+		String find_name=request.getParameter("find_name");//검색어
+		String find_field=request.getParameter("find_field");//검색 필드
+		allclassVO.setFind_field(find_field);
+		allclassVO.setFind_name("%"+find_name+"%");
+		//SQL문에서 %는 검색에서 하나이상의 모르는 임의의 문자와 매핑 대응하는
+		//와일드 카드문자
+
+		int totalCount=this.classService.getRowCountAll(allclassVO);
+		//검색전 총레코드 개수,검색후 레코드 개수
+
+		allclassVO.setStartrow((page-1)*10+1);//시작행번호
+		allclassVO.setEndrow(allclassVO.getStartrow()+limit-1);//끝행 번호
+
+		List<AllClassVO> alist=this.classService.getAllList(allclassVO); //검색 전후 목록
+
+		//총 페이지수
+		int maxpage=(int)((double)totalCount/limit+0.95);
+		//시작페이지(1,11,21 ..)
+		int startpage=(((int)((double)page/10+0.9))-1)*10+1;
+		//현재 페이지에 보여질 마지막 페이지(10,20 ..)
+		int endpage=maxpage;
+		if(endpage>startpage+10-1) endpage=startpage+10-1;
+
+		listC.addAttribute("alist",alist);
+		listC.addAttribute("page",page);
+		listC.addAttribute("startpage",startpage);
+		listC.addAttribute("endpage",endpage);
+		listC.addAttribute("maxpage",maxpage);
+		listC.addAttribute("listcount",totalCount);
+		listC.addAttribute("find_field",find_field);
+		listC.addAttribute("find_name",find_name);
+		return "admin/admin_classMain";
 	}//admin_classMain()
 	
 	

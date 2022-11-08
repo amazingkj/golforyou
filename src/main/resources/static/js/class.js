@@ -1,5 +1,299 @@
 /*class.js*/
 
+
+/* 강사 등록 시 유효성 검사 */
+function write_check_teacher() {
+	if($.trim($("#tname").val())==""){
+		alert("강사명을 입력해주세요!");
+		$("#tname").val("").focus();
+		return false;
+	}
+	if(form5.tgender.value == 'none'){
+   		alert("강사 성별을 선택해주세요!");
+   		return false;
+  	}
+	if($.trim($("#tcareer").val())==""){
+		alert("강사 소개 또는 경력 사항을 입력해주세요!");
+		$("#tcareer").val("").focus();
+		return false;
+	}
+}
+
+/* 강사 정보 수정 시 유효성 검사 */
+function edit_check_teacher() {
+	if($.trim($("#tname").val())==""){
+		alert("강사명을 입력해주세요!");
+		$("#tname").val("").focus();
+		return false;
+	}
+	if(form7.tgender.value == 'none'){
+   		alert("강사 성별을 선택해주세요!");
+   		return false;
+  	}
+	if($.trim($("#tcareer").val())==""){
+		alert("강사 소개 또는 경력 사항을 입력해주세요!");
+		$("#tcareer").val("").focus();
+		return false;
+	}
+}
+
+/* 필드 클래스 등록 시 유효성 검사 */
+function write_check_field(){
+	if($.trim($("#ftitle").val())==""){
+		alert("클래스명을 입력해주세요!");
+		$("#ftitle").val("").focus();
+		return false;
+	}
+	if(form1.tname.value == 'none'){
+   		alert("강사명을 선택해주세요!");
+   		return false;
+  	}
+	if($.trim($("#fphone").val())==""){
+		alert("클래스 전화번호를 입력하세요!");
+		$("#fphone").val("").focus();
+		return false;
+	}
+	if(form1.faddr.value == 'none'){
+   		alert("클래스 지역을 선택해주세요!");
+   		return false;
+  	}
+	var fileCheck = document.getElementById("fimage2").value;
+    if(!fileCheck){
+        alert("썸네일 이미지를 첨부해주세요!");
+        return false;
+    }
+	if($.trim($("#fsprice").val())==""){
+		alert("STANDARD 가격을 입력하세요!");
+		$("#fsprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#fsrounding").val())==""){
+		alert("STANDARD 라운딩 횟수를 입력하세요!");
+		$("#fsrounding").val("").focus();
+		return false;
+	}
+	if($.trim($("#fsdesc").val())==""){
+		alert("STANDARD 상세 설명을 입력하세요!");
+		$("#fsdesc").val("").focus();
+		return false;
+	}
+	if($.trim($("#fstime").val())==""){
+		alert("STANDARD 1회당 레슨 시간(분)을 입력하세요!");
+		$("#fstime").val("").focus();
+		return false;
+	}
+	if($.trim($("#fdprice").val())==""){
+		alert("DELUCE 가격을 입력하세요!");
+		$("#fdprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#fdrounding").val())==""){
+		alert("DELUXE 라운딩 횟수를 입력하세요!");
+		$("#fdrounding").val("").focus();
+		return false;
+	}
+	if($.trim($("#fddesc").val())==""){
+		alert("DELUXE 상세 설명을 입력하세요!");
+		$("#fddesc").val("").focus();
+		return false;
+	}
+	if($.trim($("#fdtime").val())==""){
+		alert("DELUXE 1회당 레슨 시간(분)을 입력하세요!");
+		$("#fdtime").val("").focus();
+		return false;
+	}
+	if($.trim($("#fpprice").val())==""){
+		alert("PREMIUM 가격을 입력하세요!");
+		$("#fpprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#fprounding").val())==""){
+		alert("PREMIUM 라운딩 횟수를 입력하세요!");
+		$("#fprounding").val("").focus();
+		return false;
+	}
+	if($.trim($("#fpdesc").val())==""){
+		alert("PREMIUM 상세 설명을 입력하세요!");
+		$("#fpdesc").val("").focus();
+		return false;
+	}	
+	if($.trim($("#fptime").val())==""){
+		alert("PREMIUM 1회당 레슨 시간(분)을 입력하세요!");
+		$("#fptime").val("").focus();
+		return false;
+	}
+}
+
+/* 필드 클래스 수정 시 유효성 검사 */
+function edit_check_field(){
+	if($.trim($("#ftitle").val())==""){
+		alert("클래스명을 입력해주세요!");
+		$("#ftitle").val("").focus();
+		return false;
+	}
+	if(form3.tname.value == 'none'){
+   		alert("강사명을 선택해주세요!");
+   		return false;
+  	}
+	if($.trim($("#fphone").val())==""){
+		alert("클래스 전화번호를 입력하세요!");
+		$("#fphone").val("").focus();
+		return false;
+	}
+	if(form3.faddr.value == 'none'){
+   		alert("클래스 지역을 선택해주세요!");
+   		return false;
+  	}
+	var fileCheck = document.getElementById("fimage2").value;
+    if(!fileCheck){
+        alert("썸네일 이미지를 첨부해주세요!");
+        return false;
+    }
+	if($.trim($("#fsprice").val())==""){
+		alert("STANDARD 가격을 입력하세요!");
+		$("#fsprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#fsrounding").val())==""){
+		alert("STANDARD 라운딩 횟수를 입력하세요!");
+		$("#fsrounding").val("").focus();
+		return false;
+	}
+	if($.trim($("#fsdesc").val())==""){
+		alert("STANDARD 상세 설명을 입력하세요!");
+		$("#fsdesc").val("").focus();
+		return false;
+	}
+	if($.trim($("#fstime").val())==""){
+		alert("STANDARD 1회당 레슨 시간(분)을 입력하세요!");
+		$("#fstime").val("").focus();
+		return false;
+	}
+	if($.trim($("#fdprice").val())==""){
+		alert("DELUCE 가격을 입력하세요!");
+		$("#fdprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#fdrounding").val())==""){
+		alert("DELUXE 라운딩 횟수를 입력하세요!");
+		$("#fdrounding").val("").focus();
+		return false;
+	}
+	if($.trim($("#fddesc").val())==""){
+		alert("DELUXE 상세 설명을 입력하세요!");
+		$("#fddesc").val("").focus();
+		return false;
+	}
+	if($.trim($("#fdtime").val())==""){
+		alert("DELUXE 1회당 레슨 시간(분)을 입력하세요!");
+		$("#fdtime").val("").focus();
+		return false;
+	}
+	if($.trim($("#fpprice").val())==""){
+		alert("PREMIUM 가격을 입력하세요!");
+		$("#fpprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#fprounding").val())==""){
+		alert("PREMIUM 라운딩 횟수를 입력하세요!");
+		$("#fprounding").val("").focus();
+		return false;
+	}
+	if($.trim($("#fpdesc").val())==""){
+		alert("PREMIUM 상세 설명을 입력하세요!");
+		$("#fpdesc").val("").focus();
+		return false;
+	}	
+	if($.trim($("#fptime").val())==""){
+		alert("PREMIUM 1회당 레슨 시간(분)을 입력하세요!");
+		$("#fptime").val("").focus();
+		return false;
+	}
+}
+
+/* 온라인 클래스 등록 시 유효성 검사 */
+function write_check_online(){
+	if($.trim($("#otitle").val())==""){
+		alert("클래스명을 입력해주세요!");
+		$("#otitle").val("").focus();
+		return false;
+	}
+	if(form2.tname.value == 'none'){
+   		alert("강사명을 선택해주세요!");
+   		return false;
+  	}
+	if($.trim($("#ophone").val())==""){
+		alert("클래스 전화번호를 입력하세요!");
+		$("#ophone").val("").focus();
+		return false;
+	}
+	var fileCheck = document.getElementById("oimage2").value;
+    if(!fileCheck){
+        alert("썸네일 이미지를 첨부해주세요!");
+        return false;
+    }
+	if($.trim($("#oprice").val())==""){
+		alert("온라인 클래스 가격을 입력하세요!");
+		$("#oprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#odesc").val())==""){
+		alert("온라인 클래스 상세 설명을 입력하세요!");
+		$("#odesc").val("").focus();
+		return false;
+	}
+	if(form2.otime.value == 'none'){
+   		alert("온라인 클래스 수강기간을 선택해주세요!");
+   		return false;
+  	}
+	if(form2.olevel.value == 'none'){
+   		alert("온라인 클래스 추천 레벨을 선택해주세요!");
+   		return false;
+  	}  	
+}
+
+/* 온라인 클래스 수정 시 유효성 검사 */
+function edit_check_online(){
+	if($.trim($("#otitle").val())==""){
+		alert("클래스명을 입력해주세요!");
+		$("#otitle").val("").focus();
+		return false;
+	}
+	if(form4.tname.value == 'none'){
+   		alert("강사명을 선택해주세요!");
+   		return false;
+  	}
+	if($.trim($("#ophone").val())==""){
+		alert("클래스 전화번호를 입력하세요!");
+		$("#ophone").val("").focus();
+		return false;
+	}
+	var fileCheck = document.getElementById("oimage2").value;
+    if(!fileCheck){
+        alert("썸네일 이미지를 첨부해주세요!");
+        return false;
+    }
+	if($.trim($("#oprice").val())==""){
+		alert("온라인 클래스 가격을 입력하세요!");
+		$("#oprice").val("").focus();
+		return false;
+	}
+	if($.trim($("#odesc").val())==""){
+		alert("온라인 클래스 상세 설명을 입력하세요!");
+		$("#odesc").val("").focus();
+		return false;
+	}
+	if(form4.otime.value == 'none'){
+   		alert("온라인 클래스 수강기간을 선택해주세요!");
+   		return false;
+  	}
+	if(form4.olevel.value == 'none'){
+   		alert("온라인 클래스 추천 레벨을 선택해주세요!");
+   		return false;
+  	}  	
+}
+
+
 let teacherList = [];
 
 /* 클래스 상세 페이지 */
@@ -49,6 +343,8 @@ $(function(){
 });
 
 
+
+
 /* 관리자 페이지에서 클래스 등록 */
 function categoryChange(e) {
 	var good_a = ["경기도 전체", "서울", "인천"];
@@ -76,102 +372,3 @@ function categoryChange(e) {
 	}
 }
 
-
-function write_check_field(){
-	if($.trim($("#ctitle").val())==""){
-		alert("빈칸을 입력해주세요!");
-		$("#ctitle").val("").focus();
-		return false;
-	}
-	if($.trim($("#cteacher").val())==""){
-		alert("강사명을 입력하세요!");
-		$("#cteacher").val("").focus();
-		return false;
-	}
-	if($.trim($("#cgender").val())==""){
-		alert("강사 성별을 선택하세요!");
-		$("#cgender").val("").focus();
-		return false;
-	}
-	if($.trim($("#ccareer").val())==""){
-		alert("강사 소개 또는 경력사항란을 입력하세요!");
-		$("#ccareer").val("").focus();
-		return false;
-	}
-	if($.trim($("#cphone").val())==""){
-		alert("클래스 전화번호를 입력하세요!");
-		$("#cphone").val("").focus();
-		return false;
-	}
-	if($.trim($("#csprice").val())==""){
-		alert("STANDARD 가격을 입력하세요!");
-		$("#csprice").val("").focus();
-		return false;
-	}
-	if($.trim($("#csrounding").val())==""){
-		alert("STANDARD 라운딩 횟수를 입력하세요!");
-		$("#csrounding").val("").focus();
-		return false;
-	}
-	if($.trim($("#csdesc").val())==""){
-		alert("STANDARD 상세 설명을 입력하세요!");
-		$("#csdesc").val("").focus();
-		return false;
-	}
-	if($.trim($("#cstime").val())==""){
-		alert("STANDARD 1회당 레슨 시간(분)을 입력하세요!");
-		$("#cstime").val("").focus();
-		return false;
-	}
-	if($.trim($("#cdprice").val())==""){
-		alert("DELUCE 가격을 입력하세요!");
-		$("#cdprice").val("").focus();
-		return false;
-	}
-	if($.trim($("#cdrounding").val())==""){
-		alert("DELUXE 라운딩 횟수를 입력하세요!");
-		$("#cdrounding").val("").focus();
-		return false;
-	}
-	if($.trim($("#cddesc").val())==""){
-		alert("DELUXE 상세 설명을 입력하세요!");
-		$("#cddesc").val("").focus();
-		return false;
-	}
-	if($.trim($("#cdtime").val())==""){
-		alert("DELUXE 1회당 레슨 시간(분)을 입력하세요!");
-		$("#cdtime").val("").focus();
-		return false;
-	}
-	if($.trim($("#cpprice").val())==""){
-		alert("PREMIUM 가격을 입력하세요!");
-		$("#cpprice").val("").focus();
-		return false;
-	}
-	if($.trim($("#cprounding").val())==""){
-		alert("PREMIUM 라운딩 횟수를 입력하세요!");
-		$("#cprounding").val("").focus();
-		return false;
-	}
-	if($.trim($("#cpdesc").val())==""){
-		alert("PREMIUM 상세 설명을 입력하세요!");
-		$("#cpdesc").val("").focus();
-		return false;
-	}	
-	if($.trim($("#cptime").val())==""){
-		alert("PREMIUM 1회당 레슨 시간(분)을 입력하세요!");
-		$("#cptime").val("").focus();
-		return false;
-	}
-	if($.trim($("#caddr").val())==""){
-		alert("지역을 선택하세요!");
-		$("#caddr").val("").focus();
-		return false;
-	}
-	if($.trim($("#caddr2").val())==""){
-		alert("상세 지역을 선택하세요!");
-		$("#caddr2").val("").focus();
-		return false;
-	}
-	return true;
-}

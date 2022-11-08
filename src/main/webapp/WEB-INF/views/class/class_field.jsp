@@ -42,44 +42,48 @@
 			<div class="category">
 				<ul class="province_3">
 					<li><a href="class_field">필드 전체</a></li>
-					<li><a href="class_field">수도권</a>
-						<ul class="province_4" id="province_4">
+					<li><a href="class_field?faddr=수도권">수도권</a>
+<!-- 						<ul class="province_4" id="province_4">
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">경기도 전체</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">서울</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">인천</a></li>
-						</ul></li>
-					<li><a href="class_field">강원도</a>
-						<ul class="province_4" id="province_4">
+						</ul> -->
+					</li>
+					<li><a href="class_field?faddr=강원도">강원도</a>
+						<!-- <ul class="province_4" id="province_4">
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">강원도 전체</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">춘천</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">속초</a></li>
-						</ul></li>
-					<li><a href="class_field">충청도</a>
-						<ul class="province_4" id="province_4">
+						</ul> -->
+					</li>
+					<li><a href="class_field?faddr=충청도">충청도</a>
+						<!-- <ul class="province_4" id="province_4">
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">충청도 전체</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">대전</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">세종</a></li>
-						</ul></li>
-					<li><a href="class_field">전라도</a>
-						<ul class="province_4" id="province_4">
+						</ul> -->
+					</li>
+					<li><a href="class_field?faddr=전라도">전라도</a>
+						<!-- <ul class="province_4" id="province_4">
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">전라도 전체</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">광주</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">전주</a></li>
-						</ul></li>
-					<li><a href="class_field">경상도</a>
-						<ul class="province_4" id="province_4">
+						</ul> -->
+					</li>
+					<li><a href="class_field?faddr=경상도">경상도</a>
+						<!-- <ul class="province_4" id="province_4">
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">경상도 전체</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
@@ -88,16 +92,18 @@
 								href="class_field">대구</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">울산</a></li>
-						</ul></li>
-					<li><a href="class_field">제주도</a>
-						<ul class="province_4" id="province_4">
+						</ul> -->
+					</li>
+					<li><a href="class_field?faddr=제주도">제주도</a>
+						<!-- <ul class="province_4" id="province_4">
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">제주도 전체</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">제주시</a></li>
 							<li><i class="fas fa-map-marker-alt"></i><a
 								href="class_field">서귀포시</a></li>
-						</ul></li>
+						</ul> -->
+					</li>
 				</ul>
 			</div>
 			<div class="subject">

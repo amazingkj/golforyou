@@ -74,92 +74,332 @@
 }
 
 * {
-   font-family: 'Noto Sans KR', sans-serif;
-   margin: 0;
-   padding: 0;
+	font-family: 'Noto Sans KR', sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
-.payok_box {
-   border: 2px solid #56F569;
-   width: 600px;
-   height: 780px;
-   margin: auto;
-   margin-top: 100px;
+#wrap {
+	width: 90%;
+	margin: 0 auto;
+	top: 250px;
+	/* border: 1px solid #ccc; */
+	height: 1200px;
+	position: relative;
 }
 
-#payok_1 {
-   text-align: center;
+#pay_ok_wrap {
+	width: 100%;
+	height: 12%;
+	/* border: 1px solid red; */
 }
 
-#memberbox_1_2 ul li {
-   list-style: none;
+#pay_ok_wrap #pay_ok {
+	width: 8%;
+	height: 27%;
+	/* border: 1px solid blue; */
+	font-size: 1.8em;
+	font-weight: bold;
+	float: left;
 }
 
-#memberbox_1_1 ul li {
-   list-style: none;
+#pay_ok_process {
+	width: 20%;
+	height: 20%;
+	/* border: 1px solid blue; */
+	float: right;
+	font-size: 1.2em;
+	text-align: right;
 }
 
-#memberbox_1_1 {
-   width: 100px;
-   text-align: center;
-   margin-top: 50px;
-   margin-left: 100px;
+#wrapper02 {
+	width: 100%;
+	height: 35%;
+	/* border: 1px solid red; */
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
-#memberbox_1_2 {
-   margin-top: -330px;
-   margin-left: 300px;
-   width: 212px;
-   heigt: 500px;
+#wrapper02 .wrapper02-01 {
+	width: 100%;
+	height: 10%;
+	/* border: 1px solid black; */
+	font-size: 1.5em;
+	text-align: center;
+	margin-top: 7%;
 }
 
-.text_1 {
-   height: 20px;
-   font-size: 15px;
-   padding: 13px;
-   margin-top: 2px;
+#wrapper02 .wrapper02-02 {
+	width: 100%;
+	height: 9%;
+	/* border: 1px solid black; */
+	margin-top: 0.5%;
 }
 
-.text_2 {
-   height: 22px;
-   font-size: 15px;
-   padding: 13px;
-   margin-top: 2px;
+.wrapper02-02 .order-number {
+	width: 49.5%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: left;
+	font-size: 1.3em;
+	text-align: right;
+	box-sizing: border-box;
 }
 
-.text_3 {
-   height: 52px;
-   font-size: 15px;
-   padding: 13px;
-   margin-top: 2px;
+.wrapper02-02 .order-number2 {
+	width: 49.5%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: right;
+	font-size: 1.3em;
+	color: #fb2904;
+	text-align: left;
+	box-sizing: border-box;
 }
 
-.memberbox_1_4 {
-   height: 18px;
-   width:230px;
-   font-size: 15px;
-   padding: 13px;
-   margin-top:-10px;
-}
-.memberbox_1_5{
-   margin-top:25px;
+.wrapper02-03 {
+	width: 100%;
+	height: 10%;
+	/* border: 1px solid black; */
+	margin-top: 1%;
 }
 
-.memberbox_1_3 {
-   height: 22px;
-   font-size: 15px;
-   padding: 13px;
-   margin-top: 2px;
+.wrapper02-03 .payokmypage {
+	border: none;
+	background-color: #56F569;
+	font-size: 1.2em;
+	margin-left: 46.2%;
+	padding: 0.3% 1%;
+	cursor: pointer;
 }
 
-#submitBtn {
-   font-size: 20px;
-   border: none;
-   height: 70px;
-   width: 200px;
-   background-color: #56F569;
-   margin-top: 40px;
-   margin-left: 200px;
-   color: #000000;
-   cursor: pointer;
+.wrapper02-04 .qna01{
+	width: 100%;
+	height: 10%;
+	/* border: 1px solid red; */
+	text-align: center;
+	font-size: 1.1em;
+	margin-top: 1%;
+	color: #808080;
+}
+
+.wrapper02-04 .qna02{
+	width: 100%;
+	height: 10%;
+	/* border: 1px solid red; */
+	text-align: center;
+	font-size: 1.1em;
+	color: #808080;
+}
+
+
+#wrapper03 {
+	width: 100%;
+	height: 45%;
+	/* border: 1px solid red; */
+	border-bottom: 1px solid black;
+	overflow: hidden;
+}
+
+.wrapper03-01 {
+	width: 100%;
+	height: 50%;
+	/* border: 1px solid blue; */
+	box-sizing: border-box;
+}
+
+.wrapper03-01 .payinfotitle{
+	width: 100%;
+	height: 15%;
+	/* border: 1px solid pink; */
+	font-size: 1.1em;
+	font-weight: bold;
+	padding-top: 2%;
+}
+
+.wrapper03-01 .payinfobox01{
+	width: 30%;
+	height: 70%;
+	/* border: 1px solid red; */
+	float: left;
+	box-sizing: border-box;
+}
+
+.wrapper03-01 .payinfobox01 .totalPrice {
+	width: 100%;
+	height: 20%;
+	/* border: 1px solid blue; */
+	font-size: 1.1em;
+	margin-top: 4%;
+}
+
+.wrapper03-01 .payinfobox01 .totalPrice02 {
+	width: 100%;
+	height: 20%;
+	/* border: 1px solid blue; */
+	font-size: 1.1em;
+	margin-top: 2%;
+}
+
+.totalPrice02 .totalPrice02-01 {
+	width: 20%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: left;
+	text-align: left;
+	color: gray;
+}
+
+.totalPrice02 .totalPrice02-02 {
+	width: 20%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: right;
+	text-align: right;
+}
+
+.wrapper03-01 .payinfobox02{
+	width: 30%;
+	height: 70%;
+	/* border: 1px solid red; */
+	float: left;
+	box-sizing: border-box;
+	margin-left: 5%;
+}
+
+.wrapper03-01 .payinfobox02 .discountInfo {
+	width: 100%;
+	height: 20%;
+	/* border: 1px solid blue; */
+	font-size: 1.1em;
+	margin-top: 4%;
+	
+}
+
+.wrapper03-01 .payinfobox02 .discountInfo02 {
+	width: 100%;
+	height: 20%;
+	/* border: 1px solid blue; */
+	font-size: 1.1em;
+	margin-top: 2%;
+}
+
+.discountInfo02 .discountInfo02-01 {
+	width: 20%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: left;
+	text-align: left;
+	color: gray;
+}
+
+.discountInfo02 .discountInfo02-02 {
+	width: 20%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: right;
+	text-align: right;
+}
+
+.wrapper03-01 .payinfobox03{
+	width: 30%;
+	height: 70%;
+	/* border: 1px solid red; */
+	float: right;
+	box-sizing: border-box;
+}
+
+.wrapper03-01 .payinfobox03 .paymentmethod{
+	width: 100%;
+	height: 20%;
+	/* border: 1px solid blue; */
+	font-size: 1.1em;
+	margin-top: 4%;
+}
+
+.wrapper03-01 .payinfobox03 .paymentmethod02 {
+	width: 100%;
+	height: 20%;
+	/* border: 1px solid blue; */
+	font-size: 1.1em;
+	margin-top: 2%;
+}
+
+.paymentmethod02 .paymentmethod02-01 {
+	width: 20%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: left;
+	text-align: left;
+	color: gray;
+}
+
+.paymentmethod02-02 .cardbrand{
+	width: 20%;
+	height: 99%;
+	/* border: 1px solid blue; */
+	float: right;
+	text-align: right;
+}
+
+.paymentmethod02-02 .paymentPrice{
+	width: 20%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: right;
+	text-align: right;
+}
+
+.wrapper03-02 {
+	width: 100%;
+	height: 25%;
+	/* border: 1px solid red; */
+	background-color: #f6f6f6;
+	box-sizing: border-box;
+}
+
+.wrapper03-02 .wrapper03-02-01 {
+	width: 40%;
+	height: 60%;
+	/* border: 1px solid red; */
+	float: right;
+	text-align: right;
+	margin-top: 2%;
+}
+
+.wrapper03-02-01 .wrapper03-02-01-01{
+	width: 30%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: right;
+	font-size: 2em;
+	font-weight: bold;
+	color: red;
+}
+
+.wrapper03-02-01 .wrapper03-02-01-02{
+	width: 30%;
+	height: 100%;
+	/* border: 1px solid blue; */
+	float: right;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.wrapper03-03 {
+	width: 100%;
+	height: 25%;
+	/* border: 1px solid red; */
+	background-color: #f6f6f6;
+	box-sizing: border-box;
+}
+
+.wrapper03-03 .mainpagebtn {
+	border: none;
+	background-color: #56F569;
+	font-size: 1.2em;
+	margin-left: 46.2%;
+	margin-top: 2%;
+	padding: 0.3% 1%;
+	cursor: pointer;
 }
