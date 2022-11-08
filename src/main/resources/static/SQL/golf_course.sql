@@ -1,31 +1,31 @@
---°ñÇÁÀå Å×ÀÌºí »ý¼º
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 create table golf_couse(
-gc_no number(38) primary key , -- °íÀ¯¹øÈ£
-gc_image varchar2(200), --ÀÌ¹ÌÁö °æ·Î
-gc_title varchar2(200), --°ñÇÁÀå¸í
-gc_english varchar2(200), --°ñÇÁÀå¿µ¹®¸í
-gc_area varchar2(200),--Áö¿ª
+gc_no number(38) primary key , -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
+gc_image varchar2(200), --ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+gc_title varchar2(200), --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+gc_english varchar2(200), --ï¿½ï¿½ï¿½ï¿½ï¿½å¿µï¿½ï¿½ï¿½ï¿½
+gc_area varchar2(200),--ï¿½ï¿½ï¿½ï¿½
 gc_hole number(38), --È¦
-gc_golf number(38), --ÆÄ
-gc_length number(38),-- ±æÀÌ
-gc_kind varchar2(200),--ÀÜµðÁ¾·ù
-gc_type varchar2(200),--ÄÚ½ºÅ¸ÀÔ
-gc_configuration varchar2(200),--ÄÚ½º±¸¼º
-gc_caddy varchar2(200),--Ä³µð (À¯/¹«)
-gc_cart varchar2(200),--Ä«Æ® (À¯/¹«)
-gc_architects varchar2(200), --¼³°èÀÚ¸í
-gc_content varchar2(2000), --°ñÇÁÀå³»¿ë
-gc_address_postcode varchar2(200),--¿ìÆí¹øÈ£
-gc_address_roadAddress varchar2(200),--µµ·Î¸íÁÖ¼Ò
-gc_address_jibunAddress varchar2(200), --Áö¹øÁÖ¼Ò
-gc_address_detailAddress varchar2(200), --»ó¼¼ÁÖ¼Ò
-gc_address_extraAddress varchar2(200),--Âü°íÇ×¸ñ
-gc_phone varchar2(50), --ÀüÈ­¹øÈ£
-gc_fax varchar2(50), --ÆÑ½º
-gc_move varchar2(1000),--°ñÇÁÀå±îÁö ÀÚÂ÷ÀÌµ¿°æ·Î 
-gc_date varchar2(200) --°ñÇÁÀå °³Àå³¯Â¥
+gc_golf number(38), --ï¿½ï¿½
+gc_length number(38),-- ï¿½ï¿½ï¿½ï¿½
+gc_kind varchar2(200),--ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½
+gc_type varchar2(200),--ï¿½Ú½ï¿½Å¸ï¿½ï¿½
+gc_configuration varchar2(200),--ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½
+gc_caddy varchar2(200),--Ä³ï¿½ï¿½ (ï¿½ï¿½/ï¿½ï¿½)
+gc_cart varchar2(200),--Ä«Æ® (ï¿½ï¿½/ï¿½ï¿½)
+gc_architects varchar2(200), --ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½
+gc_content varchar2(2000), --ï¿½ï¿½ï¿½ï¿½ï¿½å³»ï¿½ï¿½
+gc_address_postcode varchar2(200),--ï¿½ï¿½ï¿½ï¿½ï¿½È£
+gc_address_roadAddress varchar2(200),--ï¿½ï¿½ï¿½Î¸ï¿½ï¿½Ö¼ï¿½
+gc_address_jibunAddress varchar2(200), --ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
+gc_address_detailAddress varchar2(200), --ï¿½ï¿½ï¿½Ö¼ï¿½
+gc_address_extraAddress varchar2(200),--ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½
+gc_phone varchar2(50), --ï¿½ï¿½È­ï¿½ï¿½È£
+gc_fax varchar2(50), --ï¿½Ñ½ï¿½
+gc_move varchar2(1000),--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ 
+gc_date varchar2(200) --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å³¯Â¥
 );
-
+commit;
 
 DROP TABLE golf_couse;
 DROP TABLE  gc_reply;
@@ -35,55 +35,55 @@ DROP SEQUENCE golf_couse_seq
 
 SELECT * FROM golf_couse;
 commit;
-select * from golf_couse where gc_title='¼Ò³ë Æç¸®Ã¼ CC'
+select * from golf_couse where gc_title='ï¿½Ò³ï¿½ ï¿½ç¸®Ã¼ CC'
 
---°ñÇÁÀå °íÀ¯¹øÈ£ ½ÃÄö½º »ý¼º
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create sequence golf_couse_seq
-start with 1 --1ºÎÅÍ ½ÃÀÛ
-increment by 1 --1¾¿ Áõ°¡
-nocache; --ÀÓ½Ã ¸Þ¸ð¸®¸¦ »ç¿ëÇÏÁö ¾Ê°Ú´Ù´Â ÀÇ¹Ì.
+start with 1 --1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+increment by 1 --1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+nocache; --ï¿½Ó½ï¿½ ï¿½Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°Ú´Ù´ï¿½ ï¿½Ç¹ï¿½.
 
 
 
---´ñ±Û¼ö¸¦ Ä«¿îÅÍÇØ¼­ ÀúÀåÇÏ´Â gc_replycnt ÄÃ·³ Ãß°¡
+--ï¿½ï¿½Û¼ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ gc_replycnt ï¿½Ã·ï¿½ ï¿½ß°ï¿½
 alter table golf_couse
 add(gc_replycnt number(38)default 0);
---´ñ±ÛÀ» Ãß°¡ÇÏ¸é +1 ´ñ±ÛÀ» »èÁ¦ÇÏ¸é -1
+--ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¸ï¿½ +1 ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ -1
 
 
---gc_replyÅ×ÀÌºíÀÇ °Ô½ÃÆÇ¹øÈ£¸¦ ±âÁØÀ¸·Î ´ñ±Û¼ö¸¦ Ä«¿îÅÍ ÇÏ¿©  golf_couseÅ×ÀÌºí¿¡ Ãß°¡µÈ gc_replycntÄÃ·³ ·¹ÄÚµå°ªÀ» ¼öÁ¤
+--gc_replyï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½Ç¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Û¼ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¿ï¿½  golf_couseï¿½ï¿½ï¿½Ìºï¿½ ï¿½ß°ï¿½ï¿½ï¿½ gc_replycntï¿½Ã·ï¿½ ï¿½ï¿½ï¿½Úµå°ªï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 update golf_couse set gc_replycnt=(select count(gc_no) from gc_reply where gc_no=golf_couse.gc_no)where gc_no>0;
 
---´ñ±Û Å×ÀÌºí gc_reply »ý¼º
+--ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ gc_reply ï¿½ï¿½ï¿½ï¿½
 create table gc_reply(
-    gc_rno number(38) primary key--´ñ±Û ¹øÈ£
-    ,gc_no number(38) default 0 --¿Ü·¡Å° Á¦¾à Á¶°ÇÀ¸·Î Ãß°¡ ¼³Á¤. golf_couse Å×ÀÌºí ÀÇ ¹øÈ£°ª¸¸ ÀúÀåµÊ.ÁÖÁ¾ °ü°è°¡ ¼º¸³µÊ.
-    ,gc_replyer varchar2(100) not null --´ñ±ÛÀÛ¼ºÀÚ
-    ,gc_replytext varchar2(4000) not null --´ñ±Û ³»¿ë
-    ,gc_regdate date -- ´ñ±Û µî·Ï³¯Â¥
-    ,gc_updatedate date -- ´ñ±Û ¼öÁ¤³¯Â¥
+    gc_rno number(38) primary key--ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    ,gc_no number(38) default 0 --ï¿½Ü·ï¿½Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½. golf_couse ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½è°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+    ,gc_replyer varchar2(100) not null --ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½ï¿½
+    ,gc_replytext varchar2(4000) not null --ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    ,gc_regdate date -- ï¿½ï¿½ï¿½ ï¿½ï¿½Ï³ï¿½Â¥
+    ,gc_updatedate date -- ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥
 
 );
--- gc_no_seq ½ÃÄö½º »ý¼º
+-- gc_no_seq ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create sequence gc_no_seq
-start with 1 --1ºÎÅÍ ½ÃÀÛ
-increment by 1 -- 1¾¿ Áõ°¡ 
-nocache; --ÀÓ½Ã ¸Þ¸ð¸® »ç¿ëÇÏÁö ¾Ê°Ú´Ù´Â ÀÇ¹Ì
+start with 1 --1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+increment by 1 -- 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+nocache; --ï¿½Ó½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°Ú´Ù´ï¿½ ï¿½Ç¹ï¿½
 
--- ½ÃÄö½º ´ÙÀ½ ¹øÈ£°ª È®ÀÎ
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ È®ï¿½ï¿½
 select gc_no_seq.nextval from dual;
 
---¿Ü·¡Å° Á¦¾àÁ¶°Ç Ãß°¡ ¼³Á¤
+--ï¿½Ü·ï¿½Å° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
 alter table gc_reply add constraint gc_reply_gc_no_fk
 foreign key(gc_no) references golf_couse(gc_no);
 
 
 select * from gc_reply order by gc_rno desc;
 
---´ñ±Û ½ÃÄö½º »ý¼º
+--ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 create sequence gc_rno_seq
-start with 1--1ºÎÅÍ ½ÃÀÛ
-increment by 1 --1¾¿ Áõ°¡
+start with 1--1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+increment by 1 --1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 nocache;
 
 select gc_rno_seq.nextval from dual;
