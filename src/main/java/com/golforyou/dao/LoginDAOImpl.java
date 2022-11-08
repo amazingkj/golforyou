@@ -47,4 +47,10 @@ public class LoginDAOImpl implements LoginDAO {
 		
 		
 	}
+
+	@Override
+	public void updateMember(MemberVO m) {
+		this.sqlSession.update("updateaddjoin",m);
+		
+	}
 }
