@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.golforyou.vo.FieldClassVO;
+import com.golforyou.vo.GolfcouseVO;
 import com.golforyou.vo.ScboardVO;
 import com.golforyou.vo.ScorecardVO;
 
@@ -163,6 +165,12 @@ public class ScBoardDAOImpl implements ScBoardDAO {
 	public List<ScboardVO> getBoardListNotice(ScboardVO sb) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("scb_noticelist",sb);
+	}
+
+	@Override
+	public List<GolfcouseVO> getFieldList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("scb_field");
 	}
 	
 }

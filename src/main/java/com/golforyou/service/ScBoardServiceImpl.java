@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.golforyou.dao.ScBoardDAO;
+import com.golforyou.vo.FieldClassVO;
+import com.golforyou.vo.GolfcouseVO;
 import com.golforyou.vo.ScboardVO;
 import com.golforyou.vo.ScorecardVO;
 
@@ -162,6 +164,12 @@ public class ScBoardServiceImpl implements ScBoardService {
 	public List<ScboardVO> getBoardListNotice(ScboardVO sb) {
 		// TODO Auto-generated method stub
 		return scBoardDAO.getBoardListNotice(sb);
+	}
+
+	@Override
+	public List<GolfcouseVO> getFieldList() {
+		// TODO Auto-generated method stub
+		return scBoardDAO.getFieldList();
 	}
 	
 }

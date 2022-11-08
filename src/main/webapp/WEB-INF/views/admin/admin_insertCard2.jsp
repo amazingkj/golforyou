@@ -148,6 +148,12 @@
 				<option value="소노 펠리체 CC">소노 펠리체 CC</option>
 				<option value="해슬리 나인브릿지">해슬리 나인브릿지</option>
 				<option value="골드레이크 CC">골드레이크 CC</option>
+				<option value="--------">--------</option>
+				<c:if test="${!empty field }">
+				<c:forEach var="f" items="${field }">
+				<option value="${f.gc_title }">${f.gc_title }</option>
+				</c:forEach>
+				</c:if>
 			</select>
 			</div>
 			<br>

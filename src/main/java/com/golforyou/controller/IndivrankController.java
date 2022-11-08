@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.golforyou.service.IndivService;
 import com.golforyou.service.RankingService;
 import com.golforyou.service.ScBoardService;
+import com.golforyou.vo.FieldClassVO;
+import com.golforyou.vo.GolfcouseVO;
 import com.golforyou.vo.ScorecardVO;
 
 @Controller
@@ -165,10 +167,7 @@ public class IndivrankController {
 					dec = indivService.monthCount(sv);
 				}
 			}
-			
-			
-			
-			
+
 			String tierURL = null;
 			String tierStr = null;
 			
@@ -195,6 +194,8 @@ public class IndivrankController {
 				}
 			}			
 			
+			List<GolfcouseVO> field = scBoardService.getFieldList();
+			
 			im.addObject("rid", rid);
 			im.addObject("rNickname", nickname);
 			im.addObject("rPoint", rPoint);
@@ -218,7 +219,7 @@ public class IndivrankController {
 			im.addObject("dec", dec);
 			im.addObject("tierURL", tierURL);
 			im.addObject("tierStr", tierStr);
-			
+			im.addObject("field", field);
 			return im;
 		}
 		return null;
