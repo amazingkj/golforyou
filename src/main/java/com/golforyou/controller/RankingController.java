@@ -36,13 +36,20 @@ public class RankingController {
 		List<Integer> rankpoint = new ArrayList<>();
 		List<Integer> bestrange = new ArrayList<>();
 		List<String> province = new ArrayList<>();
+		List<String> profile = new ArrayList<>();
 		
 		for(int i=0 ; i<rankList.size() ; ++i) {
 			rankid.add(rankList2.get(i).getUsername());
 			rankname.add(rankList2.get(i).getNickname());
 			rankpoint.add(rankList.get(i).getR_sum());
 			bestrange.add(rankList.get(i).getR_maxrange());
-			province.add(rankList.get(i).getR_province());
+			province.add(rankList2.get(i).getMaddr());
+			
+			if(rankList2.get(i).getMfile() == null) {
+				profile.add("/images/member/blank_profile.png");
+			}else {
+				profile.add("/upload/profile"+rankList2.get(i).getMfile());
+			}
 		}		
 		
 		List<Integer> count = new ArrayList<>();
@@ -61,6 +68,7 @@ public class RankingController {
 		rm.addObject("rankpoint", rankpoint);
 		rm.addObject("bestrange", bestrange);
 		rm.addObject("province", province);
+		rm.addObject("profile", profile);
 		rm.addObject("mem",mem);		
 		rm.addObject("fileaddr", fileaddr);
 				
