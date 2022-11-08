@@ -6,8 +6,8 @@ import lombok.Data;
 public class BoardVO {
 	private int b_no;
 	private String username;
+	private String nickname;
 	private String b_title;
-	private String b_pwd;
 	private String b_cont;
 
 	private String b_file;	

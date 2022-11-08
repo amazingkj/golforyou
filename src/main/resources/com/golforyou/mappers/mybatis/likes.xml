@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="likes">
+
+	<!-- 좋아요 추가 -->
+<insert id="heart_save" >
+    insert into Likes
+    values(0, #{board_no}, #{nickname})
+</insert>
+
+	
+<!-- 좋아요 삭제 -->
+<delete id="heart_remove">
+    delete from Likes
+    where board_no=#{board_no} and nickname=#{nickname}
+</delete>
+
+
+<!--좋아요 2차 시도 -->
+
+<update id="likeupdate">
+	update Likes set <include refid="cal"></include>
+	where nickname=#{nickname} and board_no=#{board_no}
+</update>
+
+<sql id="cal">
+		<if test="count == 1">
+			likes_no = 0
+		</if> 
+		
+		<if test="count == 0">
+			likes_no = likes_no + 1 
+		</if>
+	</sql>
+
+<select id="likecount" resultType="Integer" parameterType="likes">
+	select count(likes_no) from Likes where nickname=#{nickname} and board_no=#{board_no}
+</select>
+	
+<insert id="likeinsert" parameterType="likes">
+	insert into Likes(likes_idx,likes_no,nickname,board_no)
+	values (likes_no_seq.nextval,0,#{nickname},#{board_no})
+</insert>
+	
+<select id="likegetinfo" resultType="Integer" parameterType="likes">
+	select likes_no from Likes where nickname=#{nickname} and board_no=#{board_no}
+</select>
+
+<select id="liketotalcount" resultType="Integer" >
+	select count(*) from Likes where board_no=#{b_no} and likes_no=1
+</select>
+
+<!--
+<update id="updateliketotalcount" >
+	update golforboard set b_like=(select count(*) from Likes where board_no=#{b_no} and likes_no=1)
+</update>
+-->
+
+</mapper>

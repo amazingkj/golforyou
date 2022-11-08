@@ -67,11 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 골프장 수정 -->
 	<update id="golfcouse_edit">
 		update golf_couse set
-		gc_image=#{gc_imag},gc_title=#{gc_title},gc_english=#{gc_english},gc_area=#{gc_area},gc_hole=#{gc_hole},
+		gc_image=#{gc_image},gc_title=#{gc_title},gc_english=#{gc_english},gc_area=#{gc_area},gc_hole=#{gc_hole},
 		gc_golf=#{gc_golf},gc_length=#{gc_length},gc_kind=#{gc_kind},gc_type=#{gc_type},gc_configuration=#{gc_configuration},
 		gc_caddy=#{gc_caddy},gc_cart=#{gc_cart},gc_architects=#{gc_architects},
 		gc_content=#{gc_content},gc_address_postcode=#{gc_address_postcode},gc_address_roadAddress=#{gc_address_roadAddress},
-		gc_address_jibunAFddress=#{gc_address_jibunAddress},gc_address_detailAddress=#{gc_address_detailAddress},gc_address_extraAddress=#{gc_address_extraAddress},
+		gc_address_jibunAddress=#{gc_address_jibunAddress},gc_address_detailAddress=#{gc_address_detailAddress},gc_address_extraAddress=#{gc_address_extraAddress},
 		gc_phone=#{gc_phone},gc_fax=#{gc_fax},gc_move=#{gc_move},gc_date=#{gc_date}
 		where gc_no=#{gc_no}
 	</update>
@@ -80,6 +80,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id="gcdelete">
 		delete from golf_couse where gc_no=#{gc_no}
 	</delete>
+	
+	<!-- 검색 없이 골프장 리스트 -->
+	<select id="scb_field" resultType="golfcouse">
+		select * from golf_couse order by gc_no asc
+	</select>
 
 
 </mapper>

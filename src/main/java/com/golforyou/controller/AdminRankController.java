@@ -2,7 +2,6 @@ package com.golforyou.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.golforyou.service.RankingService;
 import com.golforyou.service.ScBoardService;
+import com.golforyou.vo.FieldClassVO;
+import com.golforyou.vo.GolfcouseVO;
 import com.golforyou.vo.ScboardVO;
 import com.golforyou.vo.ScorecardVO;
 
@@ -71,14 +72,12 @@ public class AdminRankController {
 
 		int sc_no = Integer.parseInt(request.getParameter("admin_no"));
 		String sc_id = request.getParameter("admin_id");
-		//String sc_playdate = request.getParameter("admin_playdate");
 		
-				
-		//sc_playdate = sc_playdate.replace("-", "_"); //2022-01-01을 2022_01_01로
-	
 		ScboardVO info = new ScboardVO();
 		info.setSc_id(sc_id);
 		info.setSc_no(sc_no);
+		
+		List<GolfcouseVO> field = scBoardService.getFieldList();
 		
 		sb = scBoardService.getScBoardCont(info);
 		
@@ -88,6 +87,7 @@ public class AdminRankController {
 				request.setAttribute("no", sc_no);
 				request.setAttribute("id", sc_id);
 				request.setAttribute("sb", sb);
+				request.setAttribute("field", field);
 				
 				aicm.setViewName("admin/admin_insertCard2");
 			}else {

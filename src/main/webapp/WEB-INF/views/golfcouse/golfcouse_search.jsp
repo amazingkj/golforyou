@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
  <link rel="stylesheet" type="text/css" href="/css/common.css" />
+ <link rel="stylesheet" href="/css/golfcouse_search.css">
 <head>
     <meta charset="utf-8">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
@@ -23,7 +24,7 @@
                 </>
             </div>
 
-    <div id="map" style="width:100%;height:60%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="width:100%;height:60%; margin-top:30px;"position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
@@ -43,7 +44,7 @@ var markers = [];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 5 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    

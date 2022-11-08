@@ -5,7 +5,7 @@
  <link rel="stylesheet" type="text/css" href="/css/common.css" />
  <link rel="stylesheet" type="text/css" href="/css/board.css" />
 <script src="/js/jquery.js"></script>
-<script src="/js/board.js"></script>
+
 <jsp:include page="/WEB-INF/views/includes/header.jsp" /> 
 
 
@@ -36,6 +36,8 @@
  <%--섬머노트 설정--%>
  
 		<script>
+		
+
 	$(document).ready(function() {
 	     $('#summernote').summernote({
 	             height: 300,                 // 에디터 높이
@@ -116,14 +118,28 @@
 	   })
 	});
 
-	</script>
  
 	
 	 
  <%--섬머노트 설정 끝 --%>
  
  <%--유효성 검사--%>
-     
+     	function bw_check(){
+
+			if($.trim($("#b_title").val())==""){
+				alert("제목을 입력하세요!");
+				$("#b_title").val("").focus();
+				return false;
+			}
+
+			if($.trim($("#summernote").val())==""){
+				alert("글내용을 입력하세요!");
+				$("#summernote").val("").focus();
+				return false;
+			}
+		}
+
+    	</script>	
  <title>게시판 글쓰기</title>
  </head>
  <div class="clear"></div>
@@ -133,11 +149,12 @@
  <form method="post" action="board_write_ok" onsubmit="return bw_check();" enctype="multipart/form-data"> 
    <table id="bWrite_t" class="tablebox">
      <%--이름 - 로그인해서 입력하면 그냥 입력되게 히든으로 ! 처리하기 --%>
-  	 <tr><td><input type="hidden" name="username" id="username" value="${id}"/></td></tr>
+  	 <tr><td><input type="hidden" name="username" id="username" value="${id}"/>
+  	 <input type="hidden" name="nickname" id="nickname" value="${nickname}"/></td></tr>
     
      <tr>
       <td>제목</td>
-      <td class="bottom_line"><input name="b_title" class="textField" size="100%"/></td>
+      <td class="bottom_line"><input name="b_title" id="b_title"class="textField" size="100%" /></td>
    
     
      <tr>

@@ -1,6 +1,5 @@
 package com.golforyou.controller;
 
-import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.golforyou.service.IndivService;
 import com.golforyou.service.RankingService;
 import com.golforyou.service.ScBoardService;
+import com.golforyou.vo.FieldClassVO;
+import com.golforyou.vo.GolfcouseVO;
 import com.golforyou.vo.ScorecardVO;
 
 @Controller
@@ -56,9 +57,7 @@ public class IndivrankController {
 		} 
 		if(rid != null) { //ranking페이지에서 타고오거나 로그인한 경우에만 들어갈수있음
 			sv.setS_id(rid);
-			
-			
-			
+									
 			String rPoint = request.getParameter("rPoint_"); //ranking페이지에서 받아온 포인트값
 			if(rPoint == null) { //ranking페이지에서 타고온 경우가 아니라면
 				rPoint = Integer.toString(indivService.getPoint(rid)); //로그인한 회원의 정보에서 포인트값 가져옴				
@@ -168,10 +167,7 @@ public class IndivrankController {
 					dec = indivService.monthCount(sv);
 				}
 			}
-			
-			
-			
-			
+
 			String tierURL = null;
 			String tierStr = null;
 			
@@ -198,6 +194,8 @@ public class IndivrankController {
 				}
 			}			
 			
+			List<GolfcouseVO> field = scBoardService.getFieldList();
+			
 			im.addObject("rid", rid);
 			im.addObject("rNickname", nickname);
 			im.addObject("rPoint", rPoint);
@@ -221,7 +219,7 @@ public class IndivrankController {
 			im.addObject("dec", dec);
 			im.addObject("tierURL", tierURL);
 			im.addObject("tierStr", tierStr);
-			
+			im.addObject("field", field);
 			return im;
 		}
 		return null;

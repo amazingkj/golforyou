@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias type="com.golforyou.vo.MemberVO" alias="member" />
 		<typeAlias type="com.golforyou.vo.BoardVO" alias="board" />
+		<typeAlias type="com.golforyou.vo.LikesVO" alias="likes" />
 
 		<typeAlias type="com.golforyou.vo.RankingVO" alias="rank" />
 		<typeAlias type="com.golforyou.vo.ScboardVO" alias="Scb" />
@@ -25,5 +26,6 @@
 		<typeAlias type="com.golforyou.vo.BoardReplyVO" alias="br" />
 		<typeAlias type="com.golforyou.vo.GolfcouseVO" alias="golfcouse" />
 		<typeAlias type="com.golforyou.vo.Gc_replyVO" alias="Gc_Reply"/> 
+		<typeAlias type="com.golforyou.vo.AbBoardVO" alias="abboard" />
 	</typeAliases>
 </configuration>

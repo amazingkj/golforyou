@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
+//import com.golforyou.vo.LikesVO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -70,34 +71,6 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
-
-//	@Override
-//	public int register(BoardReplyVO vo) {
-//		return this.sqlSession.insert("register",vo);
-//		 
-//	}
-//
-//	@Override
-//	public BoardReplyVO getOneReply(Long r_no) {
-//		
-//		return this.sqlSession.selectOne("getOneReply",r_no);
-//	}
-//
-//	@Override
-//	public int deleteReply(Long r_no) {
-//		return this.sqlSession.delete("deleteReply",r_no);
-//	}
-//
-//	@Override
-//	public int modify(BoardReplyVO reply) {
-//		return this.sqlSession.update("modify",reply);
-//	}
-//
-//	@Override
-//	public List<BoardReplyVO> getReplyList(Criteria cri, Long b_no) {
-//		return this.sqlSession.selectMap("getReplyList",cri,b_no);
-//	}
-
 	@Override
 	public void insertReply(BoardReplyVO vo) {
 		 this.sqlSession.insert("register", vo);
@@ -123,4 +96,55 @@ public class BoardDAOImpl implements BoardDAO {
 		this.sqlSession.delete("reply_del",r_no);
 		
 	}//댓글 삭제
+
+
+	/*
+	 * @Override public int SaveHeart(LikesVO to) { return
+	 * this.sqlSession.insert("heart_save",to);
+	 * 
+	 * }
+	 */
+
+	
+	/*
+	 * public int RemoveHeart(LikesVO to) { return
+	 * this.sqlSession.delete("heart_remove",to);
+	 * 
+	 * }
+	 */
+
+	
+	//좋아요 2차시도 
+	@Override
+	public void likeupdate(LikesVO vo) {
+		this.sqlSession.update("likeupdate",vo);
+		
+	}
+
+	@Override
+	public int likecount(LikesVO vo) {
+		return this.sqlSession.selectOne("likecount",vo);
+	}
+
+	@Override
+	public void likeinsert(LikesVO vo) {
+		this.sqlSession.insert("likeinsert",vo);
+		
+	}
+
+	@Override
+	public int likegetinfo(LikesVO vo) {
+		return this.sqlSession.selectOne("likegetinfo",vo);
+	}
+
+	@Override
+	public int liketotalcount(int b_no) {
+		return this.sqlSession.selectOne("liketotalcount",b_no);
+	}
+
+//	@Override
+//	public void updateliketotalcount(BoardVO b) {
+//		this.sqlSession.update("updateliketotalcount",b);
+//		
+//	}
 }

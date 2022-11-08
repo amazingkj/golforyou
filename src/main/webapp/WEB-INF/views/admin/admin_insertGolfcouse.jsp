@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>골프장 등록</title>
 <script src="/js/jquery.js"></script>
-<script src="/js/class.js"></script>
+<script src="/js/golfcouse.js"></script>
+
+
+
 <script src="https://kit.fontawesome.com/7e87ecac1e.js" crossorigin="anonymous"></script>
  
  <script language="javascript">
@@ -134,8 +137,14 @@
 				</tr>
 				<tr>
 					<td>홀</td>
-					<td><input name="gc_hole" id="gc_hole" size="20"
-						placeholder="숫자로 입력헤주세요."></td>
+					<td><select name="gc_hole" id="gc_hole">
+					<option>홀수를 선택해주세요</option>
+							<option value="18">18</option>
+							<option value="27">27</option>
+							<option value="36">36</option>
+							<option value="54">54</option>
+							<option value="72">72</option> 
+							</select></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -257,7 +266,7 @@
 				<tr>
 					<td>골프장 전화번호</td>
 					<td><input name="gc_phone" id="gc_phone" size="30"
-						placeholder="예) 02)-1234-5678"></td>
+						placeholder="예) 02-1234-5678"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -265,7 +274,7 @@
 				<tr>
 					<td>골프장 팩스번호</td>
 					<td><input name="gc_fax" id="gc_fax" size="30"
-						placeholder="예) 02)-1235-5678"></td>
+						placeholder="예) 02-1235-5678"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -280,8 +289,12 @@
 				</tr>
 				<tr>
 					<td>골프장 개장년도</td>
-					<td><input name="gc_date" id="gc_date" size="30"
-						placeholder=" 년도만 입력해주세요."></td>
+					<td><select name="gc_date" id="gc_date" >
+					<option>년도 선택해주세요</option>
+					<c:forEach var="i" begin="2000" end="2030"><option value="${i }">${i }</option></c:forEach>
+							
+					</select>
+					</td>
 				</tr>
 				<tr>
 					<td><br /></td>

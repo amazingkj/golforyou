@@ -1,11 +1,16 @@
 package com.golforyou.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.golforyou.service.BoardService;
 import com.golforyou.vo.BoardReplyVO;
+import com.golforyou.vo.LikesVO;
 
 @RestController
 @RequestMapping("/replies/")
@@ -22,15 +28,31 @@ public class BoardReplyController {
 	@Autowired
 	private BoardService boardService;
 	
+	//좋아요 
+	@PutMapping("/likeupdate")
+	public Map<String,String> likeupdate(@RequestBody LikesVO vo){
+						
+		Map<String,String> map = new HashMap<String, String>();
+		
+		try {
+			boardService.likeupdate(vo);
+			map.put("result", "success");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
 	
 	//댓글 등록 
 	@RequestMapping(value="",method=RequestMethod.POST,produces="application/json") 
 	//post방식으로 접근하는 매팽주소를 처리 
-	public ResponseEntity<String> addReply(@RequestBody BoardReplyVO vo){
+	public ResponseEntity<String> addReply(@RequestBody BoardReplyVO vo, HttpServletRequest request){
 		/*
 		 * @RequestBody ReplyVO vo 하면 전송된 json데이터가 ReplyVO 타입의 vo객체 타입으로 변경되어 전송된다. 
 		 */
-		System.out.println(12312312);
 		System.out.println(vo.getReplyer());
 		System.out.println(vo.getReply());
 		
@@ -41,11 +63,15 @@ public class BoardReplyController {
 			entity=new ResponseEntity<>("SUCCESS",HttpStatus.OK); //댓글 저장 성공시 
 			//'SUCCESS'문자를 반환하고, HTTP상태코드는 성공했다는 의미인 200을 반환. 
 			
+			String replyer=vo.getReplyer();
+			vo.setReplyer(replyer);	
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			entity=new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 			//예외 에러가 발생했을 때 나쁜 상태코드 문자열을 반환 
 		}
+		
 		return entity;
 	}//addReply()
 	

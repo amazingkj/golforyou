@@ -21,6 +21,9 @@
 	<hr style="padding:0.5px; background-color:grey; width:1300px; margin-left:	4%; border:0; margin-top:20px;">
 	<div class="sccont_wrap">
 	<div class="sccont_doublewrap">
+	<form method="post" action="scorecard_notice">
+	<input type="hidden" value="${sb.sc_no}" name="sc_no">
+	<input type="hidden" value="${page}" name="page">
 		<table class="sccont_t">
 			<tr height="9%">
 				<th><input class="sccont_text" id="sccont_title" readonly value="[제목] ${sb.sc_title }"></th>
@@ -41,13 +44,16 @@
 			<tr height="58%">
 				<th>
 					<hr style="border:0; padding:0.5px; background-color:grey; width:80%;">
-					<input class="sccont_text" readonly value="${sb.sc_cont }">
+					<textarea class="sccont_text" readonly style="resize:none">${sb.sc_cont }</textarea>
 				</th>
 			</tr>
 			
 			<tr height="9%">
 				<td>
 					<div class="sccont_menu">
+						<c:if test="${roleCheck == 'ROLE_ADMIN'}"> <!-- 관리자인 경우 -->
+							<input type="submit" class="CheckBtn_sccont" value="공지/취소">
+						</c:if>
 						<input type="button" class="CheckBtn_sccont" value="답변" onclick="location='scorecard_cont?sc_no=${sb.sc_no}&page=${page }&state=reply';">
 						<c:if test="${(id == sb.sc_id) || (roleCheck == 'ROLE_ADMIN') }"> <!-- 글쓴 본인이거나 관리자인 경우 -->
 							<input type="button" class="CheckBtn_sccont" value="수정" onclick="location='scorecard_cont?sc_no=${sb.sc_no}&page=${page }&state=edit';">
@@ -58,6 +64,7 @@
 				</td>
 			</tr>
 		</table>
+	</form>
 	</div>
 	</div>
 	

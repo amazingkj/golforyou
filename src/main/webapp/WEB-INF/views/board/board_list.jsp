@@ -49,7 +49,7 @@ function Change(idx){
 	<thead>
 		<tr>
 			<th scope="col" class="boardNo"><a href="#">번호</a></th>
-			<th scope="col" class="boardSubject" style="text-align: left;padding-left: 5px"><a href="#">제목</a></th>
+			<th scope="col" class="boardSubject" style="text-align: left;padding-left: 5px"><a href="#">제목</a></th>  
 			<th scope="col" class="boardWriter"><span>글쓴이</span></th>
 			<th scope="col" class="boardDate"><a href="#">날짜</a></th>
 			<th scope="col" class="boardlike"><span>좋아요</span></th>
@@ -79,7 +79,7 @@ function Change(idx){
      		 <a href="board_cont?b_no=${b.b_no}&page=${page}&state=cont">${b.b_title}</a>
     		</td>
 			
-       			<td class="boardWriter">${b.username}</td>
+       			<td class="boardWriter">${b.nickname}</td>
          		<td class="boardDate">${b.b_date}</td>
          		<td class="boardlike"><i class="fas fa-heart" style="color:#56F569"></i>&nbsp;&nbsp;&nbsp;${b.b_like}</td>
      			<td class="boardView">${b.b_hit}</td>
@@ -137,9 +137,9 @@ function Change(idx){
 		<div class="fr">
 		<%-- 로그인 되면 다시 적용하기 -- --%>
 		
-		<%--  <c:if test="${!empty id}"> --%>
+		  <c:if test="${!empty id}"> 
 			<input type="button" name="write" value="쓰기" onclick="location='board_write?page=${page}';"> <%--책갈피 기능 --%>
-		 <%-- </c:if>--%>
+			</c:if>
 		</div>
 	<br><br>
 	</div>

@@ -27,16 +27,7 @@ public interface BoardDAO {
 
 	void updateLevel(BoardVO rb);
 
-//	int register(BoardReplyVO vo);
-//
-//	BoardReplyVO getOneReply(Long r_no);
-//
-//	int deleteReply(Long r_no);
-//
-//	int modify(BoardReplyVO reply);
-//
-//	List<BoardReplyVO> getReplyList(Criteria cri, Long b_no);
-
+	//댓글
 	void insertReply(BoardReplyVO vo);
 
 	List<BoardReplyVO> replyList(int b_no);
@@ -44,5 +35,26 @@ public interface BoardDAO {
 	void updateReply(BoardReplyVO vo);
 
 	void delReply(int r_no);
+	
+	//좋아요 
+	void likeupdate(LikesVO vo);
+
+
+	/*
+	 * int SaveHeart(LikesVO to);
+	 * 
+	 * int RemoveHeart(LikesVO to);
+	 */
+
+	int likecount(LikesVO vo);
+
+	void likeinsert(LikesVO vo);
+
+
+	int likegetinfo(LikesVO vo);
+
+	int liketotalcount(int b_no);
+
+	//void updateliketotalcount(BoardVO b);
 
 }

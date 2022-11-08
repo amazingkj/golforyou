@@ -18,6 +18,7 @@ public class MypageDAOImpl implements MypageDAO{
 	@Override
 	public void updateMember(MemberVO m) {
 		this.sqlSession.update("update_member",m);
+		//sqlSession.update("update_rank",m);
 	}
 
 	@Override

@@ -62,7 +62,13 @@ public class LoginController {
 		System.out.println("userDetails:"+userDetails.getUsername());
 		request.getSession().setAttribute("id", principalDetails.getUsername());
 		request.getSession().setAttribute("pw", principalDetails.getPassword());
-		return "redirect:/";
+		
+		MemberVO m= loginService.getMember(principalDetails.getUsername());
+		request.getSession().setAttribute("nickname", m.getNickname());
+
+		System.out.println(m.getNickname()); 
+		
+		return "redirect:/index";
 	}
 	
 	@GetMapping("/test/oauth/login")
@@ -74,17 +80,37 @@ public class LoginController {
 		
 		System.out.println("authentication:"+oauth2User.getAttributes());
 		System.out.println("oauth2user:"+oauth.getAttributes());
+		System.out.println("getname?:"+oauth2User.getName());
+		
 		request.getSession().setAttribute("id", oauth2User.getName());
 		request.getSession().setAttribute("pw", oauth2User.getName()); //수정예정
-	
+		request.getSession().setAttribute("nickname", oauth2User.getName()); 
 		//request.getSession().setAttribute("id", oauth2User.getAttribute);
-		return "redirect:/";
+		
+		//MemberVO m= loginService.getMember(oauth2User.getNickname());
+		//System.out.println(m);
+		//request.getSession().setAttribute("nickname", m.getNickname());
+
+		
+		return "redirect:/index";
 	}
 	
 	
+	@RequestMapping("/addjoin")
+	public String OauthJoin(HttpServletRequest request,
+			Authentication authentication,
+			@AuthenticationPrincipal OAuth2User oauth){
+		
+		//로그인 할 때 검증해서 nickname 있으면 넘기고, 없으면 추가 정보 기입하게 하기 
+		
+	
+		return "redirect:/addjoin";
+	}
+	
+
 	@GetMapping({"","/"})
 	public String index() {
-		return "index";	
+		return "redirect:/index";	
 	}
 	
 	
@@ -191,24 +217,12 @@ public class LoginController {
 		member.setMrole("ROLE_USER");
 		member.setMstate(0); //default;
 		
-		
-		/* 회원가입과 동시에 ranking에 추가 */
-		String r_id = member.getUsername();
-		String r_nickname = member.getNickname();
-		System.out.println("r_id : "+r_id);
-
-		RankingVO r = new RankingVO();
-		
-		r.setR_id(r_id);
-		r.setR_nickname(r_nickname);
-
-		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
-		/* 회원가입과 동시에 ranking에 추가 끝 */
-		
 		String rawPassword = member.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		member.setPassword(encPassword);
 		MemberVO m = userRepository.save(member);//회원가입 잘됨
+		RankingVO r = new RankingVO();
+		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
 
 		mailsender.insertMemberEmail(m);
 		

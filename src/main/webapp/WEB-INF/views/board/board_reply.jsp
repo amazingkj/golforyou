@@ -4,6 +4,8 @@
  <head><meta charset="UTF-8">
  <link rel="stylesheet" type="text/css" href="/css/common.css" />
  <link rel="stylesheet" type="text/css" href="/css/board.css" />
+ <script src="/js/jquery.js"></script>
+ <script src="/js/board.js"></script>
 <jsp:include page="/WEB-INF/views/includes/header.jsp" />  
  
  <%-- //현재 세션 상태 체크 
@@ -89,7 +91,7 @@
 	     
 
 	 	/**
-	 	* 이미지 파일 업로드
+	 	* 이미지 파일 업로드*/
 	 	
 	 	function uploadSummernoteImageFile(file, editor) {
 	 		data = new FormData();
@@ -106,7 +108,7 @@
 	 			}
 	 		});
 	 	}
-	 	*/
+	 	
 	 	
 	 	$("div.note-editable").on('drop',function(e){
 	         for(i=0; i< e.originalEvent.dataTransfer.files.length; i++){
@@ -116,12 +118,28 @@
 	   })
 	});
 
-	</script>
 	
 	 
  <%--섬머노트 설정 끝 --%>
+
  
  <%--유효성 검사--%>
+     	function bw_check(){
+
+			if($.trim($("#b_title").val())==""){
+				alert("제목을 입력하세요!");
+				$("#b_title").val("").focus();
+				return false;
+			}
+
+			if($.trim($("#summernote").val())==""){
+				alert("글내용을 입력하세요!");
+				$("#summernote").val("").focus();
+				return false;
+			}
+		}
+
+    	</script>
      
  <title></title>
  </head>
@@ -134,6 +152,7 @@
    <table id="bWrite_t" class="tablebox">
      <%--이름 - 로그인해서 입력하면 그냥 입력되게 히든으로 ! 처리하기 --%>
   	 <tr><td><input type="hidden" name="username" id="username" value="${id}"/>
+  	 <input type="hidden" name="nickname" id="nickname" value="${nickname}"/>
   	 <%--답변 히든값 --%>
     <input type="hidden" name="b_ref" value="${b.b_ref}" />
      <%-- 원본글과 답변글을 묶어주는 그룹번호 --%>
@@ -148,7 +167,7 @@
   	 
      <tr>
       <td>제목</td>
-      <td class="bottom_line"><input name="b_title" size="100%" class="textField" maxlength="100" value="Re:${b.b_title}" ></td>
+      <td class="bottom_line"><input name="b_title"id="b_title" size="100%" class="textField" maxlength="100" value="Re:${b.b_title}" ></td>
    
     
      <tr>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.sql.*, java.util.*, javax.sql.*, javax.naming.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 <link rel="stylesheet" type="text/css" href="/css/admin_insertCard.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 <br/>
@@ -42,7 +43,7 @@
 			</c:if>
 			
 			<c:if test="${empty needList }">
-				<td colspan=3>업데이트할 스코어카드가 없습니다.</td>
+				<td colspan=4>업데이트할 스코어카드가 없습니다.</td>
 			</c:if>
 		</table>
 	</div>

@@ -2,6 +2,8 @@ package com.golforyou.service;
 
 import java.util.List;
 
+import com.golforyou.vo.FieldClassVO;
+import com.golforyou.vo.GolfcouseVO;
 import com.golforyou.vo.ScboardVO;
 import com.golforyou.vo.ScorecardVO;
 
@@ -50,5 +52,13 @@ public interface ScBoardService {
 	String getroleCheck(String sc_id);
 
 	List<ScorecardVO> getScorecardList(String rid);
+
+	void setScnotice(int sc_no);
+
+	void setScnotice2(int sc_no);
+
+	List<ScboardVO> getBoardListNotice(ScboardVO sb);
+
+	List<GolfcouseVO> getFieldList();
 
 }

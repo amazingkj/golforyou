@@ -12,7 +12,7 @@ create sequence add_seq
 start with 1
 increment by 1
 nocache;
-
+commit;
 -- 지역 insert
 insert into address values(add_seq.nextval, '수도권', '경기도 전체');
 insert into address values(add_seq.nextval, '수도권', '서울');

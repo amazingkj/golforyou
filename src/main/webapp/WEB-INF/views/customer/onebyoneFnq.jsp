@@ -14,31 +14,59 @@ li {
 }
 </style>
 
-
+<script src="/js/jquery.js"></script>
 <script>
-	function check() {
+	function Fnqcheck() {
+		
+		if ($.trim($('#consult_type').val()) == '') {
+			alert('문의 유형을 선택하세요!');
+			$('#consult_type').val('').focus();
+			return false;
+		}
+		
+		
 		if ($.trim($('#question_title').val()) == '') {
 			alert('제목을 입력하세요!');
 			$('#question_title').val('').focus();
 			return false;
 		}
-	}
-
-	function check() {
+		
+		
 		if ($.trim($('#question_contents').val()) == '') {
 			alert('내용을 입력해주세요');
 			$('#question_contents').val('').focus();
 			return false;
 		}
-	}
+	
+		
+		if ($.trim($('#phone01').val()) == '') {
+			alert('휴대폰 번호를 입력해주세요');
+			return false;
+		}
+		
+		if ($.trim($('#phone02').val()) == '') {
+			alert('휴대폰 번호를 입력해주세요');
+			return false;
+		}
+		
+		if ($.trim($('#phone03').val()) == '') {
+			alert('휴대폰 번호를 입력해주세요');
+			return false;
+		}
 
-	function check() {
 		if ($.trim($('#question_email').val()) == '') {
 			alert('이메일을 꼭 입력해주세요');
 			$('#question_email').val('').focus();
 			return false;
 		}
+	
+	
 	}
+
+
+
+	
+
 </script>
 <%--<jsp:include page="./include/header.jsp" /> --%>
 <br>
@@ -97,7 +125,7 @@ li {
 
 		</ul>
 
-		<form id="qna_form" action="customer_fnq" method=post>
+		<form id="qna_form" onsubmit="return Fnqcheck();" action="/user/customer_fnq" method=post>
 
 			<dl class=consultQForm>
 
@@ -148,21 +176,17 @@ li {
 						class="textField" placeholder="aaa@google.net"> <span>*이메일로
 						답변을 드립니다. 정확한 이메일을 입력해주세요</span>
 				</dd>
-				<div class="question_title"></div>
-				<br>
-
-				<div>
+				<dt></dt>
+				<dd>
 					<button type="reset" id="questionBtn" class="etcBtn">취소</button>
 					<button type="submit" id="questionBtn2" class="submitBtn">확인</button>
-				</div>
-
+				
+				</dd>
 
 			</dl>
 		</form>
 	</div>
-		<div id="footer" style="margin: 10% 0% 0% 0%">
-
-	</div>
+		<div id="footer" style="margin: 10% 0% 0% 0%"></div>
 </body>
-<jsp:include page="/WEB-INF/views/includes/footer.jsp" /> 
 
+<jsp:include page="/WEB-INF/views/includes/footer.jsp" /> 

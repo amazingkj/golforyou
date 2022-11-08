@@ -12,16 +12,16 @@
 }
 #imginfo_wrap{
 	position:relative;
-	left:40%;
-	width:25%;
+	left:33%;
+	width:33%;
 }
 .needTable{
 	position:relative;
-	left:40%;
-	width:25%;
+	left:33%;
+	width:33%;
 }
 .needList{
-	width:300px;
+	width:100%;
 	border-top:1px solid #000;
 	border-bottom:1px solid #000;
 	text-align:center;

@@ -36,6 +36,7 @@ public class MemberVO implements Serializable{
 	
 	@Column(name="username" , unique=true)
 	private String username; //id
+	@Column(name="nickname" , unique=true)
 	private String nickname;
 	private String password;
 	private String mphone;

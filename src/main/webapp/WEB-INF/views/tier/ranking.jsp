@@ -178,7 +178,7 @@
 	
 	
 	$("#rProfile_"+${i}).css({
-		"background-image": "url('/upload/member<c:out value="${fileaddr.get(i-1)}"/>')",
+		"background-image": "url('<c:out value="${profile.get(i-1)}"/>')",
 		"background-repeat" : "no-repeat",
 		"background-size" : "50px 50px"
 	});

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.golforyou.dao.RankingDAO;
+import com.golforyou.vo.MemberVO;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.vo.ScorecardVO;
 
@@ -19,12 +20,6 @@ public class RankingServiceImpl implements RankingService {
 	public int memberCount() {
 		// TODO Auto-generated method stub
 		return rankingDAO.memberCount();
-	}
-
-	@Override
-	public int memberCount(String prov) {
-		// TODO Auto-generated method stub
-		return rankingDAO.memberCount(prov);
 	}
 
 	@Override
@@ -64,15 +59,21 @@ public class RankingServiceImpl implements RankingService {
 	}
 
 	@Override
-	public List<String> getRankName() {
-		// TODO Auto-generated method stub
-		return rankingDAO.getRankName();
-	}
-
-	@Override
 	public String getNickname(String sc_id) {
 		// TODO Auto-generated method stub
 		return rankingDAO.getNickname(sc_id);
+	}
+
+	@Override
+	public List<MemberVO> getRankList2() {
+		// TODO Auto-generated method stub
+		return rankingDAO.getRankList2();
+	}
+
+	@Override
+	public int getPoint(int mno) {
+		// TODO Auto-generated method stub
+		return rankingDAO.getPoint(mno);
 	}
 	
 }
