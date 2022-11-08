@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
 //import com.golforyou.vo.LikesVO;
+import com.golforyou.vo.LikesVO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {

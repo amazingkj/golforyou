@@ -333,6 +333,16 @@ html, body {
     overflow: hidden;
 }
 
+.atitle {
+	float: left;
+	/* border: 1px solid red; */
+	width: 100%;
+	font-size: 1.4em;
+	margin-bottom: 3%;
+	height: 80px;
+    overflow: hidden;
+}
+
 .fsprice {
 	float: right;
 	width: 100%;
@@ -344,6 +354,16 @@ html, body {
 }
 
 .oprice {
+	float: right;
+	width: 100%;
+	/* border: 1px solid red; */
+	text-align: right;
+	font-weight: bold;
+	font-size: 1.9em;
+	height: 37px;
+}
+
+.aprice {
 	float: right;
 	width: 100%;
 	/* border: 1px solid red; */

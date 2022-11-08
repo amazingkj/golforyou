@@ -194,7 +194,7 @@ public class IndivrankController {
 				}
 			}			
 			
-			List<GolfcouseVO> field = scBoardService.getFieldList();
+			//List<GolfcouseVO> field = scBoardService.getFieldList();
 			
 			im.addObject("rid", rid);
 			im.addObject("rNickname", nickname);
@@ -219,7 +219,7 @@ public class IndivrankController {
 			im.addObject("dec", dec);
 			im.addObject("tierURL", tierURL);
 			im.addObject("tierStr", tierStr);
-			im.addObject("field", field);
+			//im.addObject("field", field);
 			return im;
 		}
 		return null;

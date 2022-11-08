@@ -79,14 +79,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 필드 클래스 검색 전후 레코드 개수 -->
 	<select id="fieldc_count" resultType="int"> <!-- resultType은 반환 자료형 -->
-		select count(fno) from field_class
+		select count(fno)
+         from cteacher c inner join field_class f on c.tno=f.tno
 		<where>
+			<if test="faddr != null">faddr = #{faddr}</if>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
 			<if test="find_field == 'ftitle'"> <!-- 강사명 기준으로 검색한 경우 -->
 				ftitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
-			<if test="find_field =='faddr'"> <!-- 클래스 지역 기준 검색 -->
-				faddr like #{find_name}
+			<if test="find_field =='tname'"> <!-- 클래스 지역 기준 검색 -->
+				tname like #{find_name}
 			</if>
 		</where>
 	</select>
@@ -102,6 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          fpprice,fprounding,fpdesc,fptime
          from cteacher c inner join field_class f on c.tno=f.tno
 		<where>
+			<if test="faddr != null">faddr = #{faddr}</if>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
 			<if test="find_field == 'ftitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
 				ftitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
@@ -152,14 +155,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 온라인 클래스 검색 전후 레코드 개수 -->
 	<select id="onlinec_count" resultType="int"> <!-- resultType은 반환 자료형 -->
-		select count(ono) from online_class
+		select count(ono)
+         from cteacher c inner join online_class o on c.tno=o.tno
 		<where>
+			<if test="olevel != null">olevel = #{olevel}</if>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
 			<if test="find_field == 'otitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
 				otitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
-			<if test="find_field =='olevel'"> <!-- 추천 레벨 기준 검색 -->
-				olevel like #{find_name}
+			<if test="find_field =='tname'"> <!-- 강사명 기준 검색 -->
+				tname like #{find_name}
 			</if>
 		</where>
 	</select>
@@ -171,6 +176,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select rowNum rNum,c.tno,tname,tgender,tcareer,
          ono,otitle,ophone,oimage,odate,oprice,odesc,otime,olevel from cteacher c inner join online_class o on c.tno=o.tno
 		<where>
+			<if test="olevel != null">olevel = #{olevel}</if>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
 			<if test="find_field == 'otitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
 				otitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
@@ -213,46 +219,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from online_class where ono=#{ono}
 	</delete>
 
- 
-	<!-- 검색 전후 레코드 개수 -->
-	<select id="class_count" resultType="int"> <!-- resultType은 반환 자료형 -->
- 	select count(cno) from golf_class
-		<where>
-			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않았을 때 기준:총레코드 개수 -->
-			<if test="find_field == 'ctitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
-				ctitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+	<!-- 모든 클래스 레코드 개수 -->
+	<select id="allclass_count" resultType="int">
+     select count(TTT.tno) from
+        (
+        select 'online' as classtype, c.tno, c.tname, ono as ano,otitle as atitle, oimage as aimage, oprice  as aprice
+        from cteacher c inner join online_class o on c.tno=o.tno
+        union all
+        select 'field' as classtype, c.tno,c.tname,fno as ano,ftitle as atitle, fimage as aimage, fsprice as aprice
+         from cteacher c inner join field_class f on c.tno=f.tno
+        ) TTT
+        <where>
+			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
+			<if test="find_field == 'atitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
+				atitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
-			<if test="find_field =='cteacher'"> <!-- 강사명 기준 검색 -->
-				cteacher like #{find_name}
+			<if test="find_field =='tname'"> <!-- 강사명 기준 검색 -->
+				tname like #{find_name}
 			</if>
 		</where>
 	</select>
-
-
-	<!-- 검색 전후 목록 -->
-	<select id="class_list" parameterType="class" resultType="class">
-		select * from (
-		select rowNum
-		rNum,cno,ckind,ctitle,cteacher,cgender,ccareer,cphone,cimage,
-		csprice,csrounding,csdesc,cstime,
-		cdprice,cdrounding,cddesc,cdtime,
-		cpprice,cprounding,cpdesc,cptime,
-		caddr,caddr2,
-		coprice,codesc,cotime,clevel,cdate
-		from (select * from golf_class
-		<where>
+	
+	<!-- 모든 클래스 검색 전후 목록 -->
+	<select id="all_list" parameterType="allclass" resultType="allclass">
+		select * from
+		(
+		select rowNum rNum, BBB.* from
+        (
+        select TTT.* from
+        (
+        select 'online' as classtype, c.tno, c.tname, ono as ano,otitle as atitle, oimage as aimage, oprice  as aprice
+        from cteacher c inner join online_class o on c.tno=o.tno
+        union all
+        select 'field' as classtype, c.tno,c.tname,fno as ano,ftitle as atitle, fimage as aimage, fsprice as aprice
+         from cteacher c inner join field_class f on c.tno=f.tno
+        ) TTT
+        <where>
 			<if test="find_field == ''"></if> <!-- 검색어를 입력하지 않은 경우 =>전체목록 -->
-			<if test="find_field == 'ctitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
-				ctitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
+			<if test="find_field == 'atitle'"> <!-- 클래스명 기준으로 검색한 경우 -->
+				atitle like #{find_name}  <!-- like는 ~와 비슷한 문자를 검색하는 검색연산자 -->
 			</if>
-			<if test="find_field =='cteacher'"> <!-- 강사명 기준 검색 -->
-				cteacher like #{find_name}
+			<if test="find_field =='tname'"> <!-- 강사명 기준 검색 -->
+				tname like #{find_name}
 			</if>
 		</where>
-		order by cdate desc)) where rNum &gt;= #{startrow} and rNum &lt;=
-		#{endrow}
+        
+        order by tno desc
+        ) BBB
+        )
+        where rNum &gt;= #{startrow} and rNum&lt;=#{endrow}
 		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
 	</select>
-
+	
+	<!-- 결제 페이지 -->
+	<insert id="classpay_in" parameterType="classpay">
+		insert into class_pay(username,pno,ono,otitle,oprice,odesc,otime,olevel,pdate)
+		values(
+		#{username}, pno_seq.nextval, #{ono}, #{otitle},#{oprice},#{odesc},#{otime}, #{olevel},sysdate)
+	</insert>
+	
+	<!-- specific pno 검색 -->
+	<select id="classpay_detail" parameterType="int" resultType="classpay">
+		select * from class_pay where username=#{username}
+	</select>
 
 </mapper>
