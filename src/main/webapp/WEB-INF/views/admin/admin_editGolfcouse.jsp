@@ -77,7 +77,7 @@
 <link rel="stylesheet" href="/css/golfcouse_admin.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 
@@ -85,7 +85,7 @@
 	<div id="wrap-edit">
 		<h2>골프장 수정하기</h2>
 		<br />
-		<form name="form1" method="post" action="/editGolfcouse_ok""
+		<form name="form1" method="post" action="/admin/editGolfcouse_ok""
 			enctype="multipart/form-data">
 			<table >
 				<tr>
@@ -106,7 +106,7 @@
 				
 				<tr>
 					<td>골프장 이미지</td>
-					<td><input type="file" name="file" /></td>
+					<td><input type="file" name="file" size ="50"/></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -225,7 +225,7 @@
 				<tr>
 					<td>골프장 소개</td>
 					<td><textarea name="gc_content" id="gc_content" rows="9"
-							cols="100" value="${item.gc_content}" ></textarea></td>
+							cols="100" >${item.gc_content}</textarea></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -300,7 +300,7 @@
 					
 					<td colspan="2" align="center"><input type="submit" value="수정"
 						class="btn01"> <input type="button" value="목록"
-						class="btn01" onclick="location='admin_golfcouseList';"  /></td>
+						class="btn01" onclick="location='/admin/admin_golfcouseList';"  /></td>
 				</tr>
 				<tr>
 					<td><br /></td>

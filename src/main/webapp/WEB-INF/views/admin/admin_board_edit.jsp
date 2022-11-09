@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/abboard_cont.css" />
 <link rel="stylesheet" type="text/css" href="/css/abcustomer.css" />
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 	<div id="all_box">
@@ -45,7 +45,7 @@
 			<!-- // left navigation -->
 		</div>
 		<div class="first_box">
-			<form id="frm" action="admin_board_edit_ok">
+			<form method="post" id="frm" action="admin_board_edit_ok">
 				<input type="hidden" name="page" value="${page}">
 				
 				<table class="board_view">
@@ -85,7 +85,7 @@
 				</table>
 				<div>
 					<input type="button" value="목록으로" class="btn"
-						onclick="location='admin_board_ablist?page=${page}';"
+						onclick="location='abboard_list?page=${page}';"
 						style="cursor: pointer" /> 
 					<input type="submit" value="저장하기" class="btn" style="cursor: pointer; margin-left:0px;" /> 
 				</div>

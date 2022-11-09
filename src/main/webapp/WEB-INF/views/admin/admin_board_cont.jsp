@@ -86,7 +86,7 @@
 		<div class="clear"></div>
 	</div>
 	<input type="button" value="목록으로" class="btn" 
-   onclick="location='admin_board_list?page=${page}';" style="cursor:pointer"/>
+   onclick="location='abboard_list?page=${page}';" style="cursor:pointer"/>
 
 
 </body>

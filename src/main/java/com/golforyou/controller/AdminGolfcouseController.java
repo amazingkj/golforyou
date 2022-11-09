@@ -38,6 +38,7 @@ import com.golforyou.vo.GolfcouseVO;
 
 
 @Controller
+@RequestMapping("/admin/*")
 public class AdminGolfcouseController {
 
 	@Autowired
@@ -68,7 +69,7 @@ public class AdminGolfcouseController {
 		String gc_title=request.getParameter("gc_title"); //골프장명
 		String gc_english=request.getParameter("gc_english"); //골프장 영문명
 		String gc_area=request.getParameter("gc_area"); //지역
-		int gc_hole=Integer.parseInt(request.getParameter("gc_hole")); //홀
+		String gc_hole=request.getParameter("gc_hole"); //홀
 		int gc_golf=Integer.parseInt(request.getParameter("gc_golf")); //파
 		int gc_length=Integer.parseInt(request.getParameter("gc_length")); //길이
 		String gc_kind=request.getParameter("gc_kind"); //잔디종류
@@ -91,7 +92,7 @@ public class AdminGolfcouseController {
 		
 		
 		//이미지 업로드
-		 file = request.getFile("file"); //이미지
+		 file = request.getFile("file2"); //이미지
 		 
 		if(file != null) {
 			String fileName = file.getName();
@@ -152,7 +153,7 @@ public class AdminGolfcouseController {
 
 		this.golfcouseService.insertGolfcouse(gc);
 
-		return "redirect:/admin_golfcouseList";
+		return "redirect:/admin/admin_golfcouseList";
 	}
 
 			
@@ -237,7 +238,7 @@ public class AdminGolfcouseController {
 		String gc_title=request.getParameter("gc_title"); //골프장명
 		String gc_english=request.getParameter("gc_english"); //골프장 영문명
 		String gc_area=request.getParameter("gc_area"); //지역
-		int gc_hole=Integer.parseInt(request.getParameter("gc_hole")); //홀
+		String gc_hole=request.getParameter("gc_hole"); //홀
 		int gc_golf=Integer.parseInt(request.getParameter("gc_golf")); //파
 		int gc_length=Integer.parseInt(request.getParameter("gc_length")); //길이
 		String gc_kind=request.getParameter("gc_kind"); //잔디종류
@@ -260,7 +261,7 @@ public class AdminGolfcouseController {
 		
 		
 		//이미지 업로드
-		 file = request.getFile("file"); //이미지
+		 file = request.getFile("file2"); //이미지
 		 
 		if(file != null) {
 			String fileName = file.getName();
@@ -325,7 +326,7 @@ public class AdminGolfcouseController {
 
 			this.golfcouseService.updategolfcouse(gc);
 
-		return "redirect:/admin_golfcouseList";
+		return "redirect:/admin/admin_golfcouseList";
 	}
 	
 	//관리자 페이지 골프장 삭제
@@ -333,7 +334,7 @@ public class AdminGolfcouseController {
 		public String admin_golfcouse_del(int gc_no) throws Exception{
 
 			this.golfcouseService.deleteGolfcouse(gc_no);
-			return "redirect:/admin_golfcouseList";
+			return "redirect:/admin/admin_golfcouseList";
 		}//admin_class_del()
 		
 		

@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="/css/abboard_list.css" />
 <link rel="stylesheet" type="text/css" href="/css/abcustomer.css" />
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />  
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
 
@@ -23,31 +23,25 @@
 		<dl class="sub_menu">
 
 			<dd>
-				<a href="customer_main">FAQ</a>
+				<a href="abboard_list" >공지사항 게시판 </a>
 			</dd>
 			<dd>
-				<a href="customer_fnq">1:1문의</a>
+				<a></a>
 			</dd>
 			<dd>
-				<a href="#">공지사항</a>
+				<a href="#"></a>
 			</dd>
 			<dd>
-				<a href="customer_sitepolicy">환불규정</a>
+				<a href="#"></a>
 			</dd>
 			<dd>
-				<a href="customer_holeinone">홀인원보험</a>
+				<a href="#"></a>
 			</dd>
 
 		</dl>
 
 
-		<ul class="sub_menu_bt">
 
-			<li class="callcenter">고객센터</li>
-			<li class="callno">1588-0000(유료)</li>
-			<li class="callcenter sub">평일 : 09:30~18:00</li>
-			<li class="callcenter sub">(토, 일, 공휴일 휴무)</li>
-		</ul>
 	</div>
 	<!-- // left navigation -->
 	<Br>
@@ -95,7 +89,7 @@
 
 								<%--답글 아이콘 --%>
 							</c:if> <a
-							href="admin_board_abcont?no=${b.abboard_no}&page=${page}&state=cont">${b.abboard_title}</a>
+							href="abboard_cont?no=${b.abboard_no}&page=${page}&state=cont">${b.abboard_title}</a>
 
 						</td>
 
@@ -104,7 +98,7 @@
 						<td class="boardView">${b.abboard_hit}</td>
 						<td class="boardedit"align="center"><input type="button" value="수정"
 								onclick="location=
-'admin_board_abcont?no=${b.abboard_no}&page=${page}&state=edit';" />
+'abboard_cont?no=${b.abboard_no}&page=${page}&state=edit';" />
 								<input type="button" value="삭제"
 								onclick="if(confirm('정말로 삭제할까요?') == true){
 location=

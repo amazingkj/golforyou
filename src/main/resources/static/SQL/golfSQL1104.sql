@@ -85,7 +85,8 @@ sc_no number(38)
 
 
 create table score_card(
-s_id varchar2(50)
+s_no number(38)
+,s_id varchar2(50)
 ,s_nickname varchar2(255)
 ,s_location varchar2(50)
 ,s_putting number(38)
@@ -100,11 +101,8 @@ s_id varchar2(50)
 
 create table ranking(
 r_no number(38)
-,r_id varchar2(50)
-,r_nickname varchar2(255)
-,r_sum number(38)
+,r_sum number(38) default 9999
 ,r_maxrange number(38)
-,r_province varchar2(50)
 );
 
 create sequence rno_seq
@@ -125,7 +123,6 @@ create table abboard(
  abboard_no number(38) primary key --게시물 번호
  ,abboard_name varchar2(100) not null --작성자
  ,abboard_title varchar2(200) not null --제목
- ,abboard_pwd varchar2(20) not null --비번
  ,abboard_cont varchar2(4000) not null --내용
  ,abboard_hit number(38) default 0--조회수
  ,abboard_ref number(38) --원본글과 답변글을 묶어주는 그룹번호역할
@@ -134,6 +131,7 @@ create table abboard(
  ,abboard_level number(38) --답변글 정렬 순서
  ,abboard_date date --등록날짜
 );
+DROP TABLE abboard
 
 --abboard_no_seq 시퀀스 생성
 create sequence abboard_no_seq

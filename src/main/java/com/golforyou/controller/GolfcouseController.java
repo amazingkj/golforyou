@@ -66,15 +66,16 @@ public class GolfcouseController {
 	
 	
 	//골프장 상세 페이지
+
 	@RequestMapping(value="/golfcouse_Main",method=RequestMethod.GET)
-	public String golfcouse_Main(@RequestParam int gc_no, Model model) throws Exception {
-		System.out.println(gc_no);
-		GolfcouseVO golfcouseVO = golfcouseService.getGolfcouse(gc_no);
-		
-		model.addAttribute("item", golfcouseVO);
-		
+		public String golfcouse_Main(@RequestParam int gc_no, Model model) throws Exception {
+			//System.out.println(gc_no);
+			GolfcouseVO golfcouseVO = golfcouseService.getGolfcouse(gc_no);
+			//System.out.println(classVO.toString());
+			model.addAttribute("it", golfcouseVO);		
 		return "/golfcouse/golfcouse_Main";
-	}//class_detailField
+	}
+	
 	
 	//골프장 검색페이지
 		@RequestMapping(value="/golfcouse_search",method=RequestMethod.GET)

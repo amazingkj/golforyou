@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <link rel="stylesheet" type="text/css" href="/css/abboard_cont.css" />
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />  
 </head>
 <body>
 	<div id="all_box">
@@ -86,10 +86,10 @@
 				<table>
 					<tr>
 						<th><input type="button" value="목록으로" class="btn"
-							onclick="location='admin_board_ablist?page=${page}';"
+							onclick="location='abboard_list?page=${page}';"
 							style="cursor: pointer" /></th>
 						<th><input type="button" value="수정" class="btn" 
-							onclick="location= 'admin_board_abcont?no=${b.abboard_no}&page=${page}&state=edit';"
+							onclick="location= 'abboard_cont?no=${b.abboard_no}&page=${page}&state=edit';"
 							style="cursor: pointer; margin-left: 0px;" /></th>
 
 					</tr>

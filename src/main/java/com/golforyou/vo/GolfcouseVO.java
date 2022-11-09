@@ -11,7 +11,7 @@ public class GolfcouseVO {
 	private String	gc_title; //--골프장명
 	private String	gc_english; // --골프장영문명
 	private String	gc_area; //지역
-	private Integer gc_hole; //홀
+	private String  gc_hole; //홀
 	private Integer	gc_golf; //파
 	private Integer	gc_length; //길이
 	private String	gc_kind; //잔디종류

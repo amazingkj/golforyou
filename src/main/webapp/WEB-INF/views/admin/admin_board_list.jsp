@@ -54,7 +54,7 @@
 	<!-- // left navigation -->
 	<Br>
 	<br>
-	<h3 id="name-tag">자유게시판</h3>
+	<h3 id="name-tag">공지사항</h3>
 
 
 	<!-- <form method="get" action="admin_board_list"> -->
@@ -96,7 +96,7 @@
 										
 										<%--답글 아이콘 --%>
 									</c:if> <a
-									href="admin_board_cont?no=${b.abboard_no}&page=${page}&state=cont">${b.abboard_title}</a>
+									href="abboard_cont?no=${b.abboard_no}&page=${page}&state=cont">${b.abboard_title}</a>
 
 								</td>
 

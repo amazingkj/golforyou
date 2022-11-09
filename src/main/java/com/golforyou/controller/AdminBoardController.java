@@ -23,12 +23,9 @@ public class AdminBoardController {
 	@Autowired
 	private AdminBoardService adminBoardService;
 
-	@RequestMapping("/admin_a")
-	public String admin_a() {
-		return "admin/admin_a";//WEB-INF/views/admin/admin_login.jsp
-	}//admin_index()
+
 	/*관리자 게시판 목록*/
-	@RequestMapping("/admin_board_list")//주소 입력하면 뷰페이지 출력
+	@RequestMapping("/abboard_list")//주소 입력하면 뷰페이지 출력
 	public String admin_board_list(Model listM,   
 			@ModelAttribute AbBoardVO b,
 			HttpServletResponse response,	
@@ -79,44 +76,14 @@ public class AdminBoardController {
 		listM.addAttribute("find_field",find_field);
 		listM.addAttribute("find_name", find_name);
 
-		return "admin/admin_board_list";
+		return "/admin_board_list";
 		//뷰페이지 폴더경로와 파일명 지정		
 	}//admin_board_list()
 
-	//관리자 게시판 글쓰기
-	@RequestMapping("/admin_board_write")
-	public ModelAndView admin_board_write(
-			HttpServletRequest request,
-			HttpServletResponse response)
-					throws Exception{
-		response.setContentType("text/html;charset=UTF-8");
 
-		int page=1;
-		if(request.getParameter("page") != null) {
-			page=Integer.parseInt(request.getParameter("page"));     		
-		}	ModelAndView cm=
-				new ModelAndView("admin/admin_board_write");
-		cm.addObject("page",page);
-		return cm;
-	}//admin_board_write
-
-	//관리자 게시판 저장
-	@RequestMapping("/admin_board_write_ok")
-	public String admin_board_write_ok(
-			@ModelAttribute AbBoardVO b,
-			HttpServletRequest request,
-			HttpServletResponse response)
-					throws Exception{
-		//@ModelAttribute BoardVO b라고 하면 네임피라미터 이름과 빈
-		//클래스 변수명이 일치하면 b객체에 값이 저장되어 있다.
-		response.setContentType("text/html;charset=UTF-8");
-
-		this.adminBoardService.insertBoard(b);
-		return "redirect:/admin_board_list";
-	}//admin_board_write_ok()
 
 	//내용보기+수정폼
-	@RequestMapping("/admin_board_cont")
+	@RequestMapping("/abboard_cont")
 	public ModelAndView admin_board_cont(
 			@RequestParam("no") int abboard_no,
 			@RequestParam("state") String state,
@@ -153,25 +120,11 @@ public class AdminBoardController {
 	}//admin_board_cont()
 
 
-	//관리자 게시판 삭제
-	@RequestMapping("/admin_board_del")
-	public String admin_board_del(
-			@RequestParam("no") int no,
-			@RequestParam("page") int page,
-			HttpServletResponse response,
-			HttpServletRequest request)
-					throws Exception{
-		response.setContentType("text/html;charset=UTF-8");
 
-
-		this.adminBoardService.deleteBoard(no);//게시물 삭제
-
-		return "redirect:/admin_board_ablist?page="+page;
-	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*관리자 게시판 목록*/
-	@RequestMapping("admin/admin_board_ablist")//주소 입력하면 뷰페이지 출력
+	@RequestMapping("admin/abboard_list")//주소 입력하면 뷰페이지 출력
 	public String admin_board_ablist(Model listM,  
 			@ModelAttribute AbBoardVO b, 
 			HttpServletResponse response,	
@@ -226,7 +179,7 @@ public class AdminBoardController {
 		//뷰페이지 폴더경로와 파일명 지정		
 	}//admin_board_list()
 	//내용보기+수정폼
-	@RequestMapping("admin/admin_board_abcont")
+	@RequestMapping("admin/abboard_cont")
 	public ModelAndView admin_board_abcont(
 			@RequestParam("no") int abboard_no,
 			@RequestParam("state") String state,
@@ -260,25 +213,71 @@ public class AdminBoardController {
 		return cm;
 	}
 	//관리자 게시판 수정완료
-	@RequestMapping(value="/admin_board_edit_ok",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/admin_board_edit_ok",method=RequestMethod.POST)
 	public String admin_board_edit_ok(
 			@ModelAttribute AbBoardVO eb,
 			HttpServletResponse response,
 			HttpServletRequest request) 
 					throws Exception{
 		int page=Integer.parseInt(request.getParameter("page"));
-//		int abboard_no=Integer.parseInt(request.getParameter("abboard_no"));
-//		String board_name=request.getParameter("board_name");
-//		String board_cont=request.getParameter("board_cont");
-//		String board_title=request.getParameter("board_title");
-//
-//		eb.setAbboard_no(abboard_no);
-//		eb.setAbboard_name(board_name);
-//		eb.setAbboard_cont(board_cont);
-//		eb.setAbboard_title(board_title);
+		int abboard_no=Integer.parseInt(request.getParameter("abboard_no"));
+		String abboard_name=request.getParameter("abboard_name");
+		String abboard_cont=request.getParameter("abboard_cont");
+		String abboard_title=request.getParameter("abboard_title");
+
+		eb.setAbboard_no(abboard_no);
+		eb.setAbboard_name(abboard_name);
+		eb.setAbboard_cont(abboard_cont);
+		eb.setAbboard_title(abboard_title);
 		this.adminBoardService.editBoard(eb);
-	
-		return "redirect:/admin_board_abcont?no=" + eb.getAbboard_no() + "&page="+page + "&state=cont";
-	
-	}//admin_board_edit_ok()}
+
+		return "redirect:/admin/abboard_cont?no=" + eb.getAbboard_no() + "&page="+page + "&state=cont";
+
+	}//admin_board_edit_ok()
+	//관리자 게시판 삭제
+	@RequestMapping("admin/admin_board_del")
+	public String admin_board_del(
+			@RequestParam("no") int no,
+			@RequestParam("page") int page,
+			HttpServletResponse response,
+			HttpServletRequest request)
+					throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+
+
+		this.adminBoardService.deleteBoard(no);//게시물 삭제
+
+		return "redirect:/admin/abboard_list?page="+page;
+	}
+	//관리자 게시판 글쓰기
+	@RequestMapping("admin/admin_board_write")
+	public ModelAndView admin_board_write(
+			HttpServletRequest request,
+			HttpServletResponse response)
+					throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+
+		int page=1;
+		if(request.getParameter("page") != null) {
+			page=Integer.parseInt(request.getParameter("page"));     		
+		}	ModelAndView cm=
+				new ModelAndView("admin/admin_board_write");
+		cm.addObject("page",page);
+		return cm;
+	}//admin_board_write
+
+	//관리자 게시판 저장
+	@RequestMapping("admin/admin_board_write_ok")
+	public String admin_board_write_ok(
+			@ModelAttribute AbBoardVO b,
+			HttpServletRequest request,
+			HttpServletResponse response)
+					throws Exception{
+		//@ModelAttribute BoardVO b라고 하면 네임피라미터 이름과 빈
+		//클래스 변수명이 일치하면 b객체에 값이 저장되어 있다.
+		response.setContentType("text/html;charset=UTF-8");
+
+		this.adminBoardService.insertBoard(b);
+		return "redirect:/admin/abboard_list";
+	}//admin_board_write_ok()
 }
