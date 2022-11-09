@@ -11,7 +11,7 @@
 <header>
 </header>
 
- <link rel="stylesheet" type="text/css" href="/css/YeYag_Main.css" />
+ <link rel="stylesheet" type="text/css" href="/css/golfcouse_Main.css" />
 <script src="/js/jquery.js"></script>
 <script src="/js/goifcouse.js"></script>
 <script src="https://kit.fontawesome.com/7e87ecac1e.js" crossorigin="anonymous"></script>

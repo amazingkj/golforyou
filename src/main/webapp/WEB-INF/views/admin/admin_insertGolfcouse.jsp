@@ -322,7 +322,7 @@
 					<td>골프장 개장년도</td>
 					<td><select name="gc_date" id="gc_date" style="color:black;background-color:white;" class="check" name="test16">
 							<option value="선택">년도 선택해주세요</option>
-							<c:forEach var="i" begin="2000" end="2030" >
+							<c:forEach var="i" begin="1980" end="2030" >
 								<option value="${i }">${i }</option>
 							</c:forEach>
 

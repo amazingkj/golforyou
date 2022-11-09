@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				gc_area like #{find_name}
 			</if>
 		</where>
-		order by gc_date desc)) where rNum &gt;= #{startrow} and rNum &lt;=
+		order by gc_no desc)) where rNum &gt;= #{startrow} and rNum &lt;=
 		#{endrow}
 		<!-- &gt;= >= 의 뜻, &lt;= <=의 뜻 -->
 	</select>
