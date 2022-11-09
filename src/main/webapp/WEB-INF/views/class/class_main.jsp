@@ -91,7 +91,7 @@
 								</c:if--%>
 									<c:choose>
 										<c:when test="${!empty a.aimage}">
-											<div class="cimage">
+											<div class="fimage">
 												<img src="/upload/class${a.aimage}" class="thumbnail-img" />
 											</div>
 										</c:when>

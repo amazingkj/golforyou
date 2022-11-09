@@ -1,4 +1,4 @@
------------------필수로 생성하시면 됩니다.------------------
+---------------------필수로 생성하시면 됩니다.---------------------
 
 ----- 지역 테이블
 create table address(
@@ -12,7 +12,7 @@ create sequence add_seq
 start with 1
 increment by 1
 nocache;
-commit;
+
 -- 지역 insert
 insert into address values(add_seq.nextval, '수도권', '경기도 전체');
 insert into address values(add_seq.nextval, '수도권', '서울');
@@ -50,15 +50,13 @@ tcareer varchar2(2000), --강사 소개 또는 경력사항
 tdate date --강사 등록 날짜
 );
 
-
 --강사 시퀀스
 create sequence ct_seq
 start with 100
 increment by 1
 nocache;
 
-
---골프 필드 클래스 테이블 생성
+--필드 클래스 테이블 생성
 create table field_class(
 fno number(38) primary key, --클래스 고유번호
 tno number(38), --강사 고유번호: 외래키 지정
@@ -121,11 +119,19 @@ ADD CONSTRAINTS fk_tno2 FOREIGN KEY (tno)
 REFERENCES cteacher(tno) ON DELETE CASCADE;
 
 
+----결제완료 온라인 클래스 테이블 생성
+create table class_pay(
+pno number(38), ----주문번호
+nickname varchar2(100), ----유저닉네임
+ono number(38), ----온라인 클래스 고유번호
+pdate date ----결제 완료 날짜
+);
 
 
 
 
------------------필요시 사용하세요.--------------------------
+
+-------------------------필요시 사용하세요.--------------------------
 select * from address;
 
 select distinct adname from address;
@@ -161,10 +167,6 @@ drop sequence ol_seq;
 
 ALTER TABLE FIELD_CLASS DROP CONSTRAINT fk_tno;
 ALTER TABLE ONLINE_CLASS DROP CONSTRAINT fk_tno2;
-
-
-
-
 
 
 -- 지역 insert
@@ -310,7 +312,7 @@ select * from (
          ono,otitle,ophone,oimage,odate,oprice,odesc,otime,olevel from cteacher c inner join online_class o on c.tno=o.tno		
 		where otitle like '%코스%'
         order by odate desc)) where rNum >= 1 and rNum <= 2;
-
+ '
 ----온라인 클래스 검색-----
 select * from (
 		select *
@@ -339,13 +341,10 @@ select * from (
          fpprice,fprounding,fpdesc,fptime
          from cteacher c inner join field_class f on c.tno=f.tno));
 
-select * from cteacher c inner join online_class o on c.tno=o.tno where ono=20000
 
-select * from cteacher c inner join field_class f on c.tno=f.tno where fno=10000
+
         
 select tname,tgender,tcareer from cteacher where tno=100;
-
-select * from cteacher c inner join online_class o on c.tno=o.tno order by ono desc;
 
 
 --온라인 클래스 테이블
