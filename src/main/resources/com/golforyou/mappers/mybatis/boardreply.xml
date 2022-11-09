@@ -29,6 +29,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			delete from golforboard_reply where r_no=#{r_no} <!-- delete문에서 from절 생략가능함-->
 		</delete>
 		
+		<!-- 댓글 목록 -->
+		<select id="reply_nickname" resultType="br">
+			select replyer from golforboard_reply where b_no=#{b_no}
+		</select>
   
 
 </mapper>

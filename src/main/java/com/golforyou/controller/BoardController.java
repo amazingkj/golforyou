@@ -155,11 +155,13 @@ public class BoardController {
 			
 				String nickname = (String)session.getAttribute("nickname");
 				
-				String replynickname = boardService.getReplyNickname(b_no);
+				List<BoardReplyVO> replynickname = boardService.getReplyNickname(b_no);
+				 
 				//좋아요 기능 
 				vo=new LikesVO();
 				vo.setBoard_no(b_no);
 				vo.setNickname(nickname);
+				
 				
 				System.out.println(vo);
 				
@@ -189,6 +191,7 @@ public class BoardController {
 				cm.addObject("board_cont",board_cont);
 				cm.addObject("page",page); //페이징에서 내가 본 쪽번호로 이동하기 위해서 
 				cm.addObject("check",check); 
+				cm.addObject("replynickname",replynickname); 
 				cm.addObject("likestotal",likestotal); 
 				
 				
