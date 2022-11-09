@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>온라인 클래스 페이지</title>
+<title>온라인 클래스 페이지 페이지</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/class_main.css" />
@@ -68,9 +68,10 @@
 					</div>
 				</div>
 				<div class="class-btns">
-					<c:forEach var="o" items="${olist}">
-							<!--  <button id="class-btn" type="button" onclick="onDetail('${c.ckind}', '${c.cno}')"> -->
-							<button id="class-btn" type="button" onclick="location='class_detailOnline?ono=${o.ono}';">
+					<c:if test="${!empty olist}">
+						<c:forEach var="o" items="${olist}">
+							<button id="class-btn" type="button"
+								onclick="location='class_detailOnline?ono=${o.ono}';">
 								<div class="class-box">
 									<%--c:if test="${!empty c.cimage}">
 									<div class="cimage">
@@ -79,7 +80,7 @@
 								</c:if--%>
 									<c:choose>
 										<c:when test="${!empty o.oimage}">
-											<div class="oimage">
+											<div class="cimage">
 												<img src="/upload/class${o.oimage}" class="thumbnail-img" />
 											</div>
 										</c:when>
@@ -90,15 +91,18 @@
 										</c:otherwise>
 									</c:choose>
 
-									<div class="tname"> ${o.tname}&nbsp;프로</div>
+									<div class="tname">${o.tname}&nbsp;프로</div>
 									<div class="otitle">${o.otitle}</div>
 									<div class="oprice">
-											<fmt:formatNumber value="${o.oprice}" pattern="#,###" /> 원
+										<c:if test="${o.oprice != '0'}">
+											<fmt:formatNumber value="${o.oprice}" pattern="#,###" />
+										</c:if>
+										원
 									</div>
 								</div>
 							</button>
-						
-					</c:forEach>
+						</c:forEach>
+					</c:if>
 				</div>
 			</div>
 			<%--페이징(쪽나누기)--%>
@@ -160,14 +164,6 @@
 		</form>
 	</div>
 </body>
-<div style="margin: 13% 0%;"></div>
+<div style="margin: 15% 0%;"></div>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 </html>
-<script>
-
-function onDetail(type, ano) {
-	//alert('test'+type+cno);
-	if(type === 'field') location.href='class_detailField?ano='+ano;
-	else if(type === 'online') location.href='class_detailOnline?ano='+ano;
-}
-</script>

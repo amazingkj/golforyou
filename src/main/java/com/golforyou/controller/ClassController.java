@@ -1,6 +1,8 @@
 package com.golforyou.controller;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -188,7 +190,7 @@ public class ClassController {
 		System.out.println(fno);
 		FieldClassVO fc = classService.getFieldDetail(fno);
 		model.addAttribute("item", fc);
-		return "/class/class_payField";
+		return "class/class_payField";
 	}//class_payOnline
 	
 	//온라인 클래스 결제하기 페이지
@@ -197,43 +199,43 @@ public class ClassController {
 		System.out.println(ono);
 		OnlineClassVO oc = classService.getOnlineDetail(ono);
 		model.addAttribute("item", oc);
-		return "/class/class_payOnline";
+		return "class/class_payOnline";
 	}//class_payOnline
 	
 	//결제 정보 저장
 	@PostMapping("/insertClassPay_ok")
 	public String insertClassPay_ok(ClassPayVO cp, HttpServletRequest request) throws Exception {
 
-		//강사 기본 정보
-		String username=request.getParameter("username"); //멤버 아이디
-		int pno=Integer.parseInt(request.getParameter("pno")); //주문번호
-		int ono=Integer.parseInt(request.getParameter("ono")); //온라인 클래스 고유번호
-		String otitle=request.getParameter("otitle"); //멤버 아이디
-		int oprice=Integer.parseInt(request.getParameter("oprice")); //온라인 클래스 고유번호
-		String odesc=request.getParameter("odesc"); //멤버 아이디
-		int otime=Integer.parseInt(request.getParameter("otime")); //온라인 클래스 고유번호
-		String olevel=request.getParameter("olevel"); //멤버 아이디
+		Calendar cal = Calendar.getInstance();
+		int month=cal.get(Calendar.MONTH)+1;//월값, +1을 한 이유는 1월이 0으로 반환 되기 때문에
+		int date=cal.get(Calendar.DATE);//일값
+		int hour=cal.get(Calendar.HOUR_OF_DAY);//시값
+		int minute=cal.get(Calendar.MINUTE);//분값
+		int second=cal.get(Calendar.SECOND);//초값
 		
-		cp.setUsername(username);
+		int pno = month + date + hour + minute + second + 20220000;
+		
 		cp.setPno(pno);
-		cp.setOno(ono);
-		cp.setOtitle(otitle);
-		cp.setOprice(oprice);
-		cp.setOdesc(odesc);
-		cp.setOtime(otime);
-		cp.setOlevel(olevel);
+		
+		//강사 기본 정보
+		String nickname=request.getParameter("nickname"); //멤버 아이디
+		this.classService.insertClassPayOk(cp);
+		
+		cp.setNickname(nickname);
 
-		this.classService.insertOnlinePayOk(cp);
-
-		return "redirect:/class/class_pay_ok";
+		return "redirect:/class_pay_ok?pno="+cp.getPno();
 	}
 	
 	//클래스 결제완료 페이지
-	@RequestMapping(value="/class_pay_ok",method=RequestMethod.GET)
-	public String class_pay_ok() {
-	
+	@RequestMapping(value="/class_pay_ok",method=RequestMethod.GET) //get으로 접근하는 매핑주소를 처리
+	public String class_pay_ok(Model listC,int pno) {
+		//System.out.println("================================"+oc.toString());
+		System.out.println("pno="+pno);
+		List<ClassPayVO> plist=this.classService.getClassPayList(pno);
+		System.out.println(plist);
+		listC.addAttribute("plist",plist);
+		
 		return "/class/class_pay_ok";
-	}//class_pay_ok
-
+	}//class_online()
 
 }

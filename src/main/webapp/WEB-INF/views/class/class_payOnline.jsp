@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page errorPage = "/views/error.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +18,8 @@
 
 	<%-- header와 footer를 제외한 전체 --%>
 	<div id="wrap">
-		<form name="payonlineform" method="post" action="/insertClassPay_ok"
-			enctype="multipart/form-data">
-			<input type="hidden" name="ono" value="${item.ono}">
+		<form name="payonlineform" method="post" action="/insertClassPay_ok" >
+			<input type="hidden" name="ono" id="ono" value="${item.ono}">
 			<%-- 윗부분 --%>
 			<div class="cart_wrap">
 				<div class="cart">결제하기</div>
@@ -60,8 +60,9 @@
 				</div>
 
 				<div class="customerInfo">
-					<div class="customerInfo01">주문 고객 아이디를 입력해주세요 :</div>
-					<input name="username" id="username" class="customerInfo02" />
+					<div class="customerInfo01">주문 고객 : </div>
+					 <input type="text" class="customerInfo02" name="nickname" id="nickname" value="${nickname}" readonly="readonly">
+					<!-- <input name="username" id="username" class="customerInfo02" /> -->
 				</div>
 				<div class="orderwrap03">
 					<div class="orderwrap03-01">주문 상품 금액</div>
@@ -118,10 +119,9 @@
 							있습니다.</div>
 						<div class="guide03">서비스 제공이 완료된 이후에 전문가에게 결제 대금이 전달됩니다.</div>
 					</div>
-					<!-- <input type="submit" value="결제하기" class="btn01"> -->
-					
-					<button class="btn01" type="button" onclick="location='class_pay_ok';">결제하기</button>
-
+					<input type="submit" value="결제하기" class="btn01">
+					<%-- <button class="btn01" type="submit" onclick="location='class_pay_ok?pno=${item.pno}';">결제하기</button> --%>
+					<%-- <button class="btn01" type="button" onclick="location='class_pay_ok?ono=${item.ono}';">결제하기</button>  --%>
 				</div>
 
 			</div>

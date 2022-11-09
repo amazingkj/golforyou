@@ -60,9 +60,8 @@
 				</div>
 
 				<div class="customerInfo">
-					<div class="customerInfo01">주문 고객 아이디를 입력해주세요 :</div>
-					<input name="username" id="username" class="customerInfo02" />
-				</div>
+					<div class="customerInfo01">주문 고객 :</div>
+ 					<input type="text" class="customerInfo02" name="nickname" id="nickname" value="${nickname}" readonly="readonly">				</div>
 				<div class="orderwrap03">
 					<div class="orderwrap03-01">주문 상품 금액</div>
 					<div class="orderwrap03-02">
@@ -118,12 +117,9 @@
 							있습니다.</div>
 						<div class="guide03">서비스 제공이 완료된 이후에 전문가에게 결제 대금이 전달됩니다.</div>
 					</div>
-					<!-- <input type="submit" value="결제하기" class="btn01"> -->
-					
-					<button class="btn01" type="button" onclick="location='class_pay_ok';">결제하기</button>
-
+					<input type="submit" value="결제하기" class="btn01">
+					<!-- <button class="btn01" type="button" onclick="location='class_pay_ok';">결제하기</button> -->
 				</div>
-
 			</div>
 		</form>
 	</div>

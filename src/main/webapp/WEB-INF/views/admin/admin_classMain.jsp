@@ -34,10 +34,10 @@
 				<br />
 				<table id="cList_t">
 					<tr id="cList_a">
-						<th style="width: 20%; color:#56F569;">클래스 종류</th>
-						<th style="width: 15%; color:#56F569;">강사 고유번호</th>
-						<th style="width: 20%; color:#56F569;">강사명</th>
-						<th style="width: 50%; color:#56F569;">클래스명</th>
+						<th style="width: 20%; color:#56F569; font-size:1em;">클래스 종류</th>
+						<th style="width: 14%; color:#56F569; font-size:1em;">강사 고유번호</th>
+						<th style="width: 12%; color:#56F569; font-size:1em;">강사명</th>
+						<th style="width: 53%; color:#56F569; font-size:1em;">클래스명</th>
 					</tr>
 					<tr>
 						<td><br /></td>
@@ -47,7 +47,7 @@
 							<tr>
 								<td align="center">${a.classtype}</td>
 								<td align="center">${a.tno}</td>
-								<td align="center">${a.tname} 프로</td>
+								<td align="center">${a.tname}</td>
 								<td align="center">${a.atitle}</td>
 							</tr>
 						</c:forEach>

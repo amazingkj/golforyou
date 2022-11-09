@@ -14,7 +14,7 @@
 
     <nav class="headerNav"> 
    
-    <div id="login">${id} 관리자님 안녕하세요 |<a href="/logout" class=btn1>로그아웃</a></div>
+    <div id="login_admin">${id} 관리자님 안녕하세요 |<a href="/logout" class=btn1>로그아웃</a></div>
     
      
     <%-- 회사로고 --%>

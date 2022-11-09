@@ -136,13 +136,18 @@ public class ClassServiceImpl implements ClassService {
 
 	/* 결제 페이지 */
 	@Override
-	public void insertOnlinePayOk(ClassPayVO cp) {
-		this.classDao.insertOnlinePayOk(cp);	
+	public void insertClassPayOk(ClassPayVO cp) {
+		this.classDao.insertClassPayOk(cp);	
 	}
 	
 	@Override
 	public ClassPayVO getClassPayDetail(int pno) {
 		return this.classDao.getClassPayDetail(pno);
+	}
+
+	@Override
+	public List<ClassPayVO> getClassPayList(int pno) {
+		return this.classDao.getClassPayList(pno);
 	}
 
 
