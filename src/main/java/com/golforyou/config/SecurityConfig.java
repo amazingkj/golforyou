@@ -50,9 +50,8 @@ public class SecurityConfig{
 			.and()
 		.formLogin()
 			.loginPage("/login")
-			//.usernameParameter("mId")
 			.loginProcessingUrl("/loginOk") // /login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해줌 
-			.defaultSuccessUrl("/test/login")
+			.defaultSuccessUrl("/test/login",true)
 			.failureUrl("/access_denied")
 			.and()			
 		.logout() // 로그아웃 기능 작동함
