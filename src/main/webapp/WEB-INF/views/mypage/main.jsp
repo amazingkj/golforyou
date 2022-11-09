@@ -110,17 +110,7 @@
 			</c:if>
 			</div>
 </div>
-<div class="mypageMain">
-		
-			<h2>예약 현황</h2>
-	
-		<div class="inputBoxVertical" style="width:500px"  >
-			<c:if test="${!empty id}"> 
-			예약하신 내역이 없습니다.
-			
-			</c:if>
-			</div>
-</div>
+
 </div>
 
 </div>

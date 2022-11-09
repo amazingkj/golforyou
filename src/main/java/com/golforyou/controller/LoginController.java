@@ -1,5 +1,7 @@
 package com.golforyou.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -49,9 +51,11 @@ public class LoginController {
 	//@Autowired
 	//private PrincipalDetailsService principalDetail;
 	@GetMapping("/test/login")
-	public String testLogin(HttpServletRequest request, HttpSession session,
+	public String testLogin (HttpServletRequest request, HttpSession session, HttpServletResponse response,
 			Authentication authentication,
-			@AuthenticationPrincipal PrincipalDetails userDetails){
+			@AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{
+		
+	
 		System.out.println("/test/login================");
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 		
@@ -74,37 +78,50 @@ public class LoginController {
 
 		System.out.println(m.getNickname()); 
 		
+		PrintWriter out=response.getWriter(); 
+
+		
+		if(principalDetails.getUsername()!=null ) {
+			
+			
+			out.println("<script>");
+			out.println("alert('로그인을 환영합니다.');");
+			out.println("location='history.back()';");
+			out.println("</script>");
+			
+		}
+		
+			
+		
 		return "redirect:/index";
 		}
 		
 	}
-	
-	
-	@GetMapping("/test/oauth/login")
-	public String testOauthLogin(HttpServletRequest request,
-			Authentication authentication,
-			@AuthenticationPrincipal OAuth2User oauth){
-		System.out.println("/test/oauth/login================");
-		OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-		
-		System.out.println("authentication:"+oauth2User.getAttributes());
-		System.out.println("oauth2user:"+oauth.getAttributes());
-		System.out.println("getname?:"+oauth2User.getName());
-		
-		
-		
-		
-		request.getSession().setAttribute("id", oauth2User.getName());
-		request.getSession().setAttribute("pw", oauth2User.getName()); //수정예정
-		request.getSession().setAttribute("nickname", oauth2User.getName()); 
-		//request.getSession().setAttribute("id", oauth2User.getAttribute);
-		//MemberVO m= loginService.getMember(oauth2User.getNickname());
-		//System.out.println(m);
-		//request.getSession().setAttribute("nickname", m.getNickname());
-		
-				
-		return "redirect:/index";
-	}
+//	
+//	
+//	@GetMapping("/test/oauth/login")
+//	public String testOauthLogin(HttpServletRequest request,
+//			Authentication authentication,
+//			@AuthenticationPrincipal OAuth2User oauth){
+//		System.out.println("/test/oauth/login================");
+//		OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+//		
+//		System.out.println("authentication:"+oauth2User.getAttributes());
+//		System.out.println("oauth2user:"+oauth.getAttributes());
+//		System.out.println("getname?:"+oauth2User.getName());
+//		
+//		
+//		request.getSession().setAttribute("id", oauth2User.getName());
+//		request.getSession().setAttribute("pw", oauth2User.getName()); //수정예정
+//		request.getSession().setAttribute("nickname", oauth2User.getName()); 
+//		//request.getSession().setAttribute("id", oauth2User.getAttribute);
+//		//MemberVO m= loginService.getMember(oauth2User.getNickname());
+//		//System.out.println(m);
+//		//request.getSession().setAttribute("nickname", m.getNickname());
+//		
+//				
+//		return "redirect:/index";
+//	}
 	
 	
 	@RequestMapping("/addjoin")
@@ -125,13 +142,13 @@ public class LoginController {
 	}
 	
 	
-	//OAuth로 로그인 해도, 일반 로그인을 해도 PrincipalDetails
-	@GetMapping("/user")
-	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-		System.out.println("principalDetails:"+principalDetails.getUsername());
-		return "user";
-	}
-
+//	//OAuth로 로그인 해도, 일반 로그인을 해도 PrincipalDetails
+//	@GetMapping("/user")
+//	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+//		System.out.println("principalDetails:"+principalDetails.getUsername());
+//		return "user";
+//	}
+	
 	
 //	 @GetMapping("/user/login")
 //	    public String userLoginForm(@ModelAttribute("member") MemberVO member, HttpSession session) {
@@ -156,14 +173,14 @@ public class LoginController {
 	
 
 	@RequestMapping("/login")
-	public String login(PrincipalDetails principalDetails, HttpSession session) {
+	public String login(HttpSession session, HttpServletResponse response)  throws Exception{
 		
 //		if(session==null){
 //			return "member/login";
 //		
 //		}else {
 //			return "redirect:/";   //세션이 있으면 index로 
-//		}
+//		}	
 		
 		return "member/login";
 	}
@@ -234,8 +251,10 @@ public class LoginController {
 		MemberVO m = userRepository.save(member);//회원가입 잘됨
 		RankingVO r = new RankingVO();
 		rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
-
+		
+		
 		mailsender.insertMemberEmail(m);
+		
 		
 		return "redirect:/";
 	}

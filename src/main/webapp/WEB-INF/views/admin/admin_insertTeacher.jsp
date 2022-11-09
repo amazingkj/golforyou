@@ -48,7 +48,7 @@
 				</tr>
 				<tr>
 					<td>강사 소개 또는 경력사항</td>
-					<td><textarea name="tcareer" id="tcareer" rows="9" cols="60"></textarea></td>
+					<td><textarea name="tcareer" id="tcareer" rows="9" cols="60" style="resize:none;"></textarea></td>
 				</tr>
 				<tr>
 					<td><br /> <br /></td>

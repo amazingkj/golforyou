@@ -106,7 +106,7 @@
 				
 				<tr>
 					<td>골프장 이미지</td>
-					<td><input type="file" name="file" size ="50"/></td>
+					<td><input type="file" name="file2"  id="file2" size ="50"/></td>
 				</tr>
 				<tr>
 					<td><br /></td>

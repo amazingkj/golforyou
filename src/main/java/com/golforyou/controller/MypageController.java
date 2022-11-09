@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -57,6 +58,7 @@ public class MypageController {
 
 
 	//마이페이지 메인
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')") 
 	@GetMapping("mypage")
 	public ModelAndView mypage( HttpServletRequest request, HttpServletResponse response, @AuthenticationPrincipal PrincipalDetails userDetails, Authentication authentication) {
 		
@@ -329,5 +331,8 @@ public class MypageController {
 			
 		
 	}//withdrawal_ok()
+	
+	
+	
 
 }
