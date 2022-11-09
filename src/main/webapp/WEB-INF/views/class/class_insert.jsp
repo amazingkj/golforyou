@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>GolForYou</title>
 </head>
 <body>
 	관리자 페이지 1. 클래스 등록
