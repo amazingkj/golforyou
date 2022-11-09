@@ -268,20 +268,20 @@ public class LoginController {
 		return "redirect:/";
 	}
 		
-		@GetMapping("/join/registerEmail")
-		public String emailConfirm(MemberVO member) {
+	@GetMapping("/join/registerEmail")
+	public String emailConfirm(MemberVO member) {
 		
 		loginService.updateMailAuth(member);
 		
 		return "/member/emailAuthSuccess";
-		}
+	}
 	
-		//비밀번호 찾기
-		@GetMapping("findPwd")
-		public String findPwd() {
-			return "member/findPwd"; 
+	//비밀번호 찾기
+	@GetMapping("findPwd")
+	public String findPwd() {
+		return "member/findPwd"; 
 			
-		}//findPwd()
+	}//findPwd()
 		
 //			@RequestMapping("/findPwdValidate")
 //		    public ModelAndView findPwd_ok(String email, HttpServletRequest request) {

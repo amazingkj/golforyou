@@ -39,7 +39,7 @@
 <script>
    function emailAuthentication() { //이메일 입력 유효검증 후, emailValCheck() 호출 후 결과값 확인,
 	   //결과값이 true라면 새 창에 email정보를 get방식으로 전송
-      if ($.trim($('#email').val()) == '') {
+      if ($.trim($('#inputEmailForm').val()) == '') {
          alert('이메일을 입력하세요!');
          $('#email').val('').focus();
          return false;
