@@ -1,6 +1,7 @@
 package com.golforyou.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +25,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.golforyou.config.auth.PrincipalDetails;
 import com.golforyou.repository.UserRepository;
 import com.golforyou.service.LoginService;
+import com.golforyou.service.MypageService;
 import com.golforyou.service.RankingService;
 import com.golforyou.vo.RankingVO;
 import com.golforyou.util.MailService;
+import com.golforyou.vo.AddrVO;
 import com.golforyou.vo.MemberVO;
 
 
@@ -44,6 +47,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private MypageService mypageService;
 	
 	@Autowired(required=false)
 	private MailService mailsender;
@@ -125,14 +131,17 @@ public class LoginController {
 	
 	
 	@RequestMapping("/addjoin")
-	public String OauthJoin(HttpServletRequest request,
+	public ModelAndView OauthJoin(HttpServletRequest request,
 			Authentication authentication,
 			@AuthenticationPrincipal OAuth2User oauth){
 		
 		//로그인 할 때 검증해서 nickname 있으면 넘기고, 없으면 추가 정보 기입하게 하기 
 		
-	
-		return "member/addjoin";
+		List<AddrVO> addrList = mypageService.getAddrList();
+		ModelAndView m=new ModelAndView("member/addjoin");
+		
+		m.addObject("addrList",addrList);
+		return m;
 	}
 	
 
