@@ -13,7 +13,7 @@
 
  <link rel="stylesheet" type="text/css" href="/css/YeYag_Main.css" />
 <script src="/js/jquery.js"></script>
-<script src="/js/class.js"></script>
+<script src="/js/goifcouse.js"></script>
 <script src="https://kit.fontawesome.com/7e87ecac1e.js" crossorigin="anonymous"></script>
  <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap"
@@ -21,59 +21,10 @@
 
 
 	<script src="/js/jquery.js"></script>
-	<script src="/js/class.js"></script>
 	<jsp:include page="/WEB-INF/views/includes/header.jsp" />
 
 </head>
 <body>
-<br><br>
-<script>
-//별점 마킹 모듈 프로토타입으로 생성
-function Rating(){};
-Rating.prototype.rate = 0;
-Rating.prototype.setRate = function(newrate){
-    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
-    this.rate = newrate;
-    let items = document.querySelectorAll('.rate_radio');
-    items.forEach(function(item, idx){
-        if(idx < newrate){
-            item.checked = true;
-        }else{
-            item.checked = false;
-        }
-    });
-}
-</script>
-
-<script>
-let rating = new Rating();//별점 인스턴스 생성
-
-document.addEventListener('DOMContentLoaded', function(){
-    //별점선택 이벤트 리스너
-    document.querySelector('.rating').addEventListener('click',function(e){
-        let elem = e.target;
-        if(elem.classList.contains('rate_radio')){
-            rating.setRate(parseInt(elem.value));
-        }
-    })
-});
-//저장 전송전 필드 체크 이벤트 리스너
-document.querySelector('#save').addEventListener('click', function(e){
-    //별점 선택 안했으면 메시지 표시
-    if(rating.rate == 0){
-        rating.showMessage('rate');
-        return false;
-    }
-});
-//저장 전송전 필드 체크 이벤트 리스너
-document.querySelector('#save').addEventListener('click', function(e){
-    //별점 선택 안했으면 메시지 표시
-    if(rating.rate == 0){
-        rating.showMessage('rate');
-        return false;
-    }
-});
-</script>
 
 <br><br>
 
@@ -83,7 +34,7 @@ document.querySelector('#save').addEventListener('click', function(e){
 		<div class="header_info">
 			<div class="info_tit">
 				<p class="tit-basic">
-					<span class="tit-ko"  >${it.gc_title}</span><span class="tit-area">${it.gc_area}</span>
+					<span class="tit-ko">${it.gc_title}</span><span class="tit-area">${it.gc_area}</span>
 				</p>				
 				<p class="tit-en"><span class="tit-en1">${it.gc_english}</span></p>
 			</div>				
@@ -92,7 +43,8 @@ document.querySelector('#save').addEventListener('click', function(e){
 <div class="header_tab">
             <div class="section">
                 <ul class="tab-cont">
-                    <li id="ground-info" class="btn3" data-target-class="tab1"><button data-flag="info">정보</button></li>
+                    <li id="ground-info" class="btn3" data-target-class="tab1"><button data-flag="info"
+                    id="info_button">정보</button></li>
                 </ul>
             </div>
         </div>
@@ -144,30 +96,6 @@ document.querySelector('#save').addEventListener('click', function(e){
         </div>
         
         
-   <!--   <div id="map" style="width:50%; height: 50vh; margin:40px 0px 0px 300px ;"></div>
-
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8a776efec500b4b608cd15346b5f8310"></script>
-<script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(${it.gc_coordinates} ), // 지도의 중심좌표
-        level: 5 // 지도의 확대 레벨
-    };
-
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-// 마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(${it.gc_coordinates}) ; 
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-
-</script>-->
 
 
   <div id="map" style="width:50%; height: 50vh; margin:40px 0px 0px 300px ;"></div>
@@ -284,37 +212,72 @@ geocoder.addressSearch('${it.gc_address_roadAddress}', function(result, status) 
 <hr style="padding: 0.1px; background-color: grey; width: 77%; margin-left: 6%"/>
 <%-- <hr style="border-color: #000000;">--%>
 
-<div class="wrap">
-    <h1>후기</h1>
-    <form name="reviewform" class="reviewform" method="post" action="/save">
-        <input type="hidden" name="rate" id="rate" value="0"/>
-        <p class="title_star">별점과 리뷰를 남겨주세요.</p>
- 		
-        <div class="review_rating">
-            <div class="warning_msg">별점을 선택해 주세요.</div>
-            <div class="rating">
-                <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
-                <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
-                <label for="rating1"></label>
-                <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
-                <label for="rating2"></label>
-                <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
-                <label for="rating3"></label>
-                <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
-                <label for="rating4"></label>
-                <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
-                <label for="rating5"></label>
-            </div>
-        </div>
-      <div class="review_contents">
-            <div class="warning_msg"></div>
-            <textarea rows="10"  class="review_textarea" style="width: 80% resize:none;"></textarea>
-        </div>   
-        <div class="cmd"> 
-            <input type="button" name="save" id="save" value="등록">
-        </div>
-    </form>
-</div>
+<h2 style="margin: 10px 0 0 170px" >리뷰</h2>
+	
+		<div style="margin: 10px 0 0 170px">
+		<div>
+		<input  type=hidden name="gc_replyer" id="newGc_ReplyWriter" value="${nickname}" />
+		</div>
+		<br>
+		<div>
+		내용  :
+		<br/>
+		<textarea rows="4" cols="100" name="gc_replytext" id="newGc_ReplyText" ></textarea>
+		</div>
+		<br>
+		<button id="gc_replyAddBtn" class="gc_button1">댓글 등록</button>
+		</div>
+		<br>
+	<hr style="padding: 0.1px; background-color: grey; width: 55%; margin-left: 6%"/>
+		<br>
+		
+		<%--댓글 수정 화면 --%>
+		<div id="gc_modDiv" style="display:none; margin:10px 0px 80px 20%"><%--일단 화면에 안나오게 한다. --%>
+		<div class="gc_modal-title"></div>
+		<div>
+			<textarea rows="4" cols="70" id="gc_replytext"></textarea>
+		</div>
+		<div>
+			<button type="button" id="gc_replyModBtn" class="gc_button3">댓글수정</button>
+			<button type="button" id="gc_replyDelBtn" class="gc_button3">댓글삭제</button>
+			<button type="button" id="gc_closeBtn" onclick="gc_modDivClose();" class="gc_button3">닫기</button>
+		</div>
+	</div>
+	
+		
+		
+		<%--댓글 목록 --%>
+		
+		<ul id="gc_replies" ></ul>
+		
+		<%--jQuery라이브러리--%>
+		<script type="text/javascript">
+		
+		let gc_no=${it.gc_no}; //스프링 MVC 게시판 번호값 
+		getAllList()
+		function getAllList(){
+			$.getJSON("/gc_replies/all/"+gc_no,function(gc_data){//json데이터를 get방식으로 처리,
+				//비동기식으로 가져온 데이터는 data매개변수에 저장
+				 let gc_result="";
+				 
+				 $(gc_data).each(function(){//each()함수로 반복
+					 gc_result += "<li gc_data-gc_rno='"+this.gc_rno+"' class='gc_replyLi'>"
+					 +"  <span class='com' style='color:blue;font-weight:bold;'>"+this.gc_replytext
+					 + "</span><button class='gc_button2'>댓글수정</button></li><hr style='padding: 0.1px; background-color: grey; width: 45%; margin-left: 15%'/><br/>"
+					 
+				 });
+				 
+				 $('#gc_replies').html(gc_result); //해당영역에 html()함수로 문자와 태그를 함께 변경적용.
+				
+			});
+		}//댓글목록 함수
+		
+		</script>
+	
+		</div>
+
+</body>
+<script src="/js/gc_reply.js"></script>
 <footer>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 </footer>

@@ -1,4 +1,4 @@
-**
+/**
  * golfcouse.js
  */
 function golfcouse(){

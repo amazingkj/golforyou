@@ -26,7 +26,7 @@
      <ul>
       <li><a href="/admin/member"class=btn1>회원관리</a>
        </li>
-      <li><a href="/admin/board" class=btn1>공지사항 등록</a>
+      <li><a href="/admin/abboard_list" class=btn1>공지사항 등록</a>
        </li>
       <li><a href="/admin/admin_insertCard" class=btn1>랭킹 스코어카드 입력</a>
        </li>

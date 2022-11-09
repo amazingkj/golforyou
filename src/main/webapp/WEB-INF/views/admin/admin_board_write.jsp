@@ -4,7 +4,7 @@
  <head><meta charset="UTF-8">
  <link rel="stylesheet" type="text/css" href="/css/abcommon.css" />
  <link rel="stylesheet" type="text/css" href="/css/board.css" />
-<jsp:include page="/WEB-INF/views/includes/header.jsp" /> 
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />  
 
 
  <%-- //현재 세션 상태 체크 
@@ -90,7 +90,7 @@
      <%--이름 - 로그인해서 입력하면 그냥 입력되게 히든으로 ! 처리하기 --%>
   	 <tr>
   	 <td>작성자</td>
-  	 <td><input type="text" Placeholder="writer" name="abboard_name" id="board_name" value="${b.abboard_name}"/></td></tr>
+  	 <td><input type="text" Placeholder="writer" name="abboard_name" id="board_name" /></td></tr>
     
      <tr>
       <td>제목</td>

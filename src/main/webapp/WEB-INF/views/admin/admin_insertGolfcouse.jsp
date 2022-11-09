@@ -91,7 +91,7 @@
 <link rel="stylesheet" href="/css/golfcouse_admin.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/golfcouse.js"></script>
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>
 <body>
 
@@ -99,7 +99,7 @@
 	<div id="wrap-edit">
 		<h2>골프장 등록하기</h2>
 		<br />
-		<form name="form1" method="post" action="/insertGolfcouse_ok"
+		<form name="form1" method="post" action="/admin/insertGolfcouse_ok"
 			enctype="multipart/form-data" onsubmit="return golfcouse();">
 			<table>
 				<tr>
@@ -129,28 +129,32 @@
 				</tr>
 				<tr>
 					<td>골프장명</td>
-					<td><input name="gc_title" id="gc_title" size="50"></td>
+					<td><input name="gc_title" id="gc_title" size="50"style="color:black;background-color:white;" type="text"  
+					 value="" placeholder="골프장명을 입력하세요."></td>
+					 
 				</tr>
 				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
 					<td>골프장영문명</td>
-					<td><input name="gc_english" id="gc_english" size="50"></td>
+					<td><input name="gc_english" id="gc_english" size="50" style="color:black;background-color:white;" type="text" 
+					 value="" placeholder="골프장 영문명을 입력하세요." ></td>
 				</tr>
 				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
 					<td>지역</td>
-					<td><input name="gc_area" id="gc_area" size="50"></td>
+					<td><input name="gc_area" id="gc_area" size="50" style="color:black;background-color:white;" type="text"  
+					 value="" placeholder="지역명을 입력하세요." ></td>
 				</tr>
 				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
 					<td>홀</td>
-					<td><select name="gc_hole" id="gc_hole">
+					<td><select name="gc_hole" id="gc_hole" style="color:black;background-color:white;" >
 							<option value="none">홀수를 선택해주세요</option>
 							<option value="18">18</option>
 							<option value="27">27</option>
@@ -165,15 +169,16 @@
 				<tr>
 					<td>파</td>
 					<td><input name="gc_golf" id="gc_golf" size="20"
-						placeholder="숫자로 입력헤주세요."></td>
+						style="color:black;background-color:white;" type="text" 
+						 class="check" name="test5" value="" placeholder="숫자를 입력하세요." autocomplete="off"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
 					<td>길이</td>
-					<td><input name="gc_length" id="gc_length" size="40"
-						placeholder="숫자로 입력헤주세요."></td>
+					<td><input name="gc_length" id="gc_length" size="40" style="color:black;background-color:white;" type="text"  
+					class="check" name="test6" value="" placeholder="숫자를 입력하세요." autocomplete="off"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -181,8 +186,12 @@
 
 				<tr>
 					<td>잔디종류</td>
-
-					<td><img src="/images/golfcouse/버뮤다그래이스.png" width="150"
+					
+					
+				
+						
+						
+					<td>※ 잔디종류를 선택해주세요!<br/><img src="/images/golfcouse/버뮤다그래이스.png" width="150"
 						height="150" values="버뮤다그래이스"> <img
 						src="/images/golfcouse/벤트그래스.png" width="150" height="150">
 						<img src="/images/golfcouse/켄터기블루그래스.png" width="150" height="150">
@@ -201,7 +210,8 @@
 
 				<tr>
 					<td>코스타입</td>
-					<td><input name="gc_type" id="gc_type" size="60"></td>
+					<td><input name="gc_type" id="gc_type" size="60" style="color:black;background-color:white;" type="text" 
+					 class="check" name="test7" value="" placeholder="코스타입을 입력해주세요." autocomplete="off"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -209,15 +219,16 @@
 				<tr>
 					<td>코스구성</td>
 					<td><input name="gc_configuration" id="gc_configuration"
-						size="60"></td>
+						size="60" style="color:black;background-color:white;" type="text"  
+						class="check" name="test8" value="" placeholder="코스구성을 입력하세요." autocomplete="off"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
 					<td>캐디(유/무)</td>
-					<td><select name="gc_caddy" id=gc_caddy" >
-							<option value="none">캐디(유/무) 선택해주세요</option>
+					<td><select name="gc_caddy" id=gc_caddy" style="color:black;background-color:white;" class="check" name="test9">
+							<option value="선택1">캐디(유/무) 선택해주세요</option>
 							<option value="유">유</option>
 							<option value="무">무</option>
 					</select></td>
@@ -226,9 +237,9 @@
 					<td><br /></td>
 				</tr>
 				<tr>
-					<td>카트(유/무)</td>
-					<td><select name="gc_cart" id=gc_cart" >
-							<option value="none">카트(유/무) 선택해주세요</option>
+					<td>카트(유/무)</td >
+					<td><select name="gc_cart" id=gc_cart" style="color:black;background-color:white;" class="check" name="test10">
+							<option value="선택">카트(유/무) 선택해주세요</option>
 							<option value="유">유</option>
 							<option value="무">무</option>
 					</select></td>
@@ -238,7 +249,8 @@
 				</tr>
 				<tr>
 					<td>골프장 설계자</td>
-					<td><input name="gc_architects" id="gc_architects" size="60"></td>
+					<td><input name="gc_architects" id="gc_architects" size="60" style="color:black;background-color:white;" type="text"  
+						class="check" name="test11" value="" placeholder="골프장 설계자를 입력해주세요." autocomplete="off" ></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -246,18 +258,13 @@
 				<tr>
 					<td>골프장 소개</td>
 					<td><textarea name="gc_content" id="gc_content" rows="9"
-							cols="100"></textarea></td>
+							cols="100" style="color:black;background-color:white;" type="text"  
+						class="check" name="test12" value="" placeholder="소개글을 입력해주세요." autocomplete="off"></textarea></td>
 				</tr>
 				<tr>
 					<td><br /></td>
 				</tr>
-				<!--  <tr>
-					<td>지도 좌표값</td>
-					<td>
-					<input name="gc_coordinates" id="gc_coordinates" size="60">
-					<input type="button" value="골프장 찾기"  onclick="showPopup();"" class="btn01" />	
-						</td>
-				</tr>-->
+			
 				<tr>
 					<td><br /></td>
 				</tr>
@@ -279,7 +286,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>※찾으시는 골프장지도는 입력하신주소로 자동출력됩니다.</td>
+					<td>※찾으시는 골프장지도는 입력하신주소로 자동생성됩니다.</td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -287,7 +294,8 @@
 				<tr>
 					<td>골프장 전화번호</td>
 					<td><input name="gc_phone" id="gc_phone" size="30"
-						placeholder="예) 02-1234-5678"></td>
+						style="color:black;background-color:white;" type="text"  
+						class="check" name="test13" value="" placeholder="연락처를 입력해주세요" autocomplete="off"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -295,7 +303,8 @@
 				<tr>
 					<td>골프장 팩스번호</td>
 					<td><input name="gc_fax" id="gc_fax" size="30"
-						placeholder="예) 02-1235-5678"></td>
+						style="color:black;background-color:white;" type="text"  
+						class="check" name="test14" value="" placeholder="연락처를 입력해주세요" autocomplete="off"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -303,16 +312,17 @@
 				<tr>
 					<td>자차이동시 경로</td>
 					<td><input name="gc_move" id="gc_move" size="60"
-						placeholder="예) 해당고속도로-해당ic-해당톨게이트-해당골프장"></td>
+						style="color:black;background-color:white;" type="text"  
+						class="check" name="test15" value="" placeholder="예) 해당고속도로-해당ic-해당톨게이트-해당골프장" autocomplete="off"></td>
 				</tr>
 				<tr>
 					<td><br /></td>
 				</tr>
 				<tr>
 					<td>골프장 개장년도</td>
-					<td><select name="gc_date" id="gc_date">
-							<option value="none">년도 선택해주세요</option>
-							<c:forEach var="i" begin="2000" end="2030">
+					<td><select name="gc_date" id="gc_date" style="color:black;background-color:white;" class="check" name="test16">
+							<option value="선택">년도 선택해주세요</option>
+							<c:forEach var="i" begin="2000" end="2030" >
 								<option value="${i }">${i }</option>
 							</c:forEach>
 
@@ -325,8 +335,8 @@
 				<tr>
 
 					<td colspan="2" align="center"><input type="submit" value="등록"
-						class="btn01"> <input type="button" value="목록"
-						class="btn01" onclick="location='admin_golfcouseList';" /></td>
+						class="btn01" onclick= "golficouse()"> <input type="button" value="목록"
+						class="btn01" onclick="location='/admin/admin_golfcouseList';" /></td>
 				</tr>
 				<tr>
 					<td><br /></td>

@@ -18,7 +18,7 @@
 <meta charset="UTF-8">
 <title>골프장 전체 목록</title>
 <link rel="stylesheet" href="/css/golfcouse_admin.css">
-<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 <br />
 <br />
 </head>
@@ -31,7 +31,7 @@
 			<div id="gcList_menu">
 				<div id="btn01">
 					<input class="btn" type="button" value="골프장 등록"
-						onclick="location='/admin_insertGolfcouse';" />
+						onclick="location='/admin/admin_insertGolfcouse';" />
 				</div>
 
 			</div>
@@ -60,12 +60,12 @@
 							<td align="center">${gc.gc_date}</td>
 							
 							<td align="center"><input type="button" class="modifybtn"
-								value="수정" onclick="location='/admin_editGolfcouse?gc_no=${gc.gc_no}';"/> <input
+								value="수정" onclick="location='/admin/admin_editGolfcouse?gc_no=${gc.gc_no}';"/> <input
 								type="button" class="modifybtn" value="삭제"
 								onclick="if(confirm('정말로 삭제할까요?') == true)
-							{location='admin_golfcouse_del?gc_no=${gc.gc_no}&page=${page}';}else{ return ;}" /></td>
+							{location='/admin/admin_golfcouse_del?gc_no=${gc.gc_no}&page=${page}';}else{ return ;}" /></td>
 							<td align="center"><input type="button" class="modifybtn"
-								value="상세페이지이동" onclick="location='/admin_golfcouseDetail?gc_no=${gc.gc_no}';"/>
+								value="상세페이지이동" onclick="location='/admin/admin_golfcouseDetail?gc_no=${gc.gc_no}';"/>
 						</tr>
 					</c:forEach>
 				</c:if>

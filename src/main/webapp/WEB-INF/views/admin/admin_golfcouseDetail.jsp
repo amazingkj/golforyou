@@ -20,7 +20,7 @@
 	rel="stylesheet">
 
 	
-	<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+	<jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 
 </head>
 <body>
@@ -211,7 +211,7 @@ geocoder.addressSearch('${it.gc_address_roadAddress}', function(result, status) 
 	
 		<div style="margin: 10px 0 0 170px">
 		<div>
-		임명  : &emsp;<input name="gc_replyer" id="newGc_ReplyWriter" />
+		<input  type=hidden name="gc_replyer" id="newGc_ReplyWriter" value="${nickname}" />
 		</div>
 		<br>
 		<div>
@@ -258,7 +258,7 @@ geocoder.addressSearch('${it.gc_address_roadAddress}', function(result, status) 
 				 $(gc_data).each(function(){//each()함수로 반복
 					 gc_result += "<li gc_data-gc_rno='"+this.gc_rno+"' class='gc_replyLi'>"
 					 +"  <span class='com' style='color:blue;font-weight:bold;'>"+this.gc_replytext
-					 + "</span><button class='gc_button2'>댓글수정</button></li><hr style='padding: 0.1px; background-color: grey; width: 45%; margin-left: 15%'/><br/>"
+					 + "</span><button class='gc_button2 '>댓글수정</button></li><hr style='padding: 0.1px; background-color: grey; width: 45%; margin-left: 15%'/><br/>"
 					 
 				 });
 				 
