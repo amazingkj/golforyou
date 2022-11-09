@@ -80,10 +80,20 @@
 
     <nav> 
    
-    <c:if test="${empty id}">
+   <c:if test="${empty id}">
     <div id="login"><a href="login" class=btn1>로그인</a> | <a href="join" class=btn1>회원가입</a></div></c:if>
     
-    <c:if test="${!(empty id)}"><div id="login"><a href="mypage" class=btn1>마이페이지</a> | <a href="logout" class=btn1>로그아웃</a></div>
+    <c:if test="${!(empty id)}">
+    <c:if test="${rolecheck != 'ROLE_ADMIN' }">
+    	<div id="login">
+    		<a href="mypage" class=btn1>마이페이지</a> | <a href="logout" class=btn1>로그아웃</a>
+   		</div>
+   	</c:if>
+   	 <c:if test="${rolecheck == 'ROLE_ADMIN' }">
+    	<div id="login">
+    		<a href="admin" class=btn1>관리자페이지</a> | <a href="logout" class=btn1>로그아웃</a>
+   		</div>
+   	</c:if>
     </c:if>
  
     <div class="clear"></div>  
