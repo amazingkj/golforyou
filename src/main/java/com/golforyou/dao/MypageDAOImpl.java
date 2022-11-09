@@ -55,6 +55,12 @@ public class MypageDAOImpl implements MypageDAO{
 		return sqlSession.selectList("addr_list");
 	}
 
+	@Override
+	public int classCount(String username) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("class_count",username);
+	}
+
 
 	
 

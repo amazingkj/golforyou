@@ -285,5 +285,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="classpay_detail" parameterType="int" resultType="classpay">
 		select * from class_pay cp inner join online_class o on cp.ono=o.ono where pno=#{pno} order by pno desc
 	</select>
+	
+	<!-- 수강신청한 클래스 숫자 -->
+	<select id="class_count" resultType="int">
+		select count(*) from class_pay where nickname=#{nickname}
+	</select>
 
 </mapper>

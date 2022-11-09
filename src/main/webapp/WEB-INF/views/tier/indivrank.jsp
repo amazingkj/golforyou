@@ -242,7 +242,6 @@
 			$("#iScoreCard_"+i).attr("onclick","showSCImg("+i+");");
 		}
 		
-
 	</script>
 	
 	<c:forEach var="i" begin="1" end="${getCount }">
@@ -256,18 +255,21 @@
 		
 		var loc = $('#iLocation_'+${i}).text();
 		
-		/*
 		
-		for(var j=0 ; j<field변수 크기 ; ++j){
-			if(loc == ${field.get(j).getGc_title}){
-				$('#iLocation_'+${i}).css({
-					"background-image": "linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url('${field.get(j).getGc_image}')",
-					"background-size" : "330px 80px"	
-				});
-			}
-		}
+		</script>
 		
-		*/
+			<c:forEach var="f" begin="1" end="${field.size() }">
+			<script>
+				if(loc == '${field.get(f-1).getGc_title()}'){
+					$('#iLocation_'+${i}).css({
+						"background-image": "linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url('/upload/golfcouse${field.get(f-1).getGc_image()}')",
+						"background-size" : "330px 80px"	
+					});
+				}			
+			</script>
+			</c:forEach>
+		<script>
+		
 		if(loc == '잭 니클라우스 GC 코리아'){
 			$('#iLocation_'+${i}).css({
 				"background-image": "linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),url('/images/tier/JACK_NICKLAUS_GOLF_CLUB_KOREA.jpg')",

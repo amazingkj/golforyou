@@ -21,6 +21,8 @@ public interface MypageDAO {
 
 	List<AddrVO> getAddrList();
 
+	int classCount(String username);
+
 	
 
 }

@@ -77,6 +77,8 @@ public class MypageController {
 		String tierStr = "";
 		String tierURL = "";
 		
+		int classcount = mypageService.classCount(member.getNickname());
+		
 		if(tierNum < -15){
 			tier = "d.png";
 			tierStr = "다이아몬드";
@@ -101,6 +103,7 @@ public class MypageController {
 	
 			ModelAndView m=new ModelAndView("mypage/main");
 			m.addObject("m",member);//m 키이름에 em객체 저장 
+			m.addObject("classcount",classcount);//m 키이름에 em객체 저장 
 			m.addObject("nickname",nickname);
 			m.addObject("maddr",maddr);
 			m.addObject("mfile",mfile);

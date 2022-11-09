@@ -172,6 +172,12 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update("board_likeminus",like);
 	}
 
+	@Override
+	public String getReplyNickname(int b_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board_nickname",b_no);
+	}
+
 //	@Override
 //	public void updateliketotalcount(BoardVO b) {
 //		this.sqlSession.update("updateliketotalcount",b);

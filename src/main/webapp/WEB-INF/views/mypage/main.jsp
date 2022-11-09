@@ -86,8 +86,13 @@
 	
 		<div class="inputBoxVertical" style="width:500px"  >
 			<c:if test="${!empty id}"> 
+			
+			<c:if test="${classcount == 0 }">
 			<strong>${m.nickname}</strong>님 수강중인 강의가 없습니다. <br/>
-		
+			</c:if>
+			<c:if test="${classcount > 0 }">
+			<strong>${m.nickname}</strong>님 수강중인 강의가 ${classcount }개 있습니다. <br/>
+			</c:if>
 			</c:if>
 			</div>
 </div>

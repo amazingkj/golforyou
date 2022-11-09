@@ -1,10 +1,13 @@
 package com.golforyou.controller;
 
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -204,26 +207,37 @@ public class ClassController {
 	
 	//결제 정보 저장
 	@PostMapping("/insertClassPay_ok")
-	public String insertClassPay_ok(ClassPayVO cp, HttpServletRequest request) throws Exception {
+	public String insertClassPay_ok(ClassPayVO cp, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		
+		PrintWriter out = response.getWriter();
+		if((String)session.getAttribute("id") == null) {
+			out.println("<script>");
+			out.println("alert('로그인부터 하세요')");
+			out.println("location='login'");
+			out.println("</script>");
+		}else {
+			Calendar cal = Calendar.getInstance();
+			int month=cal.get(Calendar.MONTH)+1;//월값, +1을 한 이유는 1월이 0으로 반환 되기 때문에
+			int date=cal.get(Calendar.DATE);//일값
+			int hour=cal.get(Calendar.HOUR_OF_DAY);//시값
+			int minute=cal.get(Calendar.MINUTE);//분값
+			int second=cal.get(Calendar.SECOND);//초값
+			
+			int pno = month + date + hour + minute + second + 20220000;
+			
+			cp.setPno(pno);
+			
+			//강사 기본 정보
+			String nickname=request.getParameter("nickname"); //멤버 아이디
+			this.classService.insertClassPayOk(cp);
+			
+			cp.setNickname(nickname);
 
-		Calendar cal = Calendar.getInstance();
-		int month=cal.get(Calendar.MONTH)+1;//월값, +1을 한 이유는 1월이 0으로 반환 되기 때문에
-		int date=cal.get(Calendar.DATE);//일값
-		int hour=cal.get(Calendar.HOUR_OF_DAY);//시값
-		int minute=cal.get(Calendar.MINUTE);//분값
-		int second=cal.get(Calendar.SECOND);//초값
+			return "redirect:/class_pay_ok?pno="+cp.getPno();
+		}
+		return null;
 		
-		int pno = month + date + hour + minute + second + 20220000;
-		
-		cp.setPno(pno);
-		
-		//강사 기본 정보
-		String nickname=request.getParameter("nickname"); //멤버 아이디
-		this.classService.insertClassPayOk(cp);
-		
-		cp.setNickname(nickname);
-
-		return "redirect:/class_pay_ok?pno="+cp.getPno();
 	}
 	
 	//클래스 결제완료 페이지

@@ -145,6 +145,11 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDAO.likeno(like);
 	}
+	@Override
+	public String getReplyNickname(int b_no) {
+		// TODO Auto-generated method stub
+		return boardDAO.getReplyNickname(b_no);
+	}
 	
 
 }

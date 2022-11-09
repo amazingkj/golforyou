@@ -61,6 +61,8 @@ public interface BoardService {
 
 	void likeno(LikesVO like);
 
+	String getReplyNickname(int b_no);
+
 //void updateliketotalcount(BoardVO b);
 	
 }

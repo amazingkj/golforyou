@@ -87,6 +87,7 @@
 		<br />
 		<form name="form1" method="post" action="/admin/editGolfcouse_ok""
 			enctype="multipart/form-data">
+			<input type="hidden" name="gc_no" value="${item.gc_no }">
 			<table >
 				<tr>
 					<td><hr /></td>

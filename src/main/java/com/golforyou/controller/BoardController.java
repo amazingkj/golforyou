@@ -3,12 +3,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,8 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,9 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.golforyou.service.BoardService;
+import com.golforyou.vo.BoardReplyVO;
 import com.golforyou.vo.BoardVO;
 import com.golforyou.vo.LikesVO;
-import com.golforyou.vo.MemberVO;
 import com.google.gson.JsonObject;
 
 @Controller
@@ -155,10 +150,12 @@ public class BoardController {
 	
 	//내용보기+답변폼+수정폼+삭제폼
 			@RequestMapping("/board_cont")
-			public ModelAndView board_cont(@RequestParam("b_no") int b_no, String state, int page, BoardVO b, LikesVO vo, HttpSession session) {
+			public ModelAndView board_cont(@RequestParam("b_no") int b_no, String state, int page, BoardVO b, LikesVO vo, BoardReplyVO rvo, HttpSession session) {
 				//@RequestParam("board_no")를 서블릿으로 표현하면 request.getParameter("board_no")와 같다. int page로 표현해도 get으로 전달된 page 파라미터값을 받을 수 있다. 
 			
 				String nickname = (String)session.getAttribute("nickname");
+				
+				String replynickname = boardService.getReplyNickname(b_no);
 				//좋아요 기능 
 				vo=new LikesVO();
 				vo.setBoard_no(b_no);

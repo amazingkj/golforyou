@@ -235,6 +235,7 @@ public class AdminGolfcouseController {
 		
 		
 		//골프장 정보
+		int gc_no=Integer.parseInt(request.getParameter("gc_no"));
 		String gc_title=request.getParameter("gc_title"); //골프장명
 		String gc_english=request.getParameter("gc_english"); //골프장 영문명
 		String gc_area=request.getParameter("gc_area"); //지역
@@ -297,6 +298,7 @@ public class AdminGolfcouseController {
 			String fileDBName="";
 			gc.setGc_image(fileDBName);
 		}
+			gc.setGc_no(gc_no);
 			gc.setGc_title(gc_title);
 			gc.setGc_english(gc_english);
 			gc.setGc_area(gc_area);
@@ -326,7 +328,7 @@ public class AdminGolfcouseController {
 
 			this.golfcouseService.updategolfcouse(gc);
 
-		return "redirect:/admin/admin_golfcouseList";
+		return "redirect:/admin/admin_golfcouseList?page="+page;
 	}
 	
 	//관리자 페이지 골프장 삭제

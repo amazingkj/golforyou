@@ -57,4 +57,10 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDao.getAddrList();
 	}
 
+	@Override
+	public int classCount(String username) {
+		// TODO Auto-generated method stub
+		return mypageDao.classCount(username);
+	}
+
 }

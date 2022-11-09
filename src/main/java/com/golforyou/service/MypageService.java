@@ -22,6 +22,8 @@ public interface MypageService {
 
 	List<AddrVO> getAddrList();
 
+	int classCount(String username);
+
 
 
 
