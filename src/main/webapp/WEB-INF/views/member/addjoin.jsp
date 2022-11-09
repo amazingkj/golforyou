@@ -19,14 +19,9 @@
 <input type="text" name="nickname" id="nickname" class="textField" placeholder="닉네임" value="${m.nickname}">
 <input type="tel" name="mphone" class="textField" id="mphone"pattern="^[0][1][0]-\d{4}-\d{4}$" placeholder="휴대폰 번호 (010-****-****)" value="${m.mphone}"><br>
 <select id="mAddr" name="maddr" class="textField" selected="${m.maddr}">
-			<option value="서울" <c:if test="${select_zone =='Seoul'}">${'selected'}
-        			 </c:if>>서울</option>
-					<option value="경기" <c:if test="${select_zone =='gg'}">${'selected'}
-        			 </c:if>>경기</option>
-					<option value="인천" <c:if test="${select_zone =='incheon'}">${'selected'}
-        			 </c:if>>인천</option>
-					<option value="그외" <c:if test="${select_zone =='etc'}">${'selected'}
-        			 </c:if>>그외</option>
+				<c:forEach var="a" items="${addrList }">
+        			<option value="${a.adname2 }">${a.adname2 }</option>
+        		</c:forEach>
 </select>
 <br><br>
 <input type="submit" class="submitBtn" value=제출>
