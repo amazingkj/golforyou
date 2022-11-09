@@ -52,7 +52,7 @@ function openDelCheck(){
 						 result += "<li data-r_no='"+this.r_no+"' class='replyLi'>"
 						 +this.replyer +" |  <span class='com' style='color:black;font-weight:bold;'>"+this.reply
 						 +"</span><br/><br/><span class='date' style='color:gray; text-align:right; font-style:italic'>"+this.updateDate
-						 +"</span><c:forEach var='r' items="${replynickname}"> <c:if test="${nickname==r.replyer}"><button class='button'>수정</button></c:if></c:forEach></li><br/>";
+						 +"</span><c:if test="${nickname==namecheck}"><button class='button'>수정</button></c:if></li><br/>";
 						 //c:if 내 true 되게 잘 해봅시다.
 					 });
 					 

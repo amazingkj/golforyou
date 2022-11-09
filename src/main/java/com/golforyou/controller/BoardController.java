@@ -155,12 +155,24 @@ public class BoardController {
 			
 				String nickname = (String)session.getAttribute("nickname");
 				
-				List<BoardReplyVO> replynickname = boardService.getReplyNickname(b_no);
-				 
+				
 				//좋아요 기능 
 				vo=new LikesVO();
 				vo.setBoard_no(b_no);
 				vo.setNickname(nickname);
+				rvo.setB_no(b_no);
+				
+				List<String> replyname = boardService.getReplyNickname(rvo);
+				String namecheck = "";
+				if(replyname.size() == 0) {
+					
+				}else {
+					for(int i=0 ; i<replyname.size() ; ++i) {
+						if(nickname.equals(replyname.get(i))) {
+							
+						}
+					}
+				}
 				
 				
 				System.out.println(vo);
@@ -191,8 +203,8 @@ public class BoardController {
 				cm.addObject("board_cont",board_cont);
 				cm.addObject("page",page); //페이징에서 내가 본 쪽번호로 이동하기 위해서 
 				cm.addObject("check",check); 
-				cm.addObject("replynickname",replynickname); 
 				cm.addObject("likestotal",likestotal); 
+				cm.addObject("namecheck",namecheck); 
 				
 				
 				if(state.equals("cont")) { //내용보기 일때 

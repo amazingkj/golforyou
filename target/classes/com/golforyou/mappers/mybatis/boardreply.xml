@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</delete>
 		
 		<!-- 댓글 목록 -->
-		<select id="reply_nickname" resultType="br">
+		<select id="reply_nickname" resultType="String">
 			select replyer from golforboard_reply where b_no=#{b_no}
 		</select>
   

@@ -146,9 +146,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.likeno(like);
 	}
 	@Override
-	public List<BoardReplyVO> getReplyNickname(int b_no) {
+	public List<String> getReplyNickname(BoardReplyVO rvo) {
 		// TODO Auto-generated method stub
-		return boardDAO.getReplyNickname(b_no);
+		return boardDAO.getReplyNickname(rvo);
 	}
 	
 

@@ -173,9 +173,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardReplyVO> getReplyNickname(int b_no) {
+	public List<String> getReplyNickname(BoardReplyVO rvo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("reply_nickname",b_no);
+		return sqlSession.selectList("reply_nickname",rvo);
 	}
 
 //	@Override
