@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>골프 클래스 상세페이지</title>
+<title>GolForYou</title>
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
 <script src="https://kit.fontawesome.com/7e87ecac1e.js"

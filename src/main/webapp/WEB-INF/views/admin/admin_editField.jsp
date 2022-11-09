@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>필드 클래스 수정</title>
+<title>GolForYou</title>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/class_admin.css">
 <script src="/js/jquery.js"></script>

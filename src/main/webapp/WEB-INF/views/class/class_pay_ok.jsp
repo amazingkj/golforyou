@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>결제 완료 페이지</title>
+<title>GolForYou</title>
 <link rel="stylesheet" type="text/css" href="/css/class_pay_ok.css" />
 <jsp:include page="/WEB-INF/views/includes/header.jsp" />
 </head>

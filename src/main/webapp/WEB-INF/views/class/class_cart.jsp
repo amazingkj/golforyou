@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>골프클래스 - 장바구니</title>
+<title>GolForYou</title>
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/class_cart.css" />

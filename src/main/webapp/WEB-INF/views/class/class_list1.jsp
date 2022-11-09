@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>골프 클래스 상세페이지</title>
+<title>GolForYou</title>
 <script src="/js/jquery.js"></script>
 <script src="/js/class_list.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/class_list.css" />

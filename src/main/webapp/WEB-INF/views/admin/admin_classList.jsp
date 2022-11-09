@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>클래스 전체 목록</title>
+<title>GolForYou</title>
 <link rel="stylesheet" href="/css/class_admin.css">
 <jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />
 </head>

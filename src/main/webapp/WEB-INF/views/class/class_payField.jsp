@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>골프 클래스 결제하기</title>
+<title>GolForYou</title>
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/class_cart.css" />
