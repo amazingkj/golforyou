@@ -233,7 +233,7 @@
 		});
 		
 		function showSCImg(i){
-			window.open("tier/scorecardImg?&no="+$('#iNo_'+i).text(),"a","width=400,height=400,left=100,top=50");
+			window.open("tier/scorecardImg?&no="+$('#iNo_'+i).text(),"a","width=1300,height=400,left=100,top=50");
 		}
 		
 		var id = $("#ind_id").text();

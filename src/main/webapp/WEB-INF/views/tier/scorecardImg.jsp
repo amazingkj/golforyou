@@ -12,6 +12,6 @@
 </script>
 </head>
 <body>
-<img src="/upload${imgName }" width="1300" height="300" alt="진짜스코어카드">
+<img src="/upload/scboard${imgName }" width="1300" height="300" alt="진짜스코어카드">
 </body>
 </html>
