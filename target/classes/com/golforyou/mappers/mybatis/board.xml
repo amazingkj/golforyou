@@ -128,5 +128,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update golforboard set b_like=b_like-1 where b_no=#{board_no}
 </update>
   
+  <!-- role체크 -->
+  <select id="board_rolecheck" resultType="String">
+  	select mrole from memberVO where nickname=#{nickname}
+  </select>
 
 </mapper>

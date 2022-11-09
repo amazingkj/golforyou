@@ -150,6 +150,11 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.getReplyNickname(rvo);
 	}
+	@Override
+	public String getRoleCheck(String nickname) {
+		// TODO Auto-generated method stub
+		return boardDAO.getRoleCheck(nickname);
+	}
 	
 
 }

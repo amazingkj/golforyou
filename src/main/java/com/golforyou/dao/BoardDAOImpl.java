@@ -178,6 +178,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("reply_nickname",rvo);
 	}
 
+	@Override
+	public String getRoleCheck(String nickname) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board_rolecheck",nickname);
+	}
+
 //	@Override
 //	public void updateliketotalcount(BoardVO b) {
 //		this.sqlSession.update("updateliketotalcount",b);
