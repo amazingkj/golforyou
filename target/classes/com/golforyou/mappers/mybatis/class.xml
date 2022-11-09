@@ -263,7 +263,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				tname like #{find_name}
 			</if>
 		</where>
-        
         order by tno desc
         ) BBB
         )
@@ -273,14 +272,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 결제 페이지 -->
 	<insert id="classpay_in" parameterType="classpay">
-		insert into class_pay(username,pno,ono,otitle,oprice,odesc,otime,olevel,pdate)
-		values(
-		#{username}, pno_seq.nextval, #{ono}, #{otitle},#{oprice},#{odesc},#{otime}, #{olevel},sysdate)
+		insert into class_pay(pno,nickname,ono,pdate)
+		values(#{pno}, #{nickname},#{ono},sysdate)
 	</insert>
 	
-	<!-- specific pno 검색 -->
+	<!-- 수강중인 클래스 리스트 -->
+	<select id="classpay_list" parameterType="classpay" resultType="classpay">
+		select * from class_pay cp inner join online_class o on cp.ono=o.ono where pno=#{pno} order by pno desc
+	</select>
+	
+ 	<!-- specific pno 검색 -->
 	<select id="classpay_detail" parameterType="int" resultType="classpay">
-		select * from class_pay where username=#{username}
+		select * from class_pay cp inner join online_class o on cp.ono=o.ono where pno=#{pno} order by pno desc
 	</select>
 
 </mapper>

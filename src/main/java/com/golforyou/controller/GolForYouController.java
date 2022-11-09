@@ -32,10 +32,6 @@ public class GolForYouController {
 		
 		String id = (String)session.getAttribute("id");
 		
-		String rolecheck = scboardService.getroleCheck(id);
-		
-		request.setAttribute("rolecheck", rolecheck);
-		
 		for(int i=0 ; i<ranking.size() ; ++i) {			
 			
 			request.setAttribute("r_id"+i, ranking2.get(i).getNickname());

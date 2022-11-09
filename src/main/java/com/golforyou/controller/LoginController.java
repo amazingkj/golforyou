@@ -70,6 +70,7 @@ public class LoginController {
 			
 		
 		request.getSession().setAttribute("nickname", m.getNickname());
+		request.getSession().setAttribute("rolecheck", m.getMrole());
 
 		System.out.println(m.getNickname()); 
 		
