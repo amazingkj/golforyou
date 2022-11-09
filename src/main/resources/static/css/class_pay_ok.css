@@ -173,6 +173,11 @@
 	cursor: pointer;
 }
 
+.payokmypage a {
+	text-decoration-line : none; 
+	color: black;
+}
+
 .wrapper02-04 .qna01{
 	width: 100%;
 	height: 10%;
@@ -402,4 +407,9 @@
 	margin-top: 2%;
 	padding: 0.3% 1%;
 	cursor: pointer;
+}
+
+.mainpagebtn a {
+	text-decoration-line : none; 
+	color: black;
 }

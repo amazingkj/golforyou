@@ -8,8 +8,7 @@
 <title>골프 클래스 상세페이지</title>
 <script src="/js/jquery.js"></script>
 <script src="/js/class.js"></script>
-<script src="https://kit.fontawesome.com/7e87ecac1e.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/7e87ecac1e.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/css/class_detail.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />

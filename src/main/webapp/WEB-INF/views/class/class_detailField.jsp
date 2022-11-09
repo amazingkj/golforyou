@@ -56,8 +56,7 @@
 				<div class="right_side">
 					<div class="category">골프 클래스</div>
 					<div class="class_name">
-						<p>${item.ftitle}</p>
-						<%-- request.setAttribute로 담은 이름의 컬럼명으로 데이터를 뿌림. --%>
+						${item.ftitle}
 					</div>
 
 					<div class="tab_container">

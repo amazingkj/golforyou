@@ -10,22 +10,30 @@
 <jsp:include page="/WEB-INF/views/includes/header.jsp" />
 </head>
 <body>
+<form name="form15" method="get" action="/class_pay_ok">
 	<div id="wrap">
-		<div id="pay_ok_wrap">
+	<c:forEach var="p" items="${plist}">
+	<input type="hidden" name="pno" id="pno" value="${p.pno}">
+<%-- 	<input type="hidden" class="customerInfo02" name="nickname" id="nickname" value="${nickname}" readonly="readonly">
+ --%> 	<div id="pay_ok_wrap">
 			<div id="pay_ok">결제완료</div>
 			<div id="pay_ok_process">
 				결제하기&emsp;>&emsp;<strong>결제완료</strong>
 			</div>
 		</div>
 		<div id="wrapper02">
+		
 			<div class="wrapper02-01">고객님의 결제가 정상적으로 완료되었습니다.</div>
 			<div class="wrapper02-02">
 				<div class="order-number">주문번호</div>
-				<div class="order-number2">20220001</div>
+				<div class="order-number2">
+				<c:out value="${p.pno}" /></div>
 			</div>
 			<div class="wrapper02-03">
 				<div class="mypagebtnwrap">
-				<button class="payokmypage" onclick="location.href='mypage'">마이페이지로</button>
+				<button class="payokmypage">
+				<a href="mypage">마이페이지로</a>
+				</button>
 				</div>
 			</div>
 			<div class="wrapper02-04">
@@ -40,7 +48,9 @@
 					<div class="totalPrice">총 상품금액</div>
 					<div class="totalPrice02">
 						<div class="totalPrice02-01">상품합계</div>
-						<div class="totalPrice02-02">${item.oprice} 원</div>
+						<div class="totalPrice02-02">
+							<fmt:formatNumber value="${p.oprice}" pattern="#,###" /> 원
+						</div>
 					</div>
 				</div>
 				<div class="payinfobox02">
@@ -55,7 +65,9 @@
 					<div class="paymentmethod02">
 						<div class="paymentmethod02-01">신용카드</div>
 						<div class="paymentmethod02-02">
-							<div class="paymentPrice">${item.oprice} 원</div>
+							<div class="paymentPrice">
+								<fmt:formatNumber value="${p.oprice}" pattern="#,###" /> 원
+							</div>
 							<div class="cardbrand">신한카드</div>
 						</div>
 					</div>
@@ -63,18 +75,22 @@
 			</div>
 			<div class="wrapper03-02">
 				<div class="wrapper03-02-01">
-					<div class="wrapper03-02-01-01">${item.oprice} 원</div>
+					<div class="wrapper03-02-01-01">
+						<fmt:formatNumber value="${p.oprice}" pattern="#,###" /> 원
+					</div>
 					<div class="wrapper03-02-01-02">총 결제금액</div>
 				</div>
 
 			</div>
 			<div class="wrapper03-03">
 				<div class="gotomainpage">
-					<button class="mainpagebtn" onclick="location.href='index'">메인페이지로</button>
+					<button class="mainpagebtn"><a href="index">메인페이지로</a></button>
 				</div>
 			</div>
 		</div>
+		</c:forEach>
 	</div>
+	</form>
 </body>
 <div style="margin: 13% 0% 0% 0%;"></div>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />

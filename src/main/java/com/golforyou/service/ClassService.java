@@ -41,8 +41,9 @@ public interface ClassService {
 	List<AllClassVO> getAllList(AllClassVO allclassVO);
 	
 	/* 결제 페이지 */
-	void insertOnlinePayOk(ClassPayVO cp);
+	void insertClassPayOk(ClassPayVO cp);
 	ClassPayVO getClassPayDetail(int pno);
+	List<ClassPayVO> getClassPayList(int pno);
 	
 	
 	

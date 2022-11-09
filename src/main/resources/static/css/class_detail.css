@@ -90,7 +90,7 @@
 
 #wrap .section01 {
 	width: 100%;
-	height: 600px;
+	height: 500px;
 	/*border: 1px solid #ccc;*/
 	overflow: hidden;
 	box-sizing: border-box;
@@ -141,21 +141,21 @@
 
 #wrap .section01 .right_side .category {
 	width: 100%;
-	height: 5%;
+	height: 2%;
 	padding: 0px 0px 30px 0px;
 	margin: 0 auto;
-	/*border: 1px solid gray;*/
-	font-size: 1.2em;
+	/* border: 1px solid gray; */
+	font-size: 1.1em;
 	float: left;
 	text-align: left;
 }
 
 #wrap .section01 .right_side .class_name {
 	width: 100%;
-	height: 13%;
+	height: 14%;
 	/* border: 1px solid gray; */
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1.4em;
 	float: left;
 	text-align: left;
 	box-sizing: border-box;
@@ -172,7 +172,7 @@
 	border-bottom: 1px solid #ccc;
 	float: left;
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	text-align: left;
 }
 
@@ -203,7 +203,7 @@
 
 .tab_content .class_detail {
 	width: 100%;
-	height: 150px;
+	height: 100px;
 	/* border: 1px solid blue; */
 	box-sizing: border-box;
 	color: gray;
@@ -212,7 +212,7 @@
 .class_detail .class_info {
 	width: 80%;
 	font-weight: bold;
-	font-size: 1.3em;
+	font-size: 1.1em;
 	/* border: 1px solid red; */
 	box-sizing: border-box;
 	margin: 0 auto;
@@ -225,7 +225,7 @@
 	/* border: 1px solid green; */
 	box-sizing: border-box;
 	margin: 0 auto;
-	font-size: 1.1em;
+	font-size: 1em;
 }
 
 .tab_content .class_detail2 {
@@ -615,7 +615,7 @@
 
 .detail_vertical .standard_info {
 	/*border: 1px solid gray;*/
-	width: 80%;
+	width: 90%;
 	font-weight: bold;
 	font-size: 1em;
 	margin-top: 20%;
@@ -632,7 +632,7 @@
 
 .detail_vertical .deluxe_info {
 	/*border: 1px solid gray;*/
-	width: 80%;
+	width: 90%;
 	font-weight: bold;
 	font-size: 1em;
 	margin-top: 20%;
@@ -649,7 +649,7 @@
 
 .detail_vertical .premium_info {
 	/*border: 1px solid gray;*/
-	width: 80%;
+	width: 90%;
 	font-weight: bold;
 	font-size: 1em;
 	margin-top: 20%;
@@ -778,12 +778,12 @@
 }
 
 .table_price_online .detail_vertical .standard2 {
-	width: 80%;
+	width: 100%;
 	height: 40%;
 	/*border: 1px solid gray;*/
 	font-size: 1.5em;
 	font-weight: bold;
-	margin-left: 50%;
+	margin-left: 35%;
 }
 
 .table_price_online .detail1 .detail_vertical {
@@ -955,7 +955,7 @@
 
 #wrap .section01 .right_side .class_name2 {
 	width: 100%;
-	height: 13%;
+	height: 15%;
 	/* border: 1px solid gray; */
 	border-bottom: 1px solid black;
 	font-weight: bold;

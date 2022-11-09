@@ -134,13 +134,20 @@ public class ClassDAOImpl implements ClassDAO{
 
 	/* 결제 페이지 */
 	@Override
-	public void insertOnlinePayOk(ClassPayVO cp) {
+	public void insertClassPayOk(ClassPayVO cp) {
+		System.out.println("========================");
+		System.out.println(cp.toString());
 		this.sqlSession.insert("classpay_in", cp);
 	}
 	
 	@Override
 	public ClassPayVO getClassPayDetail(int pno) {
 		return this.sqlSession.selectOne("classpay_detail", pno);
+	}
+
+	@Override
+	public List<ClassPayVO> getClassPayList(int pno) {
+		return this.sqlSession.selectList("classpay_list", pno);
 	}
 
 

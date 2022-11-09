@@ -175,7 +175,7 @@
 		</form>
 	</div>
 </body>
-<div style="margin: 13% 0%;"></div>
+<div style="margin: 15% 0%;"></div>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 </html>
 <script>

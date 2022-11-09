@@ -25,6 +25,23 @@ header{
 	text-decoration: none; /*하이퍼링크 걸린곳 밑줄선 제거 */
 	color:#000000;
 }
+
+#login_admin{
+	z-index:4;
+    top:0em;
+    position: absolute;
+	float:right;  margin:30px 0px 0px 77%;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:16px; word-spacing: 8px;
+	widht: 400px;
+} 
+#login_admin a{
+	text-decoration: none; /*하이퍼링크 걸린곳 밑줄선 제거 */
+	color:#000000;
+}
+
+
+
 #logo{
 	z-index:3;
     top:0em;
