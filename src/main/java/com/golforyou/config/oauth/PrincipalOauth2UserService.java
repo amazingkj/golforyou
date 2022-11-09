@@ -15,7 +15,9 @@ import com.golforyou.config.oauth.provider.GoogleUserInfo;
 import com.golforyou.config.oauth.provider.NaverUserInfo;
 import com.golforyou.config.oauth.provider.OAuth2UserInfo;
 import com.golforyou.repository.UserRepository;
+import com.golforyou.service.RankingService;
 import com.golforyou.vo.MemberVO;
+import com.golforyou.vo.RankingVO;
 
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
@@ -24,6 +26,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+
+	@Autowired
+	private RankingService rankingService;
 	
 	//구글에서 받은 userRequest데이터에 대한 후처리되는 함수
 	
@@ -90,6 +96,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 					.mgender(gender)
 					.build();
 			userRepository.save(userEntity);//회원가입!
+			
+			RankingVO r = new RankingVO();
+			rankingService.createRank(r); //회원가입과 동시에 랭킹정보 생성
 			
 			System.out.println("가입이 완료되었습니다");
 			
