@@ -132,7 +132,7 @@
 				</c:if>
 
 			</div>
-			<div id="cFind_wrap">
+			<div id="gcFind_wrap">
 				<select name="find_field" class="golfcouse-title">
 					<option value="gc_title"
 						<c:if test="${find_field=='gc_title'}">

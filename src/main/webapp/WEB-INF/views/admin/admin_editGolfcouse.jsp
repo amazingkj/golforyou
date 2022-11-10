@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>골프장 수정</title>
 <script src="/js/jquery.js"></script>
-<script src="/js/class.js"></script>
+<script src="/js/goifcouse.js"></script>
 <script src="https://kit.fontawesome.com/7e87ecac1e.js" crossorigin="anonymous"></script>
  
  <script language="javascript">
@@ -85,10 +85,11 @@
 	<div id="wrap-edit">
 		<h2>골프장 수정하기</h2>
 		<br />
-		<form name="form1" method="post" action="/admin/editGolfcouse_ok""
+		<form name="form1" method="post" action="/admin/editGolfcouse_ok"
 			enctype="multipart/form-data">
-			<input type="hidden" name="gc_no" value="${item.gc_no }">
+			<input type="hidden" name="gc_no" value="${item.gc_no}">
 			<table >
+				
 				<tr>
 					<td><hr /></td>
 					<td><hr /></td>
@@ -104,10 +105,10 @@
 				<tr>
 					<td><br /></td>
 				</tr>
-				
+					
 				<tr>
 					<td>골프장 이미지</td>
-					<td><input type="file" name="file2"  id="file2" size ="50"/></td>
+					<td><input type="file" name="file2" id="file2" size ="50"/></td>
 				</tr>
 				<tr>
 					<td><br /></td>
@@ -288,7 +289,7 @@
 					<td>골프장 개장년도</td>
 					<td><select name="gc_date" id="gc_date" >
 					<option>년도 선택해주세요</option>
-					<c:forEach var="i" begin="2000" end="2030"><option value="${i }">${i }</option></c:forEach>
+					<c:forEach var="i" begin="1980" end="2030"><option value="${i }">${i }</option></c:forEach>
 							
 					</select>
 					</td>
