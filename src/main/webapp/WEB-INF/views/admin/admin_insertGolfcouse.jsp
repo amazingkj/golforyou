@@ -121,7 +121,7 @@
 				<tr>
 					<td>골프장 이미지</td>
 					<td><input type="file" name="file2" id="file2"
-						accept="image/*"></td>
+						accept="image/*" ></td>
 
 				</tr>
 				<tr>
