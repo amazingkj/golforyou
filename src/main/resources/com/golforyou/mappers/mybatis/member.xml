@@ -65,4 +65,9 @@
  	 		update MemberVO set mrole='ROLE_ADMIN' where username=#{username}
  	 	</update>
  	 	
+ 	 	<!-- 회원 하나의 정보 가져오기 -->
+ 	 	<select id="mypage_info" resultType="member">
+ 	 		select * from memberVO where username=#{username}
+ 	 	</select>
+ 	 	
 </mapper>

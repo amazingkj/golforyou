@@ -63,4 +63,10 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDao.classCount(username);
 	}
 
+	@Override
+	public MemberVO getInfo(MemberVO m) {
+		// TODO Auto-generated method stub
+		return mypageDao.getInfo(m);
+	}
+
 }

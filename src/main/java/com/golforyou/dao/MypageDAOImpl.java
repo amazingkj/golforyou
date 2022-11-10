@@ -61,6 +61,12 @@ public class MypageDAOImpl implements MypageDAO{
 		return sqlSession.selectOne("class_count",username);
 	}
 
+	@Override
+	public MemberVO getInfo(MemberVO m) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mypage_info",m);
+	}
+
 
 	
 

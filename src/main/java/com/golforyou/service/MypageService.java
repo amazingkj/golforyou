@@ -24,6 +24,8 @@ public interface MypageService {
 
 	int classCount(String username);
 
+	MemberVO getInfo(MemberVO m);
+
 
 
 

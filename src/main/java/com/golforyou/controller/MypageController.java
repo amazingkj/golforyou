@@ -166,13 +166,18 @@ public class MypageController {
 			String mphone=request.getParameter("mphone"); 
 			String memail=request.getParameter("memail");
 			String maddr=request.getParameter("maddr");
-		
-		
 			
+			m.setUsername(username);
+			m.setNickname(nickname); 
+			m.setMphone(mphone); 
+			m.setMemail(memail);
+			m.setMaddr(maddr);
+		
+			MemberVO mv = mypageService.getInfo(m);
+		
 		upFile=request.getFile("file");//첨부할 파일을 가져온다. 
-		if(upFile != null) {//첨부한 파일이 있는 경우
-			
-			
+		if(upFile.getSize() != 0) {//첨부한 파일이 있는 경우
+						
 			String fileName=upFile.getName();//첨부한 파일명을 구함
 			File delFile=new File(saveFolder+m.getMfile()); //삭제할 파일 객체 생성 
 			
@@ -192,10 +197,10 @@ public class MypageController {
 			int random=ran.nextInt(100000000);
 			
 			/*첨부파일 확장자 구함*/
-			int index=fileName.lastIndexOf(".");
+			//int index=fileName.lastIndexOf(".");
 			//마침표를 맨 오른쪽부터 찾아서 가장 먼저 나오는 .의 위치 번호를  맨 왼쪽부터 카운터해서 반환 
 			//첫 문자는 0부터 시작 
-			String fileExtendsion=FilenameUtils.getExtension(upFile.getOriginalFilename()); // fileName.substring(index+1);//마침표 이후부터 마지막 문자까지 구함. 
+			String fileExtendsion = FilenameUtils.getExtension(upFile.getOriginalFilename()); //파일 확장자
 			//즉 첨부파일  확장자를 구함. 
 			String refileName="profile"+year+month+date+random+"."+fileExtendsion;//새로운 파s일명 저장 
 			String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;//데이터베이스에 저장될 레코드 값
@@ -205,19 +210,15 @@ public class MypageController {
 			
 		}else {//수정 첨부파일을 하지 않았을 때
 			String fileDBName="";
-			if(m.getMfile()!=null) {
-				m.setMfile(m.getMfile());
+			if(mv.getMfile()!=null) {
+				m.setMfile(mv.getMfile());
 											
 			}else {
 				m.setMfile(fileDBName);
 			}
 		}//수정 첨부파일을 첨부한 경우와 안한 경우 분기 조건문
 		
-		m.setUsername(username);
-		m.setNickname(nickname); 
-		m.setMphone(mphone); 
-		m.setMemail(memail);
-		m.setMaddr(maddr);
+		
 		
 		//System.out.println(m);
 		mypageService.updateMember(m);//username 기준으로 닉네임, 휴대폰, email, maddr, 첨부파일 수정 

@@ -23,6 +23,8 @@ public interface MypageDAO {
 
 	int classCount(String username);
 
+	MemberVO getInfo(MemberVO m);
+
 	
 
 }
