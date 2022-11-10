@@ -15,6 +15,7 @@
 		var sumpoint = 0;
 		var par = 0;
 		var bestpoint = 9999;
+		
 		for(var i=1 ; i<=18 ; i++){
 			var a = $('#point'+i).val();
 			a = parseInt(a);
@@ -33,12 +34,24 @@
 			}
 		}
 		
+		
 		document.getElementById('point_sum').value = sumpoint;
 		document.getElementById('strike').value = par+sumpoint;
 		document.getElementById('bestPoint').value = bestpoint;
 		
+		
 	}
-	
+	function calc_range(){
+		var bestrange = -9999;
+		for(var i=1 ; i<=18 ; i++){
+			var d = $('#range'+i).val();
+			d = parseInt(d);
+			if(bestrange < d){
+				bestrange = d;
+			}
+		}
+		document.getElementById('bestRange').value = bestrange;
+	}
 	function calc_putt(){
 		var puttpoint = 0;
 		for(var i=1 ; i<=18 ; i++){
@@ -109,6 +122,29 @@
 					</c:forEach>
 				</tr>
 				<tr>
+					<td>최대비거리(m)</td>
+					
+						<td><input type="text" name="range" class="insert_info" id="range1" size="1" value="160"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range2" size="1" value="230"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range3" size="1" value="250"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range4" size="1" value="140"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range5" size="1" value="240"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range6" size="1" value="260"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range7" size="1" value="150"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range8" size="1" value="220"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range9" size="1" value="230"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range10" size="1" value="140"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range11" size="1" value="200"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range12" size="1" value="230"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range13" size="1" value="160"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range14" size="1" value="210"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range15" size="1" value="270"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range16" size="1" value="180"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range17" size="1" value="230"></td>					
+						<td><input type="text" name="range" class="insert_info" id="range18" size="1" value="260"></td>					
+					
+				</tr>
+				<tr>
 					<td>OB횟수</td>
 					<c:forEach var="i" begin="1" end="18">
 						<td><input type="text" name="ob" class="insert_info" id="ob${i }" size="1" value="0"></td>					
@@ -137,18 +173,14 @@
 			평균 퍼팅 계산하기 : <input type="button" name="cal_put" id="cal_put" value="계산하기" onclick="calc_putt();"><br>
 			평균 퍼팅 : <input type="text" name="put_avg" id="put_avg" readonly size="14">
 			<hr class="mini_hr">
-			최대비거리 : <input type="text" name="range" id="range">
+			최대비거리 찾기 : <input type="button" name="cal_range" id="cal_range" value="계산하기" onclick="calc_range();"><br>
+			최대비거리 : <input type="text" name="range" id="bestRange" readonly size="14">
 			<hr class="mini_hr">
 			OB+Hazard 계산하기 : <input type="button" name="cal_OBandHazard" id="cal_OBandHazard" value="계산하기" onclick="calc_OBandHazard();"><br>
 			OB+Hazard : <input type="text" name="OBandHazard" id="OBandHazard" readonly size="14">
 			<hr class="mini_hr">
 			골프장 이름 : 
 			<select name="location" id="location">
-				<option value="잭 니클라우스 GC 코리아">잭 니클라우스 GC 코리아</option>
-				<option value="소노 펠리체 CC">소노 펠리체 CC</option>
-				<option value="해슬리 나인브릿지">해슬리 나인브릿지</option>
-				<option value="골드레이크 CC">골드레이크 CC</option>
-				<option value="--------">--------</option>
 				<c:if test="${!empty field }">
 				<c:forEach var="f" items="${field }">
 				<option value="${f.gc_title }">${f.gc_title }</option>

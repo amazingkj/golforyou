@@ -2,7 +2,7 @@
 
 .adminInsertCard2_main{
 	position:relative;
-	background:rgba(0,0,0,0); width:1500px; height:1200px; text-align:center;
+	background:rgba(0,0,0,0); width:1500px; height:1250px; text-align:center;
 	margin:140px 0px 0px 0px;
 	border:none;
 	margin-right:auto; margin-left:auto;
@@ -38,7 +38,8 @@
 } 
 #cal_point,
 #cal_put,
-#cal_OBandHazard{
+#cal_OBandHazard,
+#cal_range{
 	border:none;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -51,7 +52,8 @@
 #range,
 #handicap,
 #OBandHazard,
-#strike{
+#strike,
+#bestRange{
 	border:none;
 	background-color:#fff;
 	opacity:0.5;

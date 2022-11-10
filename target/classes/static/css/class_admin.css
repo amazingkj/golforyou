@@ -158,7 +158,7 @@ html, body {
 #wrap-edit {
 	width: 80%;
 	margin: 0 auto;
-	top: 250px;
+	top: 50px;
 	/* border: 1px solid #ccc; */
 	height: 1500px;
 	position: relative;
@@ -189,7 +189,7 @@ html, body {
 #wrap-edit2 {
 	width: 80%;
 	margin: 0 auto;
-	top: 250px;
+	top: 50px;
 	/* border: 1px solid #ccc; */
 	height: 1100px;
 	position: relative;
