@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.golforyou.vo.GolfcouseVO;
+import com.golforyou.vo.ScorecardVO;
 
 @Repository
 public class GolfcouseDAOImpl implements GolfcouseDAO {
@@ -44,7 +45,12 @@ public class GolfcouseDAOImpl implements GolfcouseDAO {
 	@Override
 	public void deleteGolfcouse(int gc_no) {
 		this.sqlSession.delete("gcdelete",gc_no);
-		
+	}
+
+	@Override
+	public void updateIndiv(ScorecardVO scv) {
+		// TODO Auto-generated method stub
+		sqlSession.update("sc_updateLoc",scv);
 	}
 	
 }

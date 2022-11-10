@@ -3,6 +3,7 @@ package com.golforyou.service;
 import java.util.List;
 
 import com.golforyou.vo.GolfcouseVO;
+import com.golforyou.vo.ScorecardVO;
 
 public interface GolfcouseService {
 
@@ -12,6 +13,7 @@ public interface GolfcouseService {
 	void insertGolfcouse(GolfcouseVO gc);//관리자 골프장등록
 	void updategolfcouse(GolfcouseVO gc);//골프장수정
 	void deleteGolfcouse(int gc_no);//골프장삭제
+	void updateIndiv(ScorecardVO scv);
 	
 	
 	

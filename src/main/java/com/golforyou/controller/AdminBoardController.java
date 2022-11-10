@@ -277,7 +277,8 @@ public class AdminBoardController {
 		//@ModelAttribute BoardVO b라고 하면 네임피라미터 이름과 빈
 		//클래스 변수명이 일치하면 b객체에 값이 저장되어 있다.
 		response.setContentType("text/html;charset=UTF-8");
-
+		request.setCharacterEncoding("utf-8");
+		
 		this.adminBoardService.insertBoard(b);
 		return "redirect:/admin/abboard_list";
 	}//admin_board_write_ok()

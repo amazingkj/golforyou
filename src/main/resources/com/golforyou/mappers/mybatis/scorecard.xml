@@ -97,4 +97,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select s_no from score_card where s_id=#{s_id} order by s_sort desc
 	</select>
 	
+	<!-- 골프장 수정에 따른 s_location 수정 -->
+	<update id="sc_updateLoc">
+		update score_card set s_location=#{newLocation} where s_location=#{oldLocation}
+	</update>
+	
 </mapper>

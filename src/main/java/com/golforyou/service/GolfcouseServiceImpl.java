@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.golforyou.dao.GolfcouseDAO;
 import com.golforyou.vo.GolfcouseVO;
+import com.golforyou.vo.ScorecardVO;
 
 
 @Service
@@ -46,6 +47,12 @@ public class GolfcouseServiceImpl implements GolfcouseService {
 	public void deleteGolfcouse(int gc_no) {
 		this.golfcouseDao.deleteGolfcouse(gc_no);
 		
+	}
+
+	@Override
+	public void updateIndiv(ScorecardVO scv) {
+		// TODO Auto-generated method stub
+		golfcouseDao.updateIndiv(scv);
 	}
 
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>골프장 목록 페이지</title>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/golfcouse_list.css" />
@@ -68,7 +68,7 @@
 									<c:choose>
 										<c:when test="${!empty gc.gc_image}">
 											<div class="gc_image">
-												<img src="/upload/golfcouse${gc.gc_image}" class="thumbnail-img" width="350px" height="350px" onclick="location='/golfcouse_Main?gc_no=${gc.gc_no}';" />
+												<img src="/upload/golfcouse${gc.gc_image}" class="thumbnail-img" width="100%" height="60%" onclick="location='/golfcouse_Main?gc_no=${gc.gc_no}';" />
 											</div>
 										</c:when>
 										<c:otherwise>

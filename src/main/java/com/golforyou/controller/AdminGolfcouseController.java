@@ -1,9 +1,5 @@
 package com.golforyou.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,29 +8,27 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.golforyou.service.GolfcouseService;
-
 import com.golforyou.vo.GolfcouseVO;
+import com.golforyou.vo.ScorecardVO;
 
 
 @Controller
@@ -223,7 +217,7 @@ public class AdminGolfcouseController {
 
 	//관리자 페이지 골프장 수정
 	@PostMapping("/editGolfcouse_ok")
-	public String editGolfcouse_ok(GolfcouseVO gc, MultipartHttpServletRequest request,Model model, MultipartFile file,HttpSession session) throws Exception {
+	public String editGolfcouse_ok(GolfcouseVO gc, ScorecardVO scv, MultipartHttpServletRequest request,Model model, MultipartFile file,HttpSession session) throws Exception {
 		//System.out.println("test");
 		
 		String saveFolder = request.getServletContext().getRealPath("/upload/golfcouse");
@@ -232,7 +226,6 @@ public class AdminGolfcouseController {
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		
 		
 		//골프장 정보
 		int gc_no=Integer.parseInt(request.getParameter("gc_no"));
@@ -259,6 +252,7 @@ public class AdminGolfcouseController {
 		String gc_fax=request.getParameter("gc_fax");//팩스
 		String gc_move=request.getParameter("gc_move");//골프장까지 자차이동경로
 		String gc_date=request.getParameter("gc_date");//골프장 개장날짜
+		
 		
 		
 		//이미지 업로드
@@ -323,8 +317,12 @@ public class AdminGolfcouseController {
 			gc.setGc_move(gc_move);
 			gc.setGc_date(gc_date);
 			
-		
-		
+			GolfcouseVO g = golfcouseService.getGolfcouse(gc_no);
+			String oldLocation = g.getGc_title();
+			scv.setOldLocation(oldLocation);
+			scv.setNewLocation(gc_title);
+			
+			golfcouseService.updateIndiv(scv);
 
 			this.golfcouseService.updategolfcouse(gc);
 

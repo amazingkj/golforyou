@@ -23,4 +23,7 @@ public class ScorecardVO {
 	private int startrow;
 	private int endrow;
 	
+	//지역 수정변수
+	private String oldLocation;
+	private String newLocation;
 }
