@@ -71,17 +71,16 @@ a:link, a:visited {
 #main_text {
 	margin-top: 80px;
 	width: 100px;
-	height: 30px;
+	height: 15px;
 	padding-bottom: 15px;
 	font-size: 20px;
 	font-weight: bold;
 }
 
 .board_view {
-	width: 500px;
 	margin-top: 210px;
-	margin-left: 400px;
-	width: 1400px;
+	margin-left:150px;
+	width: 500px;
 	border-top: 2px solid #252525;
 	border-bottom: 1px solid #ccc
 }
@@ -103,7 +102,7 @@ a:link, a:visited {
 }
 
 .board_view tbody th, .board_view tbody td {
-	padding: 15px 0 16px 16px;
+	padding: 10px;
 	border-bottom: 1px solid #ccc
 }
 
@@ -131,7 +130,7 @@ a:link, a:visited {
 	border: none;
 	height: 40px;
 	vertical-align: middle;
-	margin-left: 1000px;
+	margin-left: 450px;
 }
 
 @charset "UTF-8";

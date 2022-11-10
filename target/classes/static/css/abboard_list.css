@@ -93,7 +93,7 @@ li {
 }
 
 #name-tag {
-	margin-left: 410px;
+	margin-left: 270px;
 	margin-top: 240px;
 	width: 100px;
 	height: 30px;
@@ -156,16 +156,17 @@ table {
 	padding-left: 40px;
 }
 
+
 .boardlist {
 	border-top: 2px solid #252525;
-	width: 70%;
-	margin-left: 400px;
+	width: 80%;
+	margin-left: 250px;
 	margin-top: 0px;
 }
 
 #bFind_wrap {
 	width: 400px;
-	margin-left: 400px;
+	margin-left: 240px;
 	padding: 10px;
 }
 
@@ -201,7 +202,7 @@ table {
 }
 
 .page_control {
-	margin-left: 1000px;
+	margin-left: 850px;
 	width: 300px;
 }
 
@@ -235,8 +236,8 @@ table {
 }
 
 .boardListDiv {
-	margin: 50px 20px 10px 10px;
-	width: 100%;
+	margin: 10px 20px 10px 10px;
+	width: 90%;
 }
 
 .boardlist thread {
@@ -245,31 +246,29 @@ table {
 }
 
 .boardNo {
-	width: 8%;
+	width: 5px;
 }
 
-.boardSubject th, .boardSubject td {
-	width: 60%;
+.boardSubject {
+	width: 40px;
 	text-align: left;
 	padding-left: 5px;
 }
 
 .boardWriter {
-	width: 10%;
+	width: 50px;
 }
 
 .bList_count {
 	width: 130px;
-	margin-left: 1600px;
+	margin-left: 1350px;
 	margin-top: -20px;
 }
 
-.boardlike {
-	width: 8%;
-}
+
 
 .boardDate {
-	width: 10%;
+	width: 50px;
 }
 
 .boardView {
@@ -454,7 +453,7 @@ table .bottom_line {
 
 /*본문 */
 #b_cont {
-	height: 648px;
+	height: 598px;
 	width: 540px;
 	border: none;
 	resize: none;

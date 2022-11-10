@@ -5,7 +5,7 @@
 <head>
 <title></title>
 
-<link rel="stylesheet" type="text/css" href="/css/abboard_list.css" />
+<link rel="stylesheet" type="text/css" href="/css/abboard_list1.css" />
 <link rel="stylesheet" type="text/css" href="/css/abcustomer.css" />
 <jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />  
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -16,33 +16,6 @@
 
 
 <body>
-	<div class="left_navi"
-		style="margin-top: 260px; z-index: 2; position: absolute;">
-		<h3>고객센터</h3>
-
-		<dl class="sub_menu">
-
-			<dd>
-				<a href="abboard_list" >공지사항 게시판 </a>
-			</dd>
-			<dd>
-				<a></a>
-			</dd>
-			<dd>
-				<a href="#"></a>
-			</dd>
-			<dd>
-				<a href="#"></a>
-			</dd>
-			<dd>
-				<a href="#"></a>
-			</dd>
-
-		</dl>
-
-
-
-	</div>
 	<!-- // left navigation -->
 	<Br>
 	<br>
@@ -209,7 +182,7 @@ location=
 
 	<div>
 		<input id= "inputbtn" type="button" value="글쓰기"
-			onclick="location='admin_board_write?page=${page}';" />
+			onclick="location='abboard_write?page=${page}';" />
 	</div>
 
 </body>

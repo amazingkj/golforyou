@@ -164,12 +164,6 @@ public class BoardController {
 				vo.setNickname(nickname);
 				rvo.setB_no(b_no);
 				
-				List<BoardReplyVO> rep = boardService.getReplyList(rvo);
-				
-				for(int i=0 ; i<rep.size() ; ++i) {
-					
-				}
-				
 				
 				
 				System.out.println(vo);
@@ -196,6 +190,7 @@ public class BoardController {
 				
 				String board_cont=b.getB_cont().replace("\n", "<br/>");//textarea 내용입력박스에서 엔터키 친 부분을 줄바꿈 처리 
 				ModelAndView cm=new ModelAndView();
+				
 				cm.addObject("b",b);//키, 값 쌍으로 저장 
 				cm.addObject("board_cont",board_cont);
 				cm.addObject("page",page); //페이징에서 내가 본 쪽번호로 이동하기 위해서 

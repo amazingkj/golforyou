@@ -34,7 +34,8 @@ public class GolForYouController {
 		
 		for(int i=0 ; i<ranking.size() ; ++i) {			
 			
-			request.setAttribute("r_id"+i, ranking2.get(i).getNickname());
+			request.setAttribute("r_Nickname"+i, ranking2.get(i).getNickname());
+			request.setAttribute("r_id"+i, ranking2.get(i).getUsername());
 			request.setAttribute("r_sum"+i, ranking.get(i).getR_sum());
 		}
 		return "/index";

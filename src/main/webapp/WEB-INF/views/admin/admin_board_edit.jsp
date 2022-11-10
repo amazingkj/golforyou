@@ -78,8 +78,8 @@
 								value="${b.abboard_title}" /></td>
 						</tr>
 						<tr>
-							<td colspan="4" class="view_text"><textarea rows="15"
-									cols="190" name="abboard_cont">${b.abboard_cont}</textarea></td>
+							<td colspan="4" class="view_text"><textarea style="resize:none;" rows="11"
+									cols="160" name="abboard_cont">${b.abboard_cont}</textarea></td>
 						</tr>
 					</tbody>
 				</table>

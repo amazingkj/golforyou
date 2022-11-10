@@ -152,7 +152,7 @@
                 <div class="conB_small_container">
                     <div class="conB_content" onclick="location:'indivrank?rId=<c:out value='${r_id0}'/>&rPoint_=<c:out value='${r_sum0}'/>&rankno=1위'">
                      <div id="conB_content_1"></div><br/><br/>
-                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id0}'/>&rPoint_=<c:out value='${r_sum0}'/>&rankno=1위">${r_id0 }</a></h3><br>
+                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id0}'/>&rPoint_=<c:out value='${r_sum0}'/>&rankno=1위">${r_Nickname0 }</a></h3><br>
                         <p>포인트 : <span id="hide_1">${r_sum0 }</span>점</p>
                         
                     </div>
@@ -161,7 +161,7 @@
                     <div class="conB_content">
                      <div id="conB_content_2"></div>
                      <br/><br/>
-                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id1}'/>&rPoint_=<c:out value='${r_sum1}'/>&rankno=2위">${r_id1 }</a></h3><br>
+                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id1}'/>&rPoint_=<c:out value='${r_sum1}'/>&rankno=2위">${r_Nickname1 }</a></h3><br>
                         <p>포인트 : <span id="hide_2">${r_sum1 }</span>점</p>
                        
                     </div>
@@ -170,7 +170,7 @@
                     <div class="conB_content">
                      <div id="conB_content_3"></div>
                      <br/><br/>
-                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id2}'/>&rPoint_=<c:out value='${r_sum2}'/>&rankno=3위">${r_id2 }</a></h3><br>
+                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id2}'/>&rPoint_=<c:out value='${r_sum2}'/>&rankno=3위">${r_Nickname2 }</a></h3><br>
                         <p>포인트 : <span id="hide_3">${r_sum2 }</span>점</p>
                         
                     </div>
@@ -179,7 +179,7 @@
                     <div class="conB_content">
                      <div id="conB_content_4"></div>
                      <br/><br/>
-                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id3}'/>&rPoint_=<c:out value='${r_sum3}'/>&rankno=4위">${r_id3 }</a></h3><br>
+                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id3}'/>&rPoint_=<c:out value='${r_sum3}'/>&rankno=4위">${r_Nickname3 }</a></h3><br>
                         <p>포인트: <span id="hide_4">${r_sum3 }</span>점</p>
                         
                     </div>
@@ -188,7 +188,7 @@
                     <div class="conB_content">
                      <div id="conB_content_5"></div>
                      <br/><br/>
-                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id4}'/>&rPoint_=<c:out value='${r_sum4}'/>&rankno=5위">${r_id4 }</a></h3><br>
+                        <h3 class="honorh3"><a href="indivrank?rId=<c:out value='${r_id4}'/>&rPoint_=<c:out value='${r_sum4}'/>&rankno=5위">${r_Nickname4 }</a></h3><br>
                         <p>포인트 : <span id="hide_5">${r_sum4 }</span>점</p>
                       
                     </div>

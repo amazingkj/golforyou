@@ -75,8 +75,8 @@
 							<td>${b.abboard_title}</td>
 						</tr>
 						<tr>
-							<td colspan="4" class="view_text"><textarea style="pointer-events:none; "readonly rows="15"
-									cols="190" >${b.abboard_cont}</textarea>
+							<td colspan="4" class="view_text"><textarea style="pointer-events:none; resize:none; "readonly rows="10"
+									cols="160" >${b.abboard_cont}</textarea>
 							</td>
 						</tr>
 					</tbody>

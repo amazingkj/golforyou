@@ -62,7 +62,7 @@
 
 
 		
-
+<div class="boox">
 				<div class="bList_count">게시물 수: &nbsp;&nbsp;&nbsp;${listcount}</div>
 			<table class="boardlist">
 				<thead>
@@ -116,7 +116,7 @@
 
 				</tbody>
 			</table>
-
+</div>
 			<!-- 게시판 하단 목록 검색 쓰기 버튼-->
 
 			<%--검색 폼추가 --%>

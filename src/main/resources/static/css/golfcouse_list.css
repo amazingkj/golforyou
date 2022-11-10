@@ -298,8 +298,8 @@ html, body {
 }
 
 .gc_image {
-	width: 100%;
-	height:90%;	
+	width: 350px;
+	height:350px;	
 	margin-bottom: 3%;
 	box-sizing: border-box;
 	overflow: hidden;

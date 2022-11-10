@@ -3,6 +3,7 @@ package com.golforyou.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -76,7 +77,7 @@ public class AdminBoardController {
 		listM.addAttribute("find_field",find_field);
 		listM.addAttribute("find_name", find_name);
 
-		return "/admin_board_list";
+		return "board/abboard_list";
 		//뷰페이지 폴더경로와 파일명 지정		
 	}//admin_board_list()
 
@@ -112,7 +113,7 @@ public class AdminBoardController {
 		cm.addObject("page",page);
 
 		if(state.equals("cont")) {//내용보기
-			cm.setViewName("admin/admin_board_cont");
+			cm.setViewName("board/abboard_cont");
 		}else if(state.equals("edit")) {//수정폼
 			cm.setViewName("admin/admin_board_edit");
 		}
@@ -250,7 +251,7 @@ public class AdminBoardController {
 		return "redirect:/admin/abboard_list?page="+page;
 	}
 	//관리자 게시판 글쓰기
-	@RequestMapping("admin/admin_board_write")
+	@RequestMapping("admin/abboard_write")
 	public ModelAndView admin_board_write(
 			HttpServletRequest request,
 			HttpServletResponse response)

@@ -296,7 +296,7 @@
 				$(".rank").css({
 					"display" : "block"
 				});
-			}else if(!(searchname() == document.getElementById("rNickname_"+i).innerText)){
+			}else if(!(document.getElementById("rNickname_"+i).innerText.includes(searchname()))){
 				$("#rank"+i).css({
 					"display" : "none"
 				});

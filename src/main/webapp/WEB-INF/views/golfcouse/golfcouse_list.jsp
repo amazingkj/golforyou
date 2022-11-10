@@ -68,7 +68,7 @@
 									<c:choose>
 										<c:when test="${!empty gc.gc_image}">
 											<div class="gc_image">
-												<img src="/upload/golfcouse${gc.gc_image}" class="thumbnail-img" onclick="location='/golfcouse_Main?gc_no=${gc.gc_no}';" />
+												<img src="/upload/golfcouse${gc.gc_image}" class="thumbnail-img" width="350px" height="350px" onclick="location='/golfcouse_Main?gc_no=${gc.gc_no}';" />
 											</div>
 										</c:when>
 										<c:otherwise>

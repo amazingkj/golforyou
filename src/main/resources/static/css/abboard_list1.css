@@ -1,9 +1,83 @@
-@CHARSET "UTF-8";
-
-body {
-	padding: 0px;
-	margin: 0px;
+@charset "UTF-8";
+/*Common*/
+/* font */
+@font-face {
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 100;
+	src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2)
+		format('woff2'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff)
+		format('woff'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf)
+		format('opentype');
 }
+
+@font-face {
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 300;
+	src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2)
+		format('woff2'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff)
+		format('woff'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf)
+		format('opentype');
+}
+
+@font-face {
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 400;
+	src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2)
+		format('woff2'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff)
+		format('woff'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf)
+		format('opentype');
+}
+
+@font-face {
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+	src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2)
+		format('woff2'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff)
+		format('woff'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf)
+		format('opentype');
+}
+
+@font-face {
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 700;
+	src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2)
+		format('woff2'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff)
+		format('woff'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf)
+		format('opentype');
+}
+
+@font-face {
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 900;
+	src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2)
+		format('woff2'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff)
+		format('woff'),
+		url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf)
+		format('opentype');
+}
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+/*Common*/
+
 
 ul {
 	padding: 0px;
@@ -15,122 +89,438 @@ li {
 	margin: 0px;
 }
 
-a:link, a:visited {
-	text-decoration: none;
-	color: #656565;
-}
-
-#board_aaa {
+#name-tag {
+	margin-left: 50px;
 	margin-top: 200px;
-	margin-left: 400px;
-	position: absolute;
-}
-
-.board_list {
-	width: 100%;
-	border-top: 2px solid #252525;
-	border-bottom: 1px solid #ccc
-}
-
-.board_list thead th:first-child {
-	background-image: none
-}
-
-.board_list thead th {
-	border-bottom: 1px solid #ccc;
-	padding: 12px 0 13px 0;
-	color: #3b3a3a;
-	vertical-align: middle
-}
-
-.board_list tbody td {
-	border-top: 1px solid #ccc;
-	padding: 10px 0;
-	text-align: center;
-	vertical-align: middle
-}
-
-.board_list tbody tr:first-child td {
-	border: none
-}
-
-.board_list tbody td.title {
-	text-align: left;
-	padding-left: 20px;
-	text-decoration: none;
-}
-
-.board_list tbody td a {
-	display: inline-block
-}
-
-#all_box {
-	border: 1px solid white;
-}
-/*맨위 이름*/
-#main_text {
-	margin-top: 80px;
 	width: 100px;
-	height: 15px;
-	padding-bottom: 15px;
+	height: 30px;
 	font-size: 20px;
 	font-weight: bold;
 }
 
-.board_view {
-	margin-top: 210px;
-	margin-left:150px;
-	width: 500px;
+.clear {
+	
+}
+
+.margin {
+	margin-bottom: 200px;
+	margin-top: 200px;
+}
+
+.page_control a {
+	color: #000000;
+	text-decoration: none;
+	padding: 5px;
+}
+
+.boardlist a {
+	color: #000000;
+	text-decoration: none;
+}
+
+.boardlist a {
+	color: black;
+	font: bold;
+	margin: 0px 2px;
+}
+
+.boardlist a:visited {
+	color: black;
+	font: bold;
+	margin: 0px 2px;
+}
+
+.boardlist a:hover {
+	color: #56F569;
+	font: bold;
+	margin: 0px 2px;
+}
+
+.boardlist a:active {
+	color: black;
+	font: bold;
+	margin: 0px 2px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.board_title {
+	font-size: 30px;
+	font-weight: bold;
+	margin: 170px 20px 10px 10px;
+	padding-left: 40px;
+}
+
+.boardlist {
 	border-top: 2px solid #252525;
-	border-bottom: 1px solid #ccc
+	width: 100%;
+	height:-30px;
+	margin-left: 0px;
+	margin-top: 0px;
 }
 
-.board_view tbody th {
-	text-align: left;
-	background: #f7f7f7;
-	color: #3b3a3a
-}
-
-.board_view tbody th.list_tit {
-	font-size: 13px;
-	color: #000;
-	letter-spacing: 0.1px
-}
-
-.board_view tbody .no_line_b th, .board_view tbody .no_line_b td {
-	border-bottom: none
-}
-
-.board_view tbody th, .board_view tbody td {
+#bFind_wrap {
+	width: 400px;
+	margin-left: 0px;
 	padding: 10px;
-	border-bottom: 1px solid #ccc
 }
 
-.board_view tbody td.view_text {
-	border-top: 1px solid #ccc;
+.page_select {
+	margin-top: 10px;
+	margin-right: 5px;
+	float: right;
+}
+
+.search_page {
+	margin: 3px;
+	padding: 0px;
+}
+
+/*하단 버튼부 좌측*/
+.fl_fr {
+	overflow: hidden;
+	display: inline-block;
+	width: 100%;
+	margin-top: 5px;
+}
+
+.fl {
+	float: left;
+	margin-left: 30px;
+	display: inline-block;
+}
+
+/*하단 버튼부 우측*/
+.fr {
+	float: right;
+	margin-right: 30px;
+}
+
+.page_control {
+	margin-left: 700px;
+	width: 300px;
+}
+
+.boardPage {
+	position: relative;
+	z-index: 1;
+	margin: auto;
+	background-color: white;
+	display: block;
+	overflow: hidden;
+	padding-right: 60px;
+	padding-left: 400px;
+	padding-bottom: 5px;
+	padding-top: 28px;
+}
+
+.boardlist th {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.boardlist td {
+	border-bottom: 1px solid #cdcdcd;
+}
+
+.boardlist th, .boardlist td {
+	line-height: 2rem;
+	padding: 5px;
+	font-size: 15px;
+	text-align: center;
+}
+
+.boardListDiv {
+	margin: 50px 20px 10px 10px;
+	width: 100%;
+}
+
+.boardlist thread {
+	display: table-header-group;
+	border-collapse: collapse;
+}
+
+.boardNo {
+	width: 10%;
+}
+
+.boardSubject th, .boardSubject td {
+	width: 70%;
+	text-align: left;
+	margin-left: 80px;
+}
+
+.boardWriter {
+	width: 20%;
+}
+
+.bList_count {
+	width: 130px;
+	margin-left: 1350px;
+	margin-top: -20px;
+}
+
+
+
+.boardDate {
+	width: 30%;
+}
+
+.boardView {
+	width: 8%;
+}
+
+.page_control {
+	margin-top: -50px;
+	padding-bottom: 100px;
+}
+
+.page_control a {
+	color: black;
+	font: bold;
+	font-size: 20px;
+	margin: 0px 2px;
+}
+
+.page_control a:visited {
+	color: black;
+	font: bold;
+	font-size: 20px;
+	margin: 0px 2px;
+}
+
+.page_control a:hover {
+	color: #56F569;
+	font: bold;
+	font-size: 20px;
+	margin: 0px 2px;
+}
+
+.page_control a:active {
+	color: black;
+	font: bold;
+	font-size: 20px;
+	margin: 0px 2px;
+}
+
+/* button*/
+select#search_target, select#search_page {
+	height: 38px;
+	width: 90px;
+	font-size: 20px;
+	border-color: #ccc;
+}
+
+.fl_fr input[type="button"] {
+	font-size: 12px;
+	border: 1px solid #ccc;
+	margin-left: 6px;
+	margin-right: 3px;
+	padding: 10px;
+	background-color: #ffffff;
+	color: #000000;
+	cursor: pointer;
+}
+
+.fl_fr button[type="submit"] {
+	font-size: 12px;
+	margin-left: 0px;
+	margin-right: 6px;
+	padding: 7px;
+	cursor: pointer;
+	background: #56F569;
+	border: 0px;
+	color: white;
+}
+
+form.searchForm {
+	background-color: #56F569;
+}
+
+div .search_container {
+	background-color: #56F569;
+	height: 40px;
+	padding-left: 10px;
+	line-height: 40px;
+	margin-left: 3px;
+	float: left;
+}
+
+button .icon {
+	padding: 2px;
+	color: #fff;
+	float: right;
+	width: 40px;
+	height: 40px;
+	border: none;
+	background-color: #56F569;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.search {
+	padding: 0;
+	background: none;
+	border: none;
+	outline: none;
+	color: white;
+	display: inline-block;
+}
+
+/*쓰기화면 - board_write.jsp*/
+.bWrite_wrap {
+	padding: 20px, 10px;
+	margin-top: 100px;
+}
+
+.tablebox {
+	padding: 20px, 10px;
+	align-items: center;
+	margin: auto;
+	border: none;
+	overflow: hidden;
+	width: 87%;
+	height: 100%;
+}
+
+table .textField {
+	margin-top: 10px;
+	margin-right: 5px;
+	padding: 5px;
+	font-size: 0.8em;
+	border: none;
+}
+
+.bottom_line {
 	border-bottom: 1px solid #ccc;
-	padding: 10px 18px 10px 18px
 }
 
-.board_view tbody th.th_file {
-	padding: 0 0 0 15px;
-	vertical-align: middle
+table .file-upload-button {
+	color: #000;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	font-size: 13px;
+	line-height: 30px;
+	height: 30px;
+	cursor: pointer;
+	padding: 5px 25px;
 }
 
-.wdp_90 {
-	width: 90%
+table span {
+	font-size: 15px;
+	padding: 0px 10px;
 }
 
-.btn {
+#question_file {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+table tr {
+	border-bottom: 1px;
+	margin: 5px;
+}
+
+table .textField {
+	margin-top: 10px;
+	margin-right: 5px;
+	padding: 5px;
+	font-size: 13px;
+	border: none;
+	border-bottom: 1px;
+}
+
+table td {
+	padding: 4px;
+	text-align: left;
+}
+
+table .bottom_line {
+	
+}
+
+/*본문 */
+#b_cont {
+	height: 648px;
+	width: 540px;
+	border: none;
+	resize: none;
+	overflow: auto;
+}
+
+table .buttontd {
+	float: right;
+}
+
+td .buttontd {
+	align-items: center;
+	margin: 0, auto;
+}
+
+span .board_title_1 {
+	position: relative;
+	width: 400px;
+	height: 45px;
+	font-size: 36px;
+	font-weight: bold;
+	text-align: left;
+	right: 585px;
+	top: -10px;
+	margin-top: 20px;
+}
+
+div #bDel_menu {
+	margin-top: 20px;
+}
+
+div #bDel_wrap {
+	margin: auto;
+}
+
+.submitBtn {
+	font-size: 14px;
+	border: none;
+	padding: 10px;
+	width: 260px;
+	background-color: #56F569;
+	margin-bottom: 30px;
+	color: #000000;
+}
+
+.CheckBtn {
+	font-size: 14px;
+	border: none;
+	margin-left: 5px;
+	margin-right: 5px;
+	padding: 10px;
+	width: 100px;
+	background-color: #c0c0c0;
+	margin-bottom: 30px;
+	color: #000000;
+}
+
+#inputbtn {
+	position:absolute;
 	border-radius: 3px;
 	padding: 5px 100px;
 	color: black !important;
 	display: inline-block;
 	background-color: #56f569;
 	border: none;
-	height: 40px;
 	vertical-align: middle;
-	margin-left: 450px;
+	margin-left: 1250px;
+	height: 40px;
+	margin-top: -170px;
+	text-align: center;
 }
 
 @charset "UTF-8";
@@ -234,6 +624,18 @@ a:link, a:visited {
 	margin-bottom: 30px;
 	color: #000000;
 	cursor: pointer;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+.clear {
+	clear: both;
+	display: none;
+	margin: 0; auto;
+	overflow: hidden;
 }
 
 #content {
