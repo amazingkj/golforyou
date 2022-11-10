@@ -21,9 +21,11 @@ public class CustomErrorController implements ErrorController{
             
             if(statusCode == HttpStatus.FORBIDDEN.value()){
                 return "error"; //403에러
-            }else if(statusCode == HttpStatus.NOT_FOUND.value()){
+            } else if(statusCode == HttpStatus.NOT_FOUND.value()){
                 return "error"; //404에러
-            }else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+            } else if(statusCode == HttpStatus.METHOD_NOT_ALLOWED.value()){
+            	return "error"; //405에러
+            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
             	return "error"; //500에러
             } else {
             	return "error"; //그 외
