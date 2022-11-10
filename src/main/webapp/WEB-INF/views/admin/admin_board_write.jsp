@@ -5,7 +5,7 @@
  <link rel="stylesheet" type="text/css" href="/css/abcommon.css" />
  <link rel="stylesheet" type="text/css" href="/css/board.css" />
 <jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />  
-
+<script src="/js/jquery.js"></script>
 
  <%-- //현재 세션 상태 체크 
  	String id=null;
@@ -65,9 +65,55 @@
 	 			  // 추가한 글꼴
 	 			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
 	 			 // 추가한 폰트사이즈
-	 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+	 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+	            callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+						onImageUpload : function(files) {
+							uploadSummernoteImageFile(files[0],this);
+						},
+						onPaste: function (e) {
+							var clipboardData = e.originalEvent.clipboardData;
+							if (clipboardData && clipboardData.items && clipboardData.items.length) {
+								var item = clipboardData.items[0];
+								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+									e.preventDefault();
+								}
+							}
+						}
+					}
+	             
+	             
 	     });
+	     
+	     
+
+	 	/**
+	 	* 이미지 파일 업로드
+	 	*/
+	 	function uploadSummernoteImageFile(file, editor) {
+	 		data = new FormData();
+	 		data.append("file", file);
+	 		$.ajax({
+	 			data : data,
+	 			type : "POST",
+	 			url : "/uploadSummernoteImageFile",
+	 			contentType : false,
+	 			processData : false,
+	 			success : function(data) {
+	             	//항상 업로드된 파일의 url이 있어야 한다.
+	 				$(editor).summernote('insertImage', data.url);
+	 			}
+	 		});
+	 	}
+	 	
+	 	
+	 	$("div.note-editable").on('drop',function(e){
+	         for(i=0; i< e.originalEvent.dataTransfer.files.length; i++){
+	         	uploadSummernoteImageFile(e.originalEvent.dataTransfer.files[i],$("#summernote")[0]);
+	         }
+	        e.preventDefault();
+	   })
 	});
+
 
 	
 
@@ -79,7 +125,7 @@
  
  <%--유효성 검사--%>
      
- <title>게시판 글쓰기</title>
+ <title>GolForYou</title>
  </head>
  <div class="clear"></div>
  <body class="tablebody">
@@ -106,7 +152,7 @@
    	  <td></td>
       <td class="buttontd"><input type="submit" class="submitBtn" value="등록"  >
        <input type="reset" class="CheckBtn"value="취소"
-					onclick="$('#abboard_name').focus();" /><input type="reset" class="CheckBtn" value="목록" onclick="location='abborad_list?page=${page}';"/></td>
+					onclick="$('#abboard_name').focus();" /><input type="reset" class="CheckBtn" value="목록" onclick="location='abboard_list?page=${page}';"/></td>
      </tr>
     </table>    
 </form>

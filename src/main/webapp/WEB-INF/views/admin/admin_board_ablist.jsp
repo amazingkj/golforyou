@@ -15,11 +15,14 @@
 </head>
 
 
-<body>
+<body >
+
+<div style="margin: 30px;">
+
 	<!-- // left navigation -->
 	<Br>
 	<br>
-	<h3 id="name-tag">자유게시판</h3>
+	<h3 id="name-tag">공지사항</h3>
 
 
 	<!-- <form method="get" action="admin_board_list"> -->
@@ -123,7 +126,7 @@ location=
 				<i class="fas fa-angle-left"></i>
 			</c:if>
 			<c:if test="${page>1}">
-				<a href="admin_board_ablist?page=${page-1}"><i
+				<a href="abboard_list?page=${page-1}"><i
 					class="fas fa-angle-left"></i></a>
 			</c:if>
 			<%--현재 쪽번호 출력 --%>
@@ -132,7 +135,7 @@ location=
 				</c:if>
 				<c:if test="${a != page}">
 					<%--현재페이지가 선택 안된 경우 --%>
-					<a href="admin_board_ablist?page=${a}">${a}</a>
+					<a href="abboard_list?page=${a}">${a}</a>
 				</c:if>
 			</c:forEach>
 
@@ -140,7 +143,7 @@ location=
 				<i class="fas fa-angle-right"></i>
 			</c:if>
 			<c:if test="${page < maxpage}">
-				<a href="admin_board_ablist?page=${page+1}"><i
+				<a href="abboard_list?page=${page+1}"><i
 					class="fas fa-angle-right"></i></a>
 			</c:if>
 		</c:if>
@@ -152,7 +155,7 @@ location=
 			</c:if>
 			<c:if test="${page>1}">
 				<a
-					href="admin_board_ablist?page=${page-1}&find_field=${find_field}&find_name=${find_name}"><i
+					href="abboard_list?page=${page-1}&find_field=${find_field}&find_name=${find_name}"><i
 					class="fas fa-angle-left"></i></a>
 				<%--get으로 find_field와 find_name을 전달해야 검색이후 페이징 목록을 유지한다. 검색필드와 검색어를 전달하지 않으면
       검색전 전체 페이징 목록으로 이동해서 검색효과가 사라진다. --%>
@@ -165,7 +168,7 @@ location=
 				<c:if test="${a != page}">
 					<%--현재페이지가 선택 안된 경우 --%>
 					<a
-						href="admin_board_ablist?page=${a}&find_field=${find_field}&find_name=${find_name}">${a}</a>
+						href="abboard_list?page=${a}&find_field=${find_field}&find_name=${find_name}">${a}</a>
 				</c:if>
 			</c:forEach>
 
@@ -174,17 +177,17 @@ location=
 			</c:if>
 			<c:if test="${page < maxpage}">
 				<a
-					href="admin_board_?page=${page+1}&find_field=${find_field}&find_name=${find_name}"><i
+					href="abboard_?page=${page+1}&find_field=${find_field}&find_name=${find_name}"><i
 					class="fas fa-angle-right"></i></a>
 			</c:if>
 		</c:if>
 	</div>
 
 	<div>
-		<input id= "inputbtn" type="button" value="글쓰기"
+		<input id= "inputbtn" type="button" value="글쓰기" style="cursor:pointer;"
 			onclick="location='abboard_write?page=${page}';" />
 	</div>
-
+</div>
 </body>
 </html>
 

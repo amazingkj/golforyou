@@ -66,7 +66,7 @@ function openDelCheck(){
      </script>
  
 <meta charset="UTF-8">
-<title></title>
+<title>GolForyou</title>
 <style type="text/css">
  
 </style>
@@ -88,12 +88,12 @@ function openDelCheck(){
     </tr>
 	 <tr>
     <td>
-    
+     <%-- 좋아요--%>
     <div id="like">
     <c:choose>
         <c:when test="${check == 0}">
         <form method="post" action="likeupload_yes">
-            <i class="far fa-heart" style="color:#56F569"></i><input type="submit" id="likebtn" class="btn btn-light" value="좋아요">
+           <button type="submit" id="likebtn" name="likebtn" class="btn btn-light" value="좋아요"><i class="far fa-heart" style="color:#56F569"></i>&nbsp;좋아요</button>
             
             <input type="hidden" id="likecheck" name="likecheck_yes" value="${check}">
              <input type="hidden" id="nickname" name="nickname_yes" value="${nickname}">
@@ -104,7 +104,7 @@ function openDelCheck(){
         
         <c:when test="${check == 1}">
         <form method="post" action="/likeupload_no">
-        	<i class="fas fa-heart"  style="color:#56F569"></i> <input type="submit" id="likebtn" class="btn btn-danger" value="좋아요 취소">
+        	<button type="submit" id="likebtn" name="likebtn" class="btn btn-danger"><i class="fas fa-heart"  style="color:#56F569"></i>&nbsp;좋아요<br>취소</button>
              
              <input type="hidden" id="likecheck" name="likecheck_no" value="${check}">
                <input type="hidden" id="nickname" name="nickname_no" value="${nickname}">
@@ -119,12 +119,7 @@ function openDelCheck(){
     </tr>
     
      <%-- 좋아요 버튼 테스트중 --%>
-	 <tr>
-    <td>좋아요 test</td><td>
-    
-	</td>
-     </tr>
-
+	
 	<tr><td></td>
 	<td class="buttontd" colspan="2">
 	<form method="post" name="deletefrm">
@@ -141,18 +136,7 @@ function openDelCheck(){
  </c:if> 
 
 	    <input type="button" class="CheckBtn" class="buttontd" value="목록" onclick="location='board_list?page=${page}';" />	   	   	   
-	 <c:if test="${id != b.username}">
-	 <c:if test="${!empty b.b_like}">
-   <input type="button" class="CheckBtn" id=like value="좋아요" onclick="return like();"/></input>
-	</c:if>
-	</c:if>
-	
-	<c:if test="${!empty id}">
-	
-	<c:if test="${empty b.b_like}">
-	<input type="button" class="CheckBtn" id=like value="좋아요 취소 " onclick="return like();"/></input>
-     </c:if>
-     </c:if>
+
      </form>
   
 		<!-- 덧글 작성 시작 -->

@@ -25,7 +25,12 @@ public class AbBoardVO {
     
     //검색기능
     private String find_name;//검색어
-    private String find_field;//검색필드        
+    private String find_field;//검색필드 
+    
+
+	public void setAbboard_date(String abboard_date) {
+		this.abboard_date = abboard_date.substring(0,10);
+	}
 	
 }
 
