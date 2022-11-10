@@ -31,7 +31,7 @@
 				<a href="customer_fnq">1:1문의</a>
 			</dd>
 			<dd>
-				<a href="#">공지사항</a>
+				<a href="abboard_list">공지사항</a>
 			</dd>
 			<dd>
 				<a href="customer_sitepolicy">환불규정</a>

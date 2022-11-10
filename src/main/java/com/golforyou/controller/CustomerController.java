@@ -1,5 +1,8 @@
 package com.golforyou.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,46 +33,73 @@ public class CustomerController {
 	@Autowired(required=false)
 	private MailService mailsender;
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')") 
+
 	@RequestMapping(value = "/customer_main", method = RequestMethod.GET)
-	public String Customer_main() {
-		return "customer/main"; 
+	public String Customer_main( HttpServletResponse response, HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String loginid = (String)session.getAttribute("id");
 		
+		if(loginid == null) {
+			out.println("<script>");
+			out.println("alert('로그인부터 하세요')");
+			out.println("location='login'");
+			out.println("</script>");
+		}else {
+			
+
+			return "customer/main";
+			
+		}
+		return null;
+			
 		
 	} //고객센터 메인 페이지 
 
 	
 	@RequestMapping(value = "/customer_fnq")
 	public String customer_onebyoneFnq(CustomerVO ct, HttpServletRequest request, HttpServletResponse response, HttpSession session, Authentication authentication,
-			@AuthenticationPrincipal PrincipalDetails userDetails) {
+			@AuthenticationPrincipal PrincipalDetails userDetails) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String loginid = (String)session.getAttribute("id");
 		
+		if(loginid == null) {
+			out.println("<script>");
+			out.println("alert('로그인부터 하세요')");
+			out.println("location='login'");
+			out.println("</script>");
+		}else {
+
+			PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+	 		
+			
+			String username=principalDetails.getUsername();
+			String consult_type=request.getParameter("consult_type"); 
+			String question_title=request.getParameter("question_title"); 
+			String question_contents=request.getParameter("question_contents");
+		//	String question_file=request.getParameter("question_file");
+			String phone01=request.getParameter("phone01");
+			String phone02=request.getParameter("phone02");
+			String phone03=request.getParameter("phone03");
+			
+			String phoneNum=phone01+"-"+phone02+"-"+phone03;
+			
+			String question_email=request.getParameter("question_email");
+			
+			
+			ct.setConsult_type(consult_type);
+			ct.setPhoneNum(phoneNum);
+			ct.setQuestion_contents(question_contents);
+			ct.setQuestion_email(question_email);
+			ct.setQuestion_title(question_title);
+			
+			mailsender.OnebyOneFnqEmail(ct);
+			
+			return "customer/onebyoneFnq"; 
+		}
+			return null;
 		
-		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
- 		
-		
-		String username=principalDetails.getUsername();
-		String consult_type=request.getParameter("consult_type"); 
-		String question_title=request.getParameter("question_title"); 
-		String question_contents=request.getParameter("question_contents");
-	//	String question_file=request.getParameter("question_file");
-		String phone01=request.getParameter("phone01");
-		String phone02=request.getParameter("phone02");
-		String phone03=request.getParameter("phone03");
-		
-		String phoneNum=phone01+"-"+phone02+"-"+phone03;
-		
-		String question_email=request.getParameter("question_email");
-		
-		
-		ct.setConsult_type(consult_type);
-		ct.setPhoneNum(phoneNum);
-		ct.setQuestion_contents(question_contents);
-		ct.setQuestion_email(question_email);
-		ct.setQuestion_title(question_title);
-		
-		mailsender.OnebyOneFnqEmail(ct);
-		
-		return "customer/onebyoneFnq"; 
 	} //환불정책
 	
 	@RequestMapping(value = "/customer_sitepolicy", method = RequestMethod.GET)

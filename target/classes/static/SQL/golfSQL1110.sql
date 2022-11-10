@@ -76,6 +76,12 @@ wNO NUMBER(38,0) PRIMARY KEY
  
 );
 
+create sequence w_no_seq
+start with 1 --1부터 시작
+increment by 1 --1씩 증가
+nocache;
+
+
 alter table withdrawal add constraint fk_withdrawal
 foreign key (username) references memberVO(username);
 

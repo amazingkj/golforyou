@@ -66,7 +66,7 @@
        </li>
       <li><a href="/customer_main" class=btn1>고객센터</a>
        <ul>
-       <li><a href="/customer_main">1:1</a></li>
+       <li><a href="/customer_fnq">1:1</a></li>
        <li><a href="/customer_holeinone">홀인원 보험</a></li>
        </ul>
        </ul>  
