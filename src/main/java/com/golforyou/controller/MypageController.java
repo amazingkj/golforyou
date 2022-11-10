@@ -309,28 +309,32 @@ public class MypageController {
 			w.setUsername(username); w.setMdelcont(mdelcont); 
 			
 			
+			
 			System.out.println("username "+username);
 			System.out.println("username "+w);
 			this.mypageService.saveDelcont(w);
 	    	int result=userRepository.deleteByUsername(username);
 	    	
+	    	session.invalidate();
+	    	
 		        if (result>0) {
 		        	out.println("<script>");
-					out.println("alert('성공적으로 회원정보를 삭제했습니다.');");
-					out.println("window.close();");
+					out.println("alert('성공적으로 회원정보를 삭제했습니다.');");					
+					out.println("opener.document.location.href='/index';");					
+					out.println("self.close();");
 					out.println("</script>");
 		        	redirect.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
-		        	
-		        	
-		        	
+	        	
 		     		SecurityContextHolder.clearContext();
+		     		
+		     		
 		        } else {
 		        	 redirect.addFlashAttribute("msg", "다시 시도해주세요");
 		        	
 		        }
 		        
 	
-			 return "redirect:/"; 	
+			 return null; 	
 			
 		
 	}//withdrawal_ok()
