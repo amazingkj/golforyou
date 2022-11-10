@@ -11,6 +11,7 @@ public interface LoginService {
 	void updateTempPwd(MemberVO member);
 	void updateMailKey(MemberVO member);
 	void updateMember(MemberVO m); //addjoin
+	int updateAdminMember(String username);
 	
 
 }
