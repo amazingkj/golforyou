@@ -103,7 +103,7 @@
 			<hr>
 			<h2>스코어카드 정보 입력란</h2>  <br>
 			<table id="insertT" border="1">
-				<tr>
+				<tr style="font-weight:bold; background-color:#d4d4d4;">
 					<td>hole</td>
 					<c:forEach var="i" begin="1" end="18">
 						<td>${i }</td>					
@@ -159,7 +159,7 @@
 				<tr>
 					<td>퍼팅횟수</td>
 					<c:forEach var="i" begin="1" end="18">
-						<td><input type="text" name="putting" class="insert_info" id="putt${i }" size="1"></td>					
+						<td><input type="text" name="putting" class="insert_info" id="putt${i }" size="1" value="1"></td>					
 					</c:forEach>
 				</tr>
 			</table>
