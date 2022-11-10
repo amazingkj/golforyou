@@ -55,6 +55,11 @@ public class LoginServiceImpl implements LoginService {
 			this.loginDAO.updateMember(m);
 			
 		}
+
+		@Override
+		public int updateAdminMember(String username) {
+			return this.loginDAO.updateAdminMember(username);
+		}
 		
 		
 }

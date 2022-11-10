@@ -10,6 +10,6 @@ public interface LoginDAO {
 	void updateMailAuth(MemberVO member);
 	void updateTempPwd(MemberVO member);
 	void updateMailKey(MemberVO member);
-	void updateMember(MemberVO m);
-
+	void updateMember(MemberVO username);
+	int updateAdminMember(String username);
 }

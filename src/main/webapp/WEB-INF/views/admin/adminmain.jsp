@@ -9,9 +9,14 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 <jsp:include page="/WEB-INF/views/includes/adminheader.jsp" />  
 <meta charset="UTF-8">
-<title></title>
+<title>GolForYou</title>
 </head>
 <body>
-
+<br>
+<br>
+<br>
+<br>
+<img src="/images/adminmain.png" style="width: 80%;"/>
+<jsp:include page="/WEB-INF/views/includes/footer.jsp" />  
 </body>
 </html>

@@ -16,6 +16,7 @@ header{
 #login{
 	z-index:4;
     top:0em;
+    position: absolute;
 	float:right;  margin:30px 0px 0px 80%;
 	font-family:Arial,Helvetica,sans-serif;
 	font-size:16px; word-spacing: 8px;
@@ -28,6 +29,7 @@ header{
 #login_admin{
 	z-index:4;
     top:0em;
+    position: absolute;
 	float:right;  margin:30px 0px 0px 77%;
 	font-family:Arial,Helvetica,sans-serif;
 	font-size:16px; word-spacing: 8px;

@@ -60,5 +60,9 @@
  	 		update MemberVO set mphone=#{mphone}, nickname=#{nickname}, maddr=#{maddr} where username=#{username}
  	 	</update>
  	 	
+ 	 	<!-- addadmin -->
+ 	 	<update id="updateAdmin">
+ 	 		update MemberVO set mrole='ROLE_ADMIN' where username=#{username}
+ 	 	</update>
  	 	
 </mapper>
