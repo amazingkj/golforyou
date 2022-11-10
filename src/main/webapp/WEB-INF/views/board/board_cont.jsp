@@ -77,19 +77,10 @@ function openDelCheck(){
  <Br><br>
 <div id="bWrite_wrap" class="bWrite_wrap" style="margin-top: 200px" >
   <table id="bCont_t" class="tablebox">
-   <tr>
-    <td style="width:100px;" >제목</td><td class="bottom_line"><div class="b_title"><div name="b_title" class="textField" size="100%">${b.b_title}</div></div></td>
-   </tr>
-   <tr>
-    <td>내용</td><td class="bottom_line"><div class="b_cont" ><div class="textField" style="width:100%; height:500px; overflow-y:scroll; resize:none; border:none;" >${b.b_cont}</div></div></td>
-   </tr>
-   <tr>
-    <td>조회수</td><td class="bottom_line"><div class="b_hit">${b.b_hit}</div></td>
-    </tr>
-	 <tr>
-    <td>
+   <tr style="text-align: right">
+    <td colspan="2" style="text-align: right" >
      <%-- 좋아요--%>
-    <div id="like">
+    <div id="like" >
     <c:choose>
         <c:when test="${check == 0}">
         <form method="post" action="likeupload_yes">
@@ -104,7 +95,7 @@ function openDelCheck(){
         
         <c:when test="${check == 1}">
         <form method="post" action="/likeupload_no">
-        	<button type="submit" id="likebtn" name="likebtn" class="btn btn-danger"><i class="fas fa-heart"  style="color:#56F569"></i>&nbsp;좋아요<br>취소</button>
+        	<button type="submit" id="likebtn" name="likebtn" class="btn btn-danger"><i class="fas fa-heart"  style="color:#56F569"></i>&nbsp;좋아요 취소</button>
              
              <input type="hidden" id="likecheck" name="likecheck_no" value="${check}">
                <input type="hidden" id="nickname" name="nickname_no" value="${nickname}">
@@ -113,12 +104,22 @@ function openDelCheck(){
         </form>
         </c:when>	
     </c:choose>	  			
-	</div>
-    
-    </td><td id='likeCount' >${likestotal }  Likes</td>
+	
+    <span id='likeCount' >${likestotal }  Likes</span></div>
+    </td>
     </tr>
     
      <%-- 좋아요 버튼 테스트중 --%>
+   <tr>
+    <td style="width:100px;" >제목</td><td class="bottom_line"><div class="b_title"><div name="b_title" class="textField" size="100%">${b.b_title}</div></div></td>
+   </tr>
+   <tr>
+    <td>내용</td><td class="bottom_line"><div class="b_cont" ><div class="textField" style="width:100%; height:500px; overflow-y:scroll; resize:none; border:none;" >${b.b_cont}</div></div></td>
+   </tr>
+   <tr>
+    <td>조회수</td><td class="bottom_line"><div class="b_hit">${b.b_hit}</div></td>
+    </tr>
+	
 	
 	<tr><td></td>
 	<td class="buttontd" colspan="2">
