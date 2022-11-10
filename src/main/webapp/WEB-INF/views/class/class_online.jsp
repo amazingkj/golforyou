@@ -80,13 +80,13 @@
 								</c:if--%>
 									<c:choose>
 										<c:when test="${!empty o.oimage}">
-											<div class="cimage">
+											<div class="oimage">
 												<img src="/upload/class${o.oimage}" class="thumbnail-img" />
 											</div>
 										</c:when>
 										<c:otherwise>
 											<div class="oimage">
-												<img src="/images/class/aaaa.jpg" class="thumbnail-img" />
+												<img src="/images/class/online01.jpg" class="thumbnail-img" />
 											</div>
 										</c:otherwise>
 									</c:choose>
