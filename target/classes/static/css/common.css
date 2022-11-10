@@ -141,3 +141,16 @@
   cursor: pointer;
 }
 
+#likebtn {
+	font-size: 14px;
+  border: none;
+  margin-left: 0px;
+  margin-right: 2px;
+  padding: 4px 4px 4px 0px;
+  width: 100px;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  color: #000000;
+  cursor: pointer;
+  
+}

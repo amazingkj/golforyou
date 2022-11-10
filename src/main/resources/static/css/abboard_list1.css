@@ -523,8 +523,6 @@ div #bDel_wrap {
 	text-align: center;
 }
 
-@charset "UTF-8";
-
 /* font */
 @font-face {
 	font-family: 'Noto Sans KR';
@@ -634,7 +632,7 @@ body {
 .clear {
 	clear: both;
 	display: none;
-	margin: 0; auto;
+	margin: 0 auto;
 	overflow: hidden;
 }
 

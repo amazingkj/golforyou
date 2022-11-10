@@ -88,7 +88,7 @@ function openDelCheck(){
     </tr>
 	 <tr>
     <td>
-    
+     <%-- 좋아요--%>
     <div id="like">
     <c:choose>
         <c:when test="${check == 0}">
