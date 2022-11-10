@@ -137,7 +137,7 @@
 										</div>
 									</c:when>
 									<c:otherwise>
-										<div class="oimage">
+										<div class="fimage">
 											<img src="/images/class/aaaa.jpg" class="thumbnail-img" />
 										</div>
 									</c:otherwise>

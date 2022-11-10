@@ -91,12 +91,12 @@
 								</c:if--%>
 									<c:choose>
 										<c:when test="${!empty a.aimage}">
-											<div class="fimage">
+											<div class="aimage">
 												<img src="/upload/class${a.aimage}" class="thumbnail-img" />
 											</div>
 										</c:when>
 										<c:otherwise>
-											<div class="fimage">
+											<div class="aimage">
 												<img src="/images/class/aaaa.jpg" class="thumbnail-img" />
 											</div>
 										</c:otherwise>
