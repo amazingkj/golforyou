@@ -289,10 +289,14 @@ function edit_check(){
 
 
 
+function checkinput(){
 
-
-
-
+if($.trim($("#adminRole").val())==""){
+		alert("아이디를 입력하세요!");
+		$("#adminRole").val("").focus();
+		return false;
+	}
+}
 
 
 

@@ -35,32 +35,30 @@ public class AdminMainController {
 		public ModelAndView adminmember() {
 			
 			
-			
 			ModelAndView admin = new ModelAndView("/admin/admin_member");
 			return admin;
 		}
 
 		
 		@PostMapping("/admin/member_ok")
-		public String adminmemberOK(MemberVO member,HttpServletRequest request,HttpServletResponse response) throws IOException {
-	
+		public String adminmemberOK(MemberVO member,HttpServletRequest request,HttpServletResponse response) throws Exception {
+			response.setContentType("text/html;charset=UTF-8");
 			String username=request.getParameter("adminRole");
+			System.out.println(username);
 			
 		int i=this.loginService.updateAdminMember(username);
+		System.out.println(i);
 		PrintWriter out = response.getWriter();
 		if(i==1) {
-			out.println("<script>");
-			out.println("alert('권한 부여가 성공했습니다.')");			
-			out.println("</script>");
-			
+			return "admin/adminmemberok";
 		} else {
 			out.println("<script>");
-			out.println("alert('권한 부여가 실패했습니다. 아이디를 다시 확인해주세요')");
+			out.println("alert('권한 부여가 실패했습니다. 아이디를 다시 확인해주세요');");
 			out.println("</script>");
-		
+			return "redirect:/admin/member";
 		}
-		return "redirect:/admin";
-			
+	
+	
 		}
 
 		
