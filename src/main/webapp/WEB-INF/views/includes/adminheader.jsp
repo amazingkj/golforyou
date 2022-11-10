@@ -30,7 +30,7 @@
        </li>
       <li><a href="/admin/admin_insertCard" class=btn1>랭킹 스코어카드 입력</a>
        </li>
-      <li><a href="/admin/admin_insertGolfcouse" class=btn1>골프장 등록</a>
+      <li><a href="/admin/admin_golfcouseList" class=btn1>골프장 등록</a>
        </li>
       <li><a href="/admin/admin_classMain" class=btn1>클래스 관리</a>
        </ul>  
