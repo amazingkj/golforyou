@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="rank">
 	<!-- 랭킹 수 -->
 	<select id="rank_count" resultType="java.lang.Integer">
-		select count(*) from memberVO m inner join ranking r on m.mno=r.r_no where mstate=0 and m.mrole='ROLE_USER'
+		select count(*) from memberVO m inner join ranking r on m.mno=r.r_no where mstate=0 or mstate=1 and m.mrole='ROLE_USER'
 	</select>
 	
 	<!-- 로그인한 회원의 점수 -->
@@ -33,12 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 랭크리스트 얻어오기(rankingVO기준) -->
 	<select id="rank_list" resultType="rank">
-		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' order by r_sum asc
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 or mstate=1 and m.mrole='ROLE_USER' order by r_sum asc
 	</select>
 	
 	<!-- 랭크리스트 얻어오기(MemberVO기준) -->
 	<select id="rank_list2" resultType="member">
-		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' order by r_sum asc
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 or mstate=1 and m.mrole='ROLE_USER' order by r_sum asc
 	</select>
 	
 	<!-- 아이디에 맞는 닉네임 하나 반환 -->
@@ -58,16 +58,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 랭크리스트 얻어오기(rankingVO기준),prov포함 -->
 	<select id="rank_listprov" resultType="rank">
-		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' and m.maddr=#{prov} order by r_sum asc
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 or mstate=1 and m.mrole='ROLE_USER' and m.maddr=#{prov} order by r_sum asc
 	</select>
 	
 	<!-- 랭크리스트 얻어오기(MemberVO기준),prov포함 -->
 	<select id="rank_listprov2" resultType="member">
-		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 and m.mrole='ROLE_USER' and m.maddr=#{prov} order by r_sum asc
+		select * from memberVO m inner join ranking r on m.mno = r.r_no where mstate=0 or mstate=1 and m.mrole='ROLE_USER' and m.maddr=#{prov} order by r_sum asc
 	</select>
 	
 	<!-- 랭킹 수, 그런데 prov를 곁들인 -->
 	<select id="rank_countprov" resultType="java.lang.Integer">
-		select count(*) from memberVO m inner join ranking r on m.mno=r.r_no where mstate=0 and m.mrole='ROLE_USER' and m.maddr=#{prov}
+		select count(*) from memberVO m inner join ranking r on m.mno=r.r_no where mstate=0 or mstate=1 and m.mrole='ROLE_USER' and m.maddr=#{prov}
 	</select>
 </mapper>
