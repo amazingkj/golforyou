@@ -18,7 +18,7 @@
     
      
     <%-- 회사로고 --%>
-  	<div id="logo"><a href="/admin"><img src="/images/logo1.png"
+  	<div id="logo"><a href="/index"><img src="/images/logo1.png"
     width="70px" height="70px" alt="Golf" /></a></div>
  
      <%--상단 메뉴 --%>
