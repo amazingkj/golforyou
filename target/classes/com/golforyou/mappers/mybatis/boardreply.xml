@@ -34,5 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select replyer from golforboard_reply where b_no=#{b_no}
 		</select>
   
+  		<!-- 댓글 목록 -->
+		<select id="board_replyList" resultType="br">
+			select * from golforboard_reply where b_no=#{b_no}
+		</select>
 
 </mapper>

@@ -68,6 +68,8 @@ public interface BoardDAO {
 
 	String getRoleCheck(String nickname);
 
+	List<BoardReplyVO> getReplyList(BoardReplyVO rvo);
+
 	//void updateliketotalcount(BoardVO b);
 
 }

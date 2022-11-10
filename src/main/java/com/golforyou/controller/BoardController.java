@@ -156,12 +156,19 @@ public class BoardController {
 				String nickname = (String)session.getAttribute("nickname");
 				
 				String rolecheck = boardService.getRoleCheck(nickname);
+				
+				
 				//좋아요 기능 
 				vo=new LikesVO();
 				vo.setBoard_no(b_no);
 				vo.setNickname(nickname);
 				rvo.setB_no(b_no);
 				
+				List<BoardReplyVO> rep = boardService.getReplyList(rvo);
+				
+				for(int i=0 ; i<rep.size() ; ++i) {
+					
+				}
 				
 				
 				

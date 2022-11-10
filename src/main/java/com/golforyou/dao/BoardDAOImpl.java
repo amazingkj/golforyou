@@ -184,6 +184,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("board_rolecheck",nickname);
 	}
 
+	@Override
+	public List<BoardReplyVO> getReplyList(BoardReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("board_replyList",rvo);
+	}
+
 //	@Override
 //	public void updateliketotalcount(BoardVO b) {
 //		this.sqlSession.update("updateliketotalcount",b);

@@ -36,7 +36,7 @@ function openDelCheck(){
 	}
 	
 }
-
+		
 
 //댓글
 
@@ -60,6 +60,8 @@ function openDelCheck(){
 					
 				});
 			}//댓글목록 함수
+			
+			
 			
      </script>
  
