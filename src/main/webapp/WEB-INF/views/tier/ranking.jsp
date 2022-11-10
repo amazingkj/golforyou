@@ -382,6 +382,37 @@
 			$('#tier_box').attr('value',"다이아몬드");
 		}
 	</script>
+	
+	<!-- 무한스크롤 -->
+	<!-- <script>
+		var intersectionObserver = new IntersectionObserver(function(entries) {
+			  // If intersectionRatio is 0, the target is out of view
+			  // and we do not need to do anything.
+			if (entries[0].intersectionRatio <= 0) return;
+		
+				loadItems(10);
+				console.log('Loaded new items');
+			});
+			// start observing
+		intersectionObserver.observe(document.querySelector('.scrollerFooter'));
+			
+		const io = new IntersectionObserver((entries, observer) => {
+			entries.forEach(entry => {
+			  if (!entry.isIntersecting) return; 
+				//entry가 interscting 중이 아니라면 함수를 실행하지 않습니다.
+			  if (page._scrollchk) return;
+				//현재 page가 불러오는 중임을 나타내는 flag를 통해 불러오는 중이면 함수를 실행하지 않습니다.
+		    observer.observe(document.getElementById('sentinel'));
+				//observer를 등록합니다.
+		    page._page += 1;
+				//불러올 페이지를 추가합니다.
+		    page.list.search();
+				//페이지를 불러오는 함수를 호출합니다.
+			});
+		});
+
+		io.observe(document.getElementById('sentinel'));
+	</script> -->
 
 </article>
 
