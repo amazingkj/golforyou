@@ -140,7 +140,7 @@
 		}
 
     	</script>	
- <title>게시판 글쓰기</title>
+ <title>GolForYou</title>
  </head>
  <div class="clear"></div>
  <body class="tablebody">
