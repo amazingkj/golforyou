@@ -40,7 +40,7 @@
 				<th scope="col" class="boardWriter"><span>글쓴이</span></th>
 				<th scope="col" class="boardDate"><a href="#">날짜</a></th>
 				<th scope="col" class="boardView"><a href="#">조회수</a></th>
-				<th scope="col" class="boardedit"><a href="#">수정/삭제</a><th>
+				<th scope="col" class="boardedit"><a href="#">수정/삭제</a></th>
 			</tr>
 		</thead>
 		<tbody>

@@ -133,7 +133,7 @@
 
 			</div>
 			<div id="gcFind_wrap">
-				<select name="find_field" class="golfcouse-title">
+				<select name="find_field" class="golfcouse-title" 	style="height:33px"; >
 					<option value="gc_title"
 						<c:if test="${find_field=='gc_title'}">
    ${'selected'}</c:if>>골프장명</option>
