@@ -24,6 +24,8 @@ public class MailService {
     private static final String setFrom = "jiin724@gmail.com";
     private int authNumber;
     
+   
+    
     @Autowired
     private LoginService loginService;
     
@@ -41,6 +43,8 @@ public class MailService {
     //비밀번호 찾기 메일
 	public String findPwdMail(String email) {
 		makeRandomNumber();
+		
+		
 		//String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
 		String toMail = email;
 		String title = "GolForYou 계정 임시 비밀번호"; // 이메일 제목 
@@ -91,7 +95,7 @@ public class MailService {
 				"<h1>GolForYou에 가입해주셔서 감사합니다.<h1>" + 	//html 형식으로 작성 ! 
                "<br><br>" + 
 			    "<br>아래 [이메일 인증 확인]을 눌러 회원가입을 완료하세요" + 
-			    "<br><a href='http://localhost:8091/join/registerEmail?memail=" + 
+			    "<br><a href='http://192.168.104.209:8091/join/registerEmail?memail=" + 
 			    member.getMemail()+"&mailkey="+mailkey+"' target='_black'>이메일 인증 확인</a>";
 		
 		

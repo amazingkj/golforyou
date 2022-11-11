@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -60,7 +61,7 @@ public class LoginController {
 	public String testLogin (HttpServletRequest request, HttpSession session, HttpServletResponse response,
 			Authentication authentication,
 			@AuthenticationPrincipal PrincipalDetails userDetails) throws Exception{
-		
+		response.setContentType("text/html;charset=utf-8");
 	
 		System.out.println("/test/login================");
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
@@ -81,25 +82,37 @@ public class LoginController {
 		
 		request.getSession().setAttribute("nickname", m.getNickname());
 		request.getSession().setAttribute("rolecheck", m.getMrole());
-
+		request.getSession().setAttribute("mstate", m.getMstate());
+		int mstate = (int)session.getAttribute("mstate");
+	
 		System.out.println(m.getNickname()); 
 		
 		PrintWriter out=response.getWriter(); 
 
+		if(mstate != 1) {
+			out.println("<script>");
+			out.println("alert('이메일을 확인하시고 인증해주세요')");
+			out.println("location='/index'");
+			out.println("</script>");
+			
+			SecurityContextHolder.clearContext();
+			session.invalidate();
+		}
+			
 		
 		if(principalDetails.getUsername()!=null ) {
 			
 			
 			out.println("<script>");
 			out.println("alert('로그인을 환영합니다.');");
-			out.println("location='history.back()';");
+			out.println("location='/index';");
 			out.println("</script>");
 			
 		}
 		
 			
 		
-		return "redirect:/index";
+		return null;
 		}
 		
 	}

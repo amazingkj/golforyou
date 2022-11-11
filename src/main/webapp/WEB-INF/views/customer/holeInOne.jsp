@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<title>GolforYou</title>
+
 <link rel="stylesheet" type="text/css" href="/css/customer.css?after" />
 <jsp:include page="/WEB-INF/views/includes/header.jsp" /> 
 

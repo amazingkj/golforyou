@@ -125,7 +125,7 @@ li {
 
 		</ul>
 
-		<form id="qna_form" onsubmit="return Fnqcheck();" action="/user/customer_fnq" method=post>
+		<form id="qna_form" onsubmit="return Fnqcheck();" action="customer_fnq" method=post>
 
 			<dl class=consultQForm>
 
