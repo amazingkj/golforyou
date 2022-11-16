@@ -22,8 +22,23 @@
 ## 프로그램 흐름도 
 ![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) ](https://user-images.githubusercontent.com/107861610/202067211-a3751daf-5800-4aaa-89e2-4c05638a5c43.jpg)
 
-## 스토리보드
+## 담당
+![화면 캡처 2022-11-16 112907](https://user-images.githubusercontent.com/107861610/202069016-58bf5f4d-da60-4721-97ef-1f87516eb9e2.png)
+
+## 스토리보드 - 로그인/회원 가입
 ![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2)1 ](https://user-images.githubusercontent.com/107861610/202067538-1b190d6e-4855-4d66-8f31-d02c96477f07.jpg)
 ![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 2 ](https://user-images.githubusercontent.com/107861610/202067568-ce7e3f43-30c1-4dfb-b4e2-3588f2cf2d0f.jpg)
 ![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 3](https://user-images.githubusercontent.com/107861610/202067645-8383231b-8e83-436e-ad92-f794518df85a.jpg)
 ![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 10](https://user-images.githubusercontent.com/107861610/202067833-0c13a73c-8238-4a7a-97d0-948d76b3e568.jpg)
+
+## 스토리보드 - 자유게시판
+![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 4](https://user-images.githubusercontent.com/107861610/202068294-83bb5042-d9a6-43b3-9aa0-0810621ff8c4.jpg)
+![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 5 ](https://user-images.githubusercontent.com/107861610/202068301-e5b9533e-6a8e-472b-9492-2708b29868e8.jpg)
+
+## 스토리보드 - 마이페이지
+![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 6 ](https://user-images.githubusercontent.com/107861610/202068390-650070b2-ee36-4814-8a0c-b881018b4330.jpg)
+![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 7](https://user-images.githubusercontent.com/107861610/202068393-ce1599a5-2064-4424-a789-d4fe87f3c02d.jpg)
+
+
+## 그 외 
+[GolforYou 골프 커뮤니티 플랫폼_1111.pdf](https://github.com/amazingkj/amazingkj/files/10017607/GolforYou._1111.pdf)
