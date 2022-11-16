@@ -1,6 +1,9 @@
 # 골프 커뮤니티 플랫폼(Spring Boot 2.7.4)
 #### NFP조 김지인(팀장) 김민우(부팀장) 조소정 김종혁 양희수 3차 프로젝트
 
+## 자료
+[GolforYou 골프 커뮤니티 플랫폼_1111.pdf](https://github.com/amazingkj/amazingkj/files/10017607/GolforYou._1111.pdf)
+
 ## 진행 일정 
 2022.10.14 ~ 2022. 11. 10 (약 1달)
 
@@ -39,6 +42,3 @@
 ![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 6 ](https://user-images.githubusercontent.com/107861610/202068390-650070b2-ee36-4814-8a0c-b881018b4330.jpg)
 ![5조 골프 커뮤니티 플랫폼_1111_인쇄 자료(2) 7](https://user-images.githubusercontent.com/107861610/202068393-ce1599a5-2064-4424-a789-d4fe87f3c02d.jpg)
 
-
-## 그 외 
-[GolforYou 골프 커뮤니티 플랫폼_1111.pdf](https://github.com/amazingkj/amazingkj/files/10017607/GolforYou._1111.pdf)
